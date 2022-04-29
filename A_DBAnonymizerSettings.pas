@@ -13,6 +13,7 @@ type
     cbLocations: TCheckBox;
     btnOK: TButton;
     btnCancel: TButton;
+    btnRetry: TButton;
   private
     { Private declarations }
   public

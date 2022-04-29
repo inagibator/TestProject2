@@ -25,7 +25,9 @@ function RandomString(const ALength: Integer): String;
 var
   i: Integer;
   LCharType: Integer;
+  x: integer;
 begin
+  x := 10;
   Result := '';
   for i := 1 to ALength do
   begin
