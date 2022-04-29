@@ -38,7 +38,6 @@ uses
   K_FDCSSpace in 'K_FDCSSpace.pas' {K_FormDCSSpace},
   K_FDCSpace in 'K_FDCSpace.pas' {K_FormDCSpace},
   K_FDCSProj in 'K_FDCSProj.pas' {K_FormDCSProjection},
-  K_DCSpace in 'K_DCSpace.pas',
   K_FFName in 'K_FFName.pas' {K_FormFileName},
   K_Arch in 'K_Arch.pas',
   N_Color1Fr in 'N_Color1Fr.pas' {N_Color1Frame: TFrame},
