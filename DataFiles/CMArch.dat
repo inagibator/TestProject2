@@ -1,0 +1,48 @@
+<sdml
+   ArchInfo="FilesEnvID=FE_N
+AppID=VRE
+ArchFmtMinVer=20081119
+ArchFmtCurVer=20090327
+">
+  <MVFolder DEF=$5 Name=ME
+     Info=(#ArchSections#)CMArch_Sys.sdt Flags=$9000E1
+     ImgInd=30></MVFolder ME>
+  <Node Name=Slides ImgInd=30></Node Slides>
+  <Integer Name=GlobInfo ImgInd=14 ElemCount=3
+     CompactArray=1>
+ 10 106 10
+
+    <String Name=MediaTypesData ImgInd=14 ElemCount=14
+       HighColumn=1 CompactArray=1>
+"MediaTypeID" "MediaTypeTitle" "100" "Cephalometric" "101" "Intraoral" 
+"102" "Intraoral Camera" "103" "Panoramic" "104" "Digital Photo’s" 
+"105" "Documents" 
+    </String MediaTypesData>
+  </Integer GlobInfo>
+  <Node Name=AppInfo ImgInd=30>
+    <Node Name=CurrentData ImgInd=30>
+      <Strings Name=UndeletedFileNames ImgInd=30
+         ArrLength=0>
+      </Strings UndeletedFileNames>
+      <String Name=PatientsData ImgInd=14 ElemCount=1>
+      </String PatientsData>
+      <String Name=ProvidersData ImgInd=14 ElemCount=1>
+      </String ProvidersData>
+      <String Name=LocationsData ImgInd=14 ElemCount=1>
+      </String LocationsData>
+    </Node CurrentData>
+    <Node Name=SysObjects ImgInd=30>
+      <TN_CMVideoStatRecord Name=VideoStat ImgInd=14
+         ElemCount=0></TN_CMVideoStatRecord VideoStat>
+    </Node SysObjects>
+    <Node Name=DeviceProfiles ImgInd=30>
+      <Node Name=SavedIcons ImgInd=30></Node SavedIcons>
+      <TK_CMTwainProfile Name=TwainProfiles ImgInd=14
+         ElemCount=0></TK_CMTwainProfile TwainProfiles>
+      <TK_CMVideoProfile Name=VideoProfiles ImgInd=14
+         ElemCount=0></TK_CMVideoProfile VideoProfiles>
+    </Node DeviceProfiles>
+  </Node AppInfo>
+</sdml>
+<DFI CurF=0 NDPT=0 ArrLength=0>
+</DFI *S*P*L*>

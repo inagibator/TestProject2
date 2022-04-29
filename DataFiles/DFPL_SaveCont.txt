@@ -1,0 +1,491 @@
+[[SaveDefaults]]
+CMS_Main    =+ CMLogFlags
+CMS_Main    =+ RusHelpAbout
+CMS_Main    =+ TWAINSearch
+CMS_Main    =+ NewOtherCaptureDeviceMode
+Global      =+ ScreenWorkArea
+CMS_UserDeb =+ *
+Twain32_dll =+ *
+CMS_UserMain =+ MediaRayFiltLU
+CMS_UserMain =+ MediaRayFiltEq
+[[/SaveDefaults]]
+
+[[RestoreDefaults]]
+CMS_Main    -  CMLogFlags
+CMS_Main    =+ CMLogFlags
+CMS_Main    -  RusHelpAbout
+CMS_Main    =+ RusHelpAbout
+CMS_Main    -  TWAINSearch
+CMS_Main    =+ TWAINSearch
+CMS_Main    -  NewOtherCaptureDeviceMode
+CMS_Main    =+ NewOtherCaptureDeviceMode
+Global      -  ScreenWorkArea
+Global      =+ ScreenWorkArea
+CMS_UserDeb -- 
+CMS_UserDeb =+ * 
+Twain32_dll -- 
+Twain32_dll =+ * 
+CMS_UserMain -  MediaRayFiltLU
+CMS_UserMain =+ MediaRayFiltLU
+CMS_UserMain -  MediaRayFiltEq
+CMS_UserMain =+ MediaRayFiltEq
+[[/RestoreDefaults]]
+
+[[Design|Save]]
+Design|Load TFE>
+[[/Design|Save]]
+
+[[Design|Load]]
+//DFPL Form Context
+DFPLPathsHistory       =+ *
+DFPLFilesHistory       =+ *
+DFPLSrcPathsHistory    =+ *
+DFPLSrcIniFilesHistory =+ *
+K_FormRunDFPLScript    =+ *
+[[/Design|Load]]
+
+[[CMScanCur|Save]]
+CMScanCur|Load TFE>
+[[/CMScanCur|Save]]
+
+[[CMScanCur|Load]]
+CMS_Main =+ ScanDataPath
+
+CMS_Main =+ CaptButtonDelay
+CMS_Main =+ FootPedalIndex
+CMS_Main =+ FootPedalDevInd
+CMS_Main =+ FootPedalReverse
+CMS_Main =+ FootPedalCOMPort
+
+CMS_Main =+ SironaActivateModeS
+CMS_Main =+ SironaCloseModeS
+
+CMS_Main =+ DentalUnitDevInd
+CMS_Main =+ DentalUnitProfName
+
+CMS_Main =+ Skip16bitMode
+CMS_Main =+ RImageType
+
+CMS_Main =+ LastRunVersion
+
+CMScan =+ IUWarnLastCMSVersion
+
+CMScan =+ RecoverMediaState
+
+N_Forms --
+N_Forms =+ *
+
+ScanWEBSettings --
+ScanWEBSettings =+ *
+
+DevicePlatesClientUse --
+DevicePlatesClientUse =+ *
+[[/CMScanCur|Load]]
+
+
+[[User|Load]]
+CMS_Main     =+ CMLogFlags
+CMS_Main     =+ TWAINSearch
+Global       =+ ScreenWorkArea
+CMS_UserDeb  =+ * 
+CMS_UserMain =+ * 
+Twain32_dll  =+ * 
+[[/User|Load]]
+
+[[User1|Load]]
+CMS_Main     =+ UseExtDB
+[[/User1|Load]]
+
+[[Global|Load]]
+//CMS_Main =+ NewPatientMode
+//CMS_Main =+ LockPatient
+CMS_Main =+ EGALogin
+CMS_Main =+ EGAPassword
+CMS_Main =+ Skip16bitMode
+CMS_Main =+ RImageType
+CMS_Main =+ DICOMImportVisible
+// Global2 Fields are needed to load for backward compatibility
+CMS_Main =+ DelObjsKeepMonths
+CMS_Main =+ WinDrawSmoothMode
+CMS_Main =+ ScanDataPath
+CMS_Main =+ ScanDataPathOld
+CMS_Main =+ PatSlidesAutoRefreshLag
+// Fields which are not edited by User
+CMS_Main =+ GUID
+CMS_Main =+ DeviceGroupInd
+CMS_Main =+ LastRunVersion
+
+// Stude Samples Context
+CMS_Main =+ StudySamplesList
+StudyTemplatesPosOrder =+ *
+[[/Global|Load]]
+
+[[Global|Save]]
+CMS_Main =+ EGALogin
+CMS_Main =+ EGAPassword
+CMS_Main =+ Skip16bitMode
+CMS_Main =+ RImageType
+CMS_Main =+ DICOMImportVisible
+CMS_Main =+ LastRunVersion
+// Print Templates
+CMS_Template0 --
+CMS_Template0 =+ *
+CMS_Template1 --
+CMS_Template1 =+ *
+CMS_Template2 --
+CMS_Template2 =+ *
+CMS_Template3 --
+CMS_Template3 =+ *
+CMS_Template4 --
+CMS_Template4 =+ *
+CMS_Template5 --
+CMS_Template5 =+ *
+CMS_Template6 --
+CMS_Template6 =+ *
+CMS_Template7 --
+CMS_Template7 =+ *
+CMS_Template8 --
+CMS_Template8 =+ *
+CMS_Template9 --
+CMS_Template9 =+ *
+
+// Stude Samples Context
+CMS_Main =+ StudySamplesList
+StudyTemplatesPosOrder --
+StudyTemplatesPosOrder =+ *
+[[/Global|Save]]
+
+[[Global2|Load]]
+CMS_Main =+ DelObjsKeepMonths
+CMS_Main =+ WinDrawSmoothMode
+CMS_Main =+ ScanDataPath
+CMS_Main =+ ScanDataPathOld
+CMS_Main =+ ScanDataPathOnClientPC
+CMS_Main =+ ScanDataPathOnClientPCAuto
+CMS_Main =+ PatSlidesAutoRefreshLag
+CMS_Main =+ IURemindeInDays
+CMS_Main =+ IUCheckUpdatesPath
+CMS_Main =+ IUCheckUpdatesCMDLType
+// Fields which are not edited by User
+CMS_Main =+ GUID
+CMS_Main =+ DeviceGroupInd
+CMS_Main =+ IURemindeTS
+CMS_Main =+ LogsKeepPeriodInMonths
+
+CMS_DCMQRSettings --
+CMS_DCMQRSettings =+ *
+
+CMS_DCMStoreSettings --
+CMS_DCMStoreSettings =+ *
+
+CMS_DCMSCommSettings --
+CMS_DCMSCommSettings =+ *
+
+CMS_DCMMWLSettings --
+CMS_DCMMWLSettings =+ *
+
+CMS_DCMAetScu --
+CMS_DCMAetScu =+ *
+
+// User Settings
+CMS_USettings --
+CMS_USettings =+ *
+
+Archive =+ *
+ExportAll =+ *
+
+// Image Update setting
+CMIUMouseState -- 
+CMIUMouseState =+ *
+
+// WEB Settings strings are moved to Instance|Load
+//CMS_WEBSettings --
+//CMS_WEBSettings =+ *
+
+// CustToolBar
+GGCMCustToolbar0 --
+GGCMCustToolbar0 =+ *
+GGCMCustToolbar1 --
+GGCMCustToolbar1 =+ *
+GGCMCustToolbar2 --
+GGCMCustToolbar2 =+ *
+GGCMCustToolbar3 --
+GGCMCustToolbar3 =+ *
+CMS_Main -  GGCustToolbarSmallButtons
+CMS_Main =+ GGCustToolbarSmallButtons
+
+// DCM Store
+CMS_Main =+ DCMStoreAuto
+CMS_Main =+ DMCStoreCommitment
+
+[[/Global2|Load]]
+
+[[Global2|Save]]
+Global2|Load TFE>
+[[/Global2|Save]]
+
+[[Instance|Save]]
+Instance|Load TFE>
+[[/Instance|Save]]
+
+[[Instance|Load]]
+//CMS_Main =+ LastImportDir
+//CMS_Main =+ LastExportDir
+//CMS_Main =+ ImgMemConstraints
+//CMS_Main =+ MediaFilesStoringMode
+CMS_Main =+ CMMediaFiles
+CMS_Main =+ LastImportFromExtDBDir
+CMS_Main =+ CaptButtonDelay
+
+CMS_Main =+ FootPedalIndex
+CMS_Main =+ FootPedalDevInd
+CMS_Main =+ FootPedalReverse
+CMS_Main =+ FootPedalCOMPort
+
+CMS_Main =+ SironaActivateModeS
+CMS_Main =+ SironaCloseModeS
+
+CMS_Main =+ ConvToBMPPath
+CMS_Main =+ LocationID
+CMS_Main =+ ProviderID
+CMS_Main =+ PatientID
+CMS_Main =+ SlideAutoOpen
+
+CMS_Main =+ DentalUnitDevInd
+CMS_Main =+ DentalUnitProfName
+
+CMS_VideoCompr =+ *
+
+ChangeRootFolderInfo =+ *
+
+N_Forms --
+N_Forms =+ *
+
+// EMAIL
+CMS_EmABook --
+CMS_EmABook =+ *
+CMS_Email --
+CMS_Email =+ *
+CMS_Main -  UseEMailLocalSettings
+CMS_Main =+ UseEMailLocalSettings
+
+// ScanDataOnClientPCAuto - not used now
+CMS_Main =+ ScanDataPathAuto
+
+// WEB Settings
+CMS_WEBSettings --
+CMS_WEBSettings =+ *
+
+[[/Instance|Load]]
+
+[[Location|Save]]
+Location|Load TFE>
+[[/Location|Save]]
+
+[[Location|Load]]
+// CTA
+GVObjCTA1 --
+GVObjCTA1 =+ *
+GVObjCTA2 --
+GVObjCTA2 =+ *
+GVObjCTA3 --
+GVObjCTA3 =+ *
+GVObjCTA4 --
+GVObjCTA4 =+ *
+
+// CustToolBar
+GCMCustToolbar0 --
+GCMCustToolbar0 =+ *
+GCMCustToolbar1 --
+GCMCustToolbar1 =+ *
+GCMCustToolbar2 --
+GCMCustToolbar2 =+ *
+GCMCustToolbar3 --
+GCMCustToolbar3 =+ *
+CMS_Main -  GCustToolbarSmallButtons
+CMS_Main =+ GCustToolbarSmallButtons
+
+// Mail Settings
+GCMS_Email --
+GCMS_Email =+ *
+
+[[/Location|Load]]
+
+[[LocationPrint|Load]]
+// Print Templates
+CMS_Template0 --
+CMS_Template0 =+ *
+CMS_Template1 --
+CMS_Template1 =+ *
+CMS_Template2 --
+CMS_Template2 =+ *
+CMS_Template3 --
+CMS_Template3 =+ *
+CMS_Template4 --
+CMS_Template4 =+ *
+CMS_Template5 --
+CMS_Template5 =+ *
+CMS_Template6 --
+CMS_Template6 =+ *
+CMS_Template7 --
+CMS_Template7 =+ *
+CMS_Template8 --
+CMS_Template8 =+ *
+CMS_Template9 --
+CMS_Template9 =+ *
+[[/LocationPrint|Load]]
+
+[[LocationPrint|Save]]
+LocationPrint|Load TFE>
+[[/LocationPrint|Save]]
+
+[[Provider|Save]]
+Provider|Load TFE>
+[[/Provider|Save]]
+
+
+[[Provider|Load]]
+K_FormCMPrintState --
+K_FormCMPrintState =+ *
+K_FormCMPrintState = PageTitle ""
+
+CMS_Forms --
+CMS_Forms =+ *
+
+VObjAttrs --
+VObjAttrs =+ *
+
+CMS_Main -  FDIToothScheme
+CMS_Main =+ FDIToothScheme
+CMS_Main -  VTBAllTopToolbars
+CMS_Main =+ VTBAllTopToolbars
+CMS_Main -  VTBAlterations
+CMS_Main =+ VTBAlterations
+CMS_Main -  ColorPalIndex
+CMS_Main =+ ColorPalIndex
+CMS_Main -  UIShowEmbossDetails
+CMS_Main =+ UIShowEmbossDetails
+//CMS_Main =+ ThumbsRFrameWidth
+CMS_Main -  EdFramesLayout
+CMS_Main =+ EdFramesLayout
+CMS_Main -  CurTeethFilter
+CMS_Main =+ CurTeethFilter
+CMS_Main -  CurMTypeFilter
+CMS_Main =+ CurMTypeFilter
+CMS_Main -  FlashlightRectFlag
+CMS_Main =+ FlashlightRectFlag
+CMS_Main -  XRayCaptStreamLine
+CMS_Main =+ XRayCaptStreamLine
+CMS_Main =  ThumbTextFlags "[ttsObjDateTaken,ttsObjTeethChart]"
+CMS_Main =+ ThumbTextFlags
+//CMSExportPathsHistory =+ *
+CMS_Main -  EmailAttachSizeInd
+CMS_Main =+ EmailAttachSizeInd
+CMS_Main -  EmailExportNameFlagsSet
+CMS_Main =+ EmailExportNameFlagsSet
+
+UserMediaFilters --
+UserMediaFilters =+ *
+
+CMS_Flashlight --
+CMS_Flashlight =+ *
+K_FormCMSharpSmoothT --
+K_FormCMSharpSmoothT =+ *
+K_FormCMSharpSmoothF --
+K_FormCMSharpSmoothF =+ *
+
+// CTA
+VObjCTA1 --
+VObjCTA1 =+ *
+VObjCTA2 --
+VObjCTA2 =+ *
+VObjCTA3 --
+VObjCTA3 =+ *
+VObjCTA4 --
+VObjCTA4 =+ *
+
+// CustToolBar
+CMS_Main -  UseCustToolbarGlobal
+CMS_Main =+ UseCustToolbarGlobal
+
+K_FormCMPresentState --
+K_FormCMPresentState =+ *
+
+// Study Direct Capture Preview Timeout
+CMS_Main -  StudyCaptPreviewTimeout
+CMS_Main =+ StudyCaptPreviewTimeout
+
+PCMCustToolbar0 --
+PCMCustToolbar0 =+ *
+PCMCustToolbar1 --
+PCMCustToolbar1 =+ *
+PCMCustToolbar2 --
+PCMCustToolbar2 =+ *
+PCMCustToolbar3 --
+PCMCustToolbar3 =+ *
+CMS_Main -  PCustToolbarSmallButtons
+CMS_Main =+ PCustToolbarSmallButtons
+
+CMS_Main -  VUICheckProvIU
+CMS_Main =+ VUICheckProvIU
+
+[[/Provider|Load]]
+
+[[ProviderInstance|Save]]
+ProviderInstance|Load TFE>
+[[/ProviderInstance|Save]]
+
+
+[[ProviderInstance|Load]]
+//N_Forms --
+//N_Forms =+ *
+
+CMS_Main -  ThumbsRFrameWidth
+CMS_Main =+ ThumbsRFrameWidth
+CMS_Main -  LastImportDir
+CMS_Main =+ LastImportDir
+CMS_Main -  LastExportDir
+CMS_Main =+ LastExportDir
+
+CMSImportFilesHistory --
+CMSImportFilesHistory =+ *
+CMSImportPPLFilesHistory --
+CMSImportPPLFilesHistory =+ *
+
+CMSExportPathsHistory --
+CMSExportPathsHistory =+ *
+CMSExportPPLPathsHistory --
+CMSExportPPLPathsHistory =+ *
+
+CMSImportExpToDCMFilesHistory --
+CMSImportExpToDCMFilesHistory =+ *
+
+K_FormCMReports --
+K_FormCMReports =+ *
+K_FormCMEFSyncInfo --
+K_FormCMEFSyncInfo =+ *
+K_FormCMReportShow --
+K_FormCMReportShow =+ *
+
+// CustToolBar
+CMCustToolbar0 --
+CMCustToolbar0 =+ *
+CMCustToolbar1 --
+CMCustToolbar1 =+ *
+CMCustToolbar2 --
+CMCustToolbar2 =+ *
+CMCustToolbar3 --
+CMCustToolbar3 =+ *
+CMS_Main -  CustToolbarSmallButtons
+CMS_Main =+ CustToolbarSmallButtons
+CMCustToolbarTVState --
+CMCustToolbarTVState =+ *
+[[/ProviderInstance|Load]]
+
+[[Patient|Save]]
+Patient|Load TFE>
+[[/Patient|Save]]
+
+[[Patient|Load]]
+CMS_Main -  StudyOnlyThumbsShowMode
+[[/Patient|Load]]

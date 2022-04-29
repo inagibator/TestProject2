@@ -1,0 +1,84 @@
+unit  @:\SPL\N_CM1;
+uses  @:\SPL\syslib, @:\SPL\N_Types, @:\SPL\Forms,
+      @:\SPL\N_Comps, @:\SPL\N_FormDescr, @:\SPL\K_CM0;
+
+//type TN_CMLogFlags = SetOf ( // CMS Protocol collecting Flags
+//type TN_CMVideoStatRecord = packed record // CMS Video Statistics Record type
+//************* Form Descriptions 
+//type TN_CMVideoStatFormDescr = class
+
+//************* N_CM1 types (Centaur Media Suite Types) *************
+
+{$ CurF=20090327}
+type TN_CMLogFlags = SetOf ( // CMS Protocol collecting Flags
+  cmpfEnable="Enable Collecting Protocol",
+//  cmpfSaveFalgs="Use cur Flags in next session",
+
+  cmpfCompInfo="Info about Computer",
+  cmpfMenuAll="Info about Menu Actions",
+
+  cmpfVideoMain="Main Video Actions",
+  cmpfVideoAll="All Video Actions",
+  cmpfVideoStat="Video Statistics",
+
+  cmpfTWAINMain="Main TWAIN Actions",
+  cmpfTWAINAll="All TWAIN Actions",
+
+  cmpfOtherMain="Main Other Dev Actions",
+  cmpfOtherAll="All Other Dev Actions",
+
+  cmpfBinDumps="Binary dumps",
+
+  cmpfDatabase="Database Actions",
+  cmpfDatabaseAll="Database Actions details",
+  cmpfDatabaseFull="Database Actions full details"
+
+  cmpfCOMServer="COM Server Actions",
+
+  cmpfVObjEvents="VObjs RFA Events",
+  cmpfVObjMain="VObjs Creating and Editing"
+
+); // type TN_CMLogFlags = Set Of ( // CMS Protocol collecting Flags
+
+type TN_CMVideoStatRecord = packed record // CMS Video Statistics Record type
+  CMSRCompName:   string; // Computer Name
+  CMSRDeviceName: string; // Video or TWAIN device Name
+  CMSRImageSize:  string; // Image Size in Pixels as string
+  CMSROperation:  string; // Operation Name (N_CMS_Operations[i])
+  CMSRVideoCodec: string; // Video Codec Name
+  CMSRVideoCMST:  string; // Video Capture Media SubType format
+  CMSRIsWorking:  string; // '?', 'OK?' or 'Failed' strings
+  CMSRComments:   string; // Any comments (may be several text lines)
+  CMSRDateTime:   string; // Date ans Time of adding to Statistics Table
+end; // type TN_CMVideoStatRecord = packed record // CMS Video Statistics Record type
+
+
+//************* Form Descriptions **********************
+
+
+//***************************  TN_CMVideoStatFormDescr  *****************
+type TN_CMVideoStatFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CMVideoStatFormDescr = class
+
+constructor TN_CMVideoStatFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CMSRCompName",    "Computer Name",     "" );
+  N_SetSimpleRCH ( "CMSRDeviceName",  "Device Name",       "" );
+  N_SetSimpleRCH ( "CMSRImageSize",   "Size",              "" );
+  N_SetSimpleRCH ( "CMSROperation",   "Mode",              "" );
+  N_SetSimpleRCH ( "CMSRVideoCodec",  "Video Codec Name",  "" );
+  N_SetSimpleRCH ( "CMSRVideoCMST",   "Video SubType",     "" );
+  N_SetSimpleRCH ( "CMSRIsWorking",   "Satus",             "" );
+  N_SetSimpleRCH ( "CMSRComments",    "Comments",          "" );
+  N_SetSimpleRCH ( "CMSRDateTime",    "Date and Time",     "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CMVideoStatFormDescr!Create();
+
+
+

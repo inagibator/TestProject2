@@ -1,0 +1,102 @@
+unit @:\SPL\N_Macros1;
+uses @:\SPL\syslib, @:\SPL\N_Types, @:\SPL\N_Comps;
+
+// Internal Pascal Procedures and Functions:
+
+function  Deb1     ( AInt1: integer; AStr1: string ): string;
+function  Deb2     ( AInt1: integer; AStr1: string ): string;
+
+procedure AddStrToFile ( AFName: string; AStr: string );
+function  AddPDCounter ( AStr: string ): string;
+//function  Round    ( AValue: double ): integer;
+//function  Склон    ( AKey12: string; ACaseStr: string ): string;
+function  Sclon    ( AKey12: string; ACaseStr: string ): string;
+function  UDFPStat ( AUDComp: TN_UDBase; AFieldPath: string ): ^Undef;
+function  UDFPDyn  ( AUDComp: TN_UDBase; AFieldPath: string ): ^Undef;
+function  CSItemKeyPDyn ( AUDComp: TN_UDBase; ACSItemPath: string ): ^string;
+function  ExecComp      ( AComp: TN_UDBase ): integer;
+function  SampleText    ( APrefix: string; ANum: integer; ALeng: integer ): string;
+function  DateTimeToStr ( ADateTime: double; AFormat: string ): string;
+function  WSInfoToStr   ( AMode: integer ): string;
+function  GetGCVar      ( AVarName: string ): string;
+procedure SetGCVar      ( AVarName: string; AVarContent: string );
+function  GetDblRow     ( AMatr: arrayOf Undef; ARowInd: integer ): arrayOf Double;
+
+procedure SetGCMDBm     ( ABookmarkName: string ); // AWhere: TN_WordInsBmkWhere;
+//                                                 AWhat: TN_WordInsBmkWhat );
+function  GetWordVar        ( AVarName: string ): string;
+procedure CreateWordVar     ( AVarName: string; AVarContent: string );
+procedure SetWordVar        ( AVarName: string; AVarContent: string );
+procedure RunWMacro         ( AFullMacroName: string );
+procedure SetWMainDocIP     ( ABookmarkName: string; AMode: integer );
+procedure SetCurWTable      ( ATableId: string );
+procedure InsWTableRows     ( ARowInd: integer; ANumRows: integer );
+procedure SetWTableStrCell  ( ARowInd: integer; AColInd: integer; AStr: string );
+procedure SetWTableValCell  ( ARowInd: integer; AColInd: integer; AVal: double; AFmt: string );
+procedure SetWTableCompCell ( ARowInd: integer; AColInd: integer; AComp: TN_UDBase );
+procedure SetWTableStrRow   ( ARowInd: integer; AColInd: integer; AStrArray: ArrayOf string );
+procedure SetFirstPageNum   ( AFirstPageNumber: integer );
+
+function  ECN               ( AColName: string ): integer;
+procedure SetCurESheet      ( ASheetId: string );
+procedure InsESheetRows     ( ARowInd: integer; ANumRows: integer );
+
+procedure SetESheetStrCell  ( ARowInd: integer; AColInd: integer; AStr: string );
+procedure SetESheetDblCell  ( ARowInd: integer; AColInd: integer; ADbl: double );
+procedure SetESheetCompCell ( ARowInd: integer; AColInd: integer; AComp: TN_UDBase );
+
+procedure SetESheetStrRow   ( ARowInd: integer; AColInd: integer; AStrArray: ArrayOf String );
+procedure SetESheetStrCol   ( ARowInd: integer; AColInd: integer; AStrArray: ArrayOf String );
+procedure SetESheetDblRow   ( ARowInd: integer; AColInd: integer; ADblArray: ArrayOf double );
+procedure SetESheetDblCol   ( ARowInd: integer; AColInd: integer; ADblArray: ArrayOf double );
+procedure SetESheetDblMatr  ( ARowInd: integer; AColInd: integer; ADblMatr:  ArrayOf double );
+
+// function  Test1   ( AStr1: string ): string;
+// procedure ShowVal ( AFmt: string; AValue: Undef );
+// function  Выб2аПр ( AStr1: string; AStr2: string; ATS: TN_TimeSeriesUPR ): string;
+
+
+function Test1( AStr1: string ): string;
+var
+  Str: string;
+begin
+  Str = 'фф';
+//  Result = СкЛон( AStr1, "Род" );
+end; // function Test1
+
+procedure ShowVal( AFmt: string; AValue: Undef );
+begin
+  ShowDump( Format( AFmt, AValue ), 0 );
+end;
+
+function Выб2аПр( AStr1: string; AStr2: string; ATS: TN_TimeSeriesUPR ): string;
+var
+  Str: string;
+  Prc: integer;
+  V: double;
+begin
+//  Deb($21);
+//  Prc = 1;
+  Prc = integer(Round( 100*ATS.Знач[-1]/ATS.Знач[-2] - 100 ));
+//  ShowFDump( 'Проценты = %d', Prc );
+
+  if( Prc GE 0 )
+    Result = AStr1 + Format( '%d', Prc ) + " %";
+  else
+    Result = AStr2 + Format( '%d', Prc ) + " %";
+  Exit;
+
+  V = 100*ATS.Знач[-1] / ATS.Знач[-2] - 100;
+  ShowDump( Format( '%g', V ), 0 );
+  V = (100*ATS.Знач[-1] / ATS.Знач[-2]) - 100;
+  ShowDump( Format( '%g', V ), 0 );
+//  V = V - 100;
+//  V = 100 - V;
+//  Prc = Round( -V ); // error!
+  Prc = integer(Round( V ));
+  ShowDump( Format( '%d', Prc ), 0 );
+
+// if ( Prc LT 0 )
+  Prc = 1;
+end; // function Выб2аПр
+

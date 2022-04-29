@@ -1,0 +1,926 @@
+unit @:\SPL\N_Types;
+uses  @:\SPL\syslib;
+// Base Types
+
+// TN_ParRBuf      = record // ParRBuf
+// TN_AffCoefs4    = record  //***** four affine convertion coefs
+// TN_StrPosParams = packed record // String Position Params
+// TN_StandartShape SetOf ( sshNone="None", sshRect="Rect", sshRomb="Romb",
+// TN_RGBColor     = packed record // Color as R,G,B tripple
+// TN_PointAttr1   = record //***** Point Attributes #1
+// TN_SysLineAttr  = record //***** Sys Line (with Vertexes) Attributes
+// TN_MinMaxValues = packed record // Min and Max Values
+// TN_RAFillNumFuncType = ( fnftLinear="Linear",
+// TN_RAFillNumParams   = packed record // params for Filling RArray of Numbers
+// TN_RAFillColorsType  = ( fctAnyIndependant="Full Range, Independant",
+// TN_RAFillColParams   = packed record // params for Filling RArray of Colors
+// TN_RAFillStrType     = ( fstCurrent="Current" );
+// TN_RAFillStrParams   = packed record // params for Filling RArray of Strings
+// TN_2DRAFillNumFuncType  = ( tdnftLinear, tdnftExp, tdnftParab );
+// TN_2DRAFillNumFuncFlags = SetOf ( tdnftClearFirst );
+// TN_2DRAFillNumParams    = packed record // params for Filling and Updating 2D RArray
+
+// TN_PixelFormat  = ( // Delphi PixelFormat
+// TN_LineCodes    = record // Line's Cobj Code and RC1, RC2
+
+// TN_RadUnits     = ( ruNone, ruPercent, ruLLW, ruUser, rumm );
+// TN_ExtParamInfo = packed record // Src and Self Names for setting External Param
+// TN_MoveDataInfo = packed record // Src and Dst Names for Moving Mata
+// TN_SetParamInfo = packed record // Info for Setting One Param
+// TN_SkipCompMode = ( scmNone="None",
+
+// TN_PicturePlace = ( ppUpperLeft="UpperLeft",
+// TN_RasterType   = ( rtRArray="RArray",
+// TN_Raster       = packed record //***** Raster with transparency Mask
+
+// TN_CTLVar1      = packed record
+// TN_VCTreeLayer  = packed record
+// TN_VCTreeParams = packed record
+
+// TN_UserParam     = packed record // One User Parameter
+// TN_TimeSeriesUP  = packed record // Time Series as User Parameter
+// TN_CodeSpaceItem = packed record // One CodeSpace Item
+
+// TN_MEWordFlags = SetOf ( mewfUseVBA="Use VBA", ...
+// TN_MEWordPSMode = ( psmNotGiven="Not Given", ...
+// TN_MEDebFlags = SetOf ( medfDebInterface="Show Deb Interface", ...
+// TN_UObjPathFlags = SetOf( ...
+// TN_LogChanFlags = SetOf ( ...
+// TN_LogChannelInfo = packed record  // Log Channel Info
+// TN_MEGOParams      = packed record // MEGlobObjParams for manual editing
+// TN_CompCoordsType  = ( cctUser="Parent User Coords", cctLSU="Parent LSU units",
+// TN_SPLMacroContext = packed record // SPL Macros Context (content of SPL _G var)
+// TN_SclonOneToken   = packed record // разные падежи одной лексемы
+
+// TN_MSizeUnit        = ( msuLSU="LSU", msumm="mm", msuPix="Pixels",
+// TN_MScalSize        = packed record // Measured Scalar Size (one Size with Mesuaring units)
+// TN_MPointSize       = packed record // Measured Point Size (two Sizes with Mesuaring units)
+// TN_MRectSize        = packed record // Measured Rect Size (four Sizes with Mesuaring units)
+// TN_RectSizePos      = packed record // Rect Size and Position (relative to sme base Rect)
+// TN_RelPos           = ( rpLefter, rpUpper, rpRighter, rpLower );
+
+// TN_ODFFlags         = SetOf ( odffNotOverlap, odffRoundElem, odffRoundGap,
+// TN_ODFSParams       = packed record // One Dimensional Fixed Size Elems layout Params
+
+// TN_CPanelSide       = packed record // CPanel Individual Side params
+// TN_CPanel           = packed record // Panel Component Params
+
+// TN_OneDouble        = packed record // used in SPL "Array of TN_OneDouble" type
+// TN_FillColorAttr1   = packed record // Fill Color Attributes
+// TN_PointAttr2Type   = ( patNotDef, patStrokeShape, patRoundRect, patEllipseFragm,
+// TN_PointAttr2       = packed record //***** Point Attributes #2
+
+// TN_PFFType        = ( pfftCosmetic="Cosmetic", pfftGeometric="Geometric" );
+// TN_PFFStyle       = ( pffsSOLID="SOLID", pffsDASH="DASH", pffsDOT="DOT",
+// TN_PFFEndCap      = ( pffeROUND="ROUND", pffeSQUARE="SQUARE", pffeFLAT="FLAT" );
+// TN_PFFLineJoin    = ( pfflROUND="ROUND", pfflBEVEL="BEVEL", pfflMITER="MITER" );
+// TN_PenStyleFields = packed record // Pen Flags as several Fields
+
+// TN_StrokeShapeType  = ( sstPlus="Plus", sstMinus="Minus", sstDiagonals="Diagonals" );
+// TN_PA2StrokeShape   = packed record // Stroke Shape Special params (patStrokeShape)
+// TN_PA2RoundRect     = packed record // Round Rect Special params (patRoundRect)
+// TN_ArcBorderType    = ( abtPieSegment="Pie Segment", abtChord="Chord", abtArcOnly="Arc Only" );
+// TN_PA2EllipseFragm    = packed record // Ellipse Arc Special params (patEllipseFragm)
+// TN_PA2RegPolyFragm    = packed record // Regular Polygon Arc Special params (patRegPolyFragm)
+// TN_PA2TextRow       = packed record // Text Row Special params (patTextRow)
+// TN_PA2Picture       = packed record // Picture Special params (patPicture)
+// TN_PA2ArrowFlags    = SetOf ( paafRound );
+// TN_PA2Arrow         = packed record // Arrow Special params (patArrow)
+// TN_PA2PolyLineFlags = SetOf ( paplfSinglePath );
+// TN_PA2PolyLine      = packed record // PolyLine Special params (patPolyLine)
+
+// TN_ExtStrokeAttr    = packed record // Extended Stroke drawing  Attributes
+// TN_ExtFillAttr      = packed record // Extended Fill drawing Attributes
+// TN_MarkerAttrFlags  = SetOf ( mafBegLine, mafEndLine,
+// TN_MarkerAttr       = packed record // One Marker drawing  Attributes
+// TN_ContAttrFlags    = SetOf ( cafWidthInmm, cafOnlyColor, cafOnlyMono );
+// TN_ExtContAttrFlags = SetOf ( ecafWidthUnits );
+// TN_ExtContAttr      = packed record // Extended Contour (stroke and fill) drawing Attributes
+// TN_ContAttr         = packed record // Contour (stroke and fill) drawing Attributes
+// TN_ContAttrArray    = packed record // used for Array of Array of TN_ContAttr
+
+// TN_File1TypeFlags   = SetOf ( ftfCompressed, ftfEncryped, ftfHasCRC, ftfUseBuffer );
+// TCompressionLevel   = (clNone, clFastest, clDefault, clMax);
+
+
+type TN_ParRBuf = record // ParRBuf
+  PSize   : TPoint;  // Pixels X,Y size of RBuf
+  PRect   : TRect;   // visible Pixel Rect in RBuf
+  URect   : TFRect; // visible User Coords (User Coords of PRect)
+  RScale  : double;    // RasterScale (DstSize = PRectSize*RScale)
+  PixFmt  : integer;   // RBuf PixelFormat
+end;
+
+type TN_AffCoefs4 = record  //***** four affine convertion coefs
+    CX: double;
+    SX: double; // Xdst := CX*Xsrc + SX;
+    CY: double;
+    SY: double; // Ydst := CY*Ysrc + SY;
+end; //*** end of type TN_AffCoefs4 = record
+
+type TN_AffCoefs6 = packed record  //***** six affine convertion coefs
+    CXX: double;
+    CXY: double;
+    SX:  double; // Xdst := CXX*Xsrc + CXY*Ysrc + SX
+    CYX: double;
+    CYY: double;
+    SY:  double; // Ydst := CYX*Xsrc + CYY*Ysrc + SY
+end; //*** end of type TN_AffCoefs6 = record
+
+{$ CurF=20120422}
+type TN_CTransfType = ( ctfNoTransform="No Transformation",
+                        ctfFlipAlongX="Flip Along X",
+                        ctfFlipAlongY="Flip Along Y",
+                        ctfRotate90CCW="Rotate +90",
+                        ctfRotate90CW="Rotate -90",
+                        ctfRotateAnyAngle="Rotate by Angle" );
+
+type TN_StrPosParams = packed record // String Position Params
+  SPPShift:    TFPoint; // String HotPoint X,Y Shift in LLW
+  SPPHotPoint: TFPoint; // HotPoint relative Coords ( (1,1) - lower right corner )
+  SPPBLAngle:  float;   // String Base Line Angle in dergee
+end; // type TN_StrPosParams
+
+type TN_StandartShape SetOf ( sshATriangle="A Triangle", sshVTriangle="V Triangle",
+                              sshRect="Rect", sshRomb="Romb", sshEllipse="Ellipse",
+                              sshPlus="Plus", sshCornerMult="Corner Mult",
+                              sshEllMult="Ellipse Mult", sshDummy1="Dummy1" );
+
+type TN_RGBColor = packed record // four bytes - RGB Color Components
+  Red:   Byte; // low byte of integer
+  Green: Byte;
+  Blue:  UInt2; // two high bytes of integer
+end; // type TN_RGBColor = packed record
+
+type TN_PointAttr1 = record //***** Point Attributes #1
+  SShape: TN_StandartShape;
+  SReservedInt2: UInt2;   // for allignment
+  SBrushColor: Color;     // not used in cross and rotated cross Sign Shapes
+  SPenColor:  Color;      // used for all Sign Shapes
+  SPenWidth:  float;      // border and cross lines Width in LLW
+  SPenStyle:    hex;      // Pen Style WinGDI flags
+  SSizeXY:   TFPoint;     // X,Y sizes in LSU
+  SShiftXY:  TFPoint;     // X,Y shifts in LSU
+  SHotPoint: TFPoint;     // Hot Point position in Norm. coords,
+end; // type TN_PointAttr1 = packed record
+
+type TN_SysLineAttr = record //***** Sys Line (with Vertexes) Attributes
+  AtLASColor: color;    // Line All Segments Color
+  AtLASWidth: float;    // Line All Segments Width (in LLW)
+  AtLBSColor: color;    // Line Beg Segment (first half) Color
+  AtLBSWidth: float;    // Line Beg Segment (first half)Width (in LLW)
+  AtLAV: TN_PointAttr1; // Line All Vertexes attributes
+  AtLBV: TN_PointAttr1; // Line Beg Vertex   attributes
+end; // type TN_SysLineAttr = packed record
+
+type TN_MinMaxValues = packed record // Min and Max Values
+  MMVMinValue: double;
+  MMVMaxValue: double;
+end; // type TN_MinMaxValues = packed record
+
+type TN_SplineLineFlags = SetOf ( slfDum1 );
+type TN_SplineLineType  = ( sltDoNotSpline="Do Not Spline",
+                            sltCatmullRom="Catmull-Rom" );
+
+type TN_SplineLineParams = packed record // Params for "Splaining" Polyline
+  SLPType:  TN_SplineLineType;   // Spline Type
+  SLPFlags: TN_SplineLineFlags;  // Spline Flags
+  SLPReserved1: byte; // for alignment
+  SLPReserved2: byte; // for alignment
+  SLPJoinAngle: float;    // all Join Angles in resulting Line should be less then given
+  SLPNumNewInSegm: integer; // Number of New Points in each segment of source Line
+end; // type TN_SplineLineParams = packed record
+
+type TN_RAFillNumFuncType = ( fnftDebug="Debug Values",
+                              fnftZero="Zero Constant",
+                              fnftLinear="Linear Function",
+                              fnftPower="Power Function",
+                              fnftSinDegree="Sin (arg in degree)" );
+
+type TN_RAFillNumParams = packed record // params for Filling RArray of Numbers
+                                        //      (Integer, Float or Double)
+  FNRAddMode:   byte; // if <> 0 then Add calculated Value (else - Set)
+  FNRFuncType: TN_RAFillNumFuncType; // Fill Function Type
+  FNRReserved1: byte; // for alignment
+  FNRReserved2: byte;
+
+  FNRBegIndex:  integer; // First Index of RArray to Fill
+  FNRNumValues: integer; // Number of elements in RArray to Fill
+  FNRBegFunc:   double;  // Minimal Function Value (Beg Value for fnftLinear)
+  FNREndFunc:   double;  // Maximal Function Value (End Value for fnftLinear)
+
+  FNRNoiseVal:  double;  // Max Noise(random) Value to add
+  FNRShiftVal:  double;  // Const Value to add
+  FNRMultCoef:  double;  // Multiplication coef (last operation after all other calculations)
+  FNRNumDigits: integer; // Rounding Accuracy (number of decimal digits)
+
+  FNRPowerCoef: double;  // Power Coef. ( =0.01 near MaxValue, =1 - linar, =100 near MinValue) (for fnftPower only)
+  FNRBegArg:    double;  // Beg Argument Value (in Degree, for fnftSinDegree only)
+  FNREndArg:    double;  // End Argument Value (in Degree, for fnftSinDegree only)
+end; // type TN_RAFillNumParams = packed record
+
+type TN_RAFillColorsType = ( fctAnyIndependant="Full Range, Independant",
+                             fctRangeIndependant="Given Range, Independant",
+                             fctRandLinear="Given Range, Linear, Random",
+                             fctUniformLinear="Given Range, Linear, Uniform",
+                             fct3DigitNumbers="As Three Digits Number" );
+
+type TN_RAFillColParams = packed record // params for Filling RArray of Colors
+  FCRFillType: TN_RAFillColorsType; // Filling type
+  FCRReserved1: byte; // for alignment
+  FCRReserved2: byte;
+  FCRReserved3: byte;
+  FCRBegIndex:  integer; // First Index of RArray to Fill
+  FCRNumValues: integer; // Number of elements in RArray to Fill
+  FCRMinColor:  Color;   // Minimal Color (not needed for fctAnyIndependant)
+  FCRMaxColor:  Color;   // Maximal Color (not needed for fctAnyIndependant)
+end; // type TN_RAFillColParams = packed record
+
+type TN_RAFillStrType  = ( fstFormatInt="Format Int Value",
+                           fstFormatDbl="Format Dbl Value",
+                           fstCharCodes="Character Codes" );
+
+type TN_RAFillStrFlags = SetOf ( fstAddAfter="Add After" );
+
+type TN_RAFillStrParams = packed record // params for Filling RArray of Strings
+  FSRFillType: TN_RAFillStrType;   // Filling type
+  FSRFillFlags: TN_RAFillStrFlags; // Filling Flags
+  FSRReserved1: byte; // for alignment
+  FSRReserved2: byte;
+  FSRBegIndex:   integer; // First Index of RArray to Fill
+  FSRNumStrings: integer; // Number of elements in RArray to Fill
+  FSRFormat:     string;  // Delphi Format String (for one Double or integer value)
+  FSRDValues: ArrayOf Double; // Values for Format convertion
+end; // type TN_RAFillStrParams = packed record
+
+type TN_2DRAFillNumFuncType  = ( tdnftLinear1="Linear Func (X,Y Steps)",
+                                 tdnftLinear2="Linear Func (end Values)",
+                                 tdnftExp="2D Exponent",
+                                 tdnftParab="2D Parabola" );
+type TN_2DRAFillNumFuncFlags = SetOf ( tdnftClearFirst="Clear before adding" );
+
+type TN_2DRAFillNumParams = packed record // params for Filling and Updating 2D RArray
+                                          // of Numbers (Integer, Float or Double)
+  FNRFlags:    TN_2DRAFillNumFuncFlags; // Some Flags
+  FNRFuncType: TN_2DRAFillNumFuncType;  // Function Type
+  FNRReserved1: byte; // for alignment
+  FNRReserved2: byte;
+  FNRVX0Y0:      double;  // Value of [0,0]   element (for Linear fill)
+  FNRVXMaxY0:    double;  // Value of [Max,0] element (for Linear fill)
+  FNRVX0YMax:    double;  // Value of [0,Max] element (for Linear fill)
+  FNRExtrCoords: TDPoint; // Extremum Index Coords (for Parabolic and Exponent fill)
+  FNRExtrVal:    double;  // Extremum Value (for Parabolic and Exponent fill)
+  FNRCXYPar:     TDPoint; // Parabolic CX CY coefs
+  FNRInfExpVal:  double;  // Infinum Exponent Value
+  FNRSigmaExp:   TDPoint; // Sigma X Y Exponent coefs
+  FNRFormat:     string;  // Pascal Format string for filling strings by numbers
+end; // type TN_2DRAFillNumParams = packed record
+
+
+type TPixelFormat = (
+  pfDevice = 'Device',
+  pf1bit   = '1bit',
+  pf4bit   = '4bit',
+  pf8bit   = '8bit',
+  pf15bit  = '15bit',
+  pf16bit  = '16bit',
+  pf24bit  = '24bit',
+  pf32bit  = '32bit'
+  pfCustom = 'Custom'
+);
+
+type TN_LineCodes = record // Line's Cobj Code and RC1, RC2
+  LCItemCode: integer;
+  LCRC1: integer;
+  LCRC2: integer;
+end; // type TN_LineCodes
+
+
+// rounding Radius Units:
+type TN_RadUnits = ( ruNone="Not Given",
+                     ruPercent="%",
+                     ruLLW="LLW",
+                     ruUser="User",
+                     rumm="mm" );
+
+type TN_ExtParamInfo = packed record // Src and Self Names for setting External Param
+  EPFlags:    integer;
+  EPSrcUObj:  TN_UDBase;
+  EPSrcPath:  string;
+  EPSelfPath: string;
+end; // type TN_ExtParamInfo = packed record
+
+type TN_MoveDataInfo = packed record // Src and Dst Names for Moving Mata
+  MDFlags:   integer;
+  MDSrcUObj: TN_UDBase;
+  MDSrcPath: string;
+  MDDstUObj: TN_UDBase;
+  MDDstPath: string;
+end; // type TN_MoveDataInfo = packed record
+
+type TN_SetParamInfo = packed record // Info for Setting One Param
+                                     // (Src and Dst Names for Moving Data)
+  SPFlags: integer;
+  SPSrcUObj: TN_UDBase;
+  SPSrcPath: string;
+  SPDstUObj: TN_UDBase;
+  SPDstPath: string;
+end; // type TN_SetParamInfo = packed record
+
+type TN_SkipCompMode = ( scmNone="None",
+                         scmAll="All" );
+
+type TN_PicturePlace = ( ppUpperLeft="UpperLeft",
+                         ppCenter="Center",
+                         ppRepeat="Repeat" );
+
+type TN_RasterType = ( rtDefault="Default",
+                       rtBArray="BArray",
+                       rtRArray="RArray",
+                       rtBMP="BMP" );
+
+type TN_Raster = packed record //***** Raster with transparency Mask
+  RType:  TN_RasterType;  // Raster implementation Type
+  RPixFmt: TPixelFormat;  // Raster Pixel Format
+  RWidth:  integer;       // Raster Width in pixels
+  RHeight: integer;       // Raster Height in pixels
+  RTranspColor: integer;  // Color for visualising Transparent Raster Pixels
+                          // (it should be absent in other Raster pixels)
+  RTranspIndex: integer;  // Color Index of RTranspColor for palette rasters
+  RNumPalColors: integer; // Number of Colors in Palette
+  RDPI: double;           // Raster Dot Per Inch (Raster Resolution in DPI)
+
+  RasterRA: ArrayOf byte;  // Raster pixels as TK_RArray of Byte
+  RasterBA: ^Undef;        // Raster pixels as BArray
+
+  RMaskRA:  ArrayOf byte;  // Transparency Mask as TK_RArray of Byte
+  RMaskBA:  ^Undef;        // Transparency Mask as BArray
+
+  RPalRA: ArrayOf integer; // Raster Palette as TK_RArray of Integer
+  RPalIA:  ^Undef;         // Raster Palette as TN_IArray
+
+  RBMP:    ^Undef;         // Raster as BMP (for rtBMP rasters) without Mask
+end; // type TN_Raster = packed record
+
+//type TN_StrMatrFormat = ( smfCSV="CSV", smfTab="Tab",
+//                          smfSpace1="Space1", smfSpace3="Space1" ); // in K_CLib\SPL\K_UDVTab
+
+type TN_CTLVar1 = packed record
+  V1LegendHeaderText: string;
+  V1LegendFooterText: string;
+  V1LegElemTexts: ArrayOf String; // Legend Elements Texts
+  V1LegElemColors: ArrayOf Color; // Legend Elements Colors (to fill SignRect)
+end; // type TN_CTLVar1 = packed record
+
+type TN_VCTreeLayer = packed record
+  VCTLName: string;
+  VCTLParams: ArrayOf Undef; // RArray with one record with Layer specific Params
+end; // type TN_VCTreeLayer = packed record
+
+type TN_VCTreeParams = packed record
+  VCTName: string;
+  VCTHeaderText: string;
+  VCTPageNumber: integer;
+  VCTLayers: ArrayOf TN_VCTreeLayer; // RArray of TN_CompTreeLayer records
+end; // type TN_VCTreeParams = packed record
+
+type TN_OneUserParam = packed record // One User Parameter
+  UPName:  string;        // User Parameter Name
+  UPDescr: string;        // User Parameter Description
+  UPValue: ArrayOf Undef; // User Parameter Value
+end; // type TN_OneUserParam = packed record
+
+{
+type TN_TimePeriodType = (
+         K_tptYear,    // = "год"
+         K_tptHYeay,   // = "полугодие"
+         K_tptQuarter, // = "квартал"
+         K_tptMonth,   // = "месяц"
+         K_tpt10Days,  // = "декада"
+         K_tptWeek,    // = "неделя"
+         K_tptDay,     // = "день"
+         K_tptHour,    // = "час"
+         K_tptMinute,  // = "минута"
+         K_tptSecond,  // = "секунда"
+         K_tptMSecond  // = "миллисекунда"
+       );
+}
+
+type TN_TimeSeriesUP = packed record // Time Series as User Parameter
+  TSArgValues:  ArrayOf double;  // Argument Values in Years (ArrayOf double)
+  TSFuncValues: ArrayOf double;  // Function Values (ArrayOf double)
+  TSRatings:    ArrayOf double; // Item Ratings (>=1, ArrayOf integer)
+  TSTimePeriodTypes: ArrayOf TK_TimePeriodType; // Arg. Values Time Period Types (ArrayOf TK_TimePeriodType)
+
+  TSNumDigits: integer;   // Number of digits after decimal point (Accuracy)
+  TSVectorKey: string;    // Source UDVector Key1 in Sclon Table
+  TSItemKey:   string;    // UDVector Item Key1 in Sclon Table
+end; // type TN_TimeSeriesUP = packed record
+
+type TN_TimeSeriesUPR = packed record // Time Series as User Parameter in Russian
+  Арг:  ArrayOf double;  // Argument Values in Years (ArrayOf double)
+  Знач: ArrayOf double;  // Function Values (ArrayOf double)
+  Место:  ArrayOf double; // Item Ratings (>=1, ArrayOf integer)
+  Период: ArrayOf TK_TimePeriodType; // Arg. Values Time Period Types (ArrayOf TK_TimePeriodType)
+
+  Точн: integer;   // Number of digits after decimal point (Accuracy)
+  ПокНазв: string;    // Source UDVector Key1 in Sclon Table
+  СубНазв: string;    // UDVector Item Key1 in Sclon Table
+end; // type TN_TimeSeriesUPR = packed record
+
+type TN_CodeSpaceItem = packed record // One CodeSpace Item
+  ItemCS: TN_UDBase; // Items's CodeSpace
+  ItemCode: string;  // Item Code in ItemCS
+end; // type TN_CodeSpaceItem = packed record
+
+type TN_RArrayOfDouble = packed record // for constructing "ArrayOf TN_RArrayOfDouble" SPL type
+  V: ArrayOf Double;
+end; // type TN_OneDouble = packed record
+
+type TN_MEWordFlags = SetOf ( mewfUseVBA="Use VBA macros",
+                              mewfUseWin32API="Use Win32API in VBA",
+                              mewfCloseResDoc="Close Resulting Doc",
+                              mewfWordVisible="Word is always Visible" );
+
+type TN_MEWordPSMode = ( psmNotGiven="Not Given (Error)",
+                         psmFile="Use File (Win API)",
+                         psmWinAPIClb="Use Clipboard API",
+                         psmDelphiMem="Use Delphi Mem",
+                         psmPSDocVar="Use PSDoc Var",
+                         psmPSDocText="Use PSDoc Text",
+                         psmPSDocClb="Use PSDoc by Clipboard" );
+
+type TN_MEDebFlags = SetOf ( medfDebInInterface="Show Deb Items In Interface",
+                             medfCollectProtocol="Collect Protocol",
+                             medfProtocolToFile="Save Protocol to File"
+                             medfAutoViewProtocol="Auto View Protocol Window",
+                             medfInfoWatch="Enable InfoWatch",
+                             medfTmpFlag1="Temporary Flag1",
+                             medfTmpFlag2="Temporary Flag2" );
+
+type TN_UObjPathFlags = SetOf ( upfUseUObjName="Use ObjName",
+                                upfOwnersPath="Use Owners Path",
+                                upfUObjRefPath="Use RefPath Fiels",
+                                upfOneSegmPath="Use OneSegm Path" );
+
+type TN_LogChanFlags = SetOf ( lcfEnable="Enable Channel",
+                               variant pcfEnable="Enable Channel",
+                               lcfShowCounter="Show Counter",
+                               variant pcfShowCounter="Show Counter",
+                               lcfShowTime="Show Time",
+                               variant pcfShowTime="Show Time",
+                               lcfShowHeader="Show Header",
+                               lcfFlushMode="Flush Mode",
+                               variant pcfFlushMode="Flush Mode",
+                               lcfAppendMode="Append Mode",
+                               variant pcfAppendMode="Append Mode" );
+
+type TN_LogChannelInfo = packed record //********** Log Channel Info for Editing and Saving
+  LCIFlags:  TN_LogChanFlags; // Log Channel Flags
+  LCIFName:       string;     // Log Channel File Name (not expanded) 
+  LCIBufSize:    integer;     // LCBuf Size in strings
+  LCISecondCInd: integer;     // Second Channel Index for copiing all strings
+end; // type TN_LogChannelInfo = record
+
+type TN_MEGOParams = packed record // MEGlobObjParams for manual editing
+  EDebFlags:       TN_MEDebFlags;    // Debug Flags
+  ESDTUnloadFlags: TK_TextModeFlags; // SDT Unload Format Flags
+  EPathFlags:      TN_UObjPathFlags; // Path Flags used for Showing Paths to UObjects
+
+  EWordFlags:      TN_MEWordFlags;   // Creating Word Documents mode Flags
+  EWordPSMode:     TN_MEWordPSMode;  // Passing StrParams Delphi <--> VBA Mode
+  EWordMinVersion: integer;    // Minimal Word major Version number (8-97, 11-2003)
+
+  EDefScrResDPI: float; // Default Screen resolution in DPI (for calculatind PixSize by mmSize)
+  EDefPrnResDPI: float; // Default Printer resolution in DPI (for calculatind PixSize by mmSize)
+  EScrResCoef:   float; // Screen resolution Coef. (for ajusting Screen Resolution)
+
+  EGridStepmm:   TDPoint; // Grid Step in mm   for Pixel --> mm convertion
+  EGridStepLSU:  TDPoint; // Grid Step in LSU  for Pixel --> LSU convertion
+  EGridStepPrc:  TDPoint; // Grid Step in Prc  for Pixel --> Percents convertion
+  EGridStepUser: TDPoint; // Grid Step in User for Pixel --> User convertion
+
+  ERecompFlags: TK_RecompileGSPLFlags; // All Archives Reload Flags after SPL Recompile
+  ELogChannels: ArrayOf TN_LogChannelInfo; // Log Channels Info
+end; // type TN_MEGOParams packed record
+
+type TN_CompCoordsType = ( cctUser="Parent User Coords", cctLSU="Parent LSU units",
+                           cctmm="Parent millimeters", cctPix="Parent Pixels",
+                           cctPercent="Parent Percents",
+                           cctDstPix="Dst Pixels", cctDstmm="Dst millimeters" );
+
+type TN_SPLMacroContext = packed record // SPL Macros Context (content of SPL _G var)
+  PrevInd: integer; // Previous Iterator Index
+  LastInd: integer; // Last Iterator Index
+  LastCreated: TN_UDBase; // Last Created by UDCreator component UDRArray
+end; // type TN_SPLMacroContext = packed record
+
+type TN_SclonOneToken = packed record // разные падежи одной лексемы
+  STKey1:   string;
+  STKey2:   string;
+  STGender: string;  // род - ж с м (маленькие русские)
+  STImenit: string;  // Именительный
+  STRodit:  string;  // Родительный
+  STDatel:  string;  // Дательный
+  STVinit:  string;  // Винительный
+  STTvorit: string;  // Творительный
+  STPredl:  string;  // Предложный
+  STSearchKeys: string; // tokens for searching needed Entry
+end; // type TN_SclonOneToken = packed record
+
+
+//************* Measured Size types  ****************
+
+type TN_MSizeUnit = ( msuLSU="LSU", msumm="mm", msuPix="Pixels", msuPrc="Percents",
+                      msuUser="User", msuSpecial1="Special 1", msuNotGiven="Not Given" );
+
+type TN_MScalSize = packed record // Measured Scalar Size (one Size with Mesuaring units)
+  MSSValue: float;      // Value in given Units
+  MSUnit: TN_MSizeUnit; // Size Unit used in MSValue field
+  MSReserved1: Byte; // for alignment
+  MSReserved2: Byte; // for alignment
+  MSReserved3: Byte; // for alignment
+end; // type TN_MScalSize = packed record
+
+type TN_MPointSize = packed record // Measured Point Size (two Sizes with Mesuaring units)
+  MSPValue: TFPoint;    // Value in given Units
+  MSXUnit: TN_MSizeUnit; // X Size Unit used in MSPValue.X field
+  MSYUnit: TN_MSizeUnit; // Y Size Unit used in MSPValue.Y field
+  MSReserved1: Byte; // for alignment
+  MSReserved2: Byte; // for alignment
+end; // type TN_MPointSize = packed record
+
+type TN_MRectSize = packed record // Measured Rect Size (four Sizes with Mesuaring units)
+  MSRValue: TFRect;    // Value in given Units
+  MSLeftUnit:   TN_MSizeUnit; // Left   Size Unit used in MSRValue.Left   field
+  MSTopUnit:    TN_MSizeUnit; // Top    Size Unit used in MSRValue.Top    field
+  MSRightUnit:  TN_MSizeUnit; // Right  Size Unit used in MSRValue.Right  field
+  MSBottomUnit: TN_MSizeUnit; // Bottom Size Unit used in MSRValue.Bottom field
+end; // type TN_MRectSize = packed record
+
+type TN_RectSizePos = packed record // Rect Size and Position (relative to sme base Rect)
+  RSPBPPos: TFPoint;         // Base Point Position in %, relative to some base Rect ( (100,100) means lower right corner )
+  RSPBPShift: TN_MPointSize; // Base Point Shift
+  RSPHPPos: TFPoint;         // Hot Point Position in %, relative to resulting Rect ( (100,100) means lower right corner )
+  RSPSize: TN_MPointSize;    // resulting Rect Size
+end; // type TN_RectSizePos = packed record
+
+type TN_RelPos = ( rpLefter, rpUpper, rpRighter, rpLower );
+
+type TN_ODFFlags = SetOf ( odffNotOverlap, odffEqualSizes,
+                           odffAlignCenter, odffAlignEnd );
+
+type TN_ODFSParams = packed record // One Dimensional Fixed Size Elems layout Params
+  ODFFLags: TN_ODFFlags; // ODFS layout algorithm Flags
+  ODFReserved1: Byte; // for alignment
+  ODFReserved2: Byte;
+  ODFReserved3: Byte;
+  ODFLRPaddings: TN_MPointSize; // Beg and End Paddings (i.e. Left and Right)
+  ODFElemSize:   TN_MScalSize;  // Element Size
+  ODFGapSize:    TN_MScalSize;  // Gap between Elements
+obsolete  ODFBordWidth:  TN_MScalSize;  // Elements Border Width
+end; // type TN_ODFSParams = packed record
+
+type TN_CPanelFlags = SetOf ( cpfBaseIntRect );
+
+type TN_CPanelSide = packed record // CPanel Individual Side params
+  PaSBorderColor: Color;      // Panel One Side Border Color
+  PaSBorderWidth: float;      // Panel One Side Border Width
+  PaSRoundXYRads: TN_MPointSize; // Panel Round (X,Y) Radiuses in Measured Units
+                                 // for corner between current and next Side
+end; // type TN_CPanelSide = packed record
+
+type TN_CPanel = packed record // Panel Component Params
+  PaFlags:  TN_CPanelFlags;  // Panel Flags
+  PaReserved1: byte;
+  PaReserved2: byte;
+  PaReserved3: byte;
+  PaMargins:  TN_MRectSize;  // Panel Margins in Measured Units
+  PaPaddings: TN_MRectSize;  // Panel Paddings in Measured Units
+  PaBackColor:   Color;      // Panel Background Color
+  PaBorderColor: Color;      // Panel All Borders Color
+  PaBorderWidth: float;      // Panel All Borders Width
+  PaRoundXYRads: TN_MPointSize; // Panel Round (X,Y) Radiuses in Measured Units
+  PaSideParams: ArrayOf TN_CPanelSide;  // Panel Sides (LTRB) Individual Params (may be nil)
+end; // type TN_CPanel = packed record
+
+type TN_OneDouble = packed record // used in SPL "Array of TN_OneDouble" type
+  V: double;
+end; // type TN_OneDouble = packed record
+
+type TN_FillColorAttr1 = packed record // Fill Color Attributes
+  MainColor:  Color;      // Main Fill Color
+  Params:  ArrayOf Undef; // Additional Fill Color Params as RArray (if needed)
+end; // type TN_FillColorAttr1 = packed record
+
+type TN_PointAttr2Type = ( patNotDef, patStrokeShape, patRoundRect, patEllipseFragm,
+                     patRegPolyFragm, patTextRow, patPicture, patArrow, patPolyLine );
+
+type TN_PointAttr2 = packed record //***** Point Attributes #2
+  PAType:  TN_PointAttr2Type;  // Point Attributes Type
+  PAShape: TN_StandartShape;   // Set of Several Standart Shapes
+  PAReserved1: Byte; // for allignment
+  PABrushColor: Color; // not used in cross and rotated cross Sign Shapes
+  PAPenColor:   Color; // used for all Sign Shapes
+  PAPenWidth:   float; // border and cross lines Width in LLW
+  PAPenStyle:     hex; // Windows Path drawing Flags
+  PASizeXY:   TFPoint; // X,Y sizes in LSU
+  PAShiftXY:  TFPoint; // X,Y shifts in LSU
+  PAHotPoint: TFPoint; // Hot Point position in Norm. coords,
+                       // ( (0,0)-UpperLeft corner, (0.5,0.5)-Center )
+  PASP: ArrayOf Undef; // Special Params (different for different Attr types)
+end; // type TN_PointAttr2 = packed record
+
+type TN_PFFType  = ( pfftCosmetic="Cosmetic", pfftGeometric="Geometric" );
+type TN_PFFStyle = ( pffsSOLID="SOLID", pffsDASH="DASH", pffsDOT="DOT",
+                     pffsDASHDOT="DASHDOT", pffsDASHDOTDOT="DASHDOTDOT",
+                     pffsNULL="NULL", pffsINSIDEFRAME="INSIDEFRAME",
+                     pffsUSERSTYLE="USERSTYLE", pffsALTERNATE="ALTERNATE" );
+
+type TN_PFFEndCap  = ( pffeROUND="ROUND", pffeSQUARE="SQUARE", pffeFLAT="FLAT" );
+
+type TN_PFFLineJoin  = ( pfflROUND="ROUND", pfflBEVEL="BEVEL", pfflMITER="MITER" );
+
+type TN_PenStyleFields = packed record // Pen Flags as several Fields
+  PFFType:     TN_PFFType;
+  PFFStyle:    TN_PFFStyle;
+  PFFEndCap:   TN_PFFEndCap;
+  PFFLineJoin: TN_PFFLineJoin;
+end; // type TN_PenStyleFields = packed record
+
+type TN_StrokeShapeType  = ( sstPlus="Plus", sstMinus="Minus", sstDiagonals="Diagonals" );
+
+type TN_PA2StrokeShape = packed record // Stroke Shape Special params (patStrokeShape)
+  PASSType: TN_StrokeShapeType; // Stroke Shape Type
+  PASSAngle: float;             // Angle to rotate all Strokes
+end; // type TN_PA2StrokeShape = packed record
+
+type TN_PA2RoundRect = packed record // Round Rect Special params (patRoundRect)
+  PAEllSizeXY: TFPoint; // Rounding Ellipse X,Y Sizes
+end; // type TN_PA2RoundRect = packed record
+
+type TN_ArcBorderType = ( abtArcOnly="Arc Only",
+                          abtChord="Chord",
+                          abtPieSegment="Pie Segment" );
+
+type TN_PA2EllipseFragm = packed record // Ellipse Arc Special params (patEllipseFragm)
+  PAEBorderType: TN_ArcBorderType; // Shape Border Type
+  PAEReserved1: Byte;  // for allignment
+  PAEReserved2: Byte;  // for allignment
+  PAEReserved3: Byte;  // for allignment
+  PAEBegAngle: float; // Beg Arc Angle (in Degree)
+  PAEArcAngle: float; // Arc Angle Value, 0 means 360 (in Degree)
+end; // type TN_PA2EllipseFragm = packed record
+
+type TN_PA2RegPolyFragm = packed record // Regular Polygon Arc Special params (patRegPolyFragm)
+  PAPBorderType: TN_ArcBorderType; // Shape Border Type
+  PAPReserved1: Byte;  // for allignment
+  PAPReserved2: Byte;  // for allignment
+  PAPReserved3: Byte;  // for allignment
+  PAPBegAngle: float; // Beg Arc Angle (in Degree)
+  PAPArcAngle: float; // Arc Angle Value, 0 means 360 (in Degree)
+  PAPNumSegments: integer;
+end; // type TN_PA2RegPolyFragm = packed record
+
+type TN_PA2TextRow = packed record // Text Row Special params (patTextRow)
+  PAText: string;       // TextRow Text
+  PAFont: TN_UDBase;    // Text Font
+  PAFSCoef:    float;   // Font Scale Coef
+  PATRAngle:   float;   // TextRow Base Line Angle in Degree in Clockwise direction
+  PACESpace:   float;   // Text Characters Extra Space in LSU
+end; // type TN_PA2TextRow = packed record
+
+type TN_PA2Picture = packed record // Picture Special params (patPicture)
+  PAPict:  TN_UDBase; // really - TN_UDPicture (TN_UDBase is used to avoid circular references)
+  PAScaleCoef: float; // if > 0 - use it instead of PASizeXY
+  PAPictFragm: TRect; // Picture fragment to show in pixels ( (0,-1) means full size)
+  PAMantainAspect: byte; // if <> 0 Picture Aspect should be mantained
+end; // type TN_PA2Picture = packed record
+
+type TN_PA2ArrowFlags = SetOf ( paafRound );
+
+type TN_PA2Arrow = packed record // Arrow Special params (patArrow)
+  PAAFlags: TN_PA2ArrowFlags; // Arrow Flags
+  PAAReserved1: Byte; // for allignment
+  PAAReserved2: Byte; // for allignment
+  PAAReserved3: Byte; // for allignment
+  PAAIntWidth:  float; // Internal Arrow Width  in LSU
+  PAAIntLength: float; // Internal Arrow Length in LSU
+  PAAExtWidth:  float; // External Arrow Width  in LSU
+  PAAExtLength: float; // External Arrow Length in LSU
+  PAArrowAngle: float; // Arrow Base Line Angle in Degree in Clockwise direction
+end; // type TN_PA2Arrow = packed record
+
+type TN_PA2PolyLineFlags = SetOf ( paplfSinglePath );
+
+type TN_PA2PolyLine = packed record // PolyLine Special params (patPolyLine)
+  PALFlags: TN_PA2PolyLineFlags; // PolyLine Flags
+  PALReserved1: Byte;
+  PALReserved2: Byte;
+  PALReserved3: Byte;
+  PALCObj: TN_UDBase; // really TN_ULines
+  PALBegItemToDraw:  integer; // Beg Item Index to Draw
+  PALNumItemsToDraw: integer; // Number of  Items to Draw (0 means all subsequent Item)
+end; // type TN_PA2PolyLine = packed record
+
+
+//************************ TN_ContAttr related Types *************************
+
+type TN_ExtContAttrFlags = SetOf ( ecafDummy1 );
+
+type TN_ExtContAttr = packed record // Extended Contour (stroke and fill) drawing Attributes
+  ECAFlags: TN_ExtContAttrFlags; // some flags
+  ECAReserved1: byte;
+  ECAReserved2: byte;
+  ECAReserved3: byte;
+  ECAMiterLimit: float;     // Miter Limit
+  ECAPenImage:  TN_UDBase;  // used instead of Pen Color
+  ECAPenHandle:    hex;     // GDI Pen Handle (used instead of Pen Color)
+  ECABrushImage: TN_UDBase; // used instead of Brush Color
+  ECABrushHandle:  hex;     // GDI Brush Handle
+  ECABegOfs:     float;     // Offset (empty Dash) at Beg of Line
+  ECAEndOfs:     float;     // Offset (empty Dash) at End of Line
+end; // type TN_ExtContAttr = packed record
+
+type TN_ContAttrFlags = SetOf ( cafWidthInmm, cafOnlyColor, cafOnlyMono,
+                                cafWidthUnits, cafSkipMainPath, cafPenStyleDashes );
+
+type TN_MarkerFlags = SetOf ( mafBegLine, mafEndLine,
+                              mafInternalVerts, mafStep,
+                              mafRotateCS, mafWidthUnits,
+                              mafSinglePath, mafDummy1, mafDummy2 );
+
+type TN_DashUnits = ( duLLW="LLW Units",
+                      dumm="millimeters"
+                      duPix="Pixels"
+                      duPenWidth="PenWidth Units",
+                      duLengthPrc= "Line Length Prc" );
+
+type TN_ContAttr = packed record // Contour (stroke and fill) drawing Attributes
+  CAFlags: TN_ContAttrFlags;     // Some General flags
+  CAMarkerFlags: TN_MarkerFlags; // Some Marker Flags (two bytes)
+  CADashUnits: TN_DashUnits;     // Dash Units
+  CAPenColor:   Color;     // Pen Color
+  CAPenWidth:   float;     // Pen Width (in LLW or in mm if cafWidthInmm flag)
+  CAPenStyle:     hex;     // GDI Pen Style
+  CABrushColor: Color;     // Brush Color
+  CAOpacity:    float;     // Stroke and Fill Opacity (0-opaque, 1.0-transparent)
+  CADashSizes: ArrayOf float;  // RArray of Float or nil for solid lines
+  CAMarkers:   ArrayOf TN_PointAttr2;  // RArray of TN_PointAttr2 or nil if Markers are not needed
+  CAExtAttr:   ArrayOf TN_ExtContAttr; // Extended Attributes (one record of TN_ExtContAttr) or nil
+end; // type TN_ContAttr = packed record
+
+type TN_ContAttrArray = packed record // used for Array of Array of TN_ContAttr
+  V: ArrayOf TN_ContAttr;
+end;
+
+type TN_ImageFileFormat = ( imffByFileExt="By File Ext",
+                            imffBMP="BMP",   imffGIF="GIF",
+                            imffJPEG="JPEG", imffEMF="EMF",
+                            imffSVG="SVG",   imffVML="VML",
+                            imffUnknown="Unknown" );
+
+{
+//*** obsolete:
+type TN_RastAndEMFPar = packed record // Raster and EMF File Params
+//  REFileName:  string;             // File Name
+  REImFileFmt: TN_ImageFileFormat; // Image File Format
+  REPixFmt: TPixelFormat;          // Pixel format (1,8,16,24,32 bits per pixel)
+  REReserved1: byte;   // for alignment
+  REReserved2: byte;   // for alignment
+  RESizePix:     TPoint;    // Size in Pixels
+  RESizemm:      TFPoint;   // Size in millimeters
+  REResDPI:      TFPoint;   // X,Y Resolutions in DPI
+  RETranspColor: integer;   // Trasparent Color (for GIF and monochrome Files)
+  REJPEGQuality: integer;   // JPEG Quality (Compression level) from 1 to 100
+  REComprLevel:  integer;   // if >= 0 use compressed emz format for emf
+  REFile1: TN_File1Params;  // Params for using File1 procedures
+end; // type TN_RastAndEMFPar = packed record
+}
+
+type TN_ImageFilePar = packed record // Image (Raster or EMF) File Params
+  IFPImFileFmt: TN_ImageFileFormat; // Image File Format
+  IFPPixFmt: TPixelFormat;          // Pixel format (1,8,16,24,32 bits per pixel)
+  IFPReserved1: byte;   // for alignment
+  IFPReserved2: byte;   // for alignment
+  IFPSizePix:     TPoint;    // Size in Pixels
+  IFPSizemm:      TFPoint;   // Size in millimeters
+  IFPResDPI:      TFPoint;   // X,Y Resolutions in DPI
+  IFPTranspColor: integer;   // Trasparent Color (for GIF and monochrome Files)
+  IFPJPEGQuality: integer;   // JPEG Quality (Compression level) from 1 to 100
+  IFPComprLevel:  integer;   // if >= 0 use compressed emz format for emf
+  IFPVisibleRect: TRect;     // Visible Rect, (0,IFPSizePix-1) for whole Image
+end; // type TN_ImageFilePar = packed record
+
+type TN_TextFileEncoding  = ( tfeANSI="ANSI", tfeUTF8="UTF8", tfeUTF16="UNICODE",
+                              tfeISO_8955_1="ISO_8955_1", tfeWin1251="Win1251" );
+
+type TN_TextFilePar = packed record // Text File Params
+  TFPRowLength: integer;
+  TFPEncoding:  TN_TextFileEncoding;
+  TFPStr1:      string; // String Param used while Exporting (now used for HTMLMap)
+  TFPHeader:    string; // File Header (with possible $0D0A)
+  TFPIntType:  integer; // File integer type
+  TFPPatFName:  string; // Pattern File Name
+end; // type TN_TextFilePar = packed record
+
+{
+type TN_File1TypeFlags = SetOf ( ftfEncryped, ftfHasCRC, ftfWritePlain,
+                                 ftfUseBuffer, ftfWriteGZIP );
+
+type TN_File1OpenFlags = SetOf ( fofForcePlain, fofEnablePlain, fofNotPlain,
+                                 fofSkipException, fofForceGZIP );
+
+type TCompressionLevel = ( clNone="None", clFastest="Fastest",
+                           clDefault="Default", clMax="Maximum" );
+
+type TN_File1Params = packed record // Params for using File1 procedures
+  F1PFileFlags: TN_File1TypeFlags;  // Flags, saved in File
+  F1POpenFlags: TN_File1OpenFlags;  // File Open Flags
+  F1PComprLevel: TCompressionLevel; // ZLib Compression level
+  F1PReserved1: byte;
+  F1PUserSign: string;              // User Signature
+  F1PPasWord:  string;              // Password
+end; // type TN_File1Params = packed record
+}
+
+type TN_OLEServerType = ( ostNotDef="Not Defined", ostWord="MS Word", ostExcel="MS Excel" );
+
+{
+type TN_ArchSectionType = ( astNotSeparate="Not Separate (Normal)",
+                            astSepReadOnly="Separate Read Only",
+                            astSepBinary="Separate *.sdb (Binary)",
+                            astSepText="Separate *.sdt (Text)" );
+}
+
+type TN_ArchSectionParams = packed record // Separate Archive Params for Editing
+  ASPIsASection:    byte;
+  ASPSectionFormat: byte;
+  ASPIsReadOnly:    byte;
+  ASPManualLoad:    byte;
+  ASPWasChanged:    byte;
+  ASPIsJoined:      byte;
+  ASPFileName:    string;       // Section File Name
+  ASPUDUses:  ArrayOf TN_UDBase; // RArray of TN_UDBase that should be loaded before lodaing Self
+end; // type TN_ArchSectionParams = packed record
+
+type TN_ArchSaveOptions = packed record // Archive Saving Options
+  ASOSkipJoin:     byte;
+  ASODisjoin:      byte;
+  ASOSkipReadOnly: byte;
+  ASOSaveReadOnly: byte;
+  ASOSkipEmpty:    byte;
+  ASOSaveEmpty:    byte;
+  ASOSkipSaveDlg:  byte;
+end; // type TN_ArchSaveOptions = packed record
+
+type TN_Boolean4 = integer;
+
+type TN_ViewCompFlags = SetOf ( vcfUseCurFrameSize, vcfFrameSizeByComp,
+                                vcfConsiderAspect1, vcfBufSizeByComp );
+// vcfUseCurFrameSize - set VCPRFrameSize field by current Frame Size
+// vcfFrameSizeByComp - set Frame Size by Component Size (otherwise use given Size)
+// vcfConsiderAspect1 - update Frame Size by Component Aspect (using aamSwapDec mode)
+// vcfBufSizeByComp   - Set RastrBuf Size by Component Size (otherwise use given Size)
+
+
+type TN_ViewCompParams = packed record // View Component Params
+  VCPRootComp: TN_UDBase;  // Root Visual Component to View
+  VCPFlags: TN_ViewCompFlags; // View Flags
+  VCPReserved1: Byte; //
+  VCPReserved2: Byte; //
+  VCPReserved3: Byte; //
+  VCPResolution: float;       // Desired Resolution
+  VCPRFrameSize: TPoint;      // Desired Frame Size in Pixels
+  VCPBufSize:    TPoint;      // Desired Buf Size in Pixels
+
+      // Temporary not implemented:
+  VCPUserScale:  float;
+  VCPUserShift:  float;
+  VCPRastrScale: float;
+  VCPRastrShift: float;
+end; // type TN_ViewCompParams
+
+type TN_RFCoordsState = packed record // Rast1Frame Coords State Params
+  RFCSFrameSize:    TPoint; // Frame Size in Pixels (same as PaintBox Size if Scrollbars are invisible)
+  RFCSBufSize:      TPoint; // Raster Buf Size in Pixels (OCanv.RSize)
+  RFCSLogFrameRect: TRect;  // LogFrameRect in Pixels
+  RFCSSrcPRect:     TRect;  // Normalized SrcPRect
+  RFCSRastrScale:   float;  // Raster Scale
+//  RFCSCompmmSize:   TFPoint; // Root Component Size in mm
+//  RFCSCompPixSize:  TPoint;  // Root Component Size in Pixels
+end; // type TN_RFCoordsState
+
+{$ CurF=20071229 PDNT=20071010 NDPT=20071229}
+type TN_UCObjRefs = TN_UDBase;
+
+{$ CurF=20071229 PDNT=20071010 NDPT=20071229}
+type TN_UDPoints = TN_UDBase;
+
+{$ CurF=20071229 PDNT=20071010 NDPT=20071229}
+type TN_ULines = TN_UDBase;
+
+{$ CurF=20071229 PDNT=20071010 NDPT=20071229}
+type TN_UContours = TN_UDBase;
+
+

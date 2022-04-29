@@ -1,0 +1,1381 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{E3773F86-B821-4788-B737-0B5876094A51}</ProjectGuid>
+        <MainSource>CMScan.dpr</MainSource>
+        <Base>True</Base>
+        <Config Condition="'$(Config)'==''">Debug</Config>
+        <TargetedPlatforms>1</TargetedPlatforms>
+        <AppType>Application</AppType>
+        <FrameworkType>VCL</FrameworkType>
+        <ProjectVersion>15.1</ProjectVersion>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Base' or '$(Base)'!=''">
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+        <Base_Win32>true</Base_Win32>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win64' and '$(Base)'=='true') or '$(Base_Win64)'!=''">
+        <Base_Win64>true</Base_Win64>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Release' or '$(Cfg_1)'!=''">
+        <Cfg_1>true</Cfg_1>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Config)'=='Debug' or '$(Cfg_2)'!=''">
+        <Cfg_2>true</Cfg_2>
+        <CfgParent>Base</CfgParent>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Cfg_2)'=='true') or '$(Cfg_2_Win32)'!=''">
+        <Cfg_2_Win32>true</Cfg_2_Win32>
+        <CfgParent>Cfg_2</CfgParent>
+        <Cfg_2>true</Cfg_2>
+        <Base>true</Base>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base)'!=''">
+        <DCC_TypedAtParameter>true</DCC_TypedAtParameter>
+        <DCC_S>false</DCC_S>
+        <DCC_UsePackage>VCL50;VCLX50;VCLSMP50;VCLDB50;VCLADO50;ibevnt50;VCLBDE50;VCLDBX50;QRPT50;TEEUI50;TEEDB50;TEE50;DSS50;TEEQR50;VCLIB50;VCLMID50;VCLIE50;INETDB50;INET50;NMFAST50;WEBMID50;dclocx50;dclaxserver50;$(DCC_UsePackage)</DCC_UsePackage>
+        <VerInfo_MajorVer>4</VerInfo_MajorVer>
+        <DCC_RangeChecking>true</DCC_RangeChecking>
+        <DCC_K>false</DCC_K>
+        <DCC_DebugInformation>true</DCC_DebugInformation>
+        <DCC_F>false</DCC_F>
+        <DCC_E>false</DCC_E>
+        <DCC_UnitSearchPath>$(DELPHI)\Lib\Debug;$(DCC_UnitSearchPath)</DCC_UnitSearchPath>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+        <VerInfo_Release>42</VerInfo_Release>
+        <DCC_Namespace>Vcl;Vcl.Imaging;Vcl.Touch;Vcl.Samples;Vcl.Shell;System;Xml;Data;Datasnap;Web;Soap;Winapi;System.Win;Data.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
+        <DCC_ImageBase>00400000</DCC_ImageBase>
+        <DCC_Optimize>false</DCC_Optimize>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <DCC_N>true</DCC_N>
+        <DCC_IntegerOverflowCheck>true</DCC_IntegerOverflowCheck>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=4.0.42.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=4.42.0</VerInfo_Keys>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win32)'!=''">
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=4.0.42.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=4.42.0</VerInfo_Keys>
+        <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
+        <Icon_MainIcon>CMScan_Icon.ico</Icon_MainIcon>
+        <DCC_Namespace>Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
+        <Manifest_File>$(BDS)\bin\default_app.manifest</Manifest_File>
+        <VerInfo_Locale>1033</VerInfo_Locale>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Base_Win64)'!=''">
+        <Icon_MainIcon>CMScan_Icon.ico</Icon_MainIcon>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_1)'!=''">
+        <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
+        <DCC_DebugInformation>0</DCC_DebugInformation>
+        <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+        <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2)'!=''">
+        <DCC_Define>DEBUG;$(DCC_Define)</DCC_Define>
+        <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(Cfg_2_Win32)'!=''">
+        <VerInfo_Release>53</VerInfo_Release>
+        <VerInfo_Keys>CompanyName=;FileDescription=;FileVersion=4.0.53.0;InternalName=;LegalCopyright=;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=4.53.0</VerInfo_Keys>
+    </PropertyGroup>
+    <ItemGroup>
+        <DelphiCompile Include="$(MainSource)">
+            <MainSource>MainSource</MainSource>
+        </DelphiCompile>
+        <DCCReference Include="VirtualUI_AutoRun.pas"/>
+        <DCCReference Include="VirtualUI_SDK.pas"/>
+        <DCCReference Include="L_VirtUI.pas"/>
+        <DCCReference Include="GDIPAPI.pas"/>
+        <DCCReference Include="GDIPOBJ.pas"/>
+        <DCCReference Include="Twain.pas"/>
+        <DCCReference Include="Pipes.pas"/>
+        <DCCReference Include="K_parse.pas"/>
+        <DCCReference Include="K_BArrays.pas"/>
+        <DCCReference Include="K_DTE1.pas"/>
+        <DCCReference Include="K_FSelectUDB.pas">
+            <Form>K_FormSelectUDB</Form>
+        </DCCReference>
+        <DCCReference Include="K_UDConst.pas"/>
+        <DCCReference Include="K_VFunc.pas"/>
+        <DCCReference Include="K_UDT2.pas"/>
+        <DCCReference Include="K_UDC.pas"/>
+        <DCCReference Include="K_STBuf.pas"/>
+        <DCCReference Include="K_IFUnc.pas"/>
+        <DCCReference Include="K_FEText.pas">
+            <Form>K_FormTextEdit</Form>
+        </DCCReference>
+        <DCCReference Include="K_Giffile.pas"/>
+        <DCCReference Include="K_FPathNameFr.pas">
+            <Form>K_FPathNameFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FSDeb.pas">
+            <Form>K_FormMVDeb</Form>
+        </DCCReference>
+        <DCCReference Include="K_SParse1.pas"/>
+        <DCCReference Include="K_Script1.pas"/>
+        <DCCReference Include="K_IWatch.pas">
+            <Form>K_FormInfoWatch</Form>
+        </DCCReference>
+        <DCCReference Include="K_FSDebTM.pas">
+            <Form>K_FormDebParams</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrRaEdit.pas">
+            <Form>K_FrameRAEdit</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_RaEditF.pas">
+            <Form>N_RAEditForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FSFList.pas">
+            <Form>K_FormSelectFromUDDir</Form>
+        </DCCReference>
+        <DCCReference Include="K_FDCSSpace.pas">
+            <Form>K_FormDCSSpace</Form>
+        </DCCReference>
+        <DCCReference Include="K_FDCSpace.pas">
+            <Form>K_FormDCSpace</Form>
+        </DCCReference>
+        <DCCReference Include="K_FDCSProj.pas">
+            <Form>K_FormDCSProjection</Form>
+        </DCCReference>
+        <DCCReference Include="K_DCSpace.pas"/>
+        <DCCReference Include="K_FFName.pas">
+            <Form>K_FormFileName</Form>
+        </DCCReference>
+        <DCCReference Include="K_Arch.pas"/>
+        <DCCReference Include="N_Color1Fr.pas">
+            <Form>N_Color1Frame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_Color1F.pas">
+            <Form>N_Color1Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_VRE3.pas"/>
+        <DCCReference Include="N_EdStrF.pas">
+            <Form>N_StrEditForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_GS1.pas"/>
+        <DCCReference Include="N_Deb1.pas"/>
+        <DCCReference Include="N_Lib1.pas"/>
+        <DCCReference Include="N_ClassRef.pas"/>
+        <DCCReference Include="N_PWin.pas">
+            <Form>N_PWinForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_PBase.pas">
+            <Form>N_BasePage</Form>
+        </DCCReference>
+        <DCCReference Include="N_Memo2Fr.pas">
+            <Form>N_Memo2Frame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_MemoFr.pas">
+            <Form>N_MemoFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_Gra2.pas"/>
+        <DCCReference Include="N_InfoF.pas">
+            <Form>N_InfoForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_PDTree1.pas"/>
+        <DCCReference Include="N_ExpImp1.pas"/>
+        <DCCReference Include="N_FNameFr.pas">
+            <Form>N_FileNameFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_RastFrOpF.pas">
+            <Form>N_RFrameOptionsForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_Gra3.pas"/>
+        <DCCReference Include="N_RichEdF.pas">
+            <Form>N_RichEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_Lib2.pas"/>
+        <DCCReference Include="N_AffC4F.pas">
+            <Form>N_AffCoefs4Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_PlainEdF.pas">
+            <Form>N_PlainEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_MsgDialF.pas">
+            <Form>N_MsgDialogForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_Rast1Fr.pas">
+            <Form>N_Rast1Frame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_Gra6.pas"/>
+        <DCCReference Include="N_DBF.pas"/>
+        <DCCReference Include="N_LibF.pas">
+            <Form>N_LibForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_SGRA1.pas"/>
+        <DCCReference Include="N_MetafEdF.pas">
+            <Form>N_MetafEdForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_UDat4.pas"/>
+        <DCCReference Include="N_UDCMap.pas"/>
+        <DCCReference Include="N_FNameF.pas">
+            <Form>N_FileNameForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_ME1.pas"/>
+        <DCCReference Include="N_NVTreeF.pas">
+            <Form>N_NVTreeForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_GetUObjF.pas">
+            <Form>N_GetUObjForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_Types.pas"/>
+        <DCCReference Include="N_SGComp.pas"/>
+        <DCCReference Include="K_FRaEdit.pas">
+            <Form>K_FormRAEdit</Form>
+        </DCCReference>
+        <DCCReference Include="K_RAEdit.pas"/>
+        <DCCReference Include="N_CompCL.pas"/>
+        <DCCReference Include="K_IMVDAR.pas"/>
+        <DCCReference Include="N_ACEdF.pas">
+            <Form>N_AffCoefsEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CObjVectEdF.pas">
+            <Form>N_CObjVectEditorForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_Gra4.pas"/>
+        <DCCReference Include="K_FRASearch.pas">
+            <Form>K_FormRASearchReplace</Form>
+        </DCCReference>
+        <DCCReference Include="K_FUDVTab.pas">
+            <Form>K_FormUDVectorsTab</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrUDVTab.pas">
+            <Form>K_FrameRATabEdit</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FrUDV.pas">
+            <Form>K_FrameRAVectorEdit</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FUDV.pas">
+            <Form>K_FormUDVector</Form>
+        </DCCReference>
+        <DCCReference Include="N_WebBrF.pas">
+            <Form>N_WebBrForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_MVObjs.pas"/>
+        <DCCReference Include="N_Comp1.pas"/>
+        <DCCReference Include="K_FSFCombo.pas">
+            <Form>K_FormSelectFromCombo</Form>
+        </DCCReference>
+        <DCCReference Include="K_Script2.pas"/>
+        <DCCReference Include="K_FUDRename.pas">
+            <Form>K_FormUDRename</Form>
+        </DCCReference>
+        <DCCReference Include="N_NewUObjF.pas">
+            <Form>N_NewUObjForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_ColViewFr.pas">
+            <Form>N_ColorViewFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_CompBase.pas"/>
+        <DCCReference Include="N_NVtreeOpF.pas">
+            <Form>N_NVtreeOptionsForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_ExpF.pas">
+            <Form>N_ExportForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_NVtreeFr.pas">
+            <Form>N_NVTreeFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_uobjfr.pas">
+            <Form>N_UObjFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_ME2.pas"/>
+        <DCCReference Include="K_SBuf0.pas"/>
+        <DCCReference Include="N_VVEdBaseF.pas">
+            <Form>N_VVEdBaseForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_VRectEd1F.pas">
+            <Form>N_VRectEd1Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_VPointEd1F.pas">
+            <Form>N_VPointEd1Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_Comp2.pas"/>
+        <DCCReference Include="K_UDT1.pas">
+            <Form>N_VTreeFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_CMResF.pas">
+            <Form>N_CMResForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_GCont.pas"/>
+        <DCCReference Include="K_MVMap0.pas"/>
+        <DCCReference Include="N_PrintF.pas">
+            <Form>N_PrintForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_MenuF.pas">
+            <Form>N_MenuForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_SPLF.pas"/>
+        <DCCReference Include="K_MVQR.pas"/>
+        <DCCReference Include="N_VScalEd1F.pas">
+            <Form>N_VScalEd1Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_WSBuild1.pas"/>
+        <DCCReference Include="K_CLib0.pas"/>
+        <DCCReference Include="N_Lib0.pas"/>
+        <DCCReference Include="K_FRADD.pas">
+            <Form>K_FRADataDeliveryForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_2DFunc1.pas"/>
+        <DCCReference Include="N_UObj2Fr.pas">
+            <Form>N_UObj2Frame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_EdParF.pas">
+            <Form>N_EditParamsForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_RaEd2DF.pas">
+            <Form>N_RaEdit2DForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_CSpace.pas"/>
+        <DCCReference Include="K_FrUDList.pas">
+            <Form>K_FrameUDList</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FCSDim.pas">
+            <Form>K_FormCSDim</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrCSDim2.pas">
+            <Form>K_FrameCSDim2</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FrCSDim1.pas">
+            <Form>K_FrameCSDim1</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FUDCSDim.pas">
+            <Form>K_FormUDCSDim</Form>
+        </DCCReference>
+        <DCCReference Include="K_FUDCDim.pas">
+            <Form>K_FormUDCDim</Form>
+        </DCCReference>
+        <DCCReference Include="K_FUDCSDBlock.pas">
+            <Form>K_FormUDCSDBlock</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCSDBlock.pas">
+            <Form>K_FormCSDBlock</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrCSDBData.pas">
+            <Form>K_FrameCSDBDataEdit</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FrCSDBlock.pas">
+            <Form>K_FrameCSDBlockEdit</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FUDCDCor.pas">
+            <Form>K_FormUDCDCor</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrCDCor.pas">
+            <Form>K_FrameCDCor</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FrECDRel.pas">
+            <Form>K_FrameECDRel</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FrCDRel.pas">
+            <Form>K_FrameCDRel</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FCDRelShow.pas">
+            <Form>K_FormCDRelShow</Form>
+        </DCCReference>
+        <DCCReference Include="N_HelpF.pas">
+            <Form>N_HelpForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_BaseF.pas">
+            <Form>N_BaseForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_IndGlobal.pas"/>
+        <DCCReference Include="N_Comp3.pas"/>
+        <DCCReference Include="K_TSImport0.pas"/>
+        <DCCReference Include="K_FMVMSOExp.pas">
+            <Form>K_FormMVMSOExport</Form>
+        </DCCReference>
+        <DCCReference Include="K_FRunSPLScript.pas">
+            <Form>K_FormRunSPLScript</Form>
+        </DCCReference>
+        <DCCReference Include="K_FRunDFPLScript.pas">
+            <Form>K_FormRunDFPLScript</Form>
+        </DCCReference>
+        <DCCReference Include="N_AlignF.pas">
+            <Form>N_AlignForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_NLConvF.pas">
+            <Form>N_NLConvForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_RVCTF.pas">
+            <Form>N_RastVCTForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FBase.pas">
+            <Form>K_FormBase</Form>
+        </DCCReference>
+        <DCCReference Include="K_Types.pas"/>
+        <DCCReference Include="K_FViewComp.pas">
+            <Form>K_FormViewComp</Form>
+        </DCCReference>
+        <DCCReference Include="N_StatFunc.pas"/>
+        <DCCReference Include="N_EdRecF.pas">
+            <Form>N_EditRecordForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_AInit0.pas"/>
+        <DCCReference Include="K_AUDTreeInit.pas"/>
+        <DCCReference Include="K_ASPLInit.pas"/>
+        <DCCReference Include="N_CM1.pas"/>
+        <DCCReference Include="K_AMVInit0.pas"/>
+        <DCCReference Include="N_MapEdFr.pas">
+            <Form>N_MapEdFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_TSImport4.pas"/>
+        <DCCReference Include="N_Tst2F.pas">
+            <Form>N_Test2Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMREd3Fr.pas">
+            <Form>N_CMREdit3Frame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FCMPrint1.pas">
+            <Form>K_FormCMPrint1</Form>
+        </DCCReference>
+        <DCCReference Include="N_ButtonsF.pas">
+            <Form>N_ButtonsForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_DGrid.pas"/>
+        <DCCReference Include="N_MapTools.pas"/>
+        <DCCReference Include="N_Act1.pas"/>
+        <DCCReference Include="N_IconSelF.pas">
+            <Form>N_IconSelectionForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrCMSlideFilter.pas">
+            <Form>K_FrameCMSlideFilter</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_CM2.pas"/>
+        <DCCReference Include="K_Gra0.pas"/>
+        <DCCReference Include="K_FCMMain6F.pas">
+            <Form>K_FormCMMain6</Form>
+        </DCCReference>
+        <DCCReference Include="N_TranspFr.pas">
+            <Form>N_TranspFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_MapiControl.pas"/>
+        <DCCReference Include="N_AVRInit.pas"/>
+        <DCCReference Include="K_AInit1.pas"/>
+        <DCCReference Include="N_TstC1.pas"/>
+        <DCCReference Include="K_FCMDeviceSetup.pas">
+            <Form>K_FormDeviceSetup</Form>
+        </DCCReference>
+        <DCCReference Include="N_Video.pas"/>
+        <DCCReference Include="K_FCMUndoRedo.pas">
+            <Form>K_FormCMUndoRedo</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMDevStatF.pas">
+            <Form>N_CMDevStatForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FMVBase.pas">
+            <Form>K_FormMVBase</Form>
+        </DCCReference>
+        <DCCReference Include="K_FMVBase0.pas">
+            <Form>K_FormMVBase0</Form>
+        </DCCReference>
+        <DCCReference Include="N_MemoF.pas">
+            <Form>N_MemoForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDistr.pas">
+            <Form>K_FormCMDistr</Form>
+        </DCCReference>
+        <DCCReference Include="N_Gra1.pas"/>
+        <DCCReference Include="K_FCMCaptButDelay.pas">
+            <Form>K_FormCMCaptButDelay</Form>
+            <DesignClass>K_FCMSetSlidesAttrs</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FCMSDrawAttrs.pas">
+            <Form>K_FormCMSDrawAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSTextAttrs.pas">
+            <Form>K_FormCMSTextAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSEmbAttrs.pas">
+            <Form>K_FormCMSEmboss</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSIsodensity.pas">
+            <Form>K_FormCMSIsodensity</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSNoiseRAttrs1.pas">
+            <Form>K_FormCMSNoiseRAttrs1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSRotateByAngle.pas">
+            <Form>K_FormCMSRotateByAngle</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSFlashlightAttrs.pas">
+            <Form>K_FormCMSFlashlightAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMPrefEdit.pas">
+            <Form>K_FormPrefEdit</Form>
+        </DCCReference>
+        <DCCReference Include="N_BrigHist2F.pas">
+            <Form>N_BrigHist2Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMECacheProc.pas">
+            <Form>K_FormCMECacheProc</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMVideo2F.pas">
+            <Form>N_CMVideo2Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMSharp1F.pas">
+            <Form>N_CMSharp1Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSBriCoGam1.pas">
+            <Form>K_FormCMSBriCoGam1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSFPathChange1.pas">
+            <Form>K_FormCMSFPathChange1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSFilesHandlingE.pas">
+            <Form>K_FormCMSFilesHandlingE</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMRegister.pas">
+            <Form>K_FormCMRegister</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSlideIcon.pas">
+            <Form>K_FormCMSlideIcon</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMProfileDevice.pas">
+            <Form>K_FormCMProfileDevice</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMProfileSetting.pas">
+            <Form>K_FormCMProfileSetting</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFixStudyDataWarn.pas">
+            <Form>K_FormCMFixStudyDataWarn</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSCalibrate1.pas">
+            <Form>K_FormCMSCalibrate1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImport.pas">
+            <Form>K_FormCMImport</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMStudyTemplateSelect.pas">
+            <Form>K_FormCMStudyTemplateSelect</Form>
+        </DCCReference>
+        <DCCReference Include="K_FFontAttrs.pas">
+            <Form>K_FormFontAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMFPedalSF.pas">
+            <Form>N_CMFPedalSetupForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMRegCode.pas">
+            <Form>K_FormCMRegCode</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMVideoProfileF.pas">
+            <Form>N_CMVideoProfileForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMTest1F.pas">
+            <Form>N_CMTest1Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDeviceSetupEnter.pas">
+            <Form>K_FormCMDeviceSetupEnter</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImportExpToDCM.pas">
+            <Form>K_FormCMImportExpToDCM</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMTests.pas"/>
+        <DCCReference Include="K_FCMImportPPL.pas">
+            <Form>K_FormCMImportPPL</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMAboutF.pas">
+            <Form>N_CMAboutForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSelectLocation.pas">
+            <Form>K_FormCMSelectLoc</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMEFSyncProc.pas">
+            <Form>K_FormCMEFSyncProc</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImportReverseEnter.pas">
+            <Form>K_FormCMImportReverseEnter</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMEnterDBAPSW.pas">
+            <Form>K_FormCMEnterDBAPSW</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMGAdmEnter.pas">
+            <Form>K_FormCMGAdmEnter</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMEFSyncInfo.pas">
+            <Form>K_FormCMEFSyncInfo</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMReportShow.pas">
+            <Form>K_FormCMReportShow</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMDebMP1.pas"/>
+        <DCCReference Include="N_MSWord.pas"/>
+        <DCCReference Include="N_CMExpRep.pas"/>
+        <DCCReference Include="N_MSExcel.pas"/>
+        <DCCReference Include="K_FCMUTSetDBContexts.pas">
+            <Form>K_FormCMUTSetDBContexts</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMRemoveLogsHandling.pas">
+            <Form>K_FormCMRemoveLogsHandling</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMTstDelphiF.pas">
+            <Form>N_CMTestDelphiForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMOther2F.pas">
+            <Form>N_CMOther2Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMStart.pas">
+            <Form>K_FormCMStart</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTLoadDBData3FSClear.pas">
+            <Form>K_FormCMUTLoadDBData3FSClear</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSysInfo.pas">
+            <Form>K_FormCMSysInfo</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSSharpAttrs11.pas">
+            <Form>K_FormCMSSharpAttrs11</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSRecovery1.pas">
+            <Form>K_FormCMFSRecovery1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImgFilterProcAttrs.pas">
+            <Form>K_FormCMImgFilterProcAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="N_MainFFr.pas">
+            <Form>N_MainFormFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_CMMain5F.pas">
+            <Form>N_CMMain5Form1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMLinkCLFSetup.pas">
+            <Form>K_FormCMLinkCLFSetup</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSupport.pas">
+            <Form>K_FormCMSupport</Form>
+        </DCCReference>
+        <DCCReference Include="N_Gra0.pas"/>
+        <DCCReference Include="N_CMTest2F.pas">
+            <Form>N_CMTest2Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSZoomMode.pas">
+            <Form>K_FormCMSZoomMode</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMRFA.pas"/>
+        <DCCReference Include="K_CMRFA.pas"/>
+        <DCCReference Include="K_FCMSFlashlightModeAttrs.pas">
+            <Form>K_FormCMSFlashlightModeAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSetSlidesAttrs2.pas">
+            <Form>K_FormCMSetSlidesAttrs2</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMChangeStudiesAttrs.pas">
+            <Form>K_FormCMChangeStudiesAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMCaptDevReg.pas"/>
+        <DCCReference Include="K_FCMProfileOther1.pas">
+            <Form>K_FormCMProfileOther1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FTestUnit.pas">
+            <Form>Form1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSSharpAttrsN.pas">
+            <Form>K_FormCMSSharpAttrsN</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev5F.pas">
+            <Form>N_CMCaptDev5Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev3sF.pas">
+            <Form>N_CMCaptDev3Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev5.pas"/>
+        <DCCReference Include="N_CMCaptDev1.pas"/>
+        <DCCReference Include="N_CMCaptDev3s.pas"/>
+        <DCCReference Include="N_CMCaptDev4.pas"/>
+        <DCCReference Include="N_CMCaptDev4F.pas">
+            <Form>N_CMCaptDev4Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev6aF.pas">
+            <Form>N_CMCaptDev6aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FrCMTeethChart1.pas">
+            <Form>K_FrameCMTeethChart1</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_BrigHistFr.pas">
+            <Form>N_BrigHistFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="K_FCMImportChngAttrs.pas">
+            <Form>K_FormCMImportChngAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev6.pas"/>
+        <DCCReference Include="K_FCMSUDefFilters1.pas">
+            <Form>K_FormCMSUDefFilters1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMMain5F.pas">
+            <Form>K_FormCMMain5</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMCaptDevTest.pas"/>
+        <DCCReference Include="K_FCMSCalibrate.pas">
+            <Form>K_FormCMSCalibrate</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSSharpAttrs12.pas">
+            <Form>K_FormCMSSharpAttrs12</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASetProvData.pas">
+            <Form>K_FormCMSASetProviderData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASelectLoc.pas">
+            <Form>K_FormCMSASelectLocation</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASelectPat.pas">
+            <Form>K_FormCMSASelectPatient</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASetPatData.pas">
+            <Form>K_FormCMSASetPatientData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSpecSettingsSetup.pas">
+            <Form>K_FormCMSpecSettings</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDevDemo2.pas"/>
+        <DCCReference Include="N_CMCaptDevDemo1F.pas">
+            <Form>N_CMCaptDevDemo1Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev8aF.pas">
+            <Form>N_CMCaptDev8aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev8SF.pas">
+            <Form>N_CMCaptDev8Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev8S.pas"/>
+        <DCCReference Include="N_CMCaptDev11F.pas">
+            <Form>N_CMCaptDev11Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev11.pas"/>
+        <DCCReference Include="N_CMCaptDev11aF.pas">
+            <Form>N_CMCaptDev11aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMProfileTwain.pas">
+            <Form>K_FormCMProfileTwain</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMTWAIN.pas">
+            <Form>K_FormCMTWAIN</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSSharpAttrs.pas">
+            <Form>K_FormCMSSharpAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSSharpAttrs1.pas">
+            <Form>K_FormCMSSharpAttrs1</Form>
+        </DCCReference>
+        <DCCReference Include="N_PixMesFr.pas">
+            <Form>N_PixMesFrame</Form>
+            <DesignClass>TFrame</DesignClass>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDevDemo1.pas"/>
+        <DCCReference Include="K_FCMSNoiseRAttrs.pas">
+            <Form>K_FormCMSNoiseRAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_Gra1.pas"/>
+        <DCCReference Include="K_FCMRemoteClientSetup.pas">
+            <Form>K_FormCMRemoteClientSetup</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMExportSlides.pas">
+            <Form>K_FormCMExportSlides</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTPrepDBData1.pas">
+            <Form>K_FormCMUTPrepDBData1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASelectProv.pas">
+            <Form>K_FormCMSASelectProvider</Form>
+        </DCCReference>
+        <DCCReference Include="K_CML1F.pas">
+            <Form>K_CML1Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMSLLL.pas"/>
+        <DCCReference Include="K_FCMSAModeSetup.pas">
+            <Form>K_FormCMSAModeSetup</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMTWAIN3.pas"/>
+        <DCCReference Include="N_CMTWAIN2F.pas">
+            <Form>N_CMTWAIN2Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev0.pas"/>
+        <DCCReference Include="N_CMCaptDev9.pas"/>
+        <DCCReference Include="K_FMVTSImpUnRegs.pas">
+            <Form>K_FormMVTSImpUnRegs</Form>
+        </DCCReference>
+        <DCCReference Include="N_CML2F.pas">
+            <Form>N_CML2Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSharpSmooth.pas">
+            <Form>K_FormCMSharpSmooth</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImgProfileProcAttrs.pas">
+            <Form>K_FormCMImgProfileProcAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="N_CML1F.pas">
+            <Form>N_CML1Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_CML3F.pas">
+            <Form>K_CML3Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSelectSlide.pas">
+            <Form>K_FormCMSelectSlide</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSetSlidesAttrs3.pas">
+            <Form>K_FormCMSetSlidesAttrs3</Form>
+        </DCCReference>
+        <DCCReference Include="N_ImLib.pas"/>
+        <DCCReference Include="K_FCMChangeSlidesAttrsN2.pas">
+            <Form>K_FormCMChangeSlidesAttrsN2</Form>
+        </DCCReference>
+        <DCCReference Include="K_RImage.pas"/>
+        <DCCReference Include="N_K_Tmp.pas"/>
+        <DCCReference Include="K_FCMSelectMaxPictSize.pas">
+            <Form>K_FormCMSelectMaxPictSize</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev5dF.pas">
+            <Form>N_CMCaptDev5dForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev5aF.pas">
+            <Form>N_CMCaptDev5aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMVideo3F.pas">
+            <Form>N_CMVideo3Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_Video3.pas"/>
+        <DCCReference Include="N_CMTst1.pas"/>
+        <DCCReference Include="N_CMTWAIN1F.pas">
+            <Form>N_CMTWAIN1Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMTWAIN.pas"/>
+        <DCCReference Include="N_CMCaptDev7SF.pas">
+            <Form>N_CMCaptDev7Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev7S.pas"/>
+        <DCCReference Include="N_CMCaptDev7aF.pas">
+            <Form>N_CMCaptDev7aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMCreateStudyFiles.pas">
+            <Form>K_FormCMCreateStudyFiles</Form>
+        </DCCReference>
+        <DCCReference Include="USBCam20SDK_TLB.pas"/>
+        <DCCReference Include="K_FCMArchRestore.pas">
+            <Form>K_FormCMArchRestore</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMAltShiftMEnter.pas">
+            <Form>K_FormCMAltShiftMEnter</Form>
+        </DCCReference>
+        <DCCReference Include="K_URImage.pas"/>
+        <DCCReference Include="K_CMDCMDLib.pas"/>
+        <DCCReference Include="K_FCMECacheRecoverMedia.pas">
+            <Form>K_FormCMCacheRecoverMedia</Form>
+        </DCCReference>
+        <DCCReference Include="K_SBuf.pas"/>
+        <DCCReference Include="K_CM1.pas"/>
+        <DCCReference Include="K_FCMPresent.pas">
+            <Form>K_FormCMPresent</Form>
+        </DCCReference>
+        <DCCReference Include="N_Tst1F.pas">
+            <Form>N_TestForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSysSetup.pas">
+            <Form>K_FormCMSysSetup</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMScan.pas">
+            <Form>K_FormCMScan</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSDump1.pas">
+            <Form>K_FormCMFSDump1</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMUtils.pas"/>
+        <DCCReference Include="K_FCMClientScan.pas">
+            <Form>K_FormCMClientScan</Form>
+        </DCCReference>
+        <DCCReference Include="N_Tst1.pas"/>
+        <DCCReference Include="N_CMCaptDev13F.pas">
+            <Form>N_CMCaptDev13Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev12.pas"/>
+        <DCCReference Include="N_CMCaptDev12F.pas">
+            <Form>N_CMCaptDev12Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev13.pas"/>
+        <DCCReference Include="N_CMCaptDev13aF.pas">
+            <Form>N_CMCaptDev13aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMVideoProfileSF.pas">
+            <Form>N_CMVideoProfileSForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev14.pas"/>
+        <DCCReference Include="N_CMCaptDev14aF.pas">
+            <Form>N_CMCaptDev14aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev14F.pas">
+            <Form>N_CMCaptDev14Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev0_2.pas"/>
+        <DCCReference Include="K_FCMAutoRefreshLag.pas">
+            <Form>K_FormCMAutoRefreshLag</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev15SF.pas">
+            <Form>N_CMCaptDev15Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev15S.pas"/>
+        <DCCReference Include="N_CMCaptDev15aF.pas">
+            <Form>N_CMCaptDev15aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev15bF.pas">
+            <Form>N_CMCaptDev15bForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMExportPPL.pas">
+            <Form>K_FormCMExportPPL</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTUnloadDBData.pas">
+            <Form>K_FormCMUTUnloadDBData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTLoadDBData3.pas">
+            <Form>K_FormCMUTLoadDBData3</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASetProvSec.pas">
+            <Form>K_FormCMSASetProvSecurity</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev16SF.pas">
+            <Form>N_CMCaptDev16Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev16S.pas"/>
+        <DCCReference Include="N_CMCaptDev16aF.pas">
+            <Form>N_CMCaptDev16aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDeviceLimitWarn.pas">
+            <Form>K_FormCMProfileLimitWarn</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMScanSetPatData.pas">
+            <Form>K_FormCMScanSetPatData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSASetLocData.pas">
+            <Form>K_FormCMSASetLocationData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMImport.pas">
+            <Form>K_FormCMDCMImport</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMVideo4F.pas">
+            <Form>N_CMVideo4Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_Video4.pas"/>
+        <DCCReference Include="K_FCMScanSelectMedia.pas">
+            <Form>K_FormCMScanSelectMedia</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSFilesHandling.pas">
+            <Form>K_FormCMSFilesHandling</Form>
+        </DCCReference>
+        <DCCReference Include="K_CLib.pas"/>
+        <DCCReference Include="K_CM0.pas"/>
+        <DCCReference Include="K_CMWEBBase.pas"/>
+        <DCCReference Include="N_CMCaptDev17F.pas">
+            <Form>N_CMCaptDev17Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev17.pas"/>
+        <DCCReference Include="N_CMCaptDev17aF.pas">
+            <Form>N_CMCaptDev17aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMTwainTest.pas">
+            <Form>K_FormCMTwainTest</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMTWAIN.pas"/>
+        <DCCReference Include="N_CMTWAIN4F.pas">
+            <Form>N_CMTWAIN4Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMTwainASettings.pas">
+            <Form>K_FormCMTwainASettings</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImg3DViewsImportProgress.pas">
+            <Form>K_FormCMImg3DViewsImportProgress</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMCustToolbar.pas">
+            <Form>K_FormCMCustToolbar</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMSetup.pas">
+            <Form>K_FormCMDCMSetup</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMMailCAttrs.pas">
+            <Form>K_FormMailCommonAttrs</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMCommitment.pas">
+            <Form>K_FormCMDCMCommitment</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMVideoResF.pas">
+            <Form>N_CMVideoResForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMSendMailF.pas">
+            <Form>N_CMSendMailForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMResampleLarge.pas">
+            <Form>K_FormCMResampleLarge</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMPrint.pas">
+            <Form>K_FormCMPrint</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMHPreview.pas">
+            <Form>K_FormCMHPreview</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMRepairSlideAttrs1.pas">
+            <Form>K_FormCMRepairSlidesAttrs1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDBRecovery.pas">
+            <Form>K_FormCMDBRecovery</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDeleteSlides.pas">
+            <Form>K_FormCMDeleteSlides</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDPRearrange.pas">
+            <Form>K_FormCMDPRearrange</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev20SF.pas">
+            <Form>N_CMCaptDev20Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev18.pas"/>
+        <DCCReference Include="N_CMCaptDev18aF.pas">
+            <Form>N_CMCaptDev18aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev18F.pas">
+            <Form>N_CMCaptDev18Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev20S.pas"/>
+        <DCCReference Include="K_FCMSUDefFilter2.pas">
+            <Form>K_FormCMSUDefFilter2</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSFPathChange.pas">
+            <Form>K_FormCMSFPathChange</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMSlideIcons.pas">
+            <Form>K_FormCMSlideIcons</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDelObjsHandling.pas">
+            <Form>K_FormCMDelObjsHandling</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev21S.pas"/>
+        <DCCReference Include="N_CMCaptDev21SF.pas">
+            <Form>N_CMCaptDev21Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev22.pas"/>
+        <DCCReference Include="N_CMCaptDev22aF.pas">
+            <Form>N_CMCaptDev22aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev22F.pas">
+            <Form>N_CMCaptDev22Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev23S.pas"/>
+        <DCCReference Include="N_CMCaptDev23aF.pas">
+            <Form>N_CMCaptDev23aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev23SF.pas">
+            <Form>N_CMCaptDev23Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev24aF.pas">
+            <Form>N_CMCaptDev24aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev24F.pas">
+            <Form>N_CMCaptDev24Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev24.pas"/>
+        <DCCReference Include="K_FCMStudyCapt.pas">
+            <Form>K_FormCMStudyCapt</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMStudyCaptSlide.pas">
+            <Form>K_FormCMStudyCaptSlide</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev25.pas"/>
+        <DCCReference Include="N_CMCaptDev25F.pas">
+            <Form>N_CMCaptDev25Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev25aF.pas">
+            <Form>N_CMCaptDev25aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMStudyTemplatesSetup.pas">
+            <Form>K_FormCMStudyTemplatesSetup</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSAnalysis1.pas">
+            <Form>K_FormCMFSAnalysis1</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTSyncPPL.pas">
+            <Form>K_FormCMUTSyncPPL</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSDump.pas">
+            <Form>K_FormCMFSDump</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSAnalysis.pas">
+            <Form>K_FormCMFSAnalysis</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTLoadDBData.pas">
+            <Form>K_FormCMUTLoadDBData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMProfileOther2.pas">
+            <Form>K_FormCMProfileOther2</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev19.pas"/>
+        <DCCReference Include="N_CMCaptDev19aF.pas">
+            <Form>N_CMCaptDev19aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev19F.pas">
+            <Form>N_CMCaptDev19Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev26.pas"/>
+        <DCCReference Include="N_CMCaptDev26aF.pas">
+            <Form>N_CMCaptDev26aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev26F.pas">
+            <Form>N_CMCaptDev26Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev27.pas"/>
+        <DCCReference Include="N_CMCaptDev27aF.pas">
+            <Form>N_CMCaptDev27aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev27F.pas">
+            <Form>N_CMCaptDev27Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev28.pas"/>
+        <DCCReference Include="N_CMCaptDev28aF.pas">
+            <Form>N_CMCaptDev28aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev28F.pas">
+            <Form>N_CMCaptDev28Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev29.pas"/>
+        <DCCReference Include="N_CMCaptDev29aF.pas">
+            <Form>N_CMCaptDev29aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev29F.pas">
+            <Form>N_CMCaptDev29Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev30.pas"/>
+        <DCCReference Include="N_CMCaptDev30aF.pas">
+            <Form>N_CMCaptDev30aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev30F.pas">
+            <Form>N_CMCaptDev30Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev31.pas"/>
+        <DCCReference Include="N_CMCaptDev31aF.pas">
+            <Form>N_CMCaptDev31aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev31F.pas">
+            <Form>N_CMCaptDev31Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMIntegrityCheck.pas">
+            <Form>K_FormCMIntegrityCheck</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSCopy.pas">
+            <Form>K_FormCMFSCopy</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev32.pas"/>
+        <DCCReference Include="N_CMCaptDev32aF.pas">
+            <Form>N_CMCaptDev32aForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMStudyTemplateChange1.pas">
+            <Form>K_FormCMStudyTemplateChange1</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev32F.pas">
+            <Form>N_CMCaptDev32Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FAStrings.pas">
+            <Form>K_FormAnalisesStrings</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTLoadDBData1.pas">
+            <Form>K_FormCMUTLoadDBData1</Form>
+        </DCCReference>
+        <DCCReference Include="N_PMTMain5F.pas">
+            <Form>N_PMTMain5Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_PMTVizF.pas">
+            <Form>N_PMTVizForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMNewDBAPSW.pas">
+            <Form>K_FormCMNewDBAPSW</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMReports1.pas">
+            <Form>K_FormCMReports1</Form>
+        </DCCReference>
+        <DCCReference Include="K_CMDCMGLibW.pas"/>
+        <DCCReference Include="K_CMDCM.pas"/>
+        <DCCReference Include="K_FCMDCMDImport.pas">
+            <Form>K_FormCMDCMDImport</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev33aF.pas">
+            <Form>N_CMCaptDev33aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev33S.pas"/>
+        <DCCReference Include="N_CMCaptDev33SF.pas">
+            <Form>N_CMCaptDev33Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_PMTHelp2F.pas">
+            <Form>N_PMTHelp2Form</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev34aF.pas">
+            <Form>N_CMCaptDev34aForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev34bF.pas">
+            <Form>N_CMCaptDev34bForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_CMCaptDev34S.pas"/>
+        <DCCReference Include="N_CMCaptDev34SF.pas">
+            <Form>N_CMCaptDev34Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMQR.pas">
+            <Form>K_FormCMDCMQR</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTPrepDBData.pas">
+            <Form>K_FormCMUTPrepDBData</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMUTLoadDBData2.pas">
+            <Form>K_FormCMUTLoadDBData2</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMMWL.pas">
+            <Form>K_FormCMDCMMWL</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMQuery.pas">
+            <Form>K_FormCMDCMQuery</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMArchSave.pas">
+            <Form>K_FormCMArchSave</Form>
+        </DCCReference>
+        <DCCReference Include="N_PMTHelpF.pas">
+            <Form>N_PMTHelpForm</Form>
+        </DCCReference>
+        <DCCReference Include="N_PMTDiagrF.pas">
+            <Form>N_PMTDiagrForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMExe.pas">
+            <Form>K_FormCMDCMExe</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMFSClear.pas">
+            <Form>K_FormCMFSClear</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMDCMStore.pas">
+            <Form>K_FormCMDCMStore</Form>
+        </DCCReference>
+        <DCCReference Include="N_PMTDiagr2F.pas">
+            <Form>N_PMTDiagr2Form</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMScanWEBSettings.pas">
+            <Form>K_FormCMScanWEBSettings</Form>
+        </DCCReference>
+        <DCCReference Include="L_WEBCheckVersionF.pas">
+            <Form>L_WEBCheckVersionForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMImportReverse.pas">
+            <Form>K_FormCMImportReverse</Form>
+        </DCCReference>
+        <DCCReference Include="L_WEBSettingsF.pas">
+            <Form>L_WEBSettingsForm</Form>
+        </DCCReference>
+        <DCCReference Include="K_FCMGAdmSettings.pas">
+            <Form>K_FormCMGAdmSettings</Form>
+        </DCCReference>
+        <DCCReference Include="Components\OAuth2\NetUtils.pas"/>
+        <DCCReference Include="Components\OAuth2\OAuth2.pas"/>
+        <DCCReference Include="Components\OAuth2\System.NetConsts.pas"/>
+        <DCCReference Include="Components\OAuth2\System.NetEncoding.pas"/>
+        <DCCReference Include="Components\OAuth2\System.RTLConsts.pas"/>
+        <DCCReference Include="N_CMCaptDev35.pas"/>
+        <DCCReference Include="N_CMCaptDev35F.pas">
+            <Form>N_CMCaptDev35Form</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="VIEWERS\ViewerTabSheet.pas"/>
+        <DCCReference Include="VIEWERS\DICOMViewer\fDICOMViewer.PAS">
+            <Form>DICOMViewer</Form>
+        </DCCReference>
+        <DCCReference Include="VIEWERS\DICOMViewer\fSeriesGraphicViewer.pas">
+            <Form>SeriesGraphicViewer</Form>
+        </DCCReference>
+        <DCCReference Include="VIEWERS\DICOMViewer\DICOMUtils\define_types.pas"/>
+        <DCCReference Include="VIEWERS\DICOMViewer\DICOMUtils\dicom.pas"/>
+        <DCCReference Include="Components\Forms\fProgress.pas">
+            <Form>Progress</Form>
+        </DCCReference>
+        <BuildConfiguration Include="Debug">
+            <Key>Cfg_2</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Base">
+            <Key>Base</Key>
+        </BuildConfiguration>
+        <BuildConfiguration Include="Release">
+            <Key>Cfg_1</Key>
+            <CfgParent>Base</CfgParent>
+        </BuildConfiguration>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Delphi.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Delphi.Personality>
+                <Source>
+                    <Source Name="MainSource">CMScan.dpr</Source>
+                </Source>
+                <VersionInfo>
+                    <VersionInfo Name="IncludeVerInfo">True</VersionInfo>
+                    <VersionInfo Name="AutoIncBuild">False</VersionInfo>
+                    <VersionInfo Name="MajorVer">4</VersionInfo>
+                    <VersionInfo Name="MinorVer">0</VersionInfo>
+                    <VersionInfo Name="Release">42</VersionInfo>
+                    <VersionInfo Name="Build">0</VersionInfo>
+                    <VersionInfo Name="Debug">False</VersionInfo>
+                    <VersionInfo Name="PreRelease">False</VersionInfo>
+                    <VersionInfo Name="Special">False</VersionInfo>
+                    <VersionInfo Name="Private">False</VersionInfo>
+                    <VersionInfo Name="DLL">False</VersionInfo>
+                    <VersionInfo Name="Locale">1033</VersionInfo>
+                    <VersionInfo Name="CodePage">1252</VersionInfo>
+                </VersionInfo>
+                <VersionInfoKeys>
+                    <VersionInfoKeys Name="CompanyName"/>
+                    <VersionInfoKeys Name="FileDescription"/>
+                    <VersionInfoKeys Name="FileVersion">4.0.42.0</VersionInfoKeys>
+                    <VersionInfoKeys Name="InternalName"/>
+                    <VersionInfoKeys Name="LegalCopyright"/>
+                    <VersionInfoKeys Name="LegalTrademarks"/>
+                    <VersionInfoKeys Name="OriginalFilename"/>
+                    <VersionInfoKeys Name="ProductName"/>
+                    <VersionInfoKeys Name="ProductVersion">4.42.0</VersionInfoKeys>
+                </VersionInfoKeys>
+                <Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k190.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp190.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                </Excluded_Packages>
+            </Delphi.Personality>
+            <Platforms>
+                <Platform value="Win32">True</Platform>
+                <Platform value="Win64">False</Platform>
+            </Platforms>
+        </BorlandProject>
+        <ProjectFileVersion>12</ProjectFileVersion>
+    </ProjectExtensions>
+    <Import Project="$(BDS)\Bin\CodeGear.Delphi.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Delphi.Targets')"/>
+    <Import Project="$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj" Condition="Exists('$(APPDATA)\Embarcadero\$(BDSAPPDATABASEDIR)\$(PRODUCTVERSION)\UserTools.proj')"/>
+</Project>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Cameras xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Definitions>
+    <anyType xsi:type="Camera">
+      <GUID>df405adc-abad-4864-bb56-a231ca35bf10</GUID>
+      <Name>SIROCAM AF</Name>
+      <DeviceName />
+      <VID>0927</VID>
+      <PID>701c</PID>
+      <PreviewWidth>824</PreviewWidth>
+      <PreviewHeight>514</PreviewHeight>
+      <PreviewBPP>24</PreviewBPP>
+      <StillWidth>1024</StillWidth>
+      <StillHeight>640</StillHeight>
+      <StillBPP>32</StillBPP>
+      <IsActive>true</IsActive>
+    </anyType>
+    <anyType xsi:type="Camera">
+      <GUID>b31d5a95-303f-4b27-9df5-1bf1164ac787</GUID>
+      <Name>SIROCAM AF+</Name>
+      <DeviceName />
+      <VID>0927</VID>
+      <PID>701d</PID>
+      <PreviewWidth>824</PreviewWidth>
+      <PreviewHeight>514</PreviewHeight>
+      <PreviewBPP>24</PreviewBPP>
+      <StillWidth>1276</StillWidth>
+      <StillHeight>796</StillHeight>
+      <StillBPP>32</StillBPP>
+      <IsActive>false</IsActive>
+    </anyType>
+    <anyType xsi:type="Camera">
+      <GUID>45bba9a2-07ed-45ea-b4d7-d3f4602b6f8a</GUID>
+      <Name>SIROCAM digital</Name>
+      <DeviceName>SiroCam digital Imaging</DeviceName>
+      <VID />
+      <PID />
+      <PreviewWidth>704</PreviewWidth>
+      <PreviewHeight>576</PreviewHeight>
+      <PreviewBPP>24</PreviewBPP>
+      <StillWidth>0</StillWidth>
+      <StillHeight>0</StillHeight>
+      <StillBPP>24</StillBPP>
+      <IsActive>false</IsActive>
+    </anyType>
+    <anyType xsi:type="Camera">
+      <GUID>e3e96d5f-bd61-4636-9940-77aa5e7c58cd</GUID>
+      <Name>Logitech Webcam</Name>
+      <DeviceName />
+      <VID>046d</VID>
+      <PID>0805</PID>
+      <PreviewWidth>640</PreviewWidth>
+      <PreviewHeight>400</PreviewHeight>
+      <PreviewBPP>24</PreviewBPP>
+      <StillWidth>1280</StillWidth>
+      <StillHeight>800</StillHeight>
+      <StillBPP>24</StillBPP>
+      <IsActive>false</IsActive>
+    </anyType>
+  </Definitions>
+</Cameras>

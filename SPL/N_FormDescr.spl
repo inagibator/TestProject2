@@ -1,0 +1,4018 @@
+unit  @:\SPL\N_FormDescr;
+uses  @:\SPL\syslib, @:\SPL\N_Types, @:\SPL\Forms, @:\SPL\N_Comps;
+
+      //************* Almoust All Form Descriptions **********************
+
+// procedure N_InitCommon     ( ACommon : TK_RAFrDescr );
+// procedure N_SetSimpleRC    ( FName: string; Caption: string );
+// procedure N_SetSimpleRCH   ( FName: string; Caption: string; Hint: string );
+// procedure N_SetBoolRC      ( FName: string; Caption: string );
+// procedure N_SetBoolRCH     ( FName: string; Caption: string; Hint: string );
+// procedure N_SetSetRC       ( FName: string; Caption: string );
+// procedure N_SetSetRCH      ( FName: string; Caption: string; Hint: string );
+// procedure N_SetArrayRC     ( FName: string; Caption: string );
+// procedure N_SetArrayRCH    ( FName: string; Caption: string; Hint: string );
+// procedure N_SetTextRC      ( FName: string; Caption: string );
+// procedure N_SetTextRCH     ( FName: string; Caption: string; Hint: string );
+// procedure N_SetExtFormRC   ( AFormDescr: string; Caption: string );
+// procedure N_SetExtFormRCH  ( AFormDescr: string; Caption: string; Hint: string );
+// procedure N_AddFNameEditors( AParams: string );
+// procedure N_AddExtEditor   ( AExtEditorName: string; AUserPar: string );
+// procedure N_AddTwoExtEditors ( AEd1Name: string; AFD1Name: string; AEd2Name: string; AFD2Name: string );
+// procedure N_Add2ExtEditors ( AExtEd1Name: string; AExtEd2Name: string; AUserPar: string );
+// procedure N_Add3ExtEditors ( AExtEd1Name: string; AExtEd2Name: string; AExtEd3Name: string; AUserPar: string );
+// procedure N_AddExtViewer   ( AExtViewerName: string; AUserPar: string );
+// procedure N_AddExtEdViewer ( AExtEditorName: string; AExtViewerName: string; AUserPar: string );
+// procedure N_AddVArrayVE    ( AExtEditorName: string; AUserPar: string );
+
+// type TN_VCTreeParamsFormDescr    = class
+// type TN_VCTreeLayerFormDescr     = class
+// type TN_CTLVar1FormDescr         = class
+// type TN_SclonOneTokenFormDescr   = class
+// type TN_NFontFormDescr           = class
+
+// type TN_PointAttr1FormDescr      = class
+// type TN_SysLineAttrFormDescr     = class
+// type TN_RAFillNumParamsFormDescr = class
+// type TN_RAFillColParamsFormDescr = class
+// type TN_RAFillStrParamsFormDescr = class
+// type TN_2DRAFillNumParamsFormDescr = class
+// type TN_MMValuesFormDescr        = class
+// type TN_SplineLineFormDescr      = class
+// type TN_PointSizeFormDescr       = class
+
+// type TN_AuxLineFormDescr         = class
+// type TN_RCompBaseFormDescr       = class
+// type TN_RCoordsFormDescr         = class
+
+// type TN_PaRadSizeFormDescr       = class
+// type TN_PaRectSizeFormDescr      = class
+// type TN_PaSidesFormDescr         = class
+// type TN_CPanelFormDescr          = class
+
+// type TN_SetParamsFormDescr       = class
+// type TN_UserParamsFormDescr      = class
+// type TN_ExpParamsFormDescr       = class
+// type TN_ImageFileParFormDescr    = class
+// type TN_TextFileParFormDescr     = class
+// type TN_File1ParFormDescr        = class
+// type TN_FillColorAttr1FormDescr  = class
+// type TN_TimeSeriesUPFormDescr    = class
+// type TN_CSCodeFormDescr          = class
+// type TN_CSItem1FormDescr         = class
+// type TN_CSItem2FormDescr         = class
+// type TN_DblArrayFormDescr        = class
+// type TN_LHEScalSizeFormDescr     = class
+// type TN_LHEPointSizeFormDescr    = class
+// type TN_TaScalSizeFormDescr      = class
+// type TN_RectSizePosFormDescr     = class
+// type TN_ODFSParFormDescr         = class
+
+// type TN_PointAttr2FormDescr      = class
+// type TN_PA2StrokeShapeFormDescr  = class
+// type TN_PA2RoundRectFormDescr    = class
+// type TN_PA2EllipseFragmFormDescr = class
+// type TN_PA2RegPolyFragmFormDescr = class
+// type TN_PA2TextRowFormDescr      = class
+// type TN_PA2PictureFormDescr      = class
+// type TN_PA2ArrowFormDescr        = class
+// type TN_PA2PolyLineFormDescr     = class
+// type TN_PenStyleFieldsFormDescr  = class
+
+// type TN_ExtContAttrFormDescr     = class
+// type TN_ContAttrFormDescr        = class
+
+// type TN_RTextRowFormDescr        = class
+// type TN_ImageParamsFormDescr     = class
+// type TN_RTextBoxFormDescr        = class
+// type TN_OneTextBlockFormDescr    = class
+// type TN_RParaBoxFormDescr        = class
+// type TN_CParaBoxFormDescr        = class
+
+// type TN_LegElemParFormDescr      = class
+// type TN_LegSetElemFormDescr      = class
+// type TN_RLegendFormDescr         = class
+// type TN_RNLegendFormDescr        = class
+// type TN_RLinHistAuto1FormDescr   = class
+// type TN_RPictureFormDescr        = class
+// type TN_RDIBFormDescr            = class
+// type TN_RDIBRectFormDescr        = class
+// type TN_RFileFormDescr           = class
+// type TN_RActionFormDescr         = class
+// type TN_RActionExtFormDescr      = class
+// type TN_RActionArraysFormDescr   = class
+
+// type TN_RMapPointsLayerFormDescr = class
+// type TN_RMapLinesLayerFormDescr  = class
+// type TN_RMapContsLayerFormDescr  = class
+// type TN_RMapLabelsLayerFormDescr = class
+
+// type TN_RPolylineFormDescr       = class
+// type TN_RArcFormDescr            = class
+// type TN_RSArrowFormDescr         = class
+// type TN_R2DSpaceFormDescr        = class
+// type TN_RAxisTicsFormDescr       = class
+// type TN_RTextMarksStyleFormDescr = class
+// type TN_RTextMarksNStyleFormDescr = class
+// type TN_RTextMarksFormDescr      = class
+// type TN_RTicksParamsFormDescr    = class
+// type TN_RAutoAxisFormDescr       = class
+// type TN_2DCurveFormDescr         = class
+// type TN_R2DFuncFormDescr         = class
+// type TN_RIsoLinesFormDescr       = class
+// type TN_C2DLinHistStyleFormDescr = class
+// type TN_C2DLHStyleElemFormDescr  = class
+// type TN_R2DLinHistFormDescr      = class
+// type TN_RPieChartFormDescr       = class
+
+// type TN_RowColFormDescr          = class
+// type TN_CellFormDescr            = class
+// type TN_TaCellsArrayFormDescr    = class
+// type TN_TabSetBlockFormDescr     = class
+// type TN_RTableFormDescr          = class
+// type TN_CGCellFormDescr          = class
+// type TN_RCompsGridFormDescr      = class
+
+// type TN_CQ1ElemFormDescr         = class
+// type TN_RQuery1FormDescr         = class
+// type TN_CQ2ElemFormDescr         = class
+// type TN_RQuery2FormDescr         = class
+// type TN_RIteratorFormDescr       = class
+// type TN_RCreatorFormDescr        = class
+// type TN_OneNonLinConvFormDescr   = class
+// type TN_RNonLinConvFormDescr     = class
+// type TN_RDynPictCreatorFormDescr = class
+// type TN_RFileCodecFormDescr      = class
+// type TN_CalcUParamsElemFormDescr = class
+// type TN_RTextFragmFormDescr      = class
+// type TN_RWordFragmFormDescr      = class
+// type TN_RExcelFragmFormDescr     = class
+// type TN_RExpCompFormDescr        = class
+
+// type TN_LCInfoFormDescr          = class
+// type TN_MEGOParamsFormDescr      = class
+// type TN_ArchSectionParFormDescr  = class
+// type TN_ArchSaveOptionsFormDescr = class
+
+// type TN_RPatternFormDescr   = class
+
+
+//********************************
+//  Set Column Global Context
+//********************************
+var
+  GRC : TK_RAFColumnDescr;
+  GColumns:  ArrayOf TK_RAFColumnDescr;
+  GIndex:  Integer;
+  GWViewers : ArrayOf String;
+  GWEditors : ArrayOf String;
+  N_DisableField: Integer;
+
+//************************************************************ N_InitCommon
+// Init Common field
+//
+procedure N_InitCommon( UDSelf : TN_UDBase );
+var
+  Self : TK_FrameDescription;
+begin
+  Self = UDSelf;
+  Self!Common.ColumnsPalette = '$FFFFFF $F0F0F0 $FFFFFF $F0F0F0';
+  Self!Common.SelFillColor =  $FFBFBF;
+  Self!Common.SelFontColor =  $0;
+  Self!Common.DisFillColor =  $F0F0F0;
+  Self!Common.DisFontColor =  $0F0F0F;
+//    Hex(Bit(Ord(K_ramSkipRowsInfo))) +
+//  Self!Common.ModeFlags =
+//    Hex(Bit(Ord(K_ramFillFrameWidth))) +
+//    Hex(Bit(Ord(K_ramUseFillColor)));
+  Self!Common.ModeFlags = "[K_ramUseFillColor,K_ramFillFrameWidth,K_ramSkipInfoCol,K_ramSkipColsMark]"; // K_ramSkipInfoCol
+  Self!Common.ColResizeMode = K_crmNormal;
+  Self!Common.DSeparatorSize = 5;
+  SetLength( Adr(Self!Columns), 100 ); // initial value
+  GColumns = Self!Columns;
+
+  GRC.CWidth=200; // all fields width (Value column width)
+  GRC.CCFillColorInd=0;
+  GIndex=0;
+end;
+
+//************************************************************ N_SetSimpleRC
+//  Set Simple Field Editor
+//
+procedure N_SetSimpleRC( FName : string; Caption : string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CHint = Caption;
+  if (N_DisableField NE 0) 
+    GRC.CShowEditFlags=GRC.CShowEditFlags + Hex(Bit(Ord(K_racCDisabled)));
+
+  GColumns[GIndex] = GRC;
+
+  GIndex = GIndex + 1;
+end; // procedure N_SetSimpleRC
+
+//************************************************************ N_SetSimpleRCH
+//  Set Simple Field Editor and Hint
+//
+procedure N_SetSimpleRCH( FName: string; Caption: string; Hint: string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CHint = Hint;
+//  if (N_DisableField NE 0) GRC.CShowEditFlags=Hex(Bit(Ord(K_racReadOnly)));
+  if (N_DisableField NE 0) GRC.CShowEditFlags=GRC.CShowEditFlags + Hex(Bit(Ord(K_racCDisabled)));
+
+  GColumns[GIndex] = GRC;
+
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetSimpleRCH
+
+
+//************************************************************ N_SetBoolRC
+//  Set Boolean Field Editor
+//
+procedure N_SetBoolRC( FName : string; Caption : string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CBitMask = 1;
+  GRC.CHint = Caption;
+  if (N_DisableField NE 0) 
+    GRC.CShowEditFlags=GRC.CShowEditFlags + Hex(Bit(Ord(K_racCDisabled))) + Hex(Bit(Ord(K_racShowCheckBox))));
+  else
+    GRC.CShowEditFlags=GRC.CShowEditFlags + Hex(Bit(Ord(K_racShowCheckBox)));
+
+//  if (N_DisableField NE 0) GRC!CShowEditFlags=[K_racCDisabled,K_racShowCheckBox];
+  GColumns[GIndex] = GRC;
+
+  GRC.CBitMask = 0;
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetBoolRC
+
+//************************************************************ N_SetBoolRCH
+//  Set Boolean Field Editor and Hint
+//
+procedure N_SetBoolRCH( FName: string; Caption: string; Hint: string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CBitMask = 1;
+  GRC.CHint = Hint;
+  if (N_DisableField NE 0) 
+    GRC.CShowEditFlags=GRC.CShowEditFlags + Hex(Bit(Ord(K_racCDisabled))) + Hex(Bit(Ord(K_racShowCheckBox))));
+  else 
+    GRC.CShowEditFlags=GRC.CShowEditFlags + Hex(Bit(Ord(K_racShowCheckBox)));
+//  if (N_DisableField NE 0) GRC!CShowEditFlags="[K_racCDisabled,K_racShowCheckBox]";
+  GColumns[GIndex] = GRC;
+
+  GRC.CBitMask = 0;
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetBoolRCH
+
+//************************************************************ N_SetSetRC
+//  Set Set Field Editor
+//
+procedure N_SetSetRC( FName : string; Caption : string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+//  GRC.CShowEditFlags=Hex(Bit(Ord(K_racExternalEditor)));
+  GRC.CShowEditFlagSet = "[K_racNotModalShow,K_racExternalEditor]";
+  GRC.CHint = Caption;
+  GColumns[GIndex] = GRC;
+
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetSetRC
+
+//************************************************************ N_SetSetRCH
+//  Set Set Field Editor and Hint
+//
+procedure N_SetSetRCH( FName: string; Caption: string; Hint: string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CShowEditFlagSet = "[K_racNotModalShow,K_racExternalEditor]";
+  GRC.CHint = Hint;
+  GColumns[GIndex] = GRC;
+
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetSetRCH
+
+//************************************************************ N_SetArrayRC
+//  Set Array with External Editor
+//
+procedure N_SetArrayRC( FName : string; Caption : string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CShowEditFlags=Hex(Bit(Ord(K_racExternalEditor)));
+  GRC.CHint = Caption;
+  GColumns[GIndex] = GRC;
+
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+  Exit;
+
+//  GColumns[GIndex]!CShowEditFlags=0; // compiler error!
+//  if FName ne "" then Exit;
+end; // procedure N_SetArrayRC
+
+//************************************************************ N_SetArrayRCH
+//  Set Array with External Editor and Hint
+//
+procedure N_SetArrayRCH( FName: string; Caption: string; Hint: string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CShowEditFlags=Hex(Bit(Ord(K_racExternalEditor)));
+  GRC.CHint = Hint;
+  GColumns[GIndex] = GRC;
+
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetArrayRCH
+
+//************************************************************ N_SetTextRC
+//  Set Text (with Line Breakes) Editor
+//
+procedure N_SetTextRC( FName : string; Caption : string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CEditors = "RAFSArrEditor";
+  GRC.CHint = Caption;
+  GColumns[GIndex] = GRC;
+
+  GRC.CEditors = SubArray( GRC.CEditors, 0, 0, 0 );
+  GIndex = GIndex + 1;
+end; // procedure N_SetTextRC
+
+//************************************************************ N_SetTextRCH
+//  Set Text (with Line Breakes) Editor and Hint
+//
+procedure N_SetTextRCH( FName: string; Caption: string; Hint: string );
+
+var
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GRC;
+  SetLength ( Adr(TmpGRC.CVEAttrs), 3 );
+
+  TmpGRC.FName = FName;
+  TmpGRC.CCaption = Caption;
+  TmpGRC.CHint = Hint;
+
+  TmpGRC.CVEAttrs[0]!CEName = "RAFSArrEditor";
+  TmpGRC.CVEAttrs[0]!CVName = "RAFSArrEditor";
+  TmpGRC.CVEAttrs[1]!CEName = "NRAFCharCodesEditor";
+//  TmpGRC.CVEAttrs[1]!CVName = "NRAFCharCodesEditor";
+  TmpGRC.CVEAttrs[2]!CEName = "NoEditor";
+
+  GColumns[GIndex] = TmpGRC;
+  GIndex = GIndex + 1;
+
+{
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CEditors = "RAFSArrEditor";
+  GRC.CHint = Hint;
+  GColumns[GIndex] = GRC;
+
+  GRC.CEditors = SubArray( GRC.CEditors, 0, 0, 0 );
+  GIndex = GIndex + 1;
+}
+end; // procedure N_SetTextRCH
+
+//************************************************************ N_SetFontRCH
+//  Set Font Editor and Hint
+//
+procedure N_SetFontRCH( FName: string; Caption: string; Hint: string );
+
+begin
+  GRC.FName = FName;
+  GRC.CCaption = Caption;
+  GRC.CHint = Hint;
+
+  GColumns[GIndex] = GRC;
+
+  GIndex = GIndex + 1;
+end; // procedure N_SetFontRCH
+
+//************************************************************ N_SetExtFormRC
+//  Set External Form Editor with given FormDescr on whole record
+//
+procedure N_SetExtFormRC( AFormDescr : string; Caption : string );
+
+begin
+  GRC.FName = ""; // special value for whole record
+  GRC.CCaption = Caption;
+  GRC.CGEDataID  = "N_RAEditForm";
+  GRC.CEdUserPar = AFormDescr;
+  GRC.CHint = Caption;
+  GColumns[GIndex] = GRC;
+
+  GRC.CGEDataID  = "";
+  GRC.CEdUserPar = "";
+  GIndex = GIndex + 1;
+end; // procedure N_SetExtFormRC
+
+//************************************************************ N_SetExtFormRCH
+//  Set External Form Editor with given FormDescr on whole record and Hint
+//
+procedure N_SetExtFormRCH( AFormDescr: string; Caption: string; Hint: string );
+
+begin
+  GRC.FName = ""; // special value for whole record
+  GRC.CCaption = Caption;
+  GRC.CGEDataID  = "N_RAEditForm";
+  GRC.CEdUserPar = AFormDescr;
+  GRC.CHint = Hint;
+  GColumns[GIndex] = GRC;
+
+  GRC.CGEDataID  = "";
+  GRC.CEdUserPar = "";
+  GIndex = GIndex + 1;
+end; // procedure N_SetExtFormRCH
+
+//********************************************************** N_AddFNameEditors
+//  Add External FileName Editors to previous RC
+//  ( Add RAFFileName and RAFFNameCmBEditor )
+//
+procedure N_AddFNameEditors( AParams: string );
+var
+ PS: ^ArrayOf String;
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GColumns[GIndex-1];
+  SetLength ( Adr(TmpGRC.CVEAttrs), 2 );
+
+  TmpGRC.CVEAttrs[0]!CEName   = "RAFFileName";
+  TmpGRC.CVEAttrs[0]!CVName   = "RAFFileName";
+  TmpGRC.CVEAttrs[0]!CEParams = AParams;
+  TmpGRC.CVEAttrs[0]!CVParams = AParams;
+  TmpGRC.CVEAttrs[1]!CEName   = "RAFFNameCmBEditor";
+  TmpGRC.CVEAttrs[1]!CEParams = AParams;
+
+  GColumns[GIndex-1] = TmpGRC;
+end; // procedure N_AddFNameEditors
+
+//************************************************************** N_AddExtEditor
+//  Add External Editor to previous RC
+//
+procedure N_AddExtEditor( AExtEditorName: string; AUserPar: string );
+var
+ PS: ^ArrayOf String;
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GColumns[GIndex-1];
+  PS = Adr(TmpGRC.CEditors);
+  SetLength( PS, 1 );
+
+  if(  AUserPar NE "" ) TmpGRC.CEdUserPar = AUserPar;
+  TmpGRC.CEditors[0] = AExtEditorName;
+  GColumns[GIndex-1] = TmpGRC;
+end; // procedure N_AddExtEditor
+
+//********************************************************** N_AddTwoExtEditors
+//  Add Two External Editors with FormDescriptions to previous RC
+//
+procedure N_AddTwoExtEditors( AEd1Name: string; AFD1Name: string; AEd2Name: string; AFD2Name: string );
+var
+ PS: ^ArrayOf String;
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GColumns[GIndex-1];
+  SetLength ( Adr(TmpGRC.CVEAttrs), 2 );
+
+  TmpGRC.CVEAttrs[0]!CEName   = AEd1Name;
+  TmpGRC.CVEAttrs[0]!CEParams = AFD1Name;
+  TmpGRC.CVEAttrs[1]!CEName   = AEd2Name;
+  TmpGRC.CVEAttrs[1]!CEParams = AFD2Name;
+
+  GColumns[GIndex-1] = TmpGRC;
+end; // procedure N_AddTwoExtEditors
+
+//************************************************************ N_Add2ExtEditors
+//  Add Two External Editors to previous RC
+//
+procedure N_Add2ExtEditors( AExtEd1Name: string; AExtEd2Name: string; AUserPar: string );
+var
+ PS: ^ArrayOf String;
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GColumns[GIndex-1];
+  PS = Adr(TmpGRC.CEditors);
+  SetLength( PS, 2 );
+
+  if(  AUserPar NE "" ) TmpGRC.CEdUserPar = AUserPar;
+  TmpGRC.CEditors[0] = AExtEd1Name;
+  TmpGRC.CEditors[1] = AExtEd2Name;
+  GColumns[GIndex-1] = TmpGRC;
+end; // procedure N_Add2ExtEditors
+
+//************************************************************ N_Add3ExtEditors
+//  Add Three External Editors to previous RC
+//
+procedure N_Add3ExtEditors ( AExtEd1Name: string; AExtEd2Name: string; AExtEd3Name: string; AUserPar: string );
+var
+ PS: ^ArrayOf String;
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GColumns[GIndex-1];
+  PS = Adr(TmpGRC.CEditors);
+  SetLength( PS, 3 );
+
+  if(  AUserPar NE "" ) TmpGRC.CEdUserPar = AUserPar;
+  TmpGRC.CEditors[0] = AExtEd1Name;
+  TmpGRC.CEditors[1] = AExtEd2Name;
+  TmpGRC.CEditors[2] = AExtEd3Name;
+  GColumns[GIndex-1] = TmpGRC;
+end; // procedure N_Add3ExtEditors
+
+//************************************************************ N_AddExtViewer
+//  Add External Viewer to previous RC
+//
+procedure N_AddExtViewer( AExtViewerName: string; AUserPar: string );
+var
+ PS: ^ArrayOf String;
+ TmpGRC : TK_RAFColumnDescr;
+begin
+  TmpGRC = GColumns[GIndex-1];
+  PS = Adr(TmpGRC.CViewers);
+  SetLength( PS, 1 );
+
+  if( AUserPar NE "" ) TmpGRC.CEdUserPar = AUserPar;
+  TmpGRC.CViewers[0] = AExtViewerName;
+  GColumns[GIndex-1] = TmpGRC;
+end; // procedure N_AddExtViewer
+
+//************************************************************ N_AddExtEdViewer
+//  Add External Editor and Viewer to previous RC
+//
+procedure N_AddExtEdViewer( AExtEditorName: string; AExtViewerName: string; AUserPar: string );
+var
+ PS1: ^ArrayOf String;
+ PS2: ^ArrayOf String;
+begin
+  PS1 = Adr(GRC.CEditors);
+  SetLength( PS1, 1 );
+  GRC.CEditors[0] = AExtEditorName;
+
+  PS2 = Adr(GRC.CViewers);
+  SetLength( PS2, 1 );
+  GRC.CViewers[0] = AExtViewerName;
+
+  GRC.CEdUserPar = AUserPar;
+  GColumns[GIndex-1] = GRC;
+
+  GRC.CViewers = SubArray( GRC.CViewers, 0, 0, 0 );
+  GRC.CEditors = SubArray( GRC.CEditors, 0, 0, 0 );
+  GRC.CEdUserPar = "";
+end; // procedure N_AddExtEdViewer
+
+//*************************************************************** N_AddVArrayVE
+//  Add Two External Editors and one Viewer to previous RC for VArray field
+//
+procedure N_AddVArrayVE( AExtEditorName: string; AUserPar: string );
+var
+ PS1: ^ArrayOf String;
+ PS2: ^ArrayOf String;
+begin
+  PS1 = Adr(GRC.CEditors);
+  SetLength( PS1, 2 );
+  GRC.CEditors[0] = AExtEditorName;
+  GRC.CEditors[1] = "RAFVArrayEditor";
+
+  PS2 = Adr(GRC.CViewers);
+  SetLength( PS2, 1 );
+  GRC.CViewers[0] = AExtEditorName;
+
+  GRC.CEdUserPar = AUserPar;
+  GColumns[GIndex-1] = GRC;
+
+  GRC.CViewers = SubArray( GRC.CViewers, 0, 0, 0 );
+  GRC.CEditors = SubArray( GRC.CEditors, 0, 0, 0 );
+  GRC.CEdUserPar = "";
+end; // procedure N_AddVArrayVE
+
+//************************************************************ N_SetSeparatorRC
+//  Set Separator
+//
+procedure N_SetSeparatorRC( ACaption: string );
+
+begin
+  GRC.FName="";
+  GRC.CCaption = ACaption;
+  GRC.CShowEditFlags=Hex(Bit(Ord(K_racSeparator)));
+  GColumns[GIndex] = GRC;
+
+  GRC.CShowEditFlags=0;
+  GIndex = GIndex + 1;
+end; // procedure N_SetSeparatorRC
+
+
+//*************************  Form Descriptions  ************************
+
+//***************************  TN_VCTreeParamsFormDescr  *********************
+type TN_VCTreeParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_VCTreeParamsFormDescr = class
+
+constructor TN_VCTreeParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "VCTName",        "VCTree Name",       "Имя картограммы" );
+  N_SetSimpleRCH ( "VCTHeaderText",  "VCTree HeaderText", "Заголовок картограммы" );
+  N_SetSimpleRCH ( "VCTPageNumber",  "VCTree PageNumber", "Номер страницы для печати" );
+  N_SetArrayRCH  ( "VCTLayers",      "VCTree Layers",     "Слои картограммы" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_VCTreeParamsFormDescr!Create( );
+
+//***************************  TN_VCTreeLayerFormDescr  *********************
+type TN_VCTreeLayerFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_VCTreeLayerFormDescr = class
+
+constructor TN_VCTreeLayerFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "VCTLName",   "VCTree Layer Name",   "Имя слоя картограммы" );
+  N_SetArrayRCH  ( "VCTLParams", "VCTree Layer Params", "Параметры слоя картограммы" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CTLVar1FormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_VCTreeLayerFormDescr!Create( );
+
+//***************************  TN_CTLVar1FormDescr  *********************
+type TN_CTLVar1FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CTLVar1FormDescr = class
+
+constructor TN_CTLVar1FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "V1LegendHeaderText",   "Legend Header Text",  "Заголовок легенды" );
+  N_SetSimpleRCH ( "V1LegendFooterText",   "Legend Footer Text",  "Нижний текст легенды" );
+  N_SetArrayRCH  ( "V1LegElemTexts",       "Legend Elems Texts",  "Тексты элементов легенды" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "V1LegElemColors",      "Legend Elems Colors", "Цвета элементов легенды" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CTLVar1FormDescr!Create( );
+
+//***************************  TN_SclonOneTokenFormDescr  *****************
+type TN_SclonOneTokenFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_SclonOneTokenFormDescr = class
+
+constructor TN_SclonOneTokenFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "STKey1",    "Ключ 1",   "Основной ключ" );
+  N_SetSimpleRCH ( "STKey2",    "Ключ 2",   "Дополнительный ключ" );
+  N_SetSimpleRCH ( "STGender",  "Род",      "Женский(-1), Средний(0), Мужской(1)" );
+  N_SetSimpleRCH ( "STImenit",  "Именительный падеж", "Именительный падеж" );
+  N_SetSimpleRCH ( "STRodit",   "Родительный падеж",  "Родительный падеж" );
+  N_SetSimpleRCH ( "STDatel",   "Дательный падеж",    "Дательный падеж" );
+  N_SetSimpleRCH ( "STVinit",   "Винительный падеж",  "Винительный падеж" );
+  N_SetSimpleRCH ( "STTvorit",  "Творительный падеж", "Творительный падеж" );
+  N_SetSimpleRCH ( "STPredl",   "Предложный падеж",   "Предложный падеж" );
+  N_SetSimpleRCH ( "STSearchKeys", "Поисковые ключи", "Поисковые ключи" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_SclonOneTokenFormDescr!Create();
+
+//***************************  TN_NFontFormDescr  *********************
+type TN_NFontFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_NFontFormDescr = class
+
+constructor TN_NFontFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "NFLLWHeight",       "Height in pt.",  "Заголовок легенды" );
+  N_SetSimpleRCH ( "NFFaceName",        "Face Name",      "Заголовок легенды" );
+  N_SetBoolRCH   ( "NFBold",            "Bold Flag",      "Заголовок легенды" );
+  N_SetBoolRCH   ( "NFWin.lfItalic",    "Italic Flag",    "Заголовок легенды" );
+  N_SetBoolRCH   ( "NFWin.lfUnderline", "Underline Flag", "Заголовок легенды" );
+  N_SetBoolRCH   ( "NFWin.lfStrikeOut", "StrikeOut Flag", "Заголовок легенды" );
+  N_SetSimpleRCH ( "NFWin.lfCharSet",   "CharSet Code",   "Заголовок легенды" );
+
+  N_SetSimpleRCH ( "NFWeight",            "Weight",           "Заголовок легенды" );
+  N_SetSimpleRCH ( "NFWin.lfEscapement",  "Base Line Angle",  "Заголовок легенды" );
+  N_SetSimpleRCH ( "NFWin.lfOrientation", "Characters Angle", "Заголовок легенды" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_NFontFormDescr!Create( );
+
+
+//***************************  TN_PointAttr1FormDescr  *********************
+type TN_PointAttr1FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PointAttr1FormDescr = class
+
+constructor TN_PointAttr1FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "SShape",       "Shape Type",  "" );
+  N_SetSimpleRCH ( "SBrushColor",  "Brush Color", "" );
+  N_SetSimpleRCH ( "SPenColor",    "Pen Color",   "" );
+  N_SetSimpleRCH ( "SPenWidth",    "Pen Width",   "" );
+  N_SetSimpleRCH ( "SSizeXY",      "Rect Size (X,Y in LSU)", "" );
+  N_SetSimpleRCH ( "SShiftXY",     "Shift (X,Y in LSU)",     "" );
+  N_SetSimpleRCH ( "SHotPoint",    "Hot Point (X,Y in 0,1)", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PointAttr1FormDescr!Create( );
+
+//***************************  TN_SysLineAttrFormDescr  *********************
+type TN_SysLineAttrFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_SysLineAttrFormDescr = class
+
+constructor TN_SysLineAttrFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "AtLASColor",   "All Line Segments Color", "" );
+  N_SetSimpleRCH ( "AtLASWidth",   "All Line Segments Width", "" );
+  N_SetSimpleRCH ( "AtLBSColor",   "Beg Line Segment Color",  "" );
+  N_SetSimpleRCH ( "AtLBSWidth",   "Beg Line Segment Width",  "" );
+  N_SetArrayRCH  ( "AtLAV",        "All Vertexes Attributes", "" );
+  N_AddExtEditor( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "AtLBV",        "Beg Vertexes Attributes", "" );
+  N_AddExtEditor( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_SysLineAttrFormDescr!Create( );
+
+//***************************  TN_RAFillNumParamsFormDescr  ********************
+type TN_RAFillNumParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RAFillNumParamsFormDescr = class
+
+constructor TN_RAFillNumParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetBoolRCH   ( "FNRAddMode",   "Add to current Mode",    "" );
+  N_SetSimpleRCH ( "FNRFuncType",  "Fill Function Type",     "" );
+
+  N_SetSimpleRCH ( "FNRBegIndex",  "Beg Index",              "" );
+  N_SetSimpleRCH ( "FNRNumValues", "Num Values",             "" );
+  N_SetSimpleRCH ( "FNRBegFunc",   "Beg Function Value",     "" );
+  N_SetSimpleRCH ( "FNREndFunc",   "End Function Value",     "" );
+
+  N_SetSimpleRCH ( "FNRNoiseVal",  "Maximal Noise Value",     "" );
+  N_SetSimpleRCH ( "FNRShiftVal",  "Shift Value (add Const)", "" );
+  N_SetSimpleRCH ( "FNRMultCoef",  "Multiplication coef.",    "" );
+  N_SetSimpleRCH ( "FNRNumDigits", "Accuracy (Num Digits)",   "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "FNRPowerCoef", "Power Coef. (=1-Linear)", "" );
+  N_SetSimpleRCH ( "FNRBegArg",    "Beg Argument Value",      "" );
+  N_SetSimpleRCH ( "FNREndArg",    "End Argument Value",      "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RAFillNumParamsFormDescr!Create( );
+
+//***************************  TN_RAFillColParamsFormDescr  *********************
+type TN_RAFillColParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RAFillColParamsFormDescr = class
+
+constructor TN_RAFillColParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "FCRFillType",  "Fill Colors Type",    "" );
+  N_SetSimpleRCH ( "FCRBegIndex",  "Beg Index",           "" );
+  N_SetSimpleRCH ( "FCRNumValues", "Num Values",          "" );
+  N_SetSimpleRCH ( "FCRMinColor",  "Minimal Color Value", "" );
+  N_SetSimpleRCH ( "FCRMaxColor",  "Maximal Color Value", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RAFillColParamsFormDescr!Create( );
+
+//***************************  TN_RAFillStrParamsFormDescr  *******************
+type TN_RAFillStrParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RAFillStrParamsFormDescr = class
+
+constructor TN_RAFillStrParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "FSRFillType",    "Fill Strings Type",   "" );
+  N_SetSetRCH    ( "FSRFillFlags",   "Fill Flags",          "" );
+  N_SetSimpleRCH ( "FSRBegIndex",    "Beg Index",           "" );
+  N_SetSimpleRCH ( "FSRNumStrings",  "Num Strings",         "" );
+  N_SetSimpleRCH ( "FSRFormat",      "Delphi Format",       "" );
+  N_SetArrayRCH  ( "FSRDValues",     "Values to Format",    "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RAFillStrParamsFormDescr!Create( );
+
+//***************************  TN_2DRAFillNumParamsFormDescr  *****************
+type TN_2DRAFillNumParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_2DRAFillNumParamsFormDescr = class
+
+constructor TN_2DRAFillNumParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "FNRFlags",      "Fill Flags",            "" );
+  N_SetSimpleRCH ( "FNRFuncType",   "Fill Function Type",    "" );
+
+  N_SetSimpleRCH ( "FNRVX0Y0",      "Base Value at X0,Y0",       "" );
+  N_SetSimpleRCH ( "FNRVXMaxY0",    "StepX or Value at XMax,Y0", "" );
+  N_SetSimpleRCH ( "FNRVX0YMax",    "StepY or Value at X0,YMax", "" );
+
+  N_SetSimpleRCH ( "FNRExtrCoords", "Extremum Index Coords", "" );
+  N_SetSimpleRCH ( "FNRExtrVal",    "Extremum Value",        "" );
+  N_SetSimpleRCH ( "FNRCXYPar",     "Parabola CX VY Coefs",  "" );
+
+  N_SetSimpleRCH ( "FNRInfExpVal",  "Exp Value at Infinum",       "" );
+  N_SetSimpleRCH ( "FNRSigmaExp",   "Exp Sigma X Y (dispersion)", "" );
+  N_SetSimpleRCH ( "FNRFormat",     "Dbl To Str Pascal Format",   "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_2DRAFillNumParamsFormDescr!Create( );
+
+//***************************  TN_MMValuesFormDescr  *****************
+type TN_MMValuesFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_MMValuesFormDescr = class
+
+constructor TN_MMValuesFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MMVMinValue", "Min Value", "Минимальное значение" );
+  N_SetSimpleRCH ( "MMVMaxValue", "Max Value", "Максимальное значение" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_MMValuesFormDescr!Create();
+
+//***************************  TN_SplineLineFormDescr  *****************
+type TN_SplineLineFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_SplineLineFormDescr = class
+
+constructor TN_SplineLineFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "SLPFlags",        "Spline Flags", "Максимальное значение" );
+  N_SetSimpleRCH ( "SLPType",         "Spline Type", "Минимальное значение" );
+  N_SetSimpleRCH ( "SLPJoinAngle",    "Join Angle", "Минимальное значение" );
+  N_SetSimpleRCH ( "SLPNumNewInSegm", "Num New Points Inegm", "Минимальное значение" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_SplineLineFormDescr!Create();
+
+//***************************  TN_PointSizeFormDescr  *****************
+type TN_PointSizeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PointSizeFormDescr = class
+
+constructor TN_PointSizeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MSPValue",  "Size  X Y  Values",  "Значение X Y размеров" );
+  N_SetSimpleRCH ( "MSXUnit",   "X Size Units", "Единицы измерения размера X" );
+  N_SetSimpleRCH ( "MSYUnit",   "Y Size Units", "Единицы измерения размера Y" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PointSizeFormDescr!Create();
+
+//***************************  TN_AuxLineFormDescr  *********************
+type TN_AuxLineFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_AuxLineFormDescr = class
+
+constructor TN_AuxLineFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "ALFlags",     "AuxLine Flags",  "" );
+  N_SetSimpleRCH ( "ALCType",     "Coords Type",    "" );
+  N_SetSimpleRCH ( "ALColor",     "Pen Color",      "" );
+  N_SetSimpleRCH ( "ALWidth",     "Pen Width",      "" );
+  N_SetArrayRCH  ( "ALBPAttribs", "Beg Point Attr", "" );
+  N_AddExtEditor( "NRAFRaEditEditor", "" );
+  N_SetSimpleRCH ( "ALNumPoints", "Number of Points", "" );
+  N_SetSimpleRCH ( "ALP1P2",      "Points P1 P2",     "" );
+  N_SetSimpleRCH ( "ALP3P4",      "Points P3 P4",     "" );
+  N_SetSimpleRCH ( "ALP5P6",      "Points P5 P6",     "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_AuxLineFormDescr!Create( );
+
+//***************************  TN_RCompBaseFormDescr  *********************
+type TN_RCompBaseFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RCompBaseFormDescr = class
+
+constructor TN_RCompBaseFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetBoolRCH   ( "CCompBase.CBSkipSelf",   "Skip Self",       "Не выполнять себя и детей" );
+  N_SetBoolRCH   ( "CCompBase.CBStopExec",   "Stop Execution",  "Прекратить выполнение" );
+  N_SetSetRCH    ( "CCompBase.CBFlags1",     "Other Flags 1",   "Другие(1) флаги компоненты" );
+  N_SetSetRCH    ( "CCompBase.CBFlags2",     "Other Flags 2",   "Другие(2) флаги компоненты" );
+  N_SetTextRCH   ( "CCompBase.CBSPLGlobals", "SPL Globals",     "Глобальная SPL секция");
+  N_SetSimpleRCH ( "CCompBase.CBTextAttr",   "Text Attributes", "Дополнительные текстовые атрибуты");
+  N_SetTextRCH   ( "CCompBase.CBComment",    "Comments",        "Описание, комментарии, замечания");
+  N_SetSimpleRCH ( "CCompBase.CBComp_9",     "_9 User Params",  "Компонента с _9 параметрами" );
+  N_SetSimpleRCH ( "CCompBase.CBComp_8",     "_8 User Params",  "Компонента с _8 параметрами" );
+  N_SetSimpleRCH ( "CCompBase.CBUDBase_1",   "_1 UDBase Obj",   "Объект _1UDBase" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RCompBaseFormDescr!Create( );
+
+//***************************  TN_RCoordsFormDescr  *********************
+type TN_RCoordsFormDescr = class // Component Coords Editor Form Description
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RCoordsFormDescr = class
+
+constructor TN_RCoordsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CCoords.BPCoords",      "BP(Base Point) Coords", "" );
+  N_SetSimpleRCH ( "CCoords.BPXCoordsType", "BP  X Type",            "" );
+  N_SetSimpleRCH ( "CCoords.BPYCoordsType", "BP  Y Type",            "" );
+  N_SetSimpleRCH ( "CCoords.BPShift",       "BP Shift (X,Y in LSU)", "" );
+  N_SetSimpleRCH ( "CCoords.BPPos",         "BP  Pos  (X,Y in 0-1)", "" );
+
+  N_SetSimpleRCH ( "CCoords.LRCoords",       "Lower Right Coords",   "" );
+  N_SetSimpleRCH ( "CCoords.LRXCoordsType",  "Lower Right  X Type",  "" );
+  N_SetSimpleRCH ( "CCoords.LRYCoordsType",  "Lower Right  Y Type",  "" );
+  N_SetSimpleRCH ( "CCoords.SRSize",         "Size  X,Y",            "" );
+  N_SetSimpleRCH ( "CCoords.SRXSizeType",    "Size  X Type",         "" );
+  N_SetSimpleRCH ( "CCoords.SRYSizeType",    "Size  Y Type",         "" );
+  N_SetSimpleRCH ( "CCoords.SRSizeAspect",   "Size Aspect",          "" );
+  N_SetSimpleRCH ( "CCoords.SRSizeAspType",  "Size Aspect Type",     "" );
+  N_SetSimpleRCH ( "CCoords.ResInDPI",       "Resolution in DPI",    "" );
+  N_SetSimpleRCH ( "CCoords.CoordsScope",    "Coords Scope",         "" );
+  N_SetSimpleRCH ( "CCoords.CompUCoords",    "User Coords",          "" );
+  N_SetSimpleRCH ( "CCoords.UCoordsType",    "User Coords Type",     "" );
+//  N_SetSimpleRCH ( "CCoords.UserTransfType", "User  Coords Transf.", "" );
+  N_SetSimpleRCH ( "CCoords.PixTransfType",  "Pixel Coords Transf.",   "" );
+  N_SetSimpleRCH ( "CCoords.CCRotateAngle",  "Rotate Angle in degree", "" );
+  N_SetSetRCH    ( "CCoords.CurFreeFlags",   "CurFreeRect Flags",      "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RCoordsFormDescr!Create( );
+
+
+//***************************  TN_PaRadSizeFormDescr  *****************
+type TN_PaRadSizeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PaRadSizeFormDescr = class
+
+constructor TN_PaRadSizeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MSPValue",  "Size  X Y  Values",  "Значение X Y размеров" );
+
+  N_SetSimpleRCH ( "MSXUnit",   "X Size Units", "Единицы измерения размера X" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix";
+
+  N_SetSimpleRCH ( "MSYUnit",   "Y Size Units", "Единицы измерения размера Y" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PaRadSizeFormDescr!Create();
+
+
+//***************************  TN_PaRectSizeFormDescr  *****************
+type TN_PaRectSizeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PaRectSizeFormDescr = class
+
+constructor TN_PaRectSizeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MSRValue",   "Four Size Values (LTRB)", "Четыре размера (левый, верхний, правый, нижний)" );
+
+  N_SetSimpleRCH ( "MSLeftUnit", "Left Size Units",     "Единицы измерения левого размера" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix";
+
+  N_SetSimpleRCH ( "MSTopUnit", "Top Size Units",       "Единицы измерения верхнего размера" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix";
+
+  N_SetSimpleRCH ( "MSRightUnit", "Right Size Units",   "Единицы измерения правого размера" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix";
+
+  N_SetSimpleRCH ( "MSBottomUnit", "Bottom Size Units",  "Единицы измерения нижнего размера" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PaRectSizeFormDescr!Create();
+
+
+//***************************  TN_PaSidesFormDescr  *****************
+type TN_PaSidesFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PaSidesFormDescr = class
+
+constructor TN_PaSidesFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PaSBorderColor",  "Side Border Color",  "Цвет стороны" );
+  N_SetSimpleRCH ( "PaSBorderWidth",  "Side Width",         "Толщина стороны" );
+  N_SetSimpleRCH ( "PaSRoundXYRads",  "Side Round Radiuses (X Y)", "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PaSidesFormDescr!Create();
+
+
+//***************************  TN_CPanelFormDescr  *********************
+type TN_CPanelFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CPanelFormDescr = class
+
+constructor TN_CPanelFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PaMargins",   "Margins (LTRB)", "" );
+  N_AddExtViewer ( "NRAFMSRectEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSRectEditor", "NRectVEditor", "NRAFRaEditEditor", "TN_PaRectSizeFormDescr" );
+
+  N_SetSimpleRCH ( "PaPaddings",   "Paddings (LTRB)", "" );
+  N_AddExtViewer ( "NRAFMSRectEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSRectEditor", "NRectVEditor", "NRAFRaEditEditor", "TN_PaRectSizeFormDescr" );
+
+  N_SetSimpleRCH ( "PaBackColor",    "Background Color", "" );
+  N_SetSimpleRCH ( "PaBorderColor",  "All Borders Color", "" );
+  N_SetSimpleRCH ( "PaBorderWidth",  "All Borders Width", "" );
+
+  N_SetSimpleRCH ( "PaRoundXYRads",  "Round Radiuses (X Y)", "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+  N_SetArrayRCH  ( "PaSideParams",   "Individual Side Params",   "Индивидуальные атрибуты сторон панели" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_PaSidesFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CPanelFormDescr!Create( );
+
+
+//***************************  TN_SetParamsFormDescr  *********************
+type TN_SetParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_SetParamsFormDescr = class
+
+constructor TN_SetParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "SPPhase",    "Phase",     "" );
+  N_SetSetRCH    ( "SPFlags",    "Gen Flags", "" );
+  N_SetSimpleRCH ( "SPFunc",     "Function",  "" );
+  N_SetSimpleRCH ( "SPTxtPar",   "Func Par",  "" );
+
+  N_SetSetRCH    ( "SPSrcFlags", "Src Flags", "" );
+  N_SetSimpleRCH ( "SPSrcUObj",  "Src UObj",  "" );
+  N_SetSimpleRCH ( "SPSrcPath",  "Src Path",  "" );
+  N_SetSimpleRCH ( "SPSrcField", "Src Field", "" );
+
+  N_SetSetRCH    ( "SPDstFlags", "Dst Flags", "" );
+  N_SetSimpleRCH ( "SPDstUObj",  "Dst UObj",  "" );
+  N_SetSimpleRCH ( "SPDstPath",  "Dst Path",  "" );
+  N_SetSimpleRCH ( "SPDstField", "Dst Field", "" );
+
+  N_SetTextRCH   ( "SPSPLCode",  "SPL Code",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_SetParamsFormDescr!Create( );
+
+
+//***************************  TN_UserParamsFormDescr  *********************
+type TN_UserParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_UserParamsFormDescr = class
+
+constructor TN_UserParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+//  Result!Common.ModeFlags = "[K_ramUseFillColor,K_ramFillFrameWidth,K_ramColVertical]";
+//  Result!Common.ModeFlags = Result!Common.ModeFlags + Hex(Bit(Ord(K_ramColVertical)));
+  SetOR( Adr(Result!Common.ModeFlags),
+             Result!Common.ModeFlags, TK_RAModeFlagSet("[K_ramColVertical]") );
+
+  N_SetSimpleRCH ( "UPName",    "Name",        "Имя параметра" );
+  N_SetSimpleRCH ( "UPValue",   "Value",       "Значение параметра" );
+  N_AddExtEdViewer ( "NRAFUserParamEditor", "NRAFUserParamEditor", "" );
+  N_SetSimpleRCH ( "UPDescr",   "Description", "Описание параметра" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_UserParamsFormDescr!Create( );
+
+//***************************  TN_ExpParamsFormDescr  *********************
+type TN_ExpParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ExpParamsFormDescr = class
+
+constructor TN_ExpParamsFormDescr!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "EPImageExpMode",  "Image Export mode",  "Другие параметры" );
+  N_SetSetRCH    ( "EPImageExpFlags", "Image Export Flags", "" );
+  N_SetSetRCH    ( "EPExecFlags",     "Execute Flags",      "" );
+
+  N_SetSimpleRCH ( "EPMainFName", "Full Main File Name", "Имя параметра" );
+  N_AddFNameEditors( '(#OutFiles#) OutFilesHist |*.*' );
+
+  N_SetSimpleRCH ( "EPFilesExt",  "New Files Extension", "Имя параметра" );
+
+  N_SetSimpleRCH ( "EPImageFPar", "Image File Params",   "Имя параметра" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ImageFileParFormDescr" );
+
+  N_SetSimpleRCH ( "EPTextFPar",  "Text File Params", "Другие параметры" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_TextFileParFormDescr" );
+
+//  N_SetSimpleRCH ( "EPFile1Par",  "File1 Params", "Другие параметры" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "TN_File1ParFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ExpParamsFormDescr!Create( );
+
+//***************************  TN_ImageFileParFormDescr  *****************
+type TN_ImageFileParFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ImageFileParFormDescr = class
+
+constructor TN_ImageFileParFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "IFPImFileFmt",   "Image File Format",        "Имя параметра" );
+  N_SetSimpleRCH ( "IFPPixFmt",      "Image Pixel Format",       "Имя параметра" );
+  N_SetSimpleRCH ( "IFPSizePix",     "Image X,Y Size in Pixels", "Имя параметра" );
+  N_SetSimpleRCH ( "IFPVisibleRect", "Visible Rect in Pixels",   "Имя параметра" );
+  N_SetSimpleRCH ( "IFPSizemm",      "Image X,Y Size in mm",     "Имя параметра" );
+  N_SetSimpleRCH ( "IFPResDPI",      "Image X,Y Res. in DPI",    "Имя параметра" );
+  N_SetSimpleRCH ( "IFPTranspColor", "Image Transparent Color",  "Имя параметра" );
+  N_SetSimpleRCH ( "IFPJPEGQuality", "JPEG Image Quality",       "Имя параметра" );
+  N_SetBoolRCH   ( "IFPComprLevel",  "Compress Image",           "Имя параметра" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ImageFileParFormDescr!Create();
+
+//***************************  TN_TextFileParFormDescr  *****************
+type TN_TextFileParFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_TextFileParFormDescr = class
+
+constructor TN_TextFileParFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "TFPRowLength", "Row Length",        "Значение размера" );
+  N_SetSimpleRCH ( "TFPEncoding",  "Text Encoding",     "Значение размера" );
+  N_SetSimpleRCH ( "TFPStr1",      "String Param",      "Значение размера" );
+  N_SetSimpleRCH ( "TFPHeader",    "File Header",       "Значение размера" );
+  N_SetSimpleRCH ( "TFPIntType",   "File integer type", "Значение размера" );
+
+  N_SetSimpleRCH ( "TFPPatFName",  "Pattern File",      "Значение размера" );
+  N_AddFNameEditors( '(#OtherFiles#) OtherFilesHist|*.*' );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_TextFileParFormDescr!Create();
+
+//***************************  TN_File1ParFormDescr  *****************
+type TN_File1ParFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_File1ParFormDescr = class
+
+constructor TN_File1ParFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "F1PFileFlags",  "File General Flags", "Имя параметра" );
+  N_SetSetRCH    ( "F1POpenFlags",  "File Open Flags",    "Имя параметра" );
+  N_SetSimpleRCH ( "F1PComprLevel", "ZLib Compr. level",  "Имя параметра" );
+  N_SetSimpleRCH ( "F1PUserSign",   "User Signature",     "Имя параметра" );
+  N_SetSimpleRCH ( "F1PPasWord",    "File Pasword",       "Имя параметра" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_File1ParFormDescr!Create();
+
+
+//***************************  TN_FillColorAttr1FormDescr  *********************
+type TN_FillColorAttr1FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_FillColorAttr1FormDescr = class
+
+constructor TN_FillColorAttr1FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "FAMainColor", "Main Fill Color",        "Основной цвет заливки" );
+  N_SetSimpleRCH ( "FAParams",    "Additional Fill Params", "Дополнительные параметры заливки" );
+//  N_AddExtEdViewer ( "NRAF...Editor", "NRAF...Editor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_FillColorAttr1FormDescr!Create( );
+
+
+//***************************  TN_TimeSeriesUPFormDescr  *********************
+type TN_TimeSeriesUPFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_TimeSeriesUPFormDescr = class
+
+constructor TN_TimeSeriesUPFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetArrayRCH  ( "TSArgValues",  "Argument Values", "Значения аргумента" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "TSFuncValues", "Function Values", "Значения функции" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "TSRatings",    "Raiting Values",  "Значения рейтинга" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+//  N_SetArrayRCH  ( "TSTimePeriodTypes", "Time Period Types", "Типы интервалов времени" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetSimpleRCH ( "TSNumDigits",  "Num. Decimal Digits", "Точность" );
+  N_SetSimpleRCH ( "TSVectorKey",  "Vector Key", "Ключ имени показателя в таблице слонений" );
+  N_SetSimpleRCH ( "TSItemKey",    "Item Key",   "Ключ имени элемента вектора в таблице слонений" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_TimeSeriesUPFormDescr!Create( );
+
+//***************************  TN_CSCodeFormDescr  *****************
+type TN_CSCodeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CSCodeFormDescr = class
+
+constructor TN_CSCodeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "",  "CS Code", "Код элемента кодового пространста" );
+  GColumns[GIndex-1]!CEdUserPar = "CSCode";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CSCodeFormDescr!Create();
+
+//***************************  TN_CSItem1FormDescr  *****************
+type TN_CSItem1FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CSItem1FormDescr = class
+
+constructor TN_CSItem1FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "", "Code Space Item", "Элемент кодового пространста" );
+  N_AddExtEdViewer ( "NRAFRaEditEditor", "NRAFRaEditEditor", "TN_CSItem2FormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CSItem1FormDescr!Create();
+
+//***************************  TN_CSItem2FormDescr  *****************
+type TN_CSItem2FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CSItem2FormDescr = class
+
+constructor TN_CSItem2FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "ItemCS",   "Code Space UObj", "Кодовое пространство" );
+  GColumns[GIndex-1]!CEdUserPar = "CSUObj";
+
+  N_SetSimpleRCH ( "ItemCode", "Code Space Item Code", "Код элемента кодового пространста" );
+  GColumns[GIndex-1]!CEdUserPar = "CSCode";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CSItem2FormDescr!Create();
+
+//***************************  TN_DblArrayFormDescr  *****************
+type TN_DblArrayFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_DblArrayFormDescr = class
+
+constructor TN_DblArrayFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetArrayRCH ( "V", "Double Values", "Вектора значений" );
+  N_AddExtEditor( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_DblArrayFormDescr!Create();
+
+//***************************  TN_LHEScalSizeFormDescr  *****************
+type TN_LHEScalSizeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_LHEScalSizeFormDescr = class
+
+constructor TN_LHEScalSizeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MSSValue",      "Size Value",   "Значение размера" );
+  N_SetSimpleRCH ( "MSUnit",        "Size Units",   "Единицы измерения размера" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix,msuPrcLHElem,msuPrcParent";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_LHEScalSizeFormDescr!Create();
+
+//***************************  TN_LHEPointSizeFormDescr  *****************
+type TN_LHEPointSizeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_LHEPointSizeFormDescr = class
+
+constructor TN_LHEPointSizeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MSPValue",  "Size  X Y  Values",  "Значение X Y размеров" );
+
+  N_SetSimpleRCH ( "MSXUnit",   "X Size Units", "Единицы измерения размера X" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix,msuPrcLHElem,msuPrcParent";
+
+  N_SetSimpleRCH ( "MSYUnit",   "Y Size Units", "Единицы измерения размера Y" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix,msuPrcLHElem,msuPrcParent";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_LHEPointSizeFormDescr!Create();
+
+//***************************  TN_TaScalSizeFormDescr  *****************
+type TN_TaScalSizeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_TaScalSizeFormDescr = class
+
+constructor TN_TaScalSizeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "MSSValue",      "Size Value",   "Значение размера" );
+  N_SetSimpleRCH ( "MSUnit",        "Size Unit",    "Единица измерения размера" );
+  GColumns[GIndex-1]!CSENames = "msuLSU,msumm,msuPix,msuPrcLHElem,msuPrcParent";
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_TaScalSizeFormDescr!Create();
+
+//***************************  TN_RectSizePosFormDescr  *****************
+type TN_RectSizePosFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RectSizePosFormDescr = class
+
+constructor TN_RectSizePosFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "RSPBPPos",   "Base Point Pos in %", "" );
+
+  N_SetSimpleRCH ( "RSPBPShift", "Base Point Shift",    "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+  N_SetSimpleRCH ( "RSPHPPos",   "Hot  Point Pos in %", "" );
+  N_SetSimpleRCH ( "RSPSize",    "Rect Size",           "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RectSizePosFormDescr!Create();
+
+//***************************  TN_ODFSParFormDescr  *****************
+type TN_ODFSParFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ODFSParFormDescr = class
+
+constructor TN_ODFSParFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "ODFFLags",      "Layout Flags",      "" );
+
+  N_SetSimpleRCH ( "ODFLRPaddings", "Paddings",          "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_LHEPointSizeFormDescr" );
+
+  N_SetSimpleRCH ( "ODFElemSize",   "Elems Size",        "" );
+  N_AddExtViewer ( "NRAFMSScalEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSScalEditor", "NScalVEditor", "NRAFRaEditEditor", "TN_LHEScalSizeFormDescr" );
+
+  N_SetSimpleRCH ( "ODFGapSize",    "Gap between Elems",   "" );
+  N_AddExtViewer ( "NRAFMSScalEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSScalEditor", "NScalVEditor", "NRAFRaEditEditor", "TN_LHEScalSizeFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ODFSParFormDescr!Create();
+
+//***************************  TN_PointAttr2FormDescr  *****************
+type TN_PointAttr2FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PointAttr2FormDescr = class
+
+constructor TN_PointAttr2FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+//  N_SetSimpleRCH ( "PAType",       "Sign Element Type",   "Тип элемента знака" ); // not needed
+
+  N_SetSetRCH    ( "PAShape",      "Standart Shapes",     "Флаги" );
+  N_SetSimpleRCH ( "PAPenColor",   "Pen Color",           "Цвет пера (обводки)" );
+  N_SetSimpleRCH ( "PAPenWidth",   "Pen Width",           "Ширина пера (обводки)" );
+  N_SetSimpleRCH ( "PAPenStyle",   "Pen Style",           "Стиль пера (обводки)" );
+  N_AddExtEditor ( "NRAFPenStyleEditor",    "" );
+
+  N_SetSimpleRCH ( "PABrushColor", "Brush Color",         "Цвет кисти (заливки)" );
+
+  N_SetSimpleRCH ( "PASizeXY",     "X,Y sizes in LSU",    "Размеры элемента в LSU" );
+  N_SetSimpleRCH ( "PAShiftXY",    "X,Y shifts in LSU",   "Сдвиг HotPoint в LSU" );
+  N_SetSimpleRCH ( "PAHotPoint",   "Hot Point in (0,1) coords,", "Координаты HotPoint в (0,1)" );
+  N_SetArrayRCH  ( "PASP",         "Type Specific Params", "Дополнительные параметры (Тип элемента знака)" );
+  N_AddExtEdViewer ( "NRAFPA2SPEditor", "NRAFPA2SPEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PointAttr2FormDescr!Create();
+
+//***************************  TN_PA2StrokeShapeFormDescr  *****************
+type TN_PA2StrokeShapeFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2StrokeShapeFormDescr = class
+
+constructor TN_PA2StrokeShapeFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PASSType",    "Stroke Shape Type",   "Подтип элемента знака" );
+  N_SetSimpleRCH ( "PASSAngle",   "Angle (in degree)",   "Угол поворота" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2StrokeShapeFormDescr!Create();
+
+//***************************  TN_PA2RoundRectFormDescr  *****************
+type TN_PA2RoundRectFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2RoundRectFormDescr = class
+
+constructor TN_PA2RoundRectFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PAEllSizeXY", "Rounding Ellipse X,Y Size", "Размеры эллипса скругления" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2RoundRectFormDescr!Create();
+
+//***************************  TN_PA2EllipseFragmFormDescr  *****************
+type TN_PA2EllipseFragmFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2EllipseFragmFormDescr = class
+
+constructor TN_PA2EllipseFragmFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PAEBorderType",  "Shape Border Type",     "Подтип элемента знака" );
+  N_SetSimpleRCH ( "PAEBegAngle",    "Beg Angle (in degree)", "Начальный угол в градусах" );
+  N_SetSimpleRCH ( "PAEArcAngle",    "Arc Angle (in degree)", "Величина угла в градусах" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2EllipseFragmFormDescr!Create();
+
+//***************************  TN_PA2RegPolyFragmFormDescr  *****************
+type TN_PA2RegPolyFragmFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2RegPolyFragmFormDescr = class
+
+constructor TN_PA2RegPolyFragmFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PAPBorderType",  "Shape Border Type",     "Подтип элемента знака" );
+  N_SetSimpleRCH ( "PAPBegAngle",    "Beg Angle (in degree)", "Начальный угол в градусах" );
+  N_SetSimpleRCH ( "PAPArcAngle",    "Arc Angle (in degree)", "Величина угла в градусах" );
+  N_SetSimpleRCH ( "PAPNumSegments", "Number of Segments",    "Количество сегментов" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2RegPolyFragmFormDescr!Create();
+
+//***************************  TN_PA2TextRowFormDescr  *****************
+type TN_PA2TextRowFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2TextRowFormDescr = class
+
+constructor TN_PA2TextRowFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PAText",    "Text",             "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAFont",    "Font",             "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAFSCoef",  "Font Scale Coef",  "Тип элемента знака" );
+  N_SetSimpleRCH ( "PATRAngle", "Angle",            "Тип элемента знака" );
+  N_SetSimpleRCH ( "PACESpace", "Char Extra Space in LSU", "Тип элемента знака" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2TextRowFormDescr!Create();
+
+//***************************  TN_PA2PictureFormDescr  *****************
+type TN_PA2PictureFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2PictureFormDescr = class
+
+constructor TN_PA2PictureFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PAPict",          "Picture",            "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAScaleCoef",     "Picture Scale Coef", "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAPictFragm",     "Picture Fragment",   "Тип элемента знака" );
+  N_SetBoolRCH   ( "PAMantainAspect", "Mantain Aspect",     "Тип элемента знака" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2PictureFormDescr!Create();
+
+//***************************  TN_PA2ArrowFormDescr  *****************
+type TN_PA2ArrowFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2ArrowFormDescr = class
+
+constructor TN_PA2ArrowFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "PAAFlags",      "Arrow Flags",     "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAAIntWidth",   "Internal Width",  "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAAIntLength",  "Internal Length", "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAAExtWidth",   "External Width",  "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAAExtLength",  "External Length", "Тип элемента знака" );
+  N_SetSimpleRCH ( "PAArrowAngle",  "Base Line Angle", "Arrow Base Line Angle in Degree in Clockwise direction" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2ArrowFormDescr!Create();
+
+//***************************  TN_PA2PolyLineFormDescr  *****************
+type TN_PA2PolyLineFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PA2PolyLineFormDescr = class
+
+constructor TN_PA2PolyLineFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "PALFlags",          "PolyLine Flags",     "Тип элемента знака" );
+  N_SetSimpleRCH ( "PALCObj",           "Coords Object",   "Тип элемента знака" );
+  N_SetSimpleRCH ( "PALBegItemToDraw",  "Beg Item To Draw",   "Тип элемента знака" );
+  N_SetSimpleRCH ( "PALNumItemsToDraw", "Num Items To Draw",   "Тип элемента знака" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PA2PolyLineFormDescr!Create();
+
+
+//***************************  TN_PenStyleFieldsFormDescr  *****************
+type TN_PenStyleFieldsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PenStyleFieldsFormDescr = class
+
+constructor TN_PenStyleFieldsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "PFFType",     "Type",     "Тип линии" );
+  N_SetSimpleRCH ( "PFFStyle",    "Style",    "Тип линии" );
+  N_SetSimpleRCH ( "PFFEndCap",   "EndCap",   "Тип линии" );
+  N_SetSimpleRCH ( "PFFLineJoin", "LineJoin", "Тип линии" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PenStyleFieldsFormDescr!Create();
+
+
+//************************ TN_ContAttr Related FormDescrs ****************
+
+//***************************  TN_ExtContAttrFormDescr  *****************
+type TN_ExtContAttrFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ExtContAttrFormDescr = class
+
+constructor TN_ExtContAttrFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "ECAFlags",      "Flags",               "Флаги" );
+  N_SetSimpleRCH ( "ECAMiterLimit", "Miter Limit",         "Тип линии" );
+  N_SetSimpleRCH ( "ECAPenImage",   "Pen Image",           "Тип линии" );
+  N_SetSimpleRCH ( "ECABrushImage", "Brush Image",         "Тип линии" );
+  N_SetSimpleRCH ( "ECABegOfs",     "Offs at Beg of Line", "Тип линии" );
+  N_SetSimpleRCH ( "ECAEndOfs",     "Offs at End of Line", "Тип линии" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ExtContAttrFormDescr!Create();
+
+//***************************  TN_ContAttrFormDescr  *****************
+type TN_ContAttrFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ContAttrFormDescr = class
+
+constructor TN_ContAttrFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CAFlags",       "General Flags",  "Флаги" );
+  N_SetSetRCH    ( "CAMarkerFlags", "Marker Flags",   "Флаги" );
+  N_SetSimpleRCH ( "CADashUnits",   "Dash Units",     "Тип линии" );
+  N_SetSimpleRCH ( "CAPenColor",    "Pen Color",      "Тип линии" );
+  N_SetSimpleRCH ( "CAPenWidth",    "Pen Width",      "Тип линии" );
+  N_SetSimpleRCH ( "CAPenStyle",    "Pen Style",      "Тип линии" );
+  N_AddExtEditor ( "NRAFPenStyleEditor",  "TN_ExtContAttrFormDescr" );
+  N_SetSimpleRCH ( "CABrushColor",  "Brush Color",    "Тип линии" );
+  N_SetSimpleRCH ( "CAOpacity",     "Opacity",        "Тип линии" );
+
+  N_SetArrayRCH  ( "CADashSizes",   "Dash Sizes",  "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "CAMarkers",     "Markers",  "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_PointAttr2FormDescr" );
+
+  N_SetSimpleRCH ( "CAExtAttr",     "Ext. Attribs",   "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ExtContAttrFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ContAttrFormDescr!Create();
+
+//***************************  TN_CAArrayFormDescr  *****************
+type TN_CAArrayFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CAArrayFormDescr = class
+
+constructor TN_CAArrayFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetArrayRCH  ( "V", "Line Attribs", "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ContAttrFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CAArrayFormDescr!Create();
+
+
+//***************************  TN_RTextRowFormDescr  *********************
+type TN_RTextRowFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTextRowFormDescr = class
+
+constructor TN_RTextRowFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+  SetLength( Adr(Self!Columns), 100 ); // initial value
+  GColumns = Self!Columns;
+
+  N_SetSetRCH    ( "CTextRow.TRFlags",     "Flags",                      "" );
+  N_SetSimpleRCH ( "CTextRow.TRText",      "Text (one Row)",             "" );
+  N_SetSimpleRCH ( "CTextRow.TRTextColor", "Text Color",                 "" );
+  N_SetSimpleRCH ( "CTextRow.TRAlign",     "Alignment along Base Line",  "" );
+  N_SetSimpleRCH ( "CTextRow.TRFont",      "Font (old)",                 "" );
+  N_SetSimpleRCH ( "CTextRow.TRFSCoef",    "Font Scale Coef",            "" );
+  N_SetSimpleRCH ( "CTextRow.TRNFont",     "Font (new)",                 "" );
+  N_SetSimpleRCH ( "CTextRow.TRCESpace",   "Chars Extra Space in LSU",   "" );
+  N_SetSimpleRCH ( "CTextRow.TRShift",     "Shifts (X-Along BL) in LSU", "" );
+  N_SetSimpleRCH ( "CTextRow.TRBLType",    "Base Line definition",       "" );
+  N_SetSimpleRCH ( "CTextRow.TRBLine",     "Base Line P1,P2 Points (%)", "" );
+  N_SetSimpleRCH ( "CTextRow.TRBLAngle",   "Base Line Angle in degree",  "" );
+  N_SetSimpleRCH ( "CTextRow.TRCharAngle", "Character Angle in degree",  "" );
+  N_SetSimpleRCH ( "CTextRow.TRBLWidth",   "Base Line Width in % or mm", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTextRowFormDescr!Create( );
+
+
+//***************************  TN_ImageParamsFormDescr  *********************
+type TN_ImageParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ImageParamsFormDescr = class
+
+constructor TN_ImageParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "IPStyle",         "HTML Style",        "Руск. Описание" );
+  N_SetSimpleRCH ( "IPClassName",     "HTML ClassName",    "Руск. Описание" );
+  N_SetSimpleRCH ( "IPVisibleSizeXY", "Visible  X Y  Sizes", "Руск. Описание" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_LHEPointSizeFormDescr" );
+
+  N_SetSimpleRCH ( "IPPixelSizeXY",   "Pixel  X Y  Sizes",   "Руск. Описание" );
+  N_SetSimpleRCH ( "IPUDCompVis",     "Visual Tree Root",  "Руск. Описание" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ImageParamsFormDescr!Create( );
+
+//***************************  TN_RTextBoxFormDescr  *********************
+type TN_RTextBoxFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTextBoxFormDescr = class
+
+constructor TN_RTextBoxFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CTextBox.TBFlags",     "Flags",         "" );
+  N_SetTextRCH   ( "CTextBox.TBPlainText", "Text Content",  "" );
+  N_SetSimpleRCH ( "CTextBox.TBHorAlign",  "Hor Alignment", "" );
+//  GColumns[GIndex-1]!CSENames = "hamRight,hamLeft";
+
+  N_SetSimpleRCH ( "CTextBox.TBVertAlign", "Vert Alignment",           "" );
+  N_SetSimpleRCH ( "CTextBox.TBFont",      "Font",                     "" );
+  N_SetSimpleRCH ( "CTextBox.TBFSCoef",    "Font Scale Coef",          "" );
+  N_SetSimpleRCH ( "CTextBox.TBLineExtraSpace",  "Line ExtraSpace(Y)", "" );
+
+{
+  aaaGRC.CGEDataID = "N_TestEdName";
+  GRC = GColumns[GIndex-1];
+  GColumns[GIndex-1]!CGEDataID = "N_TestEdName";
+  GRC.CShowEditFlags = GRC.CShowEditFlags + Hex(Bit(Ord(K_racExternalEditor)));
+  aaaGColumns[GIndex-1] = GRC;
+}
+  N_SetSimpleRCH ( "CTextBox.TBTokenExtraSpace", "Token ExtraSpace(X)", "" );
+  N_SetSimpleRCH ( "CTextBox.TBIndent",       "First Line Indent",      "" );
+  N_SetSimpleRCH ( "CTextBox.TBTextColor",    "Text Color",      "" );
+  N_SetSimpleRCH ( "CTextBox.TBPaddings",     "Paddings (LTRB)", "" );
+  N_SetSimpleRCH ( "CTextBox.TBPrefWidth",    "Pref. Width",     "" );
+  N_SetSimpleRCH ( "CTextBox.TBPrefHeight",   "Pref. Height",    "" );
+  N_SetArrayRCH  ( "CTextBox.TBAuxLine",      "Auxillary Line",  "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetTextRCH   ( "CTextBox.TBMacroText",    "Macro Text", "" );
+  N_SetArrayRCH  ( "CTextBox.TBImages",       "Images",     "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ImageParamsFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTextBoxFormDescr!Create( );
+
+//***************************  TN_OneTextBlockFormDescr  *********************
+type TN_OneTextBlockFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_OneTextBlockFormDescr = class
+
+constructor TN_OneTextBlockFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "OTBType",      "Type",       "" );
+  N_SetSetRCH    ( "OTBFlags",     "Flags",      "" );
+  N_SetTextRCH   ( "OTBMText",     "Macro Text", "" );
+  N_SetSimpleRCH ( "OTBNFont",     "Font (new)", "" );
+    N_AddTwoExtEditors( "NRAFRaEditEditor", "TN_NFontFormDescr", "NWinNFontEditor", "" );
+
+  N_SetSimpleRCH ( "OTBTextColor", "Text Color", "" );
+  N_SetSimpleRCH ( "OTBBackColor", "Back Color", "" );
+
+  N_SetSimpleRCH ( "OTBShift",     "X Y Shift",   "" );
+  N_SetSimpleRCH ( "OTBSize",      "X Y Size",    "" );
+  N_SetSimpleRCH ( "OTBComp",      "Component",   "" );
+  N_SetSimpleRCH ( "OTBFName",     "File Name",   "Имя файла" );
+  N_AddFNameEditors( '(#OtherFiles#) OtherFilesHist |*.*' );
+  N_SetSimpleRCH ( "OTBFont",       "Old Font",    "" );
+  N_SetSimpleRCH ( "OTBBack2Color", "Back2 Color", "" );
+  N_SetSimpleRCH ( "OTBBack2Width", "Back2 Width", "" );
+  N_SetSimpleRCH ( "OTBBack2Shift", "Back2 X Y Shift", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_OneTextBlockFormDescr!Create( );
+
+//***************************  TN_RParaBoxFormDescr  *********************
+type TN_RParaBoxFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RParaBoxFormDescr = class
+
+constructor TN_RParaBoxFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CParaBox.CPBSRTLFlags",  "Main Flags",        "" );
+//  N_SetSetRCH    ( "CParaBox.CPBFlags",      "Aux Flags",         "" );
+  N_SetSimpleRCH ( "CParaBox.CPBHorAlign",   "Hor Alignment",     "" );
+  N_SetSimpleRCH ( "CParaBox.CPBVertAlign",  "Vert Alignment",    "" );
+  N_SetSimpleRCH ( "CParaBox.CPBIndent",     "First Line Indent", "" );
+  N_SetSimpleRCH ( "CParaBox.CPBExYSpace",   "Extra Y Space",     "" );
+
+  N_SetArrayRCH  ( "CParaBox.CPBTextBlocks", "Text Blocks",       "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_OneTextBlockFormDescr" );
+
+  N_SetTextRCH   ( "CParaBox.CPBPrevSrcHTML", "Prev HTML Text",   "Hint str" );
+  N_SetTextRCH   ( "CParaBox.CPBNewSrcHTML",  "New HTML Text",    "Hint str" );
+
+  N_SetArrayRCH  ( "CParaBox.CPBAuxLine",     "Auxillary Line",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RParaBoxFormDescr!Create( );
+
+
+//***************************  TN_CParaBoxFormDescr  *********************
+type TN_CParaBoxFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CParaBoxFormDescr = class
+
+constructor TN_CParaBoxFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CPBSRTLFlags",  "Main Flags",        "" );
+//  N_SetSetRCH    ( "CPBFlags",      "Aux Flags",         "" );
+  N_SetSimpleRCH ( "CPBHorAlign",   "Hor Alignment",     "" );
+  N_SetSimpleRCH ( "CPBVertAlign",  "Vert Alignment",    "" );
+  N_SetSimpleRCH ( "CPBIndent",     "First Line Indent", "" );
+  N_SetSimpleRCH ( "CPBExYSpace",   "Extra Y Space",     "" );
+
+  N_SetArrayRCH  ( "CPBTextBlocks", "Text Blocks",       "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_OneTextBlockFormDescr" );
+
+  N_SetTextRCH   ( "CPBPrevSrcHTML", "Prev HTML Text",   "Hint str" );
+  N_SetTextRCH   ( "CPBNewSrcHTML",  "New HTML Text",    "Hint str" );
+
+  N_SetArrayRCH  ( "CPBAuxLine",     "Auxillary Line",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CParaBoxFormDescr!Create( );
+
+
+//***************************  TN_LegElemParFormDescr  *********************
+type TN_LegElemParFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_LegElemParFormDescr = class
+
+constructor TN_LegElemParFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "LEPType", "Element Type", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_LegElemParFormDescr!Create( );
+
+//***************************  TN_LegSetElemFormDescr  *********************
+type TN_LegSetElemFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_LegSetElemFormDescr = class
+
+constructor TN_LegSetElemFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "LSESrcUObj",            "Source UObj",       "" );
+  N_SetSimpleRCH ( "LSEBegSrcInd",          "Source Beg Ind",    "" );
+  N_SetSimpleRCH ( "LSEBegLegInd",          "Legend Beg Ind",    "" );
+  N_SetSimpleRCH ( "LSENumElemes",          "Num. Elems to Set", "" );
+  N_SetSimpleRCH ( "LSELegElemPar.LEPType", "Element Type",      "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_LegSetElemFormDescr!Create( );
+
+//***************************  Old TN_RLegendFormDescr2  *********************
+type TN_RLegendFormDescr2 = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RLegendFormDescr2 = class
+
+constructor TN_RLegendFormDescr2!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CLegend.LegFlags",     "Legend Flags",    "" );
+  N_SetSimpleRCH ( "CLegend.LegTextColor", "Text Color",      "" );
+//  N_SetSimpleRCH ( "CLegend.LegPaddings",  "Paddings (LTRB)", "" );
+
+  N_SetTextRCH   ( "CLegend.LegHeaderText",  "Header Text",       "" );
+  N_SetSimpleRCH ( "CLegend.LegHeaderFont",  "Header Font (old)", "" );
+  N_SetSimpleRCH ( "CLegend.LegHFSCoef",     "Header Font Scale Coef", "" );
+//  N_SetSimpleRCH ( "CLegend.LegHeaderNFont", "Header Font (new)", "" );
+  N_SetSimpleRCH ( "CLegend.LegHeaderAlign", "Header Alignment",       "" );
+  N_SetSimpleRCH ( "CLegend.LegHeaderBotMargin", "Header Bot. Margin", "" );
+
+  N_SetTextRCH   ( "CLegend.LegFooterText",  "Footer Text",       "" );
+  N_SetSimpleRCH ( "CLegend.LegFooterFont",  "Footer Font (old)", "" );
+  N_SetSimpleRCH ( "CLegend.LegFFSCoef",     "Footer Font Scale Coef", "" );
+//  N_SetSimpleRCH ( "CLegend.LegFooterNFont", "Footer Font (new)", "" );
+  N_SetSimpleRCH ( "CLegend.LegFooterAlign", "Footer Alignment",       "" );
+  N_SetSimpleRCH ( "CLegend.LegFooterTopMargin", "Footer Top Margin",  "" );
+
+  N_SetSimpleRCH ( "CLegend.LegNumColumns", "Number of  Columns", "" );
+  N_SetSimpleRCH ( "CLegend.LegNumRows",    "Number of  Rows",    "" );
+  N_SetSimpleRCH ( "CLegend.LegColumnsGap", "Columns X-Gap",      "" );
+//  N_SetSimpleRCH ( "CLegend.LegColsWidth",  "Columns Width in % of Free", "" );
+
+  N_SetArrayRCH  ( "CLegend.LegElemTexts",  "Elem Texts",  "" );
+  N_SetArrayRCH  ( "CLegend.LegElemColors", "Elem Colors", "" );
+
+  N_SetSimpleRCH ( "CLegend.LegElemsFont",  "Elems Font (old)",        "" );
+  N_SetSimpleRCH ( "CLegend.LegEFSCoef",    "Elems Font Scale Coef", "" );
+//  N_SetSimpleRCH ( "CLegend.LegElemsNFont", "Elems Font (new)", "" );
+  N_SetSimpleRCH ( "CLegend.LegElemsYGap",  "Elems Y-Gap",           "" );
+
+  N_SetSimpleRCH ( "CLegend.LegSignWidth",     "Sign Width",      "" );
+  N_SetSimpleRCH ( "CLegend.LegSignMinHeight", "Sign Min Height", "" );
+  N_SetSimpleRCH ( "CLegend.LegSignRect",      "Sign Rect",       "" );
+  N_SetSimpleRCH ( "CLegend.LegSRBWidth",      "SRBorder Width",  "" );
+
+  N_SetSimpleRCH ( "CLegend.LegSignDashXPos",  "Dash X1 X2", "" );
+  N_SetSimpleRCH ( "CLegend.LegSignDashWidth", "Dash Width", "" );
+
+//  N_SetExtFormRCH( "TN_RLegendFormDescr2", "Other", "" );
+  N_SetSimpleRCH ( "",  "Other", "Другие параметры" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RLegendFormDescr2" );
+
+  N_SetArrayRCH  ( "CLegend.LegElemsPar", "Elems Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_LegElemParFormDescr" );
+
+  N_SetArrayRCH  ( "CLegend.LegSetElems", "Set Elems", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_LegSetElemFormDescr" );
+
+  N_SetArrayRCH  ( "CLegend.LegElemsAttr", "Elems Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CAArrayFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RLegendFormDescr2!Create( );
+
+//***************************  Old TN_RLegendFormDescr  *********************
+type TN_RLegendFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RLegendFormDescr = class
+
+constructor TN_RLegendFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CLegend.LegTmpNumElems",    "Tmp Num Elems",          "" );
+  N_SetSimpleRCH ( "CLegend.LegElemsVAlign",    "Elems Vert Align",       "" );
+  N_SetSimpleRCH ( "CLegend.LegPrefColsRows",   "Pref Num Cols Rows",     "" );
+  N_SetSimpleRCH ( "CLegend.LegSideSizeCoef",   "VertSides Coef in %",    "" );
+  N_SetSimpleRCH ( "CLegend.LegElemsMaxYGap",   "Max Elems YGap in LSU",  "" );
+  N_SetSimpleRCH ( "CLegend.LegOneColNumElems", "Num Elems for One Col",  "" );
+
+  N_SetSimpleRCH ( "",  "Other", "Другие параметры" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RLegendFormDescr2" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RLegendFormDescr!Create( );
+
+//***************************  TN_RNLegendFormDescr  *********************
+type TN_RNLegendFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RNLegendFormDescr = class
+
+constructor TN_RNLegendFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CNLegend.NLFlags",     "Legend Flags",    "" );
+
+  N_SetSimpleRCH ( "CNLegend.NLNumColumns", "Number of  Columns", "" );
+  N_SetSimpleRCH ( "CNLegend.NLNumRows",    "Number of  Rows",    "" );
+  N_SetSimpleRCH ( "CNLegend.NLColumnsGap", "Columns X-Gap",      "" );
+
+  N_SetArrayRCH  ( "CNLegend.NLElemTexts",  "Elem Texts",  "" );
+  N_SetArrayRCH  ( "CNLegend.NLElemColors", "Elem Colors", "" );
+
+  N_SetSimpleRCH ( "CNLegend.NLElemsNFont", "Elems Font (new)", "" );
+  N_SetSimpleRCH ( "CNLegend.NLElemsYGap",  "Elems Y-Gap",           "" );
+
+  N_SetSimpleRCH ( "CNLegend.NLSignWidth",     "Sign Width",      "" );
+  N_SetSimpleRCH ( "CNLegend.NLSignMinHeight", "Sign Min Height", "" );
+  N_SetSimpleRCH ( "CNLegend.NLSignRect",      "Sign Rect",       "" );
+  N_SetSimpleRCH ( "CNLegend.NLSRBWidth",      "SRBorder Width",  "" );
+
+  N_SetSimpleRCH ( "CNLegend.NLSignDashXPos",  "Dash X1 X2", "" );
+  N_SetSimpleRCH ( "CNLegend.NLSignDashWidth", "Dash Width", "" );
+
+  N_SetArrayRCH  ( "CNLegend.NLElemsPar", "Elems Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_LegElemParFormDescr" );
+
+  N_SetArrayRCH  ( "CNLegend.NLSetElems", "Set Elems", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_LegSetElemFormDescr" );
+
+  N_SetArrayRCH  ( "CNLegend.NLElemsAttr", "Elems Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CAArrayFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RNLegendFormDescr!Create( );
+
+{
+//***************************  TN_RLegendFormDescr2  *********************
+type TN_RLegendFormDescr2 = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RLegendFormDescr2 = class
+
+constructor TN_RLegendFormDescr2!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "LegFlags",     "22 Legend Flags",       "" );
+  N_SetSetRCH    ( "CLegend.LegFlags",   "23 Legend Flags", "" );
+  N_SetSimpleRCH ( "LegTextColor", "Text Color",            "" );
+  N_SetSimpleRCH ( "LegPaddings",  "Paddings (LTRB)",       "" );
+
+  N_SetTextRCH   ( "CLegend.LegHeaderText",  "Header Text",      "" );
+  N_SetSimpleRCH ( "CLegend.LegHeaderFont",  "Header Font",      "" );
+  N_SetSimpleRCH ( "CLegend.LegHeaderAlign", "Header Alignment", "" );
+  N_SetSimpleRCH ( "CLegend.LegHeaderBotMargin", "Header Bot. Margin", "" );
+
+  N_SetTextRCH   ( "CLegend.LegFooterText",  "Footer Text",           "" );
+  N_SetSimpleRCH ( "CLegend.LegFooterFont",  "Footer Font",           "" );
+  N_SetSimpleRCH ( "CLegend.LegFooterAlign", "Footer Alignment",      "" );
+  N_SetSimpleRCH ( "CLegend.LegFooterTopMargin", "Footer Top Margin", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RLegendFormDescr2!Create( );
+}
+
+//***************************  TN_RPictureFormDescr  *****************
+type TN_RPictureFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RPictureFormDescr = class
+
+constructor TN_RPictureFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CPicture.PictType",         "Picture Type",   "" );
+  N_SetBoolRCH   ( "CPicture.PictNotVisible",   "Is Not Visible", "" );
+
+  N_SetSimpleRCH ( "CPicture.PictRaster.RType",         "Raster Type",   "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RPixFmt",       "Pixel Format",  "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RWidth",        "Raster Width",  "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RHeight",       "Raster Height", "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RTranspColor",  "Transparent Color", "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RTranspIndex",  "Transparent Index", "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RNumPalColors", "Number of Colors",  "" );
+  N_SetSimpleRCH ( "CPicture.PictRaster.RDPI",          "Resolution in DPI", "" );
+
+  N_SetSimpleRCH ( "CPicture.PictFName", "File Name",          "" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|BMP_Files|*.bmp|GIF_Files|*.gif|JPEG_Files|*.jpg|' );
+
+  N_SetSimpleRCH ( "CPicture.PictFragm", "Raster Fragment",    "" );
+  N_SetSimpleRCH ( "CPicture.PictScale", "Raster Scale Coef.", "" );
+  N_SetSimpleRCH ( "CPicture.PictPlace", "Raster Place",       "" );
+  N_SetSimpleRCH ( "CPicture.PictDynColors", "Color UDVector", "" );
+  N_SetSimpleRCH ( "CPicture.PictCSS",   "Raster CSS",         "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RPictureFormDescr!Create();
+
+//***************************  TN_RDIBFormDescr  *****************
+type TN_RDIBFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RDIBFormDescr = class
+
+constructor TN_RDIBFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+// Note: in SPL UDDIB new format TN_RDIBN record has CDIB field of TN_CDIBN type,
+//       in Pascal this field has CDIBN name
+//       So, below "CDIB.xxx" names are really "CDIBN.xxx"
+
+  N_SetSetRCH    ( "CDIB.CDIBFlagsN",     "Raster Storing Flags", "" );
+  N_SetSetRCH    ( "CDIB.CDIBDataFormat", "Saving UDData Format", "" );
+
+  N_SetSimpleRCH ( "CDIB.CDIBFName", "Image File Name",     "" );
+//  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|BMP_Files|*.bmp|GIF_Files|*.gif|JPEG_Files|*.jpg|' );
+  N_AddFNameEditors( '"" OtherFilesHist All_Files|*.*|BMP_Files|*.bmp|GIF_Files|*.gif|JPEG_Files|*.jpg|' );
+
+  N_SetSimpleRCH ( "CDIB.CDIBURect",       "Image User Rect",      "" );
+  N_SetSimpleRCH ( "CDIB.CDIBInfo",        "Image Info",           "" );
+  N_SetSimpleRCH ( "CDIB.CDIBTranspColor", "Transparent Color",    "" );
+  N_SetSimpleRCH ( "CDIB.CDIBJPEGQuality", "JPEG Quality (1-100)", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RDIBFormDescr!Create();
+
+//***************************  TN_RDIBRectFormDescr  *****************
+type TN_RDIBRectFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RDIBRectFormDescr = class
+
+constructor TN_RDIBRectFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CDIBRect.CDRFlags",      "View Mode Flags",        "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRSrcUDDIB",   "Source UDDIB Component", "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRSrcRect",    "Source UDDIB Pix Rect",  "" );
+
+  N_SetSeparatorRC ( "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRMode",         "Mode (effect)", "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRSrcUDDIBPath", "Path to CDRSrcUDDIB", "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRBriFactor",    "Brightness Factor (-100 100)", "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRCoFactor",     "Contrast Factor   (-100 100)", "" );
+  N_SetSimpleRCH ( "CDIBRect.CDRGamFactor",    "Gamma Factor      (-100 100)", "" );
+  N_SetSimpleRCH ( "CDIBRect.CDREmbAngle",     "Emboss Angle",           "" );
+  N_SetSimpleRCH ( "CDIBRect.CDREmbCoef",      "Emboss Coef",            "" );
+  N_SetSimpleRCH ( "CDIBRect.CDREmbDepth",     "Emboss Depth",           "" );
+  N_SetSimpleRCH ( "CDIBRect.CDREmbBaseGray",  "Emboss Base Gray value", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RDIBRectFormDescr!Create();
+
+//***************************  TN_RFileFormDescr  *****************
+type TN_RFileFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RFileFormDescr = class
+
+constructor TN_RFileFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CFile.CFFlags", "File Storing Flags", "" );
+  N_SetSimpleRCH ( "CFile.CFName",  "File Name",          "" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|' );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RFileFormDescr!Create();
+
+//***************************  TN_RActionFormDescr  *****************
+type TN_RActionFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RActionFormDescr = class
+
+constructor TN_RActionFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CAction.CAActNames", "Proc Names", "" );
+//  N_SetSimpleRCH ( "CAction.CAProcBefore", "Act Name", "" );
+//  N_SetSimpleRCH ( "CAction.CAProcAfter",  "Proc After",  "" );
+
+  N_SetSimpleRCH ( "CAction.CAFlags1",   "Hex Flags",  "" );
+  N_SetSimpleRCH ( "CAction.CAColor1",   "Color 1",  "" );
+  N_SetSimpleRCH ( "CAction.CAColor2",   "Color 2",  "" );
+
+  N_SetSimpleRCH ( "CAction.CAUDBase1",  "UDBase 1", "" );
+  N_SetSimpleRCH ( "CAction.CAUDBase2",  "UDBase 2", "" );
+  N_SetSimpleRCH ( "CAction.CAUDBase3",  "UDBase 3", "" );
+
+  N_SetSimpleRCH ( "CAction.CAParStr1",  "Params 1",    "" );
+  N_SetSimpleRCH ( "CAction.CAParStr2",  "Params 2",    "" );
+  N_SetSimpleRCH ( "CAction.CAParStr3",  "Params 3",    "" );
+
+  N_SetSimpleRCH ( "CAction.CAFName1",   "File Name 1", "Имя файла 1" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist |*.*' );
+
+//  N_SetSimpleRCH ( "CAction.CAIPoint1",  "IPoint 1", "" );
+//  N_SetSimpleRCH ( "CAction.CADPoint1",  "DPoint 1", "" );
+  N_SetSimpleRCH ( "CAction.CAIRect",    "IRect",    "" );
+  N_SetSimpleRCH ( "CAction.CAFRect",    "FRect",    "" );
+
+  N_SetSimpleRCH ( "",                   "Arrays",  "Массивы" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RActionArraysFormDescr" );
+
+  N_SetSimpleRCH ( "",                   "Other Scalars", "Другие скалярные параметры" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RActionExtFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RActionFormDescr!Create();
+
+//***************************  TN_RActionExtFormDescr  *****************
+type TN_RActionExtFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RActionExtFormDescr = class
+
+constructor TN_RActionExtFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CAction.CAStr1",     "Str 1",    "" );
+  N_SetSimpleRCH ( "CAction.CAStr2",     "Str 2",    "" );
+  N_SetSimpleRCH ( "CAction.CAStr3",     "Str 3",    "" );
+  N_SetSimpleRCH ( "CAction.CAStr4",     "Str 4",    "" );
+
+  N_SetSimpleRCH ( "CAction.CAUDBase4",  "UDBase 4", "" );
+  N_SetSimpleRCH ( "CAction.CAUDBase5",  "UDBase 5", "" );
+
+  N_SetSimpleRCH ( "CAction.CAParStr4",  "Params 4",    "" );
+  N_SetSimpleRCH ( "CAction.CAParStr5",  "Params 5",    "" );
+
+  N_SetSimpleRCH ( "CAction.CAFName2",   "File Name 2", "Имя файла 2" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist |*.*' );
+  N_SetSimpleRCH ( "CAction.CAFName3",   "File Name 3", "Имя файла 3" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist |*.*' );
+  N_SetSimpleRCH ( "CAction.CAFName4",   "File Name 4", "Имя файла 4" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist |*.*' );
+
+  N_SetArrayRCH  ( "CAction.CAFont",     "Text Font",   "" );
+    N_AddTwoExtEditors( "NRAFRaEditEditor", "TN_NFontFormDescr", "NWinNFontEditor", "" );
+
+  N_SetSimpleRCH ( "CAction.CAAux1",  "Aux 1",    "" );
+  N_SetSimpleRCH ( "CAction.CAAux2",  "Aux 2",    "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RActionExtFormDescr!Create();
+
+//***************************  TN_RActionArraysFormDescr  *****************
+type TN_RActionArraysFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RActionArraysFormDescr = class
+
+constructor TN_RActionArraysFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetArrayRCH  ( "CAction.CAIntArray",    "Array of Ints",    "" );
+  N_SetArrayRCH  ( "CAction.CADblArray",    "Array of Doubles", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",      "TN_DblArrayFormDescr" );
+
+  N_SetArrayRCH  ( "CAction.CAStrArray",    "Array of Strings", "" );
+  N_SetArrayRCH  ( "CAction.CAUDBaseArray", "Array of UDBase",  "" );
+  N_SetArrayRCH  ( "CAction.CAFPArray",     "Array of FPoints", "" );
+  N_SetArrayRCH  ( "CAction.CADPArray",     "Array of DPoints", "" );
+  N_SetArrayRCH  ( "CAction.CAFloatArray",  "Array of Float",   "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RActionArraysFormDescr!Create();
+
+//***************************  TN_RMapPointsLayerFormDescr  *****************
+type TN_RMapPointsLayerFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RMapPointsLayerFormDescr = class
+
+constructor TN_RMapPointsLayerFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CMapLayer.MLComment",    "ML Comment",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLType",       "ML Type",          "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVisible",    "Static Visiblity", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLFlags",      "Index Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDrawMode",   "Draw Mode",        "" );
+  N_SetSimpleRCH ( "CMapLayer.MLColorMode",  "Color Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLCDimInd",    "Codes Dim. Index", "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLPenColor",   "Pen Color",     "" );
+  N_SetSimpleRCH ( "CMapLayer.MLPenWidth",   "Pen Width",     "" );
+  N_SetSimpleRCH ( "CMapLayer.MLBrushColor", "Brush Color",   "" );
+  N_SetSetRCH    ( "CMapLayer.MLSShape",     "Sign Shape",    "" );
+  N_SetSimpleRCH ( "CMapLayer.MLSSizeXY",    "Sign Size",     "" );
+  N_SetSimpleRCH ( "CMapLayer.MLShiftXY",    "Sign Shift",    "" );
+  N_SetSimpleRCH ( "CMapLayer.MLHotPoint",   "Hot Point",     "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLCObj",       "Points CObj",      "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVAVisBytes", "Items Visibility", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect1",     "Fill Colors",      "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect2",     "Sign Shifts",      "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect3",     "Sign Sizes",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect4",     "Components",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLAux1",       "Sign Elements",    "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RMapPointsLayerFormDescr!Create();
+
+
+//***************************  TN_RMapLinesLayerFormDescr  *****************
+type TN_RMapLinesLayerFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RMapLinesLayerFormDescr = class
+
+constructor TN_RMapLinesLayerFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CMapLayer.MLComment",    "ML Comment",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLType",       "ML Type",          "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVisible",    "Static Visiblity", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLFlags",      "Index Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDrawMode",   "Draw Mode",        "" );
+  N_SetSimpleRCH ( "CMapLayer.MLColorMode",  "Color Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLCDimInd",    "Codes Dim. Index", "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLPenColor",   "Pen Color",   "" );
+  N_SetSimpleRCH ( "CMapLayer.MLPenWidth",   "Pen Width",   "" );
+  N_SetSimpleRCH ( "CMapLayer.MLPenStyle",   "Pen Style",   "" );
+  N_AddExtEditor ( "NRAFPenStyleEditor",    "" );
+  N_SetSimpleRCH ( "CMapLayer.MLBrushColor", "Brush Color", "" );
+
+  N_SetArrayRCH  ( "CMapLayer.MLContAttr",  "Ext. Attribs",  "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ContAttrFormDescr" );
+
+  N_SetArrayRCH  ( "CMapLayer.MLCAArray",   "Line Attribs Array", "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CAArrayFormDescr" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLCObj",       "Lines CObj",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVAVisBytes", "Items Visibility", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect1",     "Brush Colors",     "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect2",     "Pen Colors",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLAux1",       "SysLine Attribs",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RMapLinesLayerFormDescr!Create();
+
+
+//***************************  TN_RMapContsLayerFormDescr  *****************
+type TN_RMapContsLayerFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RMapContsLayerFormDescr = class
+
+constructor TN_RMapContsLayerFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CMapLayer.MLComment",    "ML Comment",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLType",       "ML Type",          "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVisible",    "Static Visiblity", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLFlags",      "Index Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDrawMode",   "Draw Mode",        "" );
+  N_SetSimpleRCH ( "CMapLayer.MLColorMode",  "Color Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLCDimInd",    "Codes Dim. Index", "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLPenColor",   "Pen Color",   "" );
+  N_SetSimpleRCH ( "CMapLayer.MLPenWidth",   "Pen Width",   "" );
+  N_SetSimpleRCH ( "CMapLayer.MLPenStyle",   "Pen Style",   "" );
+  N_AddExtEditor ( "NRAFPenStyleEditor",    "" );
+  N_SetSimpleRCH ( "CMapLayer.MLBrushColor", "Brush Color", "" );
+
+  N_SetArrayRCH  ( "CMapLayer.MLContAttr",  "Ext. Attribs",  "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ContAttrFormDescr" );
+
+  N_SetArrayRCH  ( "CMapLayer.MLCAArray",   "Line Attribs Array", "Тип линии" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CAArrayFormDescr" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLCObj",       "Contours CObj", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVAVisBytes", "Items Visibility", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect1",     "Brush Colors",  "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect2",     "Pen Colors",    "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RMapContsLayerFormDescr!Create();
+
+
+//***************************  TN_RMapLabelsLayerFormDescr  *****************
+type TN_RMapLabelsLayerFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RMapLabelsLayerFormDescr = class
+
+constructor TN_RMapLabelsLayerFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CMapLayer.MLComment",    "ML Comment",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLType",       "ML Type",          "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVisible",    "Static Visiblity", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLFlags",      "Index Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDrawMode",   "Draw Mode",        "" );
+  N_SetSimpleRCH ( "CMapLayer.MLColorMode",  "Color Mode",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLCDimInd",    "Codes Dim. Index", "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLTextColor",  "Text Color",      "" );
+  N_SetSimpleRCH ( "CMapLayer.MLShiftXY",    "Sign Shift",      "" );
+  N_SetSimpleRCH ( "CMapLayer.MLHotPoint",   "Hot Point",       "" );
+  N_SetSimpleRCH ( "CMapLayer.MLFSCoef",     "Font Scale Coef", "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLCObj",       "Labels CObj",      "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVAVisBytes", "Items Visibility", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect1",     "Labels Texts #1",  "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect2",     "Labels Shifts",    "" );
+  N_SetSimpleRCH ( "CMapLayer.MLDVect3",     "Individ. Fonts",   "" );
+  N_SetSimpleRCH ( "CMapLayer.MLAux1",       "Common Font #1",   "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CMapLayer.MLVArray1",    "Labels Texts #2", "" );
+  N_SetSimpleRCH ( "CMapLayer.MLVAux1",      "Common Font #2",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RMapLabelsLayerFormDescr!Create();
+
+
+//***************************  TN_RPolylineFormDescr  *****************
+type TN_RPolylineFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RPolylineFormDescr = class
+
+constructor TN_RPolylineFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CPolyline.CPCoordsType",  "Polyline Coords Type",     "" );
+  N_SetArrayRCH  ( "CPolyline.CPCoords",      "Polyline Coords",          "" );
+  N_SetArrayRCH  ( "CPolyline.CPolylineAttr", "Polyline Draw Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ContAttrFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RPolylineFormDescr!Create();
+
+
+//***************************  TN_RArcFormDescr  *****************
+type TN_RArcFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RArcFormDescr = class
+
+constructor TN_RArcFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CArc.CArcCoordsType", "Arc Coords Type",     "" );
+  N_SetSimpleRCH ( "CArc.CArcBorderType", "Arc Border Type",     "" );
+  N_SetSimpleRCH ( "CArc.CArcEnvRect",    "Bounding Rectangle",  "" );
+  N_SetSimpleRCH ( "CArc.CArcBegAngle",   "Start Radius Angle",  "" );
+  N_SetSimpleRCH ( "CArc.CArcEndAngle",   "Fin   Radius Angle",  "" );
+  N_SetArrayRCH  ( "CArc.CArcAttr",       "Arc Draw Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ContAttrFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RArcFormDescr!Create();
+
+
+//***************************  TN_RSArrowFormDescr  *****************
+type TN_RSArrowFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RSArrowFormDescr = class
+
+constructor TN_RSArrowFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CSArrow.SAFlags",     "Arrow Flags",                 "" );
+  N_SetSimpleRCH ( "CSArrow.SADirection", "Line Direction",              "" );
+  N_SetSimpleRCH ( "CSArrow.SAWidths",    "Line Width and Arrow Width",  "" );
+  N_SetSimpleRCH ( "CSArrow.SALengths",   "NearLine and Outer Lengths",  "" );
+  N_SetArrayRCH  ( "CSArrow.SAAttribs",   "Arrow Draw Attributes",       "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",    "TN_ContAttrFormDescr" );
+
+  N_SetSimpleRCH ( "CSArrow.SABegPoint",  "Beg Point", "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PointSizeFormDescr" );
+
+  N_SetSimpleRCH ( "CSArrow.SAEndPoint",  "End Point", "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PointSizeFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RSArrowFormDescr!Create();
+
+
+//***************************  TN_R2DSpaceFormDescr  *****************
+type TN_R2DSpaceFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_R2DSpaceFormDescr = class
+
+constructor TN_R2DSpaceFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "C2DSpace.TDSArgAxisPos",    "Argument Axis Position", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgDirection",  "Argument Direction", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncDirection", "Function Direction", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgMin",    "Min Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMin",   "Min Function Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgMax",    "Max Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMax",   "Max Function Value", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_R2DSpaceFormDescr!Create();
+
+
+//***************************  TN_RAxisTicsFormDescr  *****************
+type TN_RAxisTicsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RAxisTicsFormDescr = class
+
+constructor TN_RAxisTicsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CAxisTics.ATType",    "Axis Type",            "" );
+  N_SetSimpleRCH ( "CAxisTics.ATBaseZ",   "Tics Base Point",      "" );
+  N_SetArrayRCH  ( "CAxisTics.ATBaseZs",  "Array of Tic Points",  "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetSimpleRCH ( "CAxisTics.ATStepZ",   "Step between Tics",    "" );
+
+  N_SetArrayRCH  ( "CAxisTics.ATAttribs", "Tics Draw Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ContAttrFormDescr" );
+
+  N_SetSimpleRCH ( "CAxisTics.AT2DSpace", "2D Space Object",      "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RAxisTicsFormDescr!Create();
+
+//***************************  TN_RTextMarksStyleFormDescr  *****************
+type TN_RTextMarksStyleFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTextMarksStyleFormDescr = class
+
+constructor TN_RTextMarksStyleFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "TMSFlags",              "Style Flags",          "" );
+  N_SetSimpleRCH ( "TMSValsFmt",            "Values Format",        "" );
+  N_SetSimpleRCH ( "TMSTextColor",          "Text Color",           "" );
+  N_SetArrayRCH  ( "TMSFont",               "Text Font",            "" );
+    N_AddTwoExtEditors( "NRAFRaEditEditor", "TN_NFontFormDescr", "NWinNFontEditor", "" );
+  N_SetSimpleRCH ( "TMSStrPos.SPPShift",    "X,Y Shift in LSU",     "" );
+  N_SetSimpleRCH ( "TMSStrPos.SPPHotPoint", "X,Y HotPoint in %",    "" );
+  N_SetSimpleRCH ( "TMSStrPos.SPPBLAngle",  "Base Line Angle in °", "" );
+  N_SetSimpleRCH ( "TMSBPPos",              "X,Y BP Position in %", "" );
+  N_SetSimpleRCH ( "TMSAuxString",          "Aux String",           "" );
+
+  N_SetArrayRCH  ( "TMSBackPanel",          "Back Panel Params",    "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+//  N_SetSimpleRCH ( "TMSAddMarkRect",        "Back Panel Shifts in LSU", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTextMarksStyleFormDescr!Create();
+
+//***************************  TN_RTextMarksNStyleFormDescr  *****************
+type TN_RTextMarksNStyleFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTextMarksNStyleFormDescr = class
+
+constructor TN_RTextMarksNStyleFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "TMSFlags",              "Style Flags",          "" );
+  N_SetSimpleRCH ( "TMSValsFmt",            "Values Format",        "" );
+  N_SetSimpleRCH ( "TMSTextColor",          "Text Color",           "" );
+  N_SetArrayRCH  ( "TMSFont",               "Text Font",            "" );
+    N_AddTwoExtEditors( "NRAFRaEditEditor", "TN_NFontFormDescr", "NWinNFontEditor", "" );
+  N_SetSimpleRCH ( "TMSAuxString",          "Aux String",           "" );
+
+  N_SetSimpleRCH ( "TMSTRSizePos.RSPBPPos",   "Base Point Pos in %", "" );
+
+  N_SetSimpleRCH ( "TMSTRSizePos.RSPBPShift", "Base Point Shift",    "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+  N_SetSimpleRCH ( "TMSTRSizePos.RSPHPPos",   "Hot  Point Pos in %", "" );
+  N_SetSimpleRCH ( "TMSTRSizePos.RSPSize",    "Rect Size",           "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+
+  N_SetArrayRCH  ( "TMSInpPanel",          "Inp Panel Params",    "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  N_SetArrayRCH  ( "TMSTextPanel",          "Text Panel Params",    "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  N_SetArrayRCH  ( "TMSParaBox",          "Text Box Params",    "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CParaBoxFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTextMarksNStyleFormDescr!Create();
+
+//***************************  TN_RTextMarksFormDescr  *****************
+type TN_RTextMarksFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTextMarksFormDescr = class
+
+constructor TN_RTextMarksFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CTextMarks.TMFlags",          "Main Flags",       "" );
+  N_SetSimpleRCH ( "CTextMarks.TMXCoordsType",    "X Coords Type",    "" );
+  N_SetSimpleRCH ( "CTextMarks.TMYCoordsType",    "Y Coords Type",    "" );
+  N_SetSimpleRCH ( "CTextMarks.TMUniformLP",      "Uniform Layout",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ODFSParFormDescr" );
+  N_SetSimpleRCH ( "CTextMarks.TMMaxTextmmWidth", "Max Text Width in mm", "" );
+
+  N_SetArrayRCH  ( "CTextMarks.TMStrings",        "Self Strings",           "" );
+//  N_SetArrayRCH  ( "CTextMarks.TMBPCoords",     "Self Coords in % or mm", "" );
+  N_SetArrayRCH  ( "CTextMarks.TMSelfRects",      "Self Rects in % or mm",  "" );
+  N_SetArrayRCH  ( "CTextMarks.TMValues",         "Self Values",            "" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "TN_DblArrayFormDescr" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetSimpleRCH ( "CTextMarks.TMBaseComp",      "Base Component",       "" );
+  N_SetSimpleRCH ( "CTextMarks.TMMainStyle",     "Old Main Style",       "" );
+    N_AddExtEditor ( "NRAFRaEditEditor", "TN_RTextMarksStyleFormDescr" );
+  N_SetArrayRCH  ( "CTextMarks.TMMarkStyles",    "Old Mark Styles",      "" );
+    N_AddExtEditor ( "NRAFRaEditEditor", "TN_RTextMarksStyleFormDescr" );
+  N_SetArrayRCH  ( "CTextMarks.TMMarkStyleInds", "Old Mark Style Inds",  "" );
+    N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "CTextMarks.TMNStyles",       "New Mark Styles",      "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RTextMarksNStyleFormDescr" );
+  N_SetArrayRCH  ( "CTextMarks.TMNStyleInds",    "New Mark Style Inds",  "" );
+    N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTextMarksFormDescr!Create();
+
+//***************************  TN_RTicksParamsFormDescr  *****************
+type TN_RTicksParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTicksParamsFormDescr = class
+
+constructor TN_RTicksParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "AATSize",     "Ticks Two Sizes",        "" );
+  N_SetSimpleRCH ( "AATMinStep",  "Min Step between Ticks",        "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "AATAttribs",  "Tics Draw Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ContAttrFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTicksParamsFormDescr!Create();
+
+//***************************  TN_RAutoAxisFormDescr  *****************
+type TN_RAutoAxisFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RAutoAxisFormDescr = class
+
+constructor TN_RAutoAxisFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CAutoAxis.AAFlags",       "AutoAxis Flags",       "" );
+  N_SetSimpleRCH ( "CAutoAxis.AALinePos",     "Axis Line Pos",        "" );
+  N_SetSimpleRCH ( "CAutoAxis.AAArrowParams", "Axis Arrow Params",    "" );
+  N_SetArrayRCH  ( "CAutoAxis.AALineAttribs", "Line Draw Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_ContAttrFormDescr" );
+
+  N_SetArrayRCH  ( "CAutoAxis.AABigTics",     "Big Tics Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RTicksParamsFormDescr" );
+  N_SetArrayRCH  ( "CAutoAxis.AAMiddleTics",  "Middle Tics Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RTicksParamsFormDescr" );
+  N_SetArrayRCH  ( "CAutoAxis.AASmallTics",   "Small Tics Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RTicksParamsFormDescr" );
+
+  N_SetArrayRCH  ( "CAutoAxis.AAFont",        "Text Marks Font",      "" );
+  N_AddTwoExtEditors( "NRAFRaEditEditor", "TN_NFontFormDescr", "NWinNFontEditor", "" );
+  N_SetSimpleRCH ( "CAutoAxis.AACMShift",     "CMult shift in LLW",   "" );
+  N_SetSimpleRCH ( "CAutoAxis.AAMarksFmt",    "Text Marks Format",    "" );
+  N_SetSimpleRCH ( "CAutoAxis.AAUnitsName",   "Marks Unit Name",      "" );
+  N_SetSimpleRCH ( "CAutoAxis.AA2DSpace",     "2D Space Object",      "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RAutoAxisFormDescr!Create();
+
+//***************************  TN_2DCurveFormDescr  *****************
+type TN_2DCurveFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_2DCurveFormDescr = class
+
+constructor TN_2DCurveFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CurveType",        "Curve Type",            "Тип кривой" );
+  N_SetSetRCH    ( "CurveFlags",       "Curve Flags",           "" );
+
+  N_SetArrayRCH  ( "CurveArgVals",     "Curve Argument Values", "Значения аргумента" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "CurveFuncVals",    "Curve Funcion Values",  "Значения аргумента" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "CurveAttr",        "Curve Draw Attributes", "Значения аргумента" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ContAttrFormDescr" );
+
+  N_SetSimpleRCH ( "CurveText",        "Curve Text",            "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_2DCurveFormDescr!Create();
+
+//***************************  TN_R2DFuncFormDescr  *****************
+type TN_R2DFuncFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_R2DFuncFormDescr = class
+
+constructor TN_R2DFuncFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "C2DSpace.TDSArgAxisPos",    "Argument Axis Position", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgDirection",  "Argument Direction", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncDirection", "Function Direction", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgMin",    "Min Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMin",   "Min Function Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgMax",    "Max Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMax",   "Max Function Value", "" );
+
+  N_SetSimpleRCH ( "C2DFunc.TDFuncType",    "Graphic Type",     "" );
+  N_SetSetRCH    ( "C2DFunc.TDFuncFlags",   "Graphic Flags",    "" );
+  N_SetArrayRCH  ( "C2DFunc.TDCurves",      "Graphic Curves",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_2DCurveFormDescr" );
+
+//  N_SetSimpleRCH ( "C2DFunc.TDResMapDir",   "Resulting Maps Dir",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_R2DFuncFormDescr!Create();
+
+//***************************  TN_RIsoLinesFormDescr  *****************
+type TN_RIsoLinesFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RIsoLinesFormDescr = class
+
+constructor TN_RIsoLinesFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "C2DSpace.TDSArgAxisPos",    "Argument Axis Position", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgDirection",  "Argument Direction", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncDirection", "Function Direction", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgMin",    "Min Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMin",   "Min Function Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgMax",    "Max Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMax",   "Max Function Value", "" );
+
+  N_SetSetRCH    ( "CIsoLines.CILFlags",    "Flags",       "" );
+  N_SetArrayRCH  ( "CIsoLines.CILVMatr",    "Source Matr", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",   "" );
+  N_SetArrayRCH  ( "CIsoLines.CILMMValues", "Min Max Values",     "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",   "TN_MMValuesFormDescr" );
+  N_SetArrayRCH  ( "CIsoLines.CILAttribs",  "Drawing Attributes", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",   "TN_CAArrayFormDescr" );
+  N_SetArrayRCH  ( "CIsoLines.CILTexts",    "Texts",              "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",   "" );
+  N_SetSimpleRCH ( "CIsoLines.CILIntMatrScale",  "Int. Matr Scale Factor",   "" );
+  N_SetSimpleRCH ( "CIsoLines.CILMatrRect",    "Src. Matr Arg.Func. Values", "" );
+
+//  N_SetSimpleRCH ( "CIsoLines.CILResMapDir",    "Resulting Maps Dir",  "" );
+  N_SetSimpleRCH ( "CIsoLines.CILGridLinesML",  "Grid Lines MapLayer", "" );
+  N_SetSimpleRCH ( "CIsoLines.CILGridLabelsML", "Grid Nodes MapLayer", "" );
+
+  N_SetSimpleRCH ( "CIsoLines.CILSplineLine", "Spline Params",  "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_SplineLineFormDescr" );
+
+//  N_SetArrayRCH  ( "CIsoLines.CILLegPanel",   "Legend Panel",   "" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RIsoLinesFormDescr!Create();
+
+//***************************  TN_C2DLinHistStyleFormDescr  *****************
+type TN_C2DLinHistStyleFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_R2DLinHistFormDescr = class
+
+constructor TN_C2DLinHistStyleFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "LHSFlags",         "Style Flags",           "" );
+  N_SetSimpleRCH ( "LHSFillColor",     "Elems Fill Color",      "" );
+  N_SetSimpleRCH ( "LHSBorderColor",   "Elems Border Color",    "" );
+  N_SetSimpleRCH ( "LHSBorderWidth",   "Elems Border Width",    "" );
+  N_SetSimpleRCH ( "LHSAuxFillParams", "Elems Aux Fill Params", "" );
+
+  N_SetSimpleRCH ( "LHSAddMarkRect",   "Add. Mark Shifts in LSU", "" );
+  N_SetArrayRCH  ( "LHSMarkPanel",     "Mark Panel Params",     "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_C2DLinHistStyleFormDescr!Create();
+
+//***************************  TN_C2DLHStyleElemFormDescr  *****************
+type TN_C2DLHStyleElemFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_R2DLinHistFormDescr = class
+
+constructor TN_C2DLHStyleElemFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "LHSERectType",         "Rect Type",           "" );
+
+  N_SetSimpleRCH ( "LHSEPanel.PaMargins",   "Margins (LTRB)", "" );
+  N_AddExtViewer ( "NRAFMSRectEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSRectEditor", "NRectVEditor", "NRAFRaEditEditor", "TN_PaRectSizeFormDescr" );
+
+  N_SetSimpleRCH ( "LHSEPanel.PaPaddings",   "Paddings (LTRB)", "" );
+  N_AddExtViewer ( "NRAFMSRectEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSRectEditor", "NRectVEditor", "NRAFRaEditEditor", "TN_PaRectSizeFormDescr" );
+
+  N_SetSimpleRCH ( "LHSEPanel.PaBackColor",    "Background Color", "" );
+  N_SetSimpleRCH ( "LHSEPanel.PaBorderColor",  "All Borders Color", "" );
+  N_SetSimpleRCH ( "LHSEPanel.PaBorderWidth",  "All Borders Width", "" );
+
+  N_SetSimpleRCH ( "LHSEPanel.PaRoundXYRads",  "Round Radiuses (X Y)", "" );
+  N_AddExtViewer ( "NRAFMSPointEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSPointEditor", "NPointVEditor", "NRAFRaEditEditor", "TN_PaRadSizeFormDescr" );
+
+  N_SetArrayRCH  ( "LHSEPanel.PaSideParams",   "Individual Side Params",   "Индивидуальные атрибуты сторон панели" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_PaSidesFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_C2DLHStyleElemFormDescr!Create();
+
+//***************************  TN_R2DLinHistFormDescr  *****************
+type TN_R2DLinHistFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_R2DLinHistFormDescr = class
+
+constructor TN_R2DLinHistFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "C2DSpace.TDSArgAxisPos",    "Argument Axis Type",   "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSArgDirection",  "Argument Direction",   "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncDirection", "Function Direction",   "" );
+//  N_SetSimpleRCH ( "C2DSpace.TDSArgMin",        "Min Argument Value", "" );
+//  N_SetSimpleRCH ( "C2DSpace.TDSArgMax",        "Max Argument Value", "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMin",       "Min Function Value",   "" );
+  N_SetSimpleRCH ( "C2DSpace.TDSFuncMax",       "Max Function Value",   "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSetRCH    ( "C2DLinHist.LHFlags",        "Lin Hist Flags",      "" );
+  N_SetSimpleRCH ( "C2DLinHist.LHColorMode",    "Old Color Mode",      "" );
+  N_SetSimpleRCH ( "C2DLinHist.LHExtColorMode", "Ext Colors Mode",     "" );
+  N_SetSimpleRCH ( "C2DLinHist.LHMarkMode",     "Old Mark  Mode",      "" );
+
+  N_SetSimpleRCH ( "C2DLinHist.LHGroupsLP",      "Groups Layout",       "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ODFSParFormDescr" );
+  N_SetArrayRCH  ( "C2DLinHist.LHGroupNames",    "Group Names",         "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+//  N_SetSimpleRCH ( "C2DLinHist.LHGroupNPos",     "Group Names Pos",     "" );
+
+  N_SetSimpleRCH ( "C2DLinHist.LHColumnsLP",     "Columns Layout",      "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",  "TN_ODFSParFormDescr" );
+  N_SetArrayRCH  ( "C2DLinHist.LHColumnNames",   "Column Names",        "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+//  N_SetSimpleRCH ( "C2DLinHist.LHColumnNPos",    "Column Names Pos",    "" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHExtColors",    "Elems Ext Colors",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHFillColors",    "Old Elems Fill Colors",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHMainStyles",    "Old Main Styles",         "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_C2DLinHistStyleFormDescr" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHValStyles",     "Old Spec.Val. Styles",    "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_C2DLinHistStyleFormDescr" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHMarkStyles",    "Old Mark Styles",         "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_C2DLinHistStyleFormDescr" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHValues",        "Elems Values",        "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "TN_DblArrayFormDescr" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHValStyleInds",  "Old Spec.Val. Style Inds", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "C2DLinHist.LHMarkStyleInds", "Old Mark Style Inds",     "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHGRectStyleInds",  "GRect Style Inds", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "C2DLinHist.LHGroupStyleInds",  "Group Style Inds", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "C2DLinHist.LHElemStyleInds",   "Elem Style Inds",  "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+  N_SetArrayRCH  ( "C2DLinHist.LHValueStyleInds",  "Value Style Inds", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHStyles",          "Style Descr Strings", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetArrayRCH  ( "C2DLinHist.LHStyleElems",      "Style Elements",      "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_C2DLHStyleElemFormDescr" );
+
+  N_SetSimpleRCH ( "C2DLinHist.LHFuncBase",        "Base Func Value",     "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_R2DLinHistFormDescr!Create();
+
+
+//***************************  TN_RLinHistAuto1FormDescr  *****************
+type TN_RLinHistAuto1FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RLinHistAuto1FormDescr = class
+
+constructor TN_RLinHistAuto1FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CLinHistAuto1.LHAFlags",           "LinHistAuto Falgs",   "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAType",            "LinHistAuto Type",    "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAOrient",          "Columns Orientation", "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHABlocksHorAlign",  "(Blocks Horizontal alignment)", "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHABlocksVertAlign", "(Blocks Vertical alignment)",    "" );
+
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAWholeMinSize",    "Whole X,Y Min Size in mm",       "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAWholeMaxSize",    "Whole X,Y Max Size in mm",       "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAPatLHSize",       "Pattern LinHist X,Y Size in mm", "" );
+
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAElemsFixedSize",  "Elements Fixed Size in mm",  "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAElemsNamesWidth", "Elements Names Width in mm", "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAValTextsWidth",   "Values Texts Width in mm",   "" );
+
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAIntGapSize",      "Internal Gap X,Y Size in mm", "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHALTRBPaddings",    "L,T,R,B Paddings in mm",      "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAMaxLegHeight",    "Max Legend Height in mm",     "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAMaxBlocksInRow",  "Max Blocks In Row",           "" );
+
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAUserParams",      "User Params Component",  "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAMainHeader",      "Main Header",            "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHABlockHeader",     "Pattern Block Header",   "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAElemsNames",      "Pattern Elements Names", "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAValTexts",        "Pattern Values Texts",   "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAPatLinHist",      "Pattern LinHist",        "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHAFuncsTicks",      "Pattern Funcs Ticks",    "" );
+  N_SetSimpleRCH ( "CLinHistAuto1.LHALegend",          "Legend",                 "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RLinHistAuto1FormDescr!Create();
+
+//***************************  TN_RPieChartFormDescr  *****************
+type TN_RPieChartFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RPieChartFormDescr = class
+
+constructor TN_RPieChartFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CPieChart.PCFlags",      "Pie Chart Flags",          "" );
+//  N_SetSimpleRCH ( "CPieChart.PCCenter",     "Pie Chart Center in %",    "" );
+//  N_SetSimpleRCH ( "CPieChart.PCSize",       "Pie Chart X,Y Sizes in %", "" );
+  N_SetSimpleRCH ( "CPieChart.PCVSHeight",   "Vert Side Height in %",    "" );
+  N_SetSimpleRCH ( "CPieChart.PCBegAngle",   "Pie Beg Angle",            "" );
+
+  N_SetSimpleRCH ( "CPieChart.PCBordersColor",   "All Borders Color", "" );
+  N_SetSimpleRCH ( "CPieChart.PCBordersWidth",   "All Borders Width", "" );
+  N_SetSimpleRCH ( "CPieChart.PCVSColorCoef",    "Shadow Color in %", "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CPieChart.PCValStrPos",      "Value Strings Pos (0-1)", "" );
+  N_SetSimpleRCH ( "CPieChart.PCNamePos",        "Pie Names Pos (0-1)",     "" );
+  N_SetSimpleRCH ( "CPieChart.PCValStrMinAngle", "Val Strings Min Angle",   "" );
+  N_SetSimpleRCH ( "CPieChart.PCOtherMinAngle",  "Other Min Angle",         "" );
+
+  N_SetArrayRCH  ( "CPieChart.PCValues", "Pie Values",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",   "" );
+  N_SetArrayRCH  ( "CPieChart.PCColors", "Pie Colors",   "" );
+  N_AddExtEditor ( "NRAFRaEditEditor",   "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RPieChartFormDescr!Create();
+
+
+//*************************** Table Component  ***************************
+
+//***************************  TN_RowColFormDescr  *****************
+type TN_RowColFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RowColFormDescr = class
+
+constructor TN_RowColFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH   ( "RCSize",   "Size",   "" );
+  N_AddExtViewer   ( "NRAFMSScalEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSScalEditor", "NScalVEditor", "NRAFRaEditEditor", "TN_TaScalSizeFormDescr" );
+
+  N_SetSimpleRCH ( "RCMinPixSize", "Min Pixel Size",  "" );
+  N_SetSimpleRCH ( "RCAttr",       "Text Attributes", "" );
+
+  N_SetArrayRCH  ( "RCPanel",   "Panel Params",   "Параметры панели" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  N_SetArrayRCH  ( "RCParaBox", "Paragraph Params",   "Параметры абзаца" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RParaBoxFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RowColFormDescr!Create();
+
+//***************************  TN_CellFormDescr  *****************
+type TN_CellFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CellFormDescr = class
+
+constructor TN_CellFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "TCType",    "Cell Type",           "" );
+  N_SetSimpleRCH ( "TCFlags",   "Cell Flags",          "" );
+  N_SetSimpleRCH ( "TCMText",   "Cell Text",           "" );
+  N_SetSimpleRCH ( "TCSPLProc", "Cell SPL Procedure",  "" );
+
+  N_SetArrayRCH  ( "TCPanel",   "Cell Panel Params",   "Параметры панели клетки" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  N_SetArrayRCH  ( "TCParaBox", "Cell Paragraph Params", "Параметры абзаца клетки" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RParaBoxFormDescr" );
+
+  N_SetArrayRCH  ( "TCTextBlocks",  "Cell Text Blocks",   "Многошрифтовой текст клетки" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_OneTextBlockFormDescr" );
+
+  N_SetSimpleRCH ( "TCComp",   "Cell Component",  "" );
+  N_SetSimpleRCH ( "TCValue",  "Cell Value",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CellFormDescr!Create();
+
+//***************************  TN_TaCellsArrayFormDescr  *****************
+type TN_TaCellsArrayFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_TaCellsArrayFormDescr = class
+
+constructor TN_TaCellsArrayFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetArrayRCH ( "", "", "Ячейка таблицы" ); // Field Name is added to Column number
+  N_AddExtEditor( "NRAFRaEditEditor", "TN_CellFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_TaCellsArrayFormDescr!Create();
+// end of TN_TaCellsArrayFormDescr
+
+//***************************  TN_TabSetBlockFormDescr  *****************
+type TN_TabSetBlockFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_TabSetBlockFormDescr = class
+
+constructor TN_TabSetBlockFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "TSBFlags",       "Settings Flags",            "" );
+  N_SetBoolRCH   ( "TSBTranspose",   "Transpose Source Matrix",   "" );
+  N_SetSimpleRCH ( "TSBSrcComp",     "Component with UParam",     "" );
+  N_SetSimpleRCH ( "TSBSrcUPName",   "UParam with Source Matrix", "" );
+  N_SetSimpleRCH ( "TSBSrcBegRow",   "Beg Row Ind in Source",     "" );
+  N_SetSimpleRCH ( "TSBSrcBegCol",   "Beg Column Ind in Source",  "" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "TSBTaBegRow",  "Beg Row Ind in Table",      "" );
+  N_SetSimpleRCH ( "TSBTaBegCol",  "Beg Column Ind in Table",   "" );
+  N_SetSimpleRCH ( "TSBNumRows",   "Number of Rows to Set",     "" );
+  N_SetSimpleRCH ( "TSBNumCols",   "Number of Columns to Set",  "" );
+  N_SetSimpleRCH ( "TSBConvFmt",   "Double -> String Format",   "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_TabSetBlockFormDescr!Create();
+
+//***************************  TN_RTableFormDescr  *****************
+type TN_RTableFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTableFormDescr = class
+
+constructor TN_RTableFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CTable.TaFlags",   "Table Flags", "" );
+
+  N_SetSimpleRCH ( "CTable.TaDefCell", "Default Cell",        "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CellFormDescr" );
+
+  N_SetArrayRCH  ( "CTable.TaDefPanel",  "Default  Panel Params",   "Параметры панели клетки" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CPanelFormDescr" );
+
+  N_SetArrayRCH  ( "CTable.TaDefParaBox", "Default paragraph Params", "Параметры абзаца клетки" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RParaBoxFormDescr" );
+
+  N_SetArrayRCH  ( "CTable.TaCols",    "Columns Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RowColFormDescr" );
+
+  N_SetArrayRCH  ( "CTable.TaRows",    "Rows Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_RowColFormDescr" );
+
+  N_SetArrayRCH  ( "CTable.TaCells",   "Cells Params", "" );
+//  N_AddExtEditor( "NRAFRAEd2DEditor", "TN_TaCellsArrayFormDescr" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CellFormDescr" );
+  N_AddTwoExtEditors( "NRAFRAEd2DEditor", "TN_TaCellsArrayFormDescr", "NRAFRaEditEditor", "TN_CellFormDescr" );
+
+  N_SetArrayRCH  ( "CTable.TaSetBlocks", "Cells Blocks Settings", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_TabSetBlockFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTableFormDescr!Create();
+
+
+//***************************  CompsGrid Component  *********************
+
+//***************************  TN_CellFormDescr  *****************
+type TN_CGCellFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CGCellFormDescr = class
+
+constructor TN_CGCellFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CGCNMergedX", "Merged NX",   "Num Merged X" );
+  N_SetSimpleRCH ( "CGCNMergedY", "Merged NY",   "Num Merged Y" );
+  N_SetSimpleRCH ( "CGCComp",     "Cell Component", "Cell Component" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CGCellFormDescr!Create();
+
+//***************************  TN_RCompsGridFormDescr  *****************
+type TN_RCompsGridFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RCompsGridFormDescr = class
+
+constructor TN_RCompsGridFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CCompsGrid.CGFlags",         "Comps Grid Flags",  "" );
+  N_SetArrayRCH  ( "CCompsGrid.CGRelColWidths",  "Columns Widths",    "" );
+  N_SetArrayRCH  ( "CCompsGrid.CGRelRowHeights", "Rows Heights",      "" );
+
+  N_SetSimpleRCH ( "CCompsGrid.CGBorderWidth",   "All Borders Width",    "" );
+  N_SetSimpleRCH ( "CCompsGrid.CGBorderColor",   "All Borders Color",    "" );
+  N_SetSimpleRCH ( "CCompsGrid.CGBackColor",     "All Cells Back Color", "" );
+
+  N_SetArrayRCH  ( "CCompsGrid.CGCells", "Cells Params", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CGCellFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RCompsGridFormDescr!Create();
+
+
+//***************************  Query1 Component  ************************
+
+//***************************  TN_CQ1ElemFormDescr  *****************
+type TN_CQ1ElemFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CQ1ElemFormDescr = class
+
+constructor TN_CQ1ElemFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CQEFlags",    "Query Element Flags", "" );
+  N_SetSimpleRCH ( "CQEBegYear",  "Beg Interval Year", "" );
+  N_SetSimpleRCH ( "CQEEndYear",  "End Interval Year", "" );
+
+  N_SetSimpleRCH ( "CQECSItem",   "Query CodeSpace Item", "" );
+  N_AddExtEdViewer( "NRAFRaEditEditor", "NRAFRaEditEditor", "TN_CSItem2FormDescr" );
+
+  N_SetArrayRCH  ( "CQERatingCSItems", "List of Items for Ratings", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CSItem1FormDescr" );
+
+  N_SetArrayRCH  ( "CQEQueryCSItems",  "List of Items for Query", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CSItem1FormDescr" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CQESrcUObj",       "Query Source UObject", "" );
+  N_SetArrayRCH  ( "CQESrcUObjects",   "List of Query Source UObjects", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetSimpleRCH ( "CQEDstComp",       "Destination Component", "" );
+
+  N_SetSimpleRCH ( "CQENumDigits",     "Num. decimal digits (Accuracy)", "" );
+  N_SetSimpleRCH ( "CQEUPName",        "User Parameter Name", "" );
+  N_SetSimpleRCH ( "CQEUPDescr",       "User Parameter Description", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CQ1ElemFormDescr!Create();
+
+//***************************  TN_RQuery1FormDescr  *****************
+type TN_RQuery1FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RQuery1FormDescr = class
+
+constructor TN_RQuery1FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CQuery1.CQFlags",  "Query Flags", "" );
+
+  N_SetArrayRCH ( "CQuery1.CQElems",  "Query Elements", "" );
+  N_AddExtEditor( "NRAFRaEditEditor", "TN_CQ1ElemFormDescr" );
+
+  N_SetSimpleRCH ( "CQuery1.CQBegYear",  "Beg Interval Year", "" );
+  N_SetSimpleRCH ( "CQuery1.CQEndYear",  "End Interval Year", "" );
+
+  N_SetSimpleRCH ( "CQuery1.CQCSItem",   "Query CodeSpace Item", "" );
+  N_AddExtEdViewer ( "NRAFRaEditEditor", "NRAFRaEditEditor", "TN_CSItem2FormDescr" );
+
+  N_SetArrayRCH  ( "CQuery1.CQRatingCSItems",  "List of Items for Ratings", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CSItem1FormDescr" );
+
+  N_SetArrayRCH  ( "CQuery1.CQQueryCSItems",   "List of Items for Query", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CSItem1FormDescr" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CQuery1.CQSrcUObj",        "Query Source UObject", "" );
+  N_SetArrayRCH  ( "CQuery1.CQSrcUObjects",    "List of Query Source UObjects", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  N_SetSimpleRCH ( "CQuery1.CQDstComp",        "Destination Component", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RQuery1FormDescr!Create();
+
+//***************************  Query2 Component  ************************
+
+//***************************  TN_CQ2ElemFormDescr  *****************
+type TN_CQ2ElemFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CQ2ElemFormDescr = class
+
+constructor TN_CQ2ElemFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CQEFlags",    "Query Element Flags", "" );
+
+  N_SetSeparatorRC ( "" );
+
+//********************* Argument CSDim Query Attributes
+//  N_SetSimpleRCH ( "CQETimeCSDim",  "Time CSDim", "" );
+  N_SetArrayRCH  ( "CQETimeCSDim",  "Time CSDim", "" );
+
+  N_SetSeparatorRC ( "" );
+
+//********************* Function CSDim Query Attributes
+//  N_SetSimpleRCH ( "CQECurTargetCDIRef",  "Cur Target CDInd", "" );
+  N_SetSimpleRCH ( "CQECurTargetCDIRef.CDim",  "Target CDim", "" );
+  GColumns[GIndex-1]!CShowEditFlagSet := "[K_racRebuildAfterEdit]";
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFUDRefF";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = "0 CA:\ CDim";
+
+  N_SetSimpleRCH ( "CQECurTargetCDIRef.ItemInd",  "Target ItemElement", "" );
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = 'CQECurTargetCDIRef.CDim';
+  GColumns[GIndex-1]!CVEAttrs[0]!CVName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CVParams = 'CQECurTargetCDIRef.CDim';
+
+//  N_SetSimpleRCH ( "CQETargetCSDim",  "Target CSDim", "" );
+  N_SetArrayRCH  ( "CQETargetCSDim",  "Target CSDim", "" );
+
+  //  N_SetSimpleRCH ( "CQERatingCSDim",  "Rating CSDim", "" );
+  N_SetArrayRCH  ( "CQERatingCSDim",  "Rating CSDim", "" );
+
+  N_SetSeparatorRC ( "" );
+
+//********************* Indicator CSDim Query Attributes
+//  N_SetSimpleRCH ( "CQEIndicatorCDIRef",  "Indicator CDInd", "" );
+  N_SetSimpleRCH ( "CQEIndicatorCDIRef.CDim",  "Indicator CDInd", "" );
+  GColumns[GIndex-1]!CShowEditFlagSet := "[K_racRebuildAfterEdit]";
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFUDRefF";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = "0 CA:\ CDim";
+
+  N_SetSimpleRCH ( "CQEIndicatorCDIRef.ItemInd",  "Target ItemElement", "" );
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = 'CQEIndicatorCDIRef.CDim';
+  GColumns[GIndex-1]!CVEAttrs[0]!CVName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CVParams = 'CQEIndicatorCDIRef.CDim';
+
+  N_SetSeparatorRC ( "" );
+
+//********************* SRC UDRoot Objs Query Attributes
+  N_SetSimpleRCH ( "CQESrcUObj",       "Query Source UObject", "" );
+  N_SetArrayRCH  ( "CQESrcUObjects",   "List of Query Source UObjects", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+//********************* Other Query Attributes
+  N_SetSimpleRCH ( "CQEDstComp",       "Destination Component", "" );
+
+  N_SetSimpleRCH ( "CQENumDigits",     "Num. decimal digits (Accuracy)", "" );
+  N_SetSimpleRCH ( "CQEUPName",        "User Parameter Name", "" );
+  N_SetSimpleRCH ( "CQEUPDescr",       "User Parameter Description", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CQ2ElemFormDescr!Create();
+
+//***************************  TN_RQuery2FormDescr  *****************
+type TN_RQuery2FormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RQuery2FormDescr = class
+
+constructor TN_RQuery2FormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CQuery2.CQFlags",  "Query Flags", "" );
+
+  N_SetArrayRCH  ( "CQuery2.CQElems",  "Query Elements", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_CQ2ElemFormDescr" );
+
+  N_SetSeparatorRC ( "" );
+//********************* Argument CSDim Query Attributes
+//  N_SetSimpleRCH ( "CQuery2.CQTimeCSDim",  "Time CSDim", "" );
+  N_SetArrayRCH  ( "CQuery2.CQTimeCSDim",  "Time CSDim", "" );
+
+  N_SetSeparatorRC ( "" );
+
+//********************* Function CSDim Query Attributes
+//  N_SetSimpleRCH ( "CQuery2.CQCurTargetCDIRef",  "Cur Target CDInd", "" );
+  N_SetSimpleRCH ( "CQuery2.CQCurTargetCDIRef.CDim",  "Cur Target CDim", "" );
+  GColumns[GIndex-1]!CShowEditFlagSet := "[K_racRebuildAfterEdit]";
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFUDRefF";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = "0 CA:\ CDim";
+
+  N_SetSimpleRCH ( "CQuery2.CQCurTargetCDIRef.ItemInd",  "Cur Target ItemElement", "" );
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = 'CQuery2.CQCurTargetCDIRef.CDim';
+  GColumns[GIndex-1]!CVEAttrs[0]!CVName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CVParams = 'CQuery2.CQCurTargetCDIRef.CDim';
+
+//  N_SetSimpleRCH ( "CQuery2.CQTargetCSDim",  "Target CSDim", "" );
+  N_SetArrayRCH  ( "CQuery2.CQTargetCSDim",  "Target CSDim", "" );
+
+//  N_SetSimpleRCH ( "CQuery2.CQRatingCSDim",  "Rating CSDim", "" );
+  N_SetArrayRCH  ( "CQuery2.CQRatingCSDim",  "Rating CSDim", "" );
+
+  N_SetSeparatorRC ( "" );
+
+//********************* Indicator CSDim Query Attributes
+//  N_SetSimpleRCH ( "CQuery2.CQIndicatorCDIRef",   "Indicator CDInd", "" );
+  N_SetSimpleRCH ( "CQuery2.CQIndicatorCDIRef.CDim",  "Indicator CDInd", "" );
+  GColumns[GIndex-1]!CShowEditFlagSet := "[K_racRebuildAfterEdit]";
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFUDRefF";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = "0 CA:\ CDim";
+
+  N_SetSimpleRCH ( "CQuery2.CQIndicatorCDIRef.ItemInd",  "Target ItemElement", "" );
+  SetLength(Adr(GColumns[GIndex-1]!CVEAttrs), 1);
+  GColumns[GIndex-1]!CVEAttrs[0]!CEName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CEParams = 'CQuery2.CQIndicatorCDIRef.CDim';
+  GColumns[GIndex-1]!CVEAttrs[0]!CVName   = "RAFCDItemEditor";
+  GColumns[GIndex-1]!CVEAttrs[0]!CVParams = 'CQuery2.CQIndicatorCDIRef.CDim';
+
+  N_SetSeparatorRC ( "" );
+
+//********************* SRC UDRoot Objs Query Attributes
+  N_SetSimpleRCH ( "CQuery2.CQSrcUObj",        "Query Source UObject", "" );
+  N_SetArrayRCH  ( "CQuery2.CQSrcUObjects",    "List of Query Source UObjects", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+//********************* Other Query Attributes
+  N_SetSimpleRCH ( "CQuery2.CQDstComp",        "Destination Component", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RQuery2FormDescr!Create();
+
+//***************************  TN_RIteratorFormDescr  *****************
+type TN_RIteratorFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RIteratorFormDescr = class
+
+constructor TN_RIteratorFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CIterator.CIFlags",       "Iterator Flags",       "" );
+  N_SetSimpleRCH ( "CIterator.CIBegInd",      "Initial Index",        "" );
+  N_SetSimpleRCH ( "CIterator.CINumItems",    "Number of Iterations", "" );
+  N_SetSimpleRCH ( "CIterator.CIIterIndName", "Iterator Index Name",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RIteratorFormDescr!Create();
+
+//***************************  TN_RCreatorFormDescr  *****************
+type TN_RCreatorFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RCreatorFormDescr = class
+
+constructor TN_RCreatorFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CCreator.CCFlags",       "Creation Flags",       "" );
+  N_SetSimpleRCH ( "CCreator.CCProcName",    "Procedure Name",       "" );
+  N_SetSimpleRCH ( "CCreator.CCPatternUObj", "Pattern UObj",         "" );
+  N_SetSimpleRCH ( "CCreator.CCResUObjDir",  "Res. UObjects Dir",    "" );
+  N_SetSimpleRCH ( "CCreator.CCIterIndName", "Iterator Index Name",  "" );
+  N_SetSimpleRCH ( "CCreator.CCCompWithRef", "Comp With Ref. in UP", "" );
+  N_SetSimpleRCH ( "CCreator.CCUPRefName",   "Ref. User Param Name", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RCreatorFormDescr!Create();
+
+//***************************  TN_OneNonLinConvFormDescr  *****************
+type TN_OneNonLinConvFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_OneNonLinConvFormDescr = class
+
+constructor TN_OneNonLinConvFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "NLCParType",    "Conv Params Type", "" );
+  N_SetSimpleRCH ( "NLCFixedPoint", "Fixed Point X,Y",  "" );
+  N_SetSimpleRCH ( "NLCAngle",      "Rotation Angle",   "" );
+  N_SetSimpleRCH ( "NLCScale",      "X,Y Scale Coefs",  "" );
+  N_SetSimpleRCH ( "NLCShift",      "X,Y Sift",         "" );
+
+  N_SetSimpleRCH ( "NLCElCenter",   "Ellipses X,Y Center",        "" );
+  N_SetSimpleRCH ( "NLCR1",         "Small Ellipse X,Y Radiuses", "" );
+  N_SetSimpleRCH ( "NLCR2",         "Large Ellipse X,Y Radiuses", "" );
+  N_SetSimpleRCH ( "NLCSmoothPar",  "Smooth Par",                 "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_OneNonLinConvFormDescr!Create();
+
+
+//***************************  TN_RNonLinConvFormDescr  *****************
+type TN_RNonLinConvFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RNonLinConvFormDescr = class
+
+constructor TN_RNonLinConvFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CNonLinConv.NLCSrcCObjDir",   "Src CObjects Dir", "" );
+  N_SetSimpleRCH ( "CNonLinConv.NLCDstCObjDir",   "Dst CObjects Dir", "" );
+  N_SetSimpleRCH ( "CNonLinConv.NLCMapLayerComp", "Base Map Layer",   "" );
+
+  N_SetArrayRCH  ( "CNonLinConv.NLCConvs", "Convertions", "" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "TN_OneNonLinConvFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RNonLinConvFormDescr!Create();
+
+
+//***************************  TN_RDynPictCreatorFormDescr  *****************
+type TN_RDynPictCreatorFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RDynPictCreatorFormDescr = class
+
+constructor TN_RDynPictCreatorFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+//  N_SetSimpleRCH ( "CDynPictCreator.DPCType",         "Creation Type",   "Тип создания" );
+  N_SetSetRCH    ( "CDynPictCreator.DPCFlags",        "Creation Flags",  "Флаги создания" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCColorsUDV",    "Colors UDVector", "Вектор специальных цветов" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCSrcVCTree",    "Source VCTree",   "Исходное изображение" );
+  N_SetArrayRCH  ( "CDynPictCreator.DPCStaticColors", "Static (Not Active Zone) Colors",  "Список статических цветов"  );
+  N_SetSeparatorRC ( "" );
+
+{
+  RC.CEditors = "RAFFileName RAFFNameCmBEditor";
+  RC.CViewers = "RAFFileName";
+//  RC.CEditors = "RAFFNameEditor";
+  Self!Columns[i]=RC;
+  RC.CEditors = SubArray( RC.CEditors, 0, 0, 0 );
+  RC.CViewers = SubArray( RC.CViewers, 0, 0, 0 );
+  Self!RHTMPath_RAFFileName = '(#OtherFiles#) OtherFilesHist HTM files (*.htm*)|*.htm*';
+  Self!RHTMPath_RAFFNameCmBEditor = '(#OtherFiles#) OtherFilesHist';
+}
+
+  N_SetSimpleRCH ( "CDynPictCreator.DPCSourcePictFN",   "Source Picture",  "Исходное изображение" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|BMP_Files|*.bmp|GIF_Files|*.gif|JPEG_Files|*.jpg|' );
+  N_SetSimpleRCH ( "CDynPictCreator.DPC8BitDynPictFN",  "8-bit GIF,BMP Dynamic Picture", "8-бит файл динамических пикселей" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|GIF_Files|*.gif|' );
+  N_SetSimpleRCH ( "CDynPictCreator.DPC8BitStatPictFN", "8-bit GIF Static Picture", "8-бит файл статических пикселей" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|GIF_Files|*.gif|' );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCResJSCodeFN",    "Resulting JSCode File",    "Реультирующий JavaScript файл" );
+  N_AddFNameEditors( '"(#OtherFiles#)" OtherFilesHist All_Files|*.*|Txt_Files|*.txt|' );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CDynPictCreator.DPCTestMinColor",   "Min Test Color",    "Минимальный тестовый цвет" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCTestMaxColor",   "Max Test Color",    "Максимальный тестовый цвет" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCRectsBackColor", "Back Color for Rects Drawing", "Цвет фон прямоугольников" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CDynPictCreator.DPCSpecMinColor",   "Min Special Color", "Минимальный специальный цвет" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCSpecMaxColor",   "Max Special Color", "Максимальный специальный цвет" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCSrcTranspColor", "Transp Color in Src Raster", "Прозрачный цвет в исходном изображении" );
+  N_SetSeparatorRC ( "" );
+
+  N_SetSimpleRCH ( "CDynPictCreator.DPCAZColor",  "Active Zone Color in DynPict", "Цвет активных зон" );
+  N_SetSimpleRCH ( "CDynPictCreator.DPCNAZColor", "Not Active Zone Color in DynPict", "Цвет неактивных зон" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RDynPictCreatorFormDescr!Create();
+
+
+//***************************  TN_RFileCodecFormDescr  *****************
+type TN_RFileCodecFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RFileCodecFormDescr = class
+
+constructor TN_RFileCodecFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CFileCodec.FCActionType",      "Needed Action Type", "Тип создания" );
+  N_SetSetRCH    ( "CFileCodec.FCFileTypeFlags",   "Encoding Flags",     "Флаги создания" );
+  GColumns[GIndex-1]!CSENames = "ftfEncryped,ftfHasCRC";
+  N_SetSimpleRCH ( "CFileCodec.FCEncodedFileName", "Encoded File Name",  "Тип создания" );
+  N_SetSimpleRCH ( "CFileCodec.FCPlainFileName",   "Plain File Name",    "Тип создания" );
+  N_SetSimpleRCH ( "CFileCodec.FCFileSign",        "File Signature",     "Тип создания" );
+  N_SetSimpleRCH ( "CFileCodec.FCPasWord",         "Pasword",            "Тип создания" );
+  N_SetSimpleRCH ( "CFileCodec.FCComprLevel",      "Compression Level",  "Тип создания" );
+  N_SetArrayRCH  ( "CFileCodec.FCPanel",           "Panel New(Debug)",   "" );
+  N_SetArrayRCH  ( "CFileCodec.FCPanelOld",        "Panel Old(Debug)",   "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RFileCodecFormDescr!Create();
+
+
+//***************************  TN_CalcUParamsElemFormDescr  *****************
+type TN_CalcUParamsElemFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_CalcUParamsElemFormDescr = class
+
+constructor TN_CalcUParamsElemFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "CVEFlags",   "Elements Flags", "" );
+  N_SetSimpleRCH ( "CVEDescr",   "Description",    "" );
+  N_SetTextRCH   ( "CVESPLProc", "SPL Procedure",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_CalcUParamsElemFormDescr!Create();
+
+
+//***************************  TN_RTextFragmFormDescr  *****************
+type TN_RTextFragmFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RTextFragmFormDescr = class
+
+constructor TN_RTextFragmFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetTextRCH ( "CTextFragm.TFStyle",  "Style Fragment",  "" );
+  N_SetTextRCH ( "CTextFragm.TFBefore", "Before Fragment", "" );
+  N_SetTextRCH ( "CTextFragm.TFAfter",  "After Fragment",  "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RTextFragmFormDescr!Create();
+
+//***************************  TN_RWordFragmFormDescr  *****************
+type TN_RWordFragmFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RWordFragmFormDescr = class
+
+constructor TN_RWordFragmFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CWordFragm.WFFlags",       "Flags",         "Флаги открытия документа" );
+  N_SetSimpleRCH ( "CWordFragm.WFDocFName",    "File Name",     "Имя шаблона (doc файла)" );
+  N_AddFNameEditors( '(#WordFragms#) WordFragmsHist Doc_files|*.doc|All_Files|*.*' );
+  N_SetSimpleRCH ( "CWordFragm.WFBmGCVarName", "Bm GCVar Name", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RWordFragmFormDescr!Create();
+
+
+//***************************  TN_RExcelFragmFormDescr  *****************
+type TN_RExcelFragmFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RExcelFragmFormDescr = class
+
+constructor TN_RExcelFragmFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CExcelFragm.EFFlags",    "Flags", "" );
+  N_SetSimpleRCH ( "CExcelFragm.EFDocFName", "File Name",  "" );
+  N_AddFNameEditors( '(#WordFragms#) WordFragmsHist |*.*' );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RExcelFragmFormDescr!Create();
+
+
+//***************************  TN_RExpCompFormDescr  *****************
+type TN_RExpCompFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_RExpCompFormDescr = class
+
+constructor TN_RExpCompFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "CExpComp.ECExpParFlags", "Exp Params Flags", "" );
+  N_SetSimpleRCH ( "CExpComp.ECExpComp",     "Comp to export",   "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_RExpCompFormDescr!Create();
+
+//***************************  TN_LCInfoFormDescr  *****************
+type TN_LCInfoFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_LCInfoFormDescr = class
+
+constructor TN_LCInfoFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "LCIFlags",   "Channel flags",      "" );
+  N_SetSimpleRCH ( "LCIFName",   "Channel File Name",  "" );
+  N_AddFNameEditors( '(#DebOutFiles#) OtherFilesHist |*.txt' );
+  N_SetSimpleRCH ( "LCIBufSize", "Channel Bufer Size", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_LCInfoFormDescr!Create();
+
+//***************************  TN_MEGOParamsFormDescr  *****************
+type TN_MEGOParamsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_MEGOParamsFormDescr = class
+
+constructor TN_MEGOParamsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSetRCH    ( "EDebFlags",       "Debug Mode Flags",             "" );
+  N_SetSetRCH    ( "ESDTUnloadFlags", "SDT Format Unload Flags",      "" );
+  N_SetSetRCH    ( "EPathFlags",      "UObj Path Flags",                    "" );
+
+  N_SetSetRCH    ( "EWordFlags",      "Word Docs Creating Flags",     "" );
+  N_SetSimpleRCH ( "EWordPSMode",     "Word ParamsStr Mode",          "" );
+  N_SetSimpleRCH ( "EWordMinVersion", "Minimal allowed Word Version", "" );
+
+  N_SetSimpleRCH ( "EDefScrResDPI",   "Def. Screen  Resolution in DPI", "" );
+  N_SetSimpleRCH ( "EDefPrnResDPI",   "Def. Printer Resolution in DPI", "" );
+  N_SetSimpleRCH ( "EScrResCoef",     "Adjust Screen resolution Coef.", "" );
+
+  N_SetSimpleRCH ( "EGridStepmm",     "Grid Step for values in mm",   "Точность значений в мм." );
+  N_SetSimpleRCH ( "EGridStepLSU",    "Grid Step for values in LSU",  "Точность значений в LSU" );
+  N_SetSimpleRCH ( "EGridStepPrc",    "Grid Step for values in Percents",   "Точность значений в %" );
+  N_SetSimpleRCH ( "EGridStepUser",   "Grid Step for values in User units", "Точность значений в User units" );
+
+  N_SetSetRCH    ( "ERecompFlags",    "Reload after Recomp Flags",    "" );
+
+  N_SetArrayRCH  ( "ELogChannels",   "Log Channels",                  "" );
+//  N_AddExtEditor ( "NRAFRaEditEditor", "TN_PCInfoFormDescr" );
+  N_AddExtEditor ( "NRAFRaEditEditor", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_MEGOParamsFormDescr!Create();
+
+//***************************  TN_ArchSectionParFormDescr  *****************
+type TN_ArchSectionParFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ArchSectionParFormDescr = class
+
+constructor TN_ArchSectionParFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetBoolRCH   ( "ASPIsASection",    "UObj is a Section",     "" );
+  N_SetBoolRCH   ( "ASPSectionFormat", "Text (*.sdt) Format",   "" );
+  N_SetBoolRCH   ( "ASPIsReadOnly",    "Section Is Read Only",  "" );
+  N_SetBoolRCH   ( "ASPManualLoad",    "Manualy Loaded",        "" );
+  N_SetBoolRCH   ( "ASPWasChanged",    "Section was Changed",   "" );
+  N_SetBoolRCH   ( "ASPIsJoined",      "Should be Joined to Archive",  "" );
+
+  N_SetSimpleRCH ( "ASPFileName",      "File Name",             "" );
+  N_AddFNameEditors( '(#ArchSections#) ArchSectionsHist All_Files|*.*|sdb_Files|*.sdb|sdt_Files|*.sdt|sda_Files|*.sda|' );
+
+  N_SetArrayRCH ( "ASPUDUses",         "Used Archive Sections", "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ArchSectionParFormDescr!Create();
+
+//***************************  TN_ArchSaveOptionsFormDescr  *****************
+type TN_ArchSaveOptionsFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_ArchSaveOptionsFormDescr = class
+
+constructor TN_ArchSaveOptionsFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetBoolRCH   ( "ASOSkipJoin",     "Skip Join Sections to Archive", "" );
+  N_SetBoolRCH   ( "ASODisjoin",      "Disjoin Archive Sections",      "" );
+  N_SetBoolRCH   ( "ASOSkipReadOnly", "Skip Saving ReadOnly Sections", "" );
+  N_SetBoolRCH   ( "ASOSaveReadOnly", "Save ReadOnly Sections",        "" );
+  N_SetBoolRCH   ( "ASOSkipEmpty",    "Skip Saving Empty Sections",    "" );
+  N_SetBoolRCH   ( "ASOSaveEmpty",    "Save Empty Sections",           "" );
+  N_SetBoolRCH   ( "ASOSkipSaveDlg",  "Skip 'Save Section' Dialog",    "" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_ArchSaveOptionsFormDescr!Create();
+
+{
+//***************************  TN_PatternFormDescr  *****************
+type TN_PatternFormDescr = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end; // type TN_PatternFormDescr = class
+
+constructor TN_PatternFormDescr!Create( );
+begin
+  N_InitCommon( Result );
+
+  N_SetSimpleRCH ( "Cxxx.yyy1", "yyy1", "" );
+
+  N_SetSetRCH    ( "Cxxx.yyy2", "yyy2", "" );
+
+  N_SetArrayRCH ( "Cxxx.yyy3",  "yyy3", "" );
+  N_AddExtEditor( "NRAFRaEditEditor",   "TN_???FormDescr" );
+
+  N_SetSeparatorRC ( "" );
+  N_SetSimpleRCH ( "yyy4",   "yyy4",   "" );
+  N_AddExtViewer ( "NRAFMSScalEditor",   "" );
+  N_Add3ExtEditors ( "NRAFMSScalEditor", "NScalVEditor", "NRAFRaEditEditor", "TN_??ScalSizeFormDescr" );
+
+  SetLength( Adr(Self!Columns), GIndex );
+end; // constructor TN_PatternFormDescr!Create();
+// end of TN_PatternFormDescr
+
+}
+
+{
+  RC.FName="RRootPath";
+  RC.CCaption = "Путь к каталогу с публикацией";
+  RC.CHint = "Относительный путь к каталогу с сайтом внутри TestData";
+  SetLength(Adr(RC.CVEAttrs), 2);
+  RC.CVEAttrs[0]!CEName   = "InlineEditor";
+  RC.CVEAttrs[0]!CVName   = "RAFFileName";
+  RC.CVEAttrs[0]!CVParams = '.&(#OtherFiles#)';
+  RC.CVEAttrs[1]!CEName   = "RAFFileName";
+  RC.CVEAttrs[1]!CEParams = '.&(#OtherFiles#) * |*.*';
+  Self!Columns[i]=RC;
+  RC.CVEAttrs = SubArray( RC.CVEAttrs, 0, 0, 0 );
+  i = i+1;
+}
+

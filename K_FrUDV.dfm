@@ -1,0 +1,2 @@
+inherited K_FrameRAVectorEdit: TK_FrameRAVectorEdit
+end

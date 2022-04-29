@@ -1,0 +1,234 @@
+unit @:\SPL\Forms;
+uses  @:\SPL\syslib;
+
+//********************************
+//      Forms Structures
+//********************************
+
+type  TK_CellPos = ( K_ppUndef, K_ppLeft, K_ppCenter, K_ppRight );
+
+type TK_RAColumnFlags = (
+  K_racReadOnly,          // ReadOnly Column Flag
+  K_racEnumSwitch,        // Switch Enum while Cell Select Flag
+  K_racShowCheckBox,      // Show CheckBox Flag
+  K_racNoText,            // No Text in cell
+  K_racUseFillColor,      // Fill Cell BackGround Flag
+  K_racUseRowFillColor,   // Fill Cell BackGround with Row Fill Color Flag
+  K_racUseMixFillColor,   // Fill Cell BackGround with using Mix Color Matrix Flag
+  K_racNotUsePalette,     // Use Palette Indexes as Colors for Cells Color Mattrix
+  K_racUseFDFillColor,    // Use FormDescr Fill Color instead of (ColorMatrix)
+  K_racExternalEditor,    // Use External Editor Flag
+  K_racShowExtEditButton, // Show Special Button for External Editor Call
+  K_racCDisabled,         // Disable Column Flag
+  K_racRebuildAfterEdit,  // Invalidate Grid after Finish Cell Edit (for rebuild other Cells View)
+  K_racShowRecValue,      // Show Field Text even if Field is Record Or Array
+  K_racShowRecType,       // Show Field Type with '...' if  Field is Record Or Array
+  K_racSkipRowChangeNum,  // Skip Row Adding and Change Order in Next Form for Array
+  K_racSkipRowEditing,    // Skip Row Editing in Next Form for Array
+  K_racStopExtEditApply,  // Skip Apply Call on this level
+  K_racUseExtEditArchChange, // Set Use Global Change Flag in Next Form
+  K_racAutoApply,            // Call Apply Action after Every data Change
+  K_racSeparator,            // Column Separator Flag
+  K_racSkipColMark,          // Skip Column Mark
+  K_racSkipFieldMove,        // Skip Field Move in GetRowData, GetFrameData and GetDataToRArray
+  K_racNotModalShow,         // Set Not Modal Next Level Form Show Mode
+  K_racFieldRenameEnable,    // Field Rename Action is Enable
+  K_racUseOpendChildForm,    // Use Opend Child Form for View/Edit Column Data
+  K_racSkipDataPaste         // Skip Data Paste from Clipboard
+ );
+type TK_RAColumnFlagSet = SetOf TK_RAColumnFlags : Integer;
+
+type TK_RAModeFlags = (
+  K_ramReadOnly,               // ReadOnly Mode Flag for for All Cells
+  K_ramColVertical,            // View Logical Columns as Frame Columns
+  K_ramManualColOrient,        // Prevent Logical Columns Auto Oriention in DefaultEditor in Next Level Form
+  K_ramShowLRowNumbers,        // Show Logical Rows Numbers
+  K_ramUseEvenOddColors,       // Use Different Colors for Even and Odd Logical/Physical Rows
+  K_ramUsePhysRowNumberColors, // Use Different Colors for Even and Odd Physical Rows
+  K_ramUseFillColor,           // Fill All Cells with bgcolor
+  K_ramNotUsePalette,          // Use ColorIndex Value as Color but not as Palette Index
+  K_ramRowChangeOrder,         // Allows Logical Rows Change Order - (Set Change Data Flag while Logical Rows Moving)
+  K_ramRowChangeNum,           // Allows Logical Rows Deletion And Addition
+  K_ramRowAutoChangeNum,       // Allows Auto Change Logical Rows Number while paste from Clipboard
+  K_ramSkipResizeHeight,       // Prevents Form Heighy Auto Resize while RebuildFrameSize
+  K_ramSkipResizeWidth,        // Prevents Form Width Auto Resize while RebuildFrameSize
+  K_ramOnlyEnlargeSize,        // Prevents Form Size Minimization while RebuildFrameSize
+  K_ramFillFrameWidth,         // Last Physical Column always Fill all Frame Width
+  K_ramSkipRowMoving,          // Prevents Logical Rows Moving
+  K_ramShowLColNumbers,        // Show Logical Columns Numbers
+  K_ramColChangeOrder,         // Allows Logical Columns Change Order - (Set Change Data Flag while Logical Columns Moving)
+  K_ramColChangeNum,           // Allows Logical Columns Deletion And Addition
+  K_ramColAutoChangeNum,       // Allows Auto Change Logical Columns Number while paste from Clipboard
+  K_ramSkipColMoving,          // Prevents Logical Columns Moving
+  K_ramSkipInfoRow,            // Hides Top Physical Row
+ variant K_ramSkipRowsInfo,           // Hides Top Physical Row
+  K_ramSkipInfoCol,            // Hides Left Physical Column
+ variant K_ramSkipColsInfo,           // Hides Left Physical Column
+  K_ramCDisabled,              // Prevents Cells Edition and Draw All Cells in Disabled Mode
+  K_ramUseExtEditArchChange,   // FraControl.StoreToSData Set Archive "WasChanged" for Current Archive
+  K_ramAutoApply,              // Allows to Call OnDataApply Frame procedure of object
+  K_ramSkipColsMark,           // Prevent Logical Columns Marking
+  K_ramSingleColMark,          // Single Logical Column Marking Permission
+  K_ramMarkRowsByHeader,       // Prevent Logical Rows Marking
+  K_ramSingleRowMark,          // Single Logical Row Marking Permission
+  K_ramShowSingleRecord,       // Show Single Record if Multi Records Array
+  K_ramSkipAutoMatrix,         // Skip Auto Matrix ShowEdit Mode
+  K_ramShowCheckBox,           // Show CheckBox for Simple Type RArray
+  K_ramAutoEnlargeSelectedCol, // Auto Enlarge Selected Column Width
+  K_ramUseOpendChildForm,      // Use Opend Child Form for View/Edit Column Data
+  K_ramNotModalShow,           // Set Not Modal Next Level Form Show Mode
+  K_ramSkipDataPaste           // Skip Data Paste from Clipboard
+ );
+type TK_RAModeFlagSet = SetOf TK_RAModeFlags;
+
+type TK_RAColResizeMode = (
+  K_crmDataBased,
+variant K_crmOptimal,
+  K_crmHeaderBased,
+  K_crmNormal,
+  K_crmCompact );
+
+type TK_RAFDColVEAttrs = packed record // SPL Column View Edit Attributes
+  CEName   : string;  // Column Editor Name
+  CEParams : string;  // Column Edtor Params
+  CSENames : ArrayOf string;  // Column Set/Enum Ordered SubSet (Elements Names)
+  CEEID    : string;  // Column External Editor ID param
+  CVName   : string;  // Column Viewer Name
+  CVParams : string;  // Column Viewer Params
+end;
+
+type TK_RAFColumnDescr = packed record // SPL Column Description
+  FName          : String;  // Field Name
+  CName          : string;  // Column Name
+  CCaption       : String;  // Column Caption
+  CGrFlagsSet    : Hex;     // Columns Group Flags Set
+  CWidth         : Integer; // Max Columnn Width
+  CDataAddCWidth : Integer; // Additional Width to Column Data Width for Dynamic Column Resize
+  CTextPos       : Byte;    // Cell Text position
+  CFormat        : String;  // String Data Format
+  CShowEditFlagSet : TK_RAColumnFlagSet;   // Show/Edit Flags
+variant CShowEditFlags : Hex;     // Show/Edit Flags
+  CCFillColorInd : Integer; // Column Color Palette Index
+  CBorderWidth   : Integer; // Column Additional Border Width
+  CBorderColor   : Color;   // Column Border Color
+  CBitMask       : Hex;     // Row Bit Mask for Check Box Case
+  CHint          : string;   // Column Hint
+  CViewers       : ArrayOf String;  // Column Field Viewer Names
+  CEditors       : ArrayOf String;  // Column Field Editor Names
+  CGEDataID      : string;   // Column Global Edit Field ID
+  CEdUserPar     : string;   // Column Edtor User Param
+  CSENames       : ArrayOf String;  // Column Set/Enum Ordered SubSet (Elements Names)
+  CVEAttrs       : ArrayOf TK_RAFDColVEAttrs; // Column View Edit Attributes for Shift/Control Keys
+  CHelpIndex     : string;   // Column Show help index
+// Fields for DB SubTree Fields Edit
+  FPath          : string;   // Column Field Path
+runtime FPData   : ^Undef;   // DB Field Data Pointer
+runtime FType    : TypeCode; // DB Field Data TypeCode
+runtime FUDR     : TN_UDBase;       // runtime DB Field UDRArray Container
+end;
+
+type TK_RAFrDescr = record  // Frame Commom fields Description
+  ModeFlags     : TK_RAModeFlagSet; // Show/Edit Mode Flags
+//variant  ModeFlags     : Hex; // Show/Edit Mode Flags
+  DataCapt      : string;   // Data Caption
+  NameCapt      : String;   // Field Names Caption
+  ValueCapt     : String;   // Field Values Caption
+  CellPadding   : Integer;  // Text Cell Padding
+  MinHColWidth  : Integer;  // Min Header Column Width
+  HRowHeight    : Integer;  // Header Row Height
+  DataAddCWidth : Integer;  // Additional Width to Column Data Width for Dynamic Column Resize
+  MaxCWidth     : Integer;  // Max Columnn Width
+  MinCWidth     : Integer;  // Min Columnn Width for Dynamic Column Resize
+  DSeparatorSize: Integer;  // Data Separator Size
+  DefRColWidth  : Integer;  // Default Real Column Width
+  SelFillColor  : Integer;  // Color for Fill in Selected Cells
+  SelFontColor  : Integer;  // Color for Font in Selected Cells
+  DisFillColor  : Integer;  // Fill Color in Disabled Cells
+  DisFontColor  : Integer;  // Font Color in Disabled Cells
+  RowColorInd1  : Integer;  // Index of Color in Rows Color Pallete for  odd rows
+  RowColorInd2  : Integer;  // Index of Color in Rows Color Pallete for even rows
+  ColumnsPalette: ArrayOf Color; // Columns Color Palette
+  RowsPalette   : ArrayOf Color; // Rows Color Palette
+  MixedPalette  : ArrayOf Color; // Mixed Columns/Rows Color Palette - matrix
+  ColResizeMode : TK_RAColResizeMode; // Columns Resize Mode
+end;
+
+//**************************************
+//***** TK_RAFrame Runtime Fields Description - Pascal Types for Info Dump
+//**************************************
+type TK_RAFColVEAttrs = packed record // Runtime Column View Edit Attributes
+  EObj    : Hex;    // Column Editor Object
+  EParams : string; // Column Edtor Params
+  SEInds  : Hex;    // Column Set/Enum Ordered SubSet (Elements Names)
+  EEID    : string; // Column External Editor ID param
+  VObj    : Hex;    // Column Viewer Object
+  VParams : string; // Column Viewer Params
+end;
+
+type TK_RAFColumn = packed record  // TK_RAFrame Runtime Column Description  - Pascal record
+  Name          : string;     // Column Data Field Name
+  Path          : string;     // Column Data Field Path
+  Fmt           : String;     // Simple Data Format
+  Caption       : string;     // Column Data Caption
+//*** Width Attributes for all Cells for this Logic Column
+  DataAddCWidth : Integer;    // Additional Width to Column Data Width for Dynamic Column Resize
+  MaxCWidth     : Integer;    // Max Columnn Width
+//***
+  TextPos       : Byte;       // Column Text Position
+  CDType        : TK_ExprExtType; // Field Type
+  ShowEditFlags : TK_RAColumnFlagSet; // Show/Edit Flags
+  CFillColorInd : Integer;    // Columns Color Palette Index
+  CFillColor    : Color;      // Row Fill Color - Integer
+  CFontColor    : Color;      // Row Fill Color - Integer
+  BorderWidth   : Integer;    // Column Additional Border Width
+  BorderColor   : Color;      // Column Border Color - Integer
+  BitMask       : Integer;    // Row Bit Mask for Check Box Case - LongWord
+  FieldPos      : Integer;    // Field Position in Record
+  Hint          : String;     // Column Hint
+  CVEInd        : Integer;    // View Edit Attributes Current Ind
+  VEArray       : Hex;        // View Edit Attributes
+  Marked        : Byte;       // Mark Field Flag
+  DataTextWidth : Integer;    // Special field for enum Column Width Calculation optimisation
+  MVHelpTopicID : string;     // MV Show help Topic ID
+runtime CUDR    : TN_UDBase;  // Column UDRArray Field container
+runtime RUDInfo : Integer;    // Runtime User Defined Info
+end;
+
+procedure AddColumnDescr( Descr : TK_RAFColumnDescr;
+ PColumns : ^ArrayOf TK_RAFColumnDescr );
+var
+  L : Integer;
+begin
+  L = ALength( Value(PColumns) );
+  SetLength( PColumns, L + 1 );
+  SetElements( Value(PColumns), L, 1, Adr(Descr) );
+end;
+
+//*** Base Form Description class
+type TK_FrameDescription = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+end;
+
+procedure K_InitFormCommon( UDSelf : TN_UDBase );
+var
+  Self : TK_FrameDescription;
+begin
+  Self = UDSelf;
+  Self!Common.NameCapt = '';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $F0F0F0 $FFFFFF $F0F0F0';
+  Self!Common.SelFillColor =   $FFBFBF;
+  Self!Common.SelFontColor =   $0;
+  Self!Common.DisFillColor =   -1;
+  Self!Common.DisFontColor =   -1;
+  Self!Common.DSeparatorSize =  5;
+  Self!Common.DSeparatorSize =  5;
+  Self!Common.MinHColWidth   = 50;
+
+  Self!Common.ModeFlags = "[K_ramFillFrameWidth,K_ramUseFillColor]";
+//    Hex(Bit(Ord(K_ramFillFrameWidth))) +
+//    Hex(Bit(Ord(K_ramUseFillColor)));
+end;
+
+

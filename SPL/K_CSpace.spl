@@ -1,0 +1,691 @@
+unit @:\SPL\CSpace;
+uses  @:\SPL\syslib, @:\SPL\Forms;
+//********************************
+//    Types List
+//********************************
+//type TK_TimeStampUnits = (    // Time Stamp Units Enum
+//type TK_OneTimeStamp = packed record // One Time Stamp
+//type TK_TimeStampsAttrs = packed record // Time Stamps Array Attributes
+//type TK_TimeStamps = // Time Stamps Complex Type
+//type TK_CDim = packed record // Code Dimension
+//type TK_CDIRef = packed record // Code Dimension Item Reference
+//type TK_CDimEdit = packed record // DCDim Edit Structure
+//type TK_CDRType = ( // Code Dimensions Relation Type
+//type TK_CSDimAttrs = packed record // Code SubDimension Attributes
+//type TK_CSDim = // Code SubDimension Complex Type
+//type TK_CSDimEdit = packed record // DCDim Indices and Relation Edit Structure
+//type TK_CSDimSetEdit = packed record // DCDim SubSet  Edit Structure
+//type TK_CDCorAttrs = packed record //  Code Dimension Correlation Attrs
+//type TK_CDCor = // Code Dimension Correlation Complex Type
+//type TK_CDCorEdit = packed record // Code Dimension Correlation Edit Structure
+//type TK_CDRQAHead = packed record // CDims Relation Single SubSet Query Acceleration Head
+//type TK_CDRQAInfo = packed record  // Relation CDims Subsets Sort Info for Query Acceleration
+//type TK_CDRelAttrs = packed record // CDims Relation Attributes
+//type TK_CDRel = TK_CDRelAttrs : Integer; // CDims Relation Complex Type
+//type TK_CDRelArray {%Array of Relation}= // Array of CDims Relation
+//type TK_CSDBAttrs = packed record // CDims Data Block Relation Attributes
+//type TK_CSDBDouble  {%Block of Double}
+//type TK_CSDBFloat   {%Block of Float}
+//type TK_CSDBString  {%Block of String}
+//type TK_CSDBInteger {%Block of Integer}
+//type TK_CSDBUDRef   {%Block of UDRef}
+//type TK_CSDBURArray {%Block of Array of Undef}
+//type TK_CSDBlock    {%Array of Block}
+//type TK_CSDBBlock   {%Block of Block}
+//type TK_CSDVBlock   {%VArray of Block}
+//type TK_CSDBVBlock  {%Block of VBlock}
+//type TK_CSDBRel     {%Block of Relation}
+//type TK_ERDBAttrs = packed record // Extended Relations Data Block Attributes
+//type TK_ERDBDouble  {%ERDBlock of Double}    = TK_ERDBAttrs : Double;
+//type TK_ERDBFloat   {%ERDBlock of Float}     = TK_ERDBAttrs : Float;
+//type TK_ERDBString  {%ERDBlock of String}    = TK_ERDBAttrs : String;
+//type TK_ERDBInteger {%ERDBlock of Integer}   = TK_ERDBAttrs : Integer;
+//type TK_ERDBUDRef   {%ERDBlock of UDRef}     = TK_ERDBAttrs : TN_UDBase;
+//type TK_ERDBURArray {%ERDBlock of Array of Undef} = TK_ERDBAttrs : TK_URArray;
+//type TK_ERDBlock    {%Array of ERDBlock}     = ArrayOf TK_ERDBURArray;
+//type TK_ERDBBlock   {%ERDBlock of ERDBlock}  = TK_ERDBAttrs : TK_ERDBlock;
+//type TK_ERDVBlock   {%VArray of ERDBlock}    = VArrayOf TK_ERDBURArray;
+//type TK_ERDBVBlock  {%ERDBlock of ERDVBlock} = TK_ERDBAttrs : TK_ERDVBlock;
+
+//********************************
+//    Frame Decription List
+//********************************
+//type TK_TimeStampsAttrsForm = class
+//type TK_OneTimeStampForm = class
+//type TK_FormCDim = class
+//type TK_FormCSDim = class
+//type TK_FormCDSetInds = class
+//type TK_FormCDCor = class
+//type TK_FormCDRel = class
+//type TK_FormCDIRef = class
+
+//********************************
+//    Time Dimension Types
+//********************************
+type TK_TimeStampUnits = (    // Time Stamp Units Enum
+  K_tduYear    = "год",       // = "год"
+  K_tduHYear   = "полугодие", // = "полугодие"
+  K_tduQuarter = "квартал",   // = "квартал"
+  K_tduMonth   = "месяц",     // = "месяц"
+  K_tdu10Days  = "декада",    // = "декада"
+  K_tduWeek    = "неделя",    // = "неделя"
+  K_tduDay     = "день"       // = "день"
+);
+
+type TK_OneTimeStamp = packed record // One Time Stamp
+  SDate   : TDate;      // Time Stamps Array Start Date
+  TISize  : Integer;    // Time Interval Size
+  TIUnits : TK_TimeStampUnits; // Time Interval Units
+end;
+
+type TK_TimeStampsAttrs = packed record // Time Stamps Array Attributes
+  SDate   : TDate;      // Time Stamps Array Start Date
+  TISize  : Integer;    // Time Stamps Interval Size
+  TIUnits : TK_TimeStampUnits; // Time Stamps Interval Units
+// end of TK_OneTimeStamp
+  TSUnits : TK_TimeStampUnits; // Time Stamps Shifts Units
+end;
+
+type TK_TimeStamps = TK_TimeStampsAttrs : Integer; // Time Stamps
+
+//********************************
+//    Data Code Dimensions Space
+//********************************
+
+//********************************
+//*** Code Dimension Structures
+//********************************
+type TK_CDim = packed record // Code Dimension
+  CDCodes   : ArrayOf String; // Dimension Codes Array
+variant  Codes   : ArrayOf String;
+  CDNames   : ArrayOf String; // Dimension Names Array
+variant  Names   : ArrayOf String;
+  CDKeys    : ArrayOf String; // Dimension Keys Array
+variant  Keys   : ArrayOf String;
+end; // type TK_CDim = packed record
+
+type TK_CDIRef = packed record // Code Dimension Item Reference
+  CDRCDim    : TN_UDBase;
+  CDRItemInd : Integer;
+end; // type TK_CDIRef = packed record
+
+type TK_CDimEdit = packed record // DCDim Edit Structure
+  PrevIndex : Integer; // Previouse Index Value
+  Code   : String;  // Dim Code
+  Name   : String;  // Dim Code Name
+  Key    : String;  // Dim Code Keys
+end; // type TK_CDimEdit = packed record
+
+//********************************
+//*** Code Dimension Indices Structures
+//********************************
+type TK_CDRType = ( // Code Dimensions Relation Type
+  K_cdrList = 'Список',
+  K_cdrBag  = 'Мультимножество',
+  K_cdrSSet = 'Множество',
+  K_cdrAny  = 'Любой'
+ ); // CDims Relation Elements Set Type
+
+type TK_CSDimAttrs = packed record // CDim Indices Attributes
+  CDim    : TN_UDBase;  // CDim Reference
+  CDIType : TK_CDRType; // CDim Inds Type
+end; // type TK_CSDimAttrs = packed record
+
+type TK_CSDim = TK_CSDimAttrs : Integer; // CDim Indices
+
+type TK_CSDimEdit = packed record // DCDim Indices and Relation Edit Structure
+  Code   : String;  // Space Code
+  Name   : String;  // Space Code Name
+end; // type TK_CSDimEdit = packed record
+
+type TK_CSDimSetEdit = packed record // DCDim SubSet  Edit Structure
+  IndUse : Hex; // Index Use Flag
+  Code   : String;  // Space Code
+  Name   : String;  // Space Code Name
+end; // type TK_CSDimSetEdit = packed record
+
+//********************************
+//*** Code SubDimensions Relation  Structures
+//********************************
+
+type TK_CDCorAttrs = packed record
+  PrimCSDim : VArrayOf TK_CSDim; // Independent CSDim Indices
+  SecCSDim : ArrayOf TK_CSDim;   // Dependent CSDim Indices
+end;
+type TK_CDCor = TK_CDCorAttrs : Undef;
+
+type TK_CDCorEdit = packed record // CSDim Relation Edit Structure
+  Code1   : String;  // Space Code
+  Name1   : String;  // Space Code Name
+  Code2   : String;  // Space Code
+  Name2   : String;  // Space Code Name
+end; // type TK_CDCorEdit = packed record
+
+type TK_CDRQAHead = packed record // CDims Relation Single SubSet Query Acceleration Head
+  SIDInd : Integer; // Relation CDims SubSet ID Start Index. ID - array of pairs UDCDim/UDCDCor
+  SCIInd : Integer; // Start Index for Group of Columns in QAData which contains
+                    // QAData[SCInd][0] - 0-element in Vector of Relation CDims SubSet SorIndex
+                    // QAData[SCInd+1][i] ... Cols[SCInd+k][i] - Relation i-tuple CDims SubSet Compact Indices
+end; // type TK_CDRQAAttrs = packed record
+
+type TK_CDRQAInfo = packed record  // Relation CDims Subsets Sort Info for Query Acceleration
+  QAAttrs : ArrayOf TK_CDRQAHead;  // Array of Relation CDims Subsets QAIDs and QAData (ArrayOf TK_CDRQAHead)
+  QAIDs   : ArrayOf Integer;       // Array of Relation CDims Subsets IDs (ArrayOf Integer)
+  QAData  : ArrayOf Integer;       // Array of Relation CDims Subsets Compact Indices (runtime ArrayOf Integer)ation CDims Subsets Sort Info for Query Acceleration (ArrayOf Integer)
+end; // type TK_CDRQAInfo = packed record
+
+type TK_CDRelAttrs = packed record // CDims Relation Attributes
+  CDims   : VArrayOf TN_UDBase;    // Relation CDims References (VArrayOf TN_UDBase)
+  CDRType : TK_CDRType;            // CDims Relation Elements Set Type
+  CUDCSDim: TN_UDBase;             // Relation Corrensponding UDCSDim Reference
+runtime CDRQAInfo : TK_CDRQAInfo;  // Relation CDims Subsets Sort Info for Query Acceleration
+end; // type TK_CDRelAttrs = packed record
+type TK_CDRel = TK_CDRelAttrs : Integer; // CDims Relation
+type TK_CDRelArray {%Array of Relation}= ArrayOf TK_CDRel;
+
+//********************************
+//*** Link to Code Space Data Blocks Structures
+//********************************
+// Old Block Attributes for compatibility
+type TK_CSDBA = packed record
+  CCDS : VArrayOf Undef;    // Columns CSDims Relation
+  RCDS : VArrayOf Undef;    // Rows CSDims Relation
+  BCDR : ArrayOf TK_CDIRef; // Block CDim Items References Array
+end; // type TK_CSDBA = packed record
+
+type TK_CSDBAttrs = packed record
+  ColsRel : VArrayOf TK_CDRel; // Column CDim Indices
+variant  CCSD : VArrayOf TK_CDRel; // Column CDim Indices
+  RowsRel : VArrayOf TK_CDRel; // Row CDim Indices
+variant  RCSD : VArrayOf TK_CDRel; // Row CDim Indices
+  CBRel   : ArrayOf TK_CDRel;  // Block Common CDims Relation (Single Line Relation)
+variant  CCDR : ArrayOf TK_CDRel;  // Block Common CDims Relation (Single Line Relation)
+end; // type TK_CSDBAttrs = packed record
+
+type TK_CSDBDouble  {%CSDBlock of Double}  = TK_CSDBAttrs : Double;
+type TK_CSDBFloat   {%CSDBlock of Float}   = TK_CSDBAttrs : Float;
+type TK_CSDBString  {%CSDBlock of String}  = TK_CSDBAttrs : String;
+type TK_CSDBInteger {%CSDBlock of Integer} = TK_CSDBAttrs : Integer;
+type TK_CSDBUDRef   {%CSDBlock of UDRef}   = TK_CSDBAttrs : TN_UDBase;
+type TK_CSDBURArray {%CSDBlock of Array of Undef} = TK_CSDBAttrs : TK_URArray;
+type TK_CSDBlock    {%Array of CSDBlock}   = ArrayOf TK_CSDBURArray;
+type TK_CSDBBlock   {%CSDBlock of CSDBlock}   = TK_CSDBAttrs : TK_CSDBlock;
+type TK_CSDVBlock   {%VArray of CSDBlock}  = VArrayOf TK_CSDBURArray;
+type TK_CSDBVBlock  {%CSDBlock of VBlock}  = TK_CSDBAttrs : TK_CSDVBlock;
+type TK_CSDBRel     {%CSDBlock of Relation}= TK_CSDBAttrs : TK_CDRelArray;
+
+type TK_ERDBAttrs = packed record // Extended Relations Data Block Attributes
+  // Block CSDBAttrs
+  ColsRel : VArrayOf TK_CDRel; // Column CDim Indices
+  RowsRel : VArrayOf TK_CDRel; // Row CDim Indices
+  CBRel   : ArrayOf TK_CDRel;  // Block Common CDims Relation (Single Line Relation)
+  // end of TK_CSDBAttrs
+
+  // Block TimeStamps
+  ColsTS      : VArrayOf TK_TimeStamps; // Cols Time Stamps VArrray
+  RowsTS      : VArrayOf TK_TimeStamps; // RowsTime Stamps VArrray
+  CBTimeStamp : TK_OneTimeStamp;    // Common Time Stamp
+  // end of Block TimeStamps
+
+  // Block Attributes
+  ColsAttrs : ArrayOf Undef;          // List of Cols Attributes or Static Array
+  RowsAttrs : ArrayOf Undef;          // List of Rows Attributes or Static Array
+  CBAList   : ArrayOf TK_RAList;  // Common Attributes List
+  // end of Block Attributes
+end; // type TK_DBAttrs = packed record
+
+
+type TK_ERDBDouble  {%ERDBlock of Double}    = TK_ERDBAttrs : Double;
+type TK_ERDBFloat   {%ERDBlock of Float}     = TK_ERDBAttrs : Float;
+type TK_ERDBString  {%ERDBlock of String}    = TK_ERDBAttrs : String;
+type TK_ERDBInteger {%ERDBlock of Integer}   = TK_ERDBAttrs : Integer;
+type TK_ERDBUDRef   {%ERDBlock of UDRef}     = TK_ERDBAttrs : TN_UDBase;
+type TK_ERDBURArray {%ERDBlock of Array of Undef} = TK_ERDBAttrs : TK_URArray;
+type TK_ERDBlock    {%Array of ERDBlock}     = ArrayOf TK_ERDBURArray;
+type TK_ERDBBlock   {%ERDBlock of ERDBlock}  = TK_ERDBAttrs : TK_ERDBlock;
+type TK_ERDVBlock   {%VArray of ERDBlock}    = VArrayOf TK_ERDBURArray;
+type TK_ERDBVBlock  {%ERDBlock of ERDVBlock} = TK_ERDBAttrs : TK_ERDVBlock;
+
+//********************************
+//    Global Consts and Vars
+//********************************
+
+//***************************************
+//*** Form Description for TK_TimeStampsAttrs
+//***************************************
+type TK_TimeStampsAttrsForm = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_TimeStampsAttrsForm!Create( );
+var
+  RC : TK_RAFColumnDescr;
+  i  : Integer;
+begin
+  K_InitFormCommon( Result );
+  Self!Common.DSeparatorSize = 5;
+
+  SetLength( Adr(Self!Columns), 100 );
+  i = 0;
+
+  RC.CWidth = 100; // all fields width (Value column width)
+  RC.CCFillColorInd = 0;
+  RC.FName = "SDate";
+  RC.CCaption = "Начальная дата";
+  RC.CHint = "Начальная дата набора временных меток";
+//  SetLength(Adr(RC.CVEAttrs), 1);
+//  RC.CVEAttrs[0]!CEName = "RAFDateTimePicEditor";
+//  RC.CVEAttrs[0]!CEParams = "";
+  Self!Columns[i] = RC;
+//  RC.CVEAttrs = SubArray( RC.CVEAttrs, 0, 0, 0 );
+  i = i+1;
+
+  RC.FName = "TIUnits";
+  RC.CCaption = "Единицы интервала";
+  RC.CHint = "Единицы интервала связанного с метками времени";
+  Self!Columns[i] = RC;
+  i = i+1;
+
+  RC.FName="TISize";
+  RC.CCaption = "Длительность интервала";
+  RC.CHint = "Длительность интервала связанного с метками времени";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="TSUnits";
+  RC.CCaption = "Единицы шага";
+  RC.CHint = "Единицы смещения временных меток от начальной даты";
+  Self!Columns[i] = RC;
+  i = i+1;
+
+  SetLength( Adr(Self!Columns), i );
+
+end;
+//*** end of Form Description for TK_TimeStampsAttrs
+
+//***************************************
+//*** Form Description for TK_OneTimeStamp
+//***************************************
+type TK_OneTimeStampForm = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_OneTimeStampForm!Create( );
+var
+  RC : TK_RAFColumnDescr;
+  i  : Integer;
+begin
+  K_InitFormCommon( Result );
+  Self!Common.DSeparatorSize = 5;
+
+  SetLength( Adr(Self!Columns), 100 );
+  i = 0;
+
+  RC.CWidth = 100; // all fields width (Value column width)
+  RC.CCFillColorInd = 0;
+  RC.FName = "SDate";
+  RC.CCaption = "Начальная дата";
+  RC.CHint = "Начальная дата временной метки";
+//  SetLength(Adr(RC.CVEAttrs), 1);
+//  RC.CVEAttrs[0]!CEName = "RAFDateTimePicEditor";
+//  RC.CVEAttrs[0]!CEParams = "";
+  Self!Columns[i] = RC;
+//  RC.CVEAttrs = SubArray( RC.CVEAttrs, 0, 0, 0 );
+  i = i+1;
+
+  RC.FName = "TIUnits";
+  RC.CCaption = "Единицы интервала";
+  RC.CHint = "Единицы интервала связанного с меткой времени";
+  Self!Columns[i] = RC;
+  i = i+1;
+
+  RC.FName="TISize";
+  RC.CCaption = "Длительность интервала";
+  RC.CHint = "Длительность интервала связанного с меткой времени";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  SetLength( Adr(Self!Columns), i );
+
+end;
+//*** end of Form Description for TK_OneTimeStamp
+
+//********************************
+//*** Code Dimension Form
+//********************************
+type TK_FormCDim = class
+  Common : TK_RAFrDescr;
+  Columns: ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+  procedure ShowErrorMessage( Code : String; Ind1 : Integer; Ind2 : Integer );
+  function  GetErrorMessage( Code : String; Ind1 : Integer; Ind2 : Integer ) : String;
+end;
+
+constructor TK_FormCDim!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  Self!Common.NameCapt = '       ';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $FFFFFF $FFFFFF';
+  Self!Common.SelFillColor = $FFBFBF;
+  Self!Common.SelFontColor = $0;
+
+  Self!Common.ModeFlags = "[K_ramColVertical,K_ramFillFrameWidth,K_ramShowLRowNumbers]";
+//  Self!Common.ModeFlags =
+//    + Hex(Bit(Ord(K_ramColVertical)))
+//    + Hex(Bit(Ord(K_ramFillFrameWidth)))
+//    + Hex(Bit(Ord(K_ramShowLRowNumbers)));
+
+  Self!Common.ColResizeMode = K_crmNormal;
+
+  SetLength( Adr(Self!Columns), 3 );
+
+  RC.FName="Code";
+  RC.CCaption = "Код";
+  RC.CWidth=100;
+  RC.CCFillColorInd=0;
+  RC.CShowEditFlags=Hex(Bit(Ord(K_racUseFillColor)));
+  Self!Columns[0]=RC;
+
+  RC.FName="Name";
+  RC.CCaption = "Название";
+  RC.CWidth=150;
+  RC.CCFillColorInd=1;
+  Self!Columns[1]=RC;
+
+  RC.FName="Key";
+  RC.CCaption = "Ключ";
+  RC.CWidth=75;
+  RC.CCFillColorInd=2;
+  Self!Columns[2]=RC;
+
+end;
+
+procedure TK_FormCDim!ShowErrorMessage( Code : String; Ind1 : Integer; Ind2 : Integer );
+begin
+//  ShowMessage( 'Одинаковый код "'+Code+'" у элементов '+ String(Ind1) +
+//                         ' и ' + String(Ind2) );
+  ShowMessage( 'Одинаковый код "'+Code+'" у элементов '+ ToString(Adr(Ind1)) +
+                         ' и ' + ToString(Adr(Ind2)) );
+end;
+
+function TK_FormCDim!GetErrorMessage( Code : String; Ind1 : Integer; Ind2 : Integer ) : String;
+begin
+  Result = 'Одинаковый код "'+Code+'" у элементов '+ String(Ind1) +
+                         ' и ' + String(Ind2));
+end;
+
+procedure ShowErrorMessage( Code : String; Ind1 : Integer; Ind2 : Integer );
+begin
+//  ShowMessage( 'Одинаковый код "'+Code+'" у элементов '+ String(Ind1) +
+//                         ' и ' + String(Ind2) );
+  ShowMessage( 'Одинаковый код "'+Code+'" у элементов '+ ToString(Adr(Ind1)) +
+                         ' и ' + ToString(Adr(Ind2)) );
+end;
+//********************************
+//*** end of CodeDimension Form
+//********************************
+
+//********************************
+//*** Code Dimension Indices and Relation Form
+//********************************
+type TK_FormCSDim = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_FormCSDim!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  Self!Common.NameCapt = '       ';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $FFFFFF';
+  Self!Common.SelFillColor = $FFBFBF;
+  Self!Common.SelFontColor = $0;
+
+//  Self!Common.ModeFlags =
+//    + Hex(Bit(Ord(K_ramColVertical)))
+//    + Hex(Bit(Ord(K_ramFillFrameWidth)))
+//    + Hex(Bit(Ord(K_ramShowLRowNumbers)));
+  Self!Common.ModeFlags = "[K_ramColVertical,K_ramFillFrameWidth,K_ramShowLRowNumbers]";
+
+  Self!Common.ColResizeMode = K_crmNormal;
+
+  SetLength( Adr(Self!Columns), 2 );
+
+  RC.FName="Code";
+  RC.CCaption = "Код";
+  RC.CWidth=70;
+  RC.CCFillColorInd=0;
+  RC.CShowEditFlags=Hex(Bit(Ord(K_racUseFillColor)));
+  Self!Columns[0]=RC;
+
+  RC.FName="Name";
+  RC.CCaption = "Название";
+  RC.CWidth=180;
+  RC.CCFillColorInd=1;
+  Self!Columns[1]=RC;
+
+end;
+//********************************
+//*** enf of Code Dimension Indices and Relation Form
+//********************************
+
+//********************************
+//*** Code Dimension Set Indices
+//********************************
+type TK_FormCDSetInds = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_FormCDSetInds!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  Self!Common.NameCapt = '       ';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $FFFFFF';
+  Self!Common.SelFillColor = $FFBFBF;
+  Self!Common.SelFontColor = $0;
+
+  Self!Common.ModeFlags = "[K_ramColVertical,K_ramFillFrameWidth,K_ramShowLRowNumbers]";
+//  Self!Common.ModeFlags =
+//    + Hex(Bit(Ord(K_ramColVertical)))
+//    + Hex(Bit(Ord(K_ramFillFrameWidth)))
+//    + Hex(Bit(Ord(K_ramShowLRowNumbers)));
+
+  Self!Common.ColResizeMode = K_crmNormal;
+
+  SetLength( Adr(Self!Columns), 3 );
+
+  RC.FName="IndUse";
+  RC.CCaption = "Элемент";
+  RC.CWidth=20;
+  RC.CCFillColorInd=0;
+  RC.CShowEditFlagSet="[K_racShowCheckBox,K_racUseFillColor]";
+  RC.CBitMask := 1;
+  Self!Columns[2]=RC;
+
+  RC.FName="Code";
+  RC.CCaption = "Код";
+  RC.CWidth=70;
+  RC.CShowEditFlagSet="[K_racUseFillColor,K_racReadOnly]";
+  RC.CBitMask := 0;
+  Self!Columns[0]=RC;
+
+  RC.FName="Name";
+  RC.CCaption = "Название";
+  RC.CWidth=180;
+  RC.CCFillColorInd=1;
+  Self!Columns[1]=RC;
+
+end;
+//********************************
+//*** enf of Code Dimension Set Indices
+//********************************
+
+//********************************
+//*** Code Dimension Relation Form
+//********************************
+type TK_FormCDCor = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_FormCDCor!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  Self!Common.NameCapt = '       ';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $FFFFFF $F0F0F0 $F0F0F0';
+  Self!Common.SelFillColor =  $FFBFBF;
+  Self!Common.SelFontColor =  $0;
+
+  Self!Common.ModeFlags = "[K_ramColVertical,K_ramFillFrameWidth,K_ramShowLRowNumbers]";
+//  Self!Common.ModeFlags =
+//           + Hex(Bit(Ord(K_ramColVertical)))
+//           + Hex(Bit(Ord(K_ramFillFrameWidth)))
+//           + Hex(Bit(Ord(K_ramShowLRowNumbers)));
+
+  Self!Common.ColResizeMode = K_crmNormal;
+
+  SetLength( Adr(Self!Columns), 4 );
+
+  RC.FName="Code1";
+  RC.CCaption = "Код";
+  RC.CWidth=70;
+  RC.CCFillColorInd=0;
+  RC.CShowEditFlags=Hex(Bit(Ord(K_racUseFillColor)));
+  Self!Columns[0]=RC;
+
+  RC.FName="Code2";
+  RC.CCaption = "Код";
+  RC.CWidth=70;
+  RC.CCFillColorInd=2;
+  RC.CShowEditFlags=Hex(Bit(Ord(K_racUseFillColor)));
+  Self!Columns[2]=RC;
+
+  RC.FName="Name1";
+  RC.CCaption = "Название";
+  RC.CWidth=180;
+  RC.CCFillColorInd=1;
+  Self!Columns[1]=RC;
+
+  RC.FName="Name2";
+  RC.CCaption = "Название";
+  RC.CWidth=180;
+  RC.CCFillColorInd=3;
+  Self!Columns[3]=RC;
+
+end;
+//********************************
+//*** enf of Code Dimension Relation Form
+//********************************
+
+//********************************
+//*** Code Dimensions Items References
+//********************************
+type TK_FormCDIRef = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_FormCDIRef!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  Self!Common.NameCapt = '       ';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $FFFFFF';
+  Self!Common.SelFillColor = $FFBFBF;
+  Self!Common.SelFontColor = $0;
+
+  Self!Common.ModeFlags = "[K_ramColVertical,K_ramFillFrameWidth,K_ramShowLRowNumbers]";
+//  Self!Common.ModeFlags =
+//    + Hex(Bit(Ord(K_ramColVertical)))
+//    + Hex(Bit(Ord(K_ramFillFrameWidth)))
+//    + Hex(Bit(Ord(K_ramShowLRowNumbers)));
+
+  SetLength( Adr(Self!Columns), 2 );
+
+  RC.FName="CDRCDim";
+  RC.CCaption = "Измерение";
+  RC.CHint := 'Объект "Измерение"';
+  RC.CWidth=100;
+  RC.CShowEditFlagSet="[K_racReadOnly,K_racUseFillColor]";
+  RC.CCFillColorInd=0;
+  Self!Columns[0]=RC;
+
+  RC.FName="CDRItemInd";
+  RC.CCaption = "Элемент";
+  RC.CHint := 'Элемент объекта "Измерение"';
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  SetLength(Adr(RC.CVEAttrs), 1);
+  RC.CVEAttrs[0]!CEName   = "RAFCDItemEditor";
+  RC.CVEAttrs[0]!CEParams = 'CDRCDim';
+  RC.CVEAttrs[0]!CVName   = "RAFCDItemEditor";
+  RC.CVEAttrs[0]!CVParams = 'CDRCDim';
+  Self!Columns[1]=RC;
+
+end;
+//********************************
+//*** enf of Code Dimension Set Indices
+//********************************
+
+//********************************
+//*** Code Dimensions Relation Form
+//********************************
+type TK_FormCDRel = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_FormCDRel!Create( );
+var
+  RC : TK_RAFColumnDescr;
+begin
+  Self!Common.NameCapt = '       ';
+  Self!Common.ValueCapt= '';
+  Self!Common.ColumnsPalette = '$FFFFFF $FFFFFF $F0F0F0 $F0F0F0';
+  Self!Common.SelFillColor =  $FFBFBF;
+  Self!Common.SelFontColor =  $0;
+
+  Self!Common.ModeFlags = "[K_ramColVertical,K_ramFillFrameWidth,K_ramShowLRowNumbers]";
+//  Self!Common.ModeFlags =
+//           + Hex(Bit(Ord(K_ramColVertical)))
+//           + Hex(Bit(Ord(K_ramFillFrameWidth)))
+//           + Hex(Bit(Ord(K_ramShowLRowNumbers)));
+
+  Self!Common.ColResizeMode = K_crmNormal;
+
+  SetLength( Adr(Self!Columns), 1 );
+
+  RC.FName="";
+  RC.CCaption = "";
+  RC.CHint := 'Элемент Измерения';
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  SetLength(Adr(RC.CVEAttrs), 1);
+  RC.CVEAttrs[0]!CEName = "RAFCDItemEditor0";
+  RC.CVEAttrs[0]!CVName = "RAFCDItemEditor0";
+  Self!Columns[1]=RC;
+
+end;
+//********************************
+//*** enf of Code Dimensions Relation Form
+//********************************
+
+
+

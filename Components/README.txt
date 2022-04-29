@@ -1,0 +1,1 @@
+Please put all 3rd party and standalone components and sources in this folder

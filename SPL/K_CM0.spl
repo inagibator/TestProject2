@@ -1,0 +1,813 @@
+unit  @:\SPL\K_CM0;
+uses  @:\SPL\syslib, @:\SPL\Forms;
+
+//************* K_CM0 types (Centaur Media Suite Types) *************
+//type TK_CMAutoImgProcFlags  = Setof (
+//type TK_CMAutoImgProcAttrs = packed record // Auto Image Processing Attributes
+//type TK_CMUFilterProfile = packed record // User Filter Profile
+//type TK_CMDevProfListElem = packed record // Device Profiles List element
+//type TK_CMTwainProfile = packed record // Profile for TWAIN devices
+//type TK_CMOtherProfile = packed record // Profile for Other devices (with Ext DLLs)
+//type TK_CMOtherProfile3D = packed record // Profile for Other 3D devices (with Ext DLLs)
+//type TK_CMVCMode = ( // Video Device Capture Mode
+//type TK_CMVideoProfile = packed record // Profile for TWAIN devices
+//type TK_CMSImgMapRootFlags = SetOf // Slide Image MapRoot Flags
+//type TK_CMSMRImgAttrs = packed record // Slide Image Attributes Stored in MapRoot
+//type TN_CMSlideDUnits = ( // Slide  Distance Units
+//type TN_CMSlideSFlags = SetOf ( // Slide Data Flags
+//type TN_CMSlideRFlags = SetOf ( // Slide Runtime Flags
+//type TN_CMSlideSDBF = packed record //*** Slide Fields Stored in as single DB field
+//type TN_CMSlide = packed record // Slide Attributes (TN_UDCMSlide record type)
+//type TN_CMECSlide = packed record // Slide Attributes (TN_UDCMSlide record type) for Emergency Cache
+//type TK_CMEDBLockState = packed record // Slide DB Locking Result State
+//type TK_CMSlideFilterDateSelectMode = (K_sfdsmDatesAll, K_sfdsmDatesRange, K_sfdsmDatesExact);
+//type TK_CMSlideFilterAttrs = packed record
+//type TK_CMSALocationAttrs = packed record
+//type TK_CMSAProviderAttrs = packed record
+//type TK_CMSAPatientAttrs = packed record
+//type TK_3DMLine = packed record
+//type TK_3DAngle = packed record
+//type TK_3DFontStyle  = Setof (
+//type TK_3DText = packed record
+
+{$ CurF=20150112}
+type TK_CMAutoImgProcFlags  = Setof (
+  K_aipfNoiseReduction='Nois Reduction',// 1
+  K_aipfEqualize='Equalize',   // 3
+variant   K_aipfAutoEqualize='Auto Equalize',   // 3
+  K_aipfNegate='Negate',                // 4
+  K_aipfConvToGrey='Convert to Grey',   // 2
+// 0000000F
+  K_aipfFlipHor='Flip Horizontally',    
+  K_aipfFlipVert='Flip Vertically',
+  K_aipfSSConv='Sharp/Smooth',      
+  K_aipfBri='Use Brightness Factor',
+// 000000F0
+  K_aipfCo='Use Contrast Factor',
+  K_aipfGam='Use Gamma Factor',
+  K_aipfLLUL='Use Brightness LL/UL',
+variant K_aipfLLLU='Use Brightness Window',
+  K_aipfAutoLLUL='Use Brightness Auto LL/UL',
+variant K_aipfAutoLLLU='Use Brightness Window Auto',
+// 00000F00
+  K_aipfModified='Filter was modified by user'
+//
+// New Flags
+//
+  K_aipfNRSelf='Noise Reduction with Threshold',
+  K_aipfMedian='Median',
+  K_aipfDespeckle='Despeckle',
+// 0000F000
+  K_aipfSmooth='Smooth',
+  K_aipfSharp='Sharp',
+  K_aipfConvTo8='Convert to 8 bit',
+  K_aipfAutoContrast='Auto Contrast',
+// 000F0000
+  K_aipfUseAutoLLULPower='Use Auto LL/UL Power'
+// 00F00000
+// 0F000000
+// F0000000
+);
+
+{$ CurF=20150112}
+type TK_CMAutoImgProcAttrs = packed record // Auto Image Processing Attributes
+  CMAIPFlags:  TK_CMAutoImgProcFlags; // Operation Flags
+  CMAIPAngl :   Byte;                 // Rotate Angle 0 - 3 -> 0 - 270
+  CMAIPCoFactor   : Float; // Image Contrast Correction Factor
+  CMAIPGamFactor  : Float; // Image Gamma Correction Factor
+  CMAIPBriFactor  : Float; // Image Brightness Correction Factor
+  CMAIPResolution : Float; // Image Resolution in DPI (0 - means 72)
+  CMAIPSSFactor   : Float; // Image Sharpen/Smoothen Factor (-1 <> 1)
+  CMAIBriLLFactor : Float; // Image Brightness Window Low Level Factor
+  CMAIBriULFactor : Float; // Image Brightness Window Upper Level Factor
+variant CMAIBriLUFactor : Float; // Image Brightness Window Upper Level Factor
+//
+// New Attributes
+//
+  CMAINRThreshold1: Float;   // Noise Reduction Threshold1
+  CMAIMedianDepth : Integer; // Median Filter Aperture width
+  CMAIDespeckleDepth : Integer; // Despeckle Filter Aperture width
+  CMAISmoothPower : Float;   // Smooth Filter Power Factor
+  CMAISmoothDepth : Integer; // Smooth Filter Aperture width
+  CMAISharpPower  : Float;   // Sharp Filter Power Factor
+  CMAISharpDepth  : Integer; // Sharp Filter Aperture width
+//
+// New Attributes
+//
+  CMAIAutoLLULPower : Float; // AutoLLUL Filter Power Factor 0 <> 1
+  CMAIEqualizePower : Float; // Equalize Filter Power Factor 0 <> 1
+//  CMAIAutoContrastPower : Float; // AutoContrast Filter Power Factor
+//  CMAIAutoEqualizePower : Float; // AutoEqualize Filter Power Factor
+end; // type TK_CMAutoImgProcAttrs = packed record
+
+{$ CurF=20110424}
+type TK_CMUFilterProfile = packed record
+//***   Interface attributes
+  CMUFPCaption:     string; // User Filter Caption
+  CMUFPShortCut:    string; // User Filter ShortCut
+//***   Filter attributes
+  CMUFPAutoImgProcAttrs : TK_CMAutoImgProcAttrs; // Filter Auto Image Processing Attributes
+end; // type TK_CMUFilterProfile = packed record
+
+{$ CurF=20110728}
+type TK_CMDevProfListElem = packed record // Device Profiles List element
+  CMDPLEARef: TN_UDBase; // Profile Devices UDRArray
+  CMDPLEAInd:   integer; // Profile Element Index in Devices UDRArray
+end; // type TK_CMDevProfListElem = packed record
+
+//{$ CurF=20110405}
+//{$ CurF=20111225}
+//{$ CurF=20131022}
+//{$ CurF=20160907}
+{$ CurF=20200112}
+type TK_CMTwainProfile = packed record // Profile for TWAIN devices
+//***   Interface attributes
+  CMDPCaption:     string; // Menu Item Caption
+variant CMTPCaption:     string; // Menu Item Caption
+  CMDPHint:        string; // Menu Item and Button Hint
+variant CMTPHint:        string; // Menu Item and Button Hint
+  CMDPShortCut:    string; // Menu Item and Button ShortCutvariant
+variant CMTPShortCut:    string; // Menu Item and Button ShortCut
+  CMDPImageIndex: integer; // Menu Item and Button Image Index (for static ImageList)
+variant CMTPImageIndex: integer; // Menu Item and Button Image Index (for static ImageList)
+  CMDPDynSIcon: TN_UDBase; // Saved (Dynamic) Small Image Object
+variant CMTPDynSIcon: TN_UDBase; // Saved (Dynamic) Small Image Object
+  CMDPDynBIcon: TN_UDBase; // Saved (Dynamic) Big   Image Object
+variant CMTPDynBIcon: TN_UDBase; // Saved (Dynamic) Big   Image Object
+
+//***   Runtime attributes
+runtime
+  CMDPDelphiAction: TObject;// TAction for MenuItem and ToolButton
+variant runtime
+  CMTPDelphiAction: TObject;// TAction for MenuItem and ToolButton
+
+//***   Device attributes
+  CMDPProductName: string;  // TWAIN Data Source Product Name
+variant CMÂDProductName: string;  // TWAIN Data Source Product Name
+variant CMÂPProductName: string;  // TWAIN Data Source Product Name
+variant CMTPProductName: string;  // TWAIN Data Source Product Name
+  CMDPDLLInd:     integer; // Device DLL Index
+  CMAutoImgProcAttrs : TK_CMAutoImgProcAttrs; // Auto Image Processing Attributes
+  CMDPMTypeID:    integer; // Profile Media Type default ID
+  CMDPGroupName:   string; // Profile Group Name
+  CMDPStrPar1  :   string; // Profile Additional 1-st String Parameter
+  CMDPStrPar2  :   string; // Profile Additional 2-nd String Parameter
+
+//  TK_CMDCMAttrs
+  CMDPDModality:  string;  // DICOM Modality
+  CMDPDKVP      :  Double; // DICOM KVP - Peak kilo voltage output of the x-ray generator used
+  CMDPDExpTime  : Integer; // DICOM ExposureTime - Time of x-ray exposure in msec
+  CMDPDTubeCur  : Integer; // DICOM Integer TubeCurrent - X-Ray Tube Current in mA
+//  CMDPDTubeCurF : Float;   // DICOM Float TubeCurrent - X-Ray Tube Current in mA
+//  CMDPDRDoseF   : Float;   // DICOM RadiationDose     - X-Ray Radiation Dose in mGy
+end; // type TK_CMTwainProfile = packed record
+
+
+//{$ CurF=20110405}
+//{$ CurF=20111225}
+//{$ CurF=20131022}
+//{$ CurF=20160907}
+{$ CurF=20200112}
+type TK_CMOtherProfile = packed record // Profile for Other devices (with Ext DLLs)
+//***   Interface attributes
+  CMDPCaption:     string; // Menu Item Caption
+  CMDPHint:        string; // Menu Item and Button Hint
+  CMDPShortCut:    string; // Menu Item and Button ShortCutvariant
+  CMDPImageIndex: integer; // Menu Item and Button Image Index (for static ImageList)
+  CMDPDynSIcon: TN_UDBase; // Saved (Dynamic) Small Image Object
+  CMDPDynBIcon: TN_UDBase; // Saved (Dynamic) Big   Image Object
+
+//***   Runtime attributes
+runtime
+  CMDPDelphiAction: TObject;// TAction for MenuItem and ToolButton
+
+//***   Device attributes
+  CMDPProductName: string;  // Other Device Product Name
+variant CMÂDProductName: string; // Other Device Product Name
+  CMDPDLLInd:     integer; // Device DLL Index
+  CMAutoImgProcAttrs : TK_CMAutoImgProcAttrs; // Auto Image Processing Attributes
+  CMDPMTypeID:    integer; // Profile Media Type default ID
+  CMDPGroupName:   string; // Profile Group Name
+  CMDPStrPar1  :   string; // Profile Additional 1-st String Parameter
+  CMDPStrPar2  :   string; // Profile Additional 2-nd String Parameter
+
+//  TK_CMDCMAttrs
+  CMDPDModality:  string;  // DICOM Modality
+  CMDPDKVP      :  Double; // DICOM KVP - Peak kilo voltage output of the x-ray generator used
+  CMDPDExpTime  : Integer; // DICOM ExposureTime - Time of x-ray exposure in msec
+  CMDPDTubeCur  : Integer; // DICOM Integer TubeCurrent - X-Ray Tube Current in mA
+//  CMDPDTubeCurF : Float;   // DICOM Float TubeCurrent - X-Ray Tube Current in mA
+//  CMDPDRDoseF   : Float;   // DICOM RadiationDose     - X-Ray Radiation Dose in mGy
+end; // type TK_CMOtherProfile = packed record
+type TK_CMOtherDeviceProfile = TK_CMOtherProfile; // Old Name
+
+{$ CurF=20180606}
+type TK_CMOtherProfile3D = packed record // Profile for Other 3D devices (with Ext DLLs)
+//***   Interface attributes
+  CMDPCaption:     string; // Menu Item Caption
+  CMDPHint:        string; // Menu Item and Button Hint
+  CMDPShortCut:    string; // Menu Item and Button ShortCutvariant
+  CMDPImageIndex: integer; // Menu Item and Button Image Index (for static ImageList)
+  CMDPDynSIcon: TN_UDBase; // Saved (Dynamic) Small Image Object
+  CMDPDynBIcon: TN_UDBase; // Saved (Dynamic) Big   Image Object
+
+//***   Runtime attributes
+runtime
+  CMDPDelphiAction: TObject;// TAction for MenuItem and ToolButton
+
+//***   Device attributes
+  CMDPProductName: string;  // Other Device Product Name
+  CMDPDLLInd:     integer; // Device DLL Index
+  CMAutoImgProcAttrs : TK_CMAutoImgProcAttrs; // Auto Image Processing Attributes
+  CMDPMTypeID:    integer; // Profile Media Type default ID
+  CMDPGroupName:   string; // Profile Group Name
+  CMDPStrPar1  :   string; // Profile Additional 1-st String Parameter
+  CMDPStrPar2  :   string; // Profile Additional 2-nd String Parameter
+
+end; // type TK_CMOtherProfile3D = packed record
+
+type TK_CMVCMode = ( // Video Device Capture Mode
+  K_cvcmStillImage = "Still Images",
+  K_cvcmVideo      = "Video"
+);
+
+//{$ CurF=20090822}
+//{$ CurF=20110405}
+//{$ CurF=20111225}
+{$ CurF=20210622}
+type TK_CMVideoProfile = packed record // Profile for TWAIN devices
+//***   Interface attributes
+  CMDPCaption:     string; // Menu Item Caption
+  CMDPHint:        string; // Menu Item and Button Hint
+  CMDPShortCut:    string; // Menu Item and Button ShortCutvariant
+  CMDPImageIndex: integer; // Menu Item and Button Image Index (for static ImageList)
+  CMDPDynSIcon: TN_UDBase; // Saved (Dynamic) Small Image Object
+  CMDPDynBIcon: TN_UDBase; // Saved (Dynamic) Big   Image Object
+
+//***   Runtime attributes
+runtime
+  CMDPDelphiAction: TObject;// TAction for MenuItem and ToolButton
+
+//***   Device attributes
+  CMDPProductName: string;  // Video Data Source Product Name
+
+  CMDPDLLInd:     integer; // Device DLL Index
+  CMAutoImgProcAttrs : TK_CMAutoImgProcAttrs; // Auto Image Processing Attributes
+  CMDPMTypeID:    integer; // Profile Media Type default ID
+  CMDPGroupName:   string; // Profile Group Name
+  CMDPStrPar1  :   string; // Profile Additional 1-st String Parameter
+  CMDPStrPar2  :   string; // Profile Additional 2-nd String Parameter
+
+//***  Video Device attributes
+  CMVResolution : string;  // Video Resolution
+obsolete CMVPResolution : TPoint;  // Video Resolution
+  CMVCMode       : TK_CMVCMode;  // Video Capturing Mode
+  CMPreviewMode :  integer; // Still Images Preview Mode: 0-not init, 1-1Win, 2-2WinsVer, 3-2WinsHor, 4-4Wins
+  CMNumClicksInd:  integer; // NumClicks Groupbox Item Index (0-twoClicks, 1-SingleClick)
+  CMCaptButDLLInd: integer; // Camera Buttons DLL Index in TN_CMCameraBtnDevDLLs (=0 means no buttons)
+  CMFreezeUnfreezeKey:  integer; // FreezeUnfreeze Key for "Keystrokes" Camera Button Device
+  CMSaveAndUnfreezeKey: integer; // SaveAndUnfreeze Key for "Keystrokes" Camera Button Device
+  CMVFormatGUIDString : string;  // Video Format GUID string
+end; // type TK_CMVideoProfile = packed record
+
+
+{$ CurF=20110728 NDPT=20081119}
+type TK_CMSMapRootImgFlags = SetOf (
+  K_smriRestoreSrcImg="Original Image Restoring enabled flag",
+  K_smriNegateImg="Negate Image Pixels Color"
+); // Slide Image MapRoot Flags
+
+//{$ CurF=20081130 NDPT=20081119}
+{$ CurF=20111214 NDPT=20081119}
+type TK_CMSMRImgAttrs = packed record // Slide Image Attributes Stored in MapRoot
+// Slide Attributes Stored in MapRoot
+  MRImgFlags : TK_CMSMapRootImgFlags;
+variant  IMRFlags : TK_CMSMapRootImgFlags;
+
+// Slide Flip/Rotate Attrs
+  MRFlipRotateAttrs : Integer;
+variant  FlipRotateAttrs : Integer;
+
+// Image BriCoGam Attributes
+  MRCoFactor : Float; // Image Contrast Correction Factor
+variant MRContrFactor : Float; 
+variant ContrFactor : Float; 
+  MRGamFactor : Float; // Image Gamma Correction Factorvariant    
+variant MRGammaFactor : Float;
+variant GammaFactor : Float; 
+  MRBriFactor: Float; // Image Brightness Correction Factor
+variant MRBrightFactor: Float;
+variant BrightFactor: Float;
+  MRBriMinFactor: Float; // Image Brightness Convertion Minimal Factor
+  MRBriMaxFactor: Float; // Image Brightness Convertion Maximal Factor
+
+// Slide Image View Convertion attributes (obsolete)
+obsolete RCode  : Byte;  // Rotate Code 0 - 0, 1 - 90, 2 - 180, 3 - 270
+obsolete DFlag  : Bool1;  // Diagonal Flag
+end;
+
+{$ CurF=20081029}
+type TN_CMSlideDUnits = ( // Slide  Distance Units
+  cmsduMM="millimetres", cmsduInch="inches" );
+
+{$ CurF=20101217}
+type TN_CMSlideRFlags = SetOf ( // Slide Runtime Flags 
+  cmsfIsNew="Slide was just created",
+  cmsfCurImgChanged="Image was Changed",
+  cmsfMapRootChanged="MapRoot Elements were Changed",
+  cmsfAttribsChanged="Attribs were Changed",
+  cmsfThumbChanged="Slide Thumbnail was changed",
+  cmsfHideDrawings="Hide All Drawings",
+  cmsfIsOpened="Slide is opened in studio area", 
+  cmsfIsPrinting="Slide is shown in printing page",
+  cmsfIsLocked="Slide is locked",
+  cmsfSkipUnlock="Skip Slide unlock", // is needed while opened slides are reoder in EditFrames"
+  cmsfIsUsed="Slide is Used", // is locked by Other User
+  cmsfSkipNewMedia="Skip new Slide Image and Video file creation", // is needed for copy SLides to another Patient
+  cmsfSkipSlideEdit="Skip Slide Edit",     
+  cmsfSkipChangesSave="Skip Slide Changes Saving to ECache and DB",  
+  cmsfInitUndoBuf="Initialize Slide Undo Buffer",
+  cmsfCloseOpened="Close Opend Slide by refresh"
+);
+
+{$ Cur=20150616 NDPT=20081006}
+type TN_CMSlideSFlags = SetOf ( // Slide Data Flags
+  cmsfIsMediaObj="Is Media Object",
+  cmsfHasSrcImg="Original Image exits",
+  cmsfSaveSrcImg="Original Image is needed",
+  cmsfGreyscale="Greyscale Image",
+  cmsfShowColorize="Show Pseudocolors flag",
+  cmsfShowIsodensity="Show Isodensity flag",
+  cmsfShowEmboss="Show Emboss flag",
+  cmsfUserCalibrated="Slide is calibrated by user",
+  cmsfAutoCalibrated="Slide is auto calibrated just after capturing",
+  cmsfProbablyCalibrated="Slide is probably calibrated just after capturing",
+  cmsfIsImg3DObj="Is 3D Image Object",
+variant  cmsfIs3DImage="Is 3D Image object",
+cmsfDICOMStudy="CMSuite DICOM study",
+);
+
+{$ CurF=20140228}
+type TN_CMSUndoSlideAttrs = packed record //*** UNDO Slide Attrs
+  USADTImgMod   : TDateTime;
+  USADTMapRootMod: TDateTime;
+  USADTPropMod  : TDateTime;
+  USADTTaken    : TDateTime;
+  USATeethFlags : Int64;
+  USAMediaType  : Integer;
+  USADiagn      : string;
+  USAPixpermm   : Float;
+  USAPixBits    : Integer;
+  USAPixWidth   : Integer; 
+  USAPixHeight  : Integer; 
+  USADUnits     : TN_CMSlideDUnits;
+  USASFlags     : TN_CMSlideSFlags;
+  USAProvIDModified : Integer;
+  USALocIDModified  : Integer;
+  USACompModified   : string;
+  USAIniDTTaken     : Integer;
+end;
+
+//{$ Cur=20150706 NDPT=20081029}
+//{$ Cur=20160907 NDPT=20081029}
+//{$ CurF=20200112 NDPT=20081029}
+{$ CurF=20210111 NDPT=20081029}
+type TN_CMSlideSDBF = packed record //*** Slide Fields Stored in as single DB field
+  SFlags: TN_CMSlideSFlags; // Slide State Saved Flags
+  DUnits: TN_CMSlideDUnits; // Show Distance Units
+  PixPermm   :   float; // Pixel per millimeter (=0 is Slide was NOT calibrated)
+  PixWidth   : Integer; // Image width in pixels
+  PixHeight  : Integer; // Image height in pixels
+  PixBits    : Integer; // Image bits per pexel
+  BytesSize  :   Int64; // Image size in bytes
+  MDuration  :   Float; // Media Object Duration in seconds
+  MediaFExt  :  string; // MediaFile Extension
+  DCMModality:  string; // DICOM Modality
+  DCMKVP     :  Double; // DICOM KVP - Peak kilo voltage output of the x-ray generator used (0018,0060)
+  DCMExpTime : Integer; // DICOM ExposureTime - Time of x-ray exposure in msec (0018,1150)
+  DCMTubeCur : Integer; // DICOM Integer TubeCurrent - X-Ray Tube Current in mA (0018,1151)
+//  DCMTubeCurF: Float; // DICOM Float TubeCurrent - X-Ray Tube Current in mA
+  DCMRDose   :  Double; // DICOM RadiationDose     - X-Ray Radiation Dose in dGy*cm*cm (0018,115E)
+  DCMECMode  : Integer; // DICOM ExposureControlMode - 0 - undefibed, 1 - MANUAL, 2 - AUTOMATIC (0018,7060)
+  DCMMnf     :  string; // DICOM Manufacturer (0008,0070)
+  DCMMnfMN   :  string; // DICOM Manufacturer’s Model Name (0008,1090)
+  IniDTTaken : Integer; // Initial Date Taken  PixDepth   : Integer; // for Image 3D only
+  PixDepth   : Integer; // for Image 3D only
+  Capt3DDevObjName :  string; // Name of capture device object
+  DCMSerID   : Integer; // DICOM  series ID
+//!!! Insert New Fields here - View Attributes should occupy end of record
+
+// Image Colorize Attributes
+  ColPalInd : Integer; // Colorized Palette Index
+
+// Image Isodensity Attributes
+  IsoBaseColInt: Integer; // Image Base Color intensity
+variant ImgBaseColInt: Integer;
+  IsoRangeFactor  :   Float; // Image Colors Intensity Range Factor (0-100)
+variant RangeFactor  :   Float;
+  IsoColor     : Integer; // Isodensity Draw Color
+  IsoTranspFactor :   Float; // Isodensity Draw Transparency Factor (0-100)
+variant TranspFactor :   Float;
+
+// Image Emboss Attributes
+  EmbDepth   : Integer; // Image Emboss Depth 1 - 20
+  EmbDirAngle:   Float; // Image Emboss Direction Angle in degrees
+  EmbRFactor :   Float; // Image Emboss Resulting Correction Factor
+  EmbBase    : Integer; // Image Emboss Base Gray Intensity
+
+end;
+
+{$ CurF=20101118}
+type TN_CMSlideHist = packed record //*** Slide History
+  SHistProvID  : Integer;   // Provider ID
+  SHistLocID  : Integer;    // Location ID
+  SHistSessionID: Integer;  // Session ID
+  SHistActCode : Integer;   // History Action Code
+  SHistActTS   : TDateTime; // History Action Timestamp
+end;
+
+//{$ CurF=20101217}
+{$ CurF=20210111}
+type TN_CMSlide = packed record // Slide Attributes (TN_UDCMSlide record type)
+runtime  CMSRFlags:  TN_CMSlideRFlags; // Slide Dynamic Flags
+
+  CMSDTTaken:      TDateTime; // Slide DateTime Taken
+  CMSDTCreated:    TDateTime; // Slide DateTime Created
+  CMSDTImgMod:     TDateTime; // Slide DateTime Image Modified
+variant  CMSDTModified:   TDateTime; // Slide DateTime Modified
+  CMSDTMapRootMod: TDateTime; // Slide DateTime MapRoot Modified
+  CMSDTPropMod:    TDateTime; // Slide DateTime Properties/Diagnoses Modified
+
+  CMSProvIDCreated:  integer; // Provider ID that Creates Slide
+  CMSProvIDModified: integer; // Provider ID that (last) Modifies Slide
+
+  CMSLocIDCreated:   integer; // Location ID where Slide was Created
+  CMSLocIDModified:  integer; // Location ID where Slide was Modified
+
+
+  CMSCompCreated:     string; // Computer Name where Slide was Created
+  CMSCompModified:    string; // Computer Name where Slide was Modified
+
+  CMSMediaType:      integer; // Slide Media Type (Media Category) (global to all Patients)
+  CMSTeethFlags:     Int64;   // Slide Teeth Flags
+
+  CMSDiagn:          string;  // Slide Diagnoses
+  CMSSourceDescr:    string;  // Slide Source
+
+  CMSLocIDHost:     integer;  // Host Location ID (used in Enterprise Mode)
+variant CMSSelfId:      integer;   // Unique Self Id (to be used to retrieve from external DB)
+
+  CMSPatId:       integer;   // Patient Id (to be used to retrieve from external DB)
+  CMDCMSerID:     integer;   // DICOM  series ID
+
+  CMSDB  : TN_CMSlideSDBF;   // Slide Fields stored as single DB field
+  CMSHist : ArrayOf TN_CMSlideHist;// Slide Edit History (Array of TN_CMSlidedHist). In DB mode Temporary History - is cleared after saving to DB  
+end; // type TN_CMSlide = packed record
+
+//{$ CurF=20101217}
+{$ CurF=20210111}
+type TN_CMECSlide = packed record // Slide Attributes (TN_UDCMSlide record type) for Emergency Cache
+  CMSRFlags:  TN_CMSlideRFlags; // Slide Dynamic Flags
+
+  CMSDTTaken:      TDateTime; // Slide DateTime Taken
+  CMSDTCreated:    TDateTime; // Slide DateTime Created
+  CMSDTImgMod:     TDateTime; // Slide DateTime Image Modified
+  CMSDTMapRootMod: TDateTime; // Slide DateTime MapRoot Modified
+  CMSDTPropMod:    TDateTime; // Slide DateTime Properties/Diagnoses Modified
+
+  CMSProvIDCreated:  integer; // Provider ID that Creates Slide
+  CMSProvIDModified: integer; // Provider ID that (last) Modifies Slide
+
+  CMSLocIDCreated:   integer; // Location ID where Slide was Created
+  CMSLocIDModified:  integer; // Location ID where Slide was Modified
+
+
+  CMSCompCreated:     string; // Computer Name where Slide was Created
+  CMSCompModified:    string; // Computer Name where Slide was Modified
+
+  CMSMediaType:      integer; // Slide Media Type (Media Category) (global to all Patients)
+  CMSTeethFlags:     Int64;   // Slide Teeth Flags
+
+  CMSDiagn:          string;  // Slide Diagnoses
+  CMSSourceDescr:    string;  // Slide Source
+
+  CMSLocIDHost:     integer;  // Host Location ID (used in Enterprise Mode)
+variant CMSSelfId:      integer;   // Unique Self Id (to be used to retrieve from external DB)
+
+  CMSPatId:       integer;   // Patient Id (to be used to retrieve from external DB)
+  CMDCMSerID:     integer;   // DICOM  series ID
+
+  CMSDB  : TN_CMSlideSDBF;   // Slide Fields stored as single DB field
+  CMSHist : ArrayOf TN_CMSlideHist;// Slide Edit History (Array of TN_CMSlideHist). In DB mode Temporary History - is cleared after saving to DB  
+end; // type TN_CMSlide = packed record
+
+//******************************** SPL Types for RunTime Data Vectors Moving in ECache Dialog
+//
+{$ CurF=20100116}
+type TK_CMEDBUStateFlags = SetOf ( // slide update state flags set
+  K_dbusOldProps,   // DB User Properties Date is Older than current
+  K_dbusOldMapRoot, // DB User MapRoot Date is Older than current
+  K_dbusOldCurImg,  // DB User CurImg Date is Older than current
+  K_dbusNewProps,   // DB User Properties Date is Newer than current
+  K_dbusNewMapRoot, // DB User MapRoot Date is Newer than current
+  K_dbusNewCurImg,  // DB User CurImg Date is Newer than current
+  K_dbusECacheNew,  // ECahe Element is New Slide
+  K_dbusECacheDel   // ECahe Element is Deleted Slide
+);
+
+{$ CurF=20181210}
+type TK_CMEDBLockState = packed record
+  LSSrcInd    : Integer;             // Locked Slide Source Array Index
+  LSUpdate    : TK_CMEDBUStateFlags; // Locked Slide Update State
+  LSDTMod     : TDateTime;           // Locked Slide Modified Date (Maximal Date)
+  LSProvIDMod : Integer;             // Locked Slide Provider ID that (last) Modifies Slide
+  LSLocIDMod  : Integer;             // Locked Slide Location ID where Slide was Modified
+  LSCompIDMod :  string;             // Locked Slide Computer Name where Slide was Modified
+  LSProvIDLock: Integer;             // Locked Slide Provider ID that Locked Slide
+  LSLocIDLock : Integer;             // Locked Slide Location ID where Slide was Locked
+  LSCompIDLock:  string;             // Locked Slide Computer Name where Slide was Locked
+  LSCMSRFlags : TN_CMSlideRFlags;    // Locked Slide Initial Runtime Flags Value
+end; // type TK_CMEDBLockState = packed record
+//
+//******************************* SPL Types for RunTime Data Vectors Moving in ECache Dialog
+
+//******************************** TK_CMSLMKeyInfo
+//
+type TK_CMSLMKeyInfo = packed record //*** License Manager Key Info
+  LMKIDCode        : string;
+  LMKRegCode       : string;
+  LMKTwainDevList  : string;
+  LMKOtherDevList  : string;
+  LMKVideoDevList  : string;
+  LMKTwainDevNum   : Int1;
+  LMKOtherDevNum   : Int1;
+  LMKVideoDevNum   : Int1;
+  LMKDevListsFlags : Int1;
+end;
+
+{$ CurF=20110329}
+//****************************** Slide Thumbnail Texts Set
+// 
+type TK_CMSThumbTextFlagsSet = SetOf ( //*** Set of Slide Thumbnail Text Flags
+  ttsObjDateTaken = "Object Date Taken",         // Object Date Taken
+  ttsObjTimeTaken = "Object Time Taken",         // Object Time Taken
+  ttsObjTeethChart= "Object Teeth Chart Info",   // Object Teeth Chart
+  ttsObjSource    = "Object Source Description", // Object Source Description
+  ttsObjHLoc      = "Object Host Location"       // Object Host Location
+);
+
+
+//****************************** User Define Media Filter Date Select Enum
+// 
+{$ CurF=20110908}
+type TK_CMSlideFilterDateSelectMode = (
+  K_sfdsmDatesAll,    // Any Slide Date is OK
+  K_sfdsmDatesRange,  // Slide Date is inside given interval
+  K_sfdsmToday,       // Slide Date is inside Today interval
+variant K_sfdsmDatesExact,
+  K_sfdsmPrevWeek,    // Slide Date is inside Week ago till Today interval
+  K_sfdsmPrevMonth,   // Slide Date is inside Month ago till Today interval
+  K_sfdsmPrevQuarter, // Slide Date is inside Quarter ago till Today interval
+  K_sfdsmPrev1Year,   // Slide Date is inside Year ago till Today interval
+  K_sfdsmPrev2Years,  // Slide Date is inside 2 Years ago till Today interval
+  K_sfdsmPrev3Years   // Slide Date is inside 3 Years ago till Today interval
+  );
+
+
+//****************************** User Define Media Filter
+// 
+type TK_CMSlideFilterAttrs = packed record
+  FATeethFlags  : Int64;  // Slide Teeth Flags
+  FAMediaType   : Integer; // Slide Media Types
+  FAOpenCount   : Integer; // Slide to Open after filter apply Counter
+  FADate1       : TDateTime; // Slide DTTaken Range Start
+  FADate2       : TDateTime; // Slide DTTaken Range Fin
+  FADateMode    : TK_CMSlideFilterDateSelectMode; // Slide DTTaken Select Mode
+end;
+
+
+{$ CurF=20150210}
+//****************************** CMS Stand alone Location attributes table record
+// 
+type TK_CMSALocationAttrs = packed record
+  SALID   : Integer;    // Location ID
+  SALName : string;     // Location Name
+  SALFlags: Integer;    // Location Flags
+  SALCustRefN: string; // Location Custom Reference Number
+end;
+
+
+//****************************** CMS Stand alone Provider attributes table record
+// 
+type TK_CMSAProviderAttrs = packed record
+  SAUID          : Integer; // Provider ID
+  SAUTitle       : string;  // Provider Title
+  SAUSurname     : string;  // Provider Surname
+  SAUFirstname   : string;  // Provider Firstname
+  SAUMiddle      : string;  // Provider Middle
+  SAUAuthorities : Integer; // Provider Authorities
+  SAUFlags       : Integer; // Provider Flags
+  SAUEncodeLP    : string;  // Provider Encoded Login Password
+end;
+
+
+//****************************** CMS Stand alone Patient attributes table record
+// 
+type TK_CMSAPatientAttrs = packed record
+  SAPID          : Integer;  // Patient ID
+  SAPCardNum     : string;   // Patient Card Number
+  SAPGender      : string;   // Patient Gender
+  SAPTitle       : string;   // Patient Title
+  SAPSurname     : string;   // Patient Surname
+  SAPFirstname   : string;   // Patient Firstname
+  SAPMiddle      : string;   // Patient Middle
+  SAPDOB         : TDateTime;// Patient DOB
+  SAPProvID      : Integer;  // Patient Provider ID
+  SAPAddr1       : string;   // Patient Addr1
+  SAPAddr2       : string;   // Patient Addr2
+  SAPSuburb      : string;   // Patient Suburb
+  SAPPostCode    : string;   // Patient PostCode
+  SAPState       : string;   // Patient State
+  SAPPhone1      : string;   // Patient Phone1
+  SAPPhone2      : string;   // Patient Phone2
+  SAPFlags       : Integer;  // Patient Flags
+end;
+
+//******************************** 3D import annotations types
+//
+type TK_3DMLine = packed record
+  Color : Color;
+  Width : Integer;
+  LCoords : ArrayOf TFPoint;
+end;
+
+type TK_3DAngle = packed record
+  Color : Color;
+  Width : Integer;
+  ACoords : ArrayOf TFPoint;
+end;
+
+type TK_3DFontStyle  = Setof (
+  bold='bold', 
+  italic='italic',   
+  underline='underline',   
+  strike='strike'
+);
+
+type TK_3DText = packed record
+  BasePoint : TFPoint;
+  Color : Color;
+  FontSize : Integer;
+  FontFace : String;
+  FontStyle : TK_3DFontStyle;
+  Value : string;
+end;
+
+//******************************** TK_CMSLMKeyInfoForm
+//
+type TK_CMSLMKeyInfoForm = class
+  Common : TK_RAFrDescr;
+  Columns:  ArrayOf TK_RAFColumnDescr;
+  constructor Create( );
+end;
+
+constructor TK_CMSLMKeyInfoForm!Create( );
+var
+  RC : TK_RAFColumnDescr;
+  i : Integer;
+  WEditors : ArrayOf String;
+  WViewers : ArrayOf String;
+  PrevColumnFlagSet : TK_RAColumnFlagSet;
+begin
+
+  K_InitFormCommon( Result );
+  Self!Common.ColResizeMode = K_crmCompact;
+//  Self!Common.ColResizeMode = K_crmDataBased;
+  Self!Common.MinCWidth = 10;
+  Self!Common.DisFontColor = 0;
+  Self!Common.MinHColWidth = 10;
+
+
+  SetLength( Adr(Self!Columns), 50 );
+
+//  RC.CWidth=100;
+  RC.CCFillColorInd=0;
+  i = 0;
+
+  RC.FName="LMKIDCode";
+  RC.CCaption = "Sever Identification Code";
+  RC.CHint = "DB Sever Computer Identification Code";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKRegCode";
+  RC.CCaption = "Registration Code";
+  RC.CHint = "Registration Code";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="";
+  RC.CCaption = "X-ray/TWAIN devices restrictions";
+  RC.CHint = "";
+  PrevColumnFlagSet = RC.CShowEditFlagSet;
+  RC.CShowEditFlagSet="[K_racSeparator]";
+  Self!Columns[i]=RC;
+  RC.CHint = "Registration Code";
+  RC.CShowEditFlagSet := PrevColumnFlagSet;
+  i = i+1;
+
+  RC.FName="LMKTwainDevNum";
+  RC.CCaption = "Devices maximal number";
+  RC.CHint = "Devices maximal number (0 - Devices use is forbidden, -1 - Devices maximal number is not limited)";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKTwainDevList";
+  RC.CCaption = "Devices' Types List";
+  RC.CHint = "Devices' Types List (comma-delimited Types' Names)";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKDevListsFlags";
+  RC.CCaption = 'Not Allowed Devices Flag';
+  RC.CHint = "Checked - not allowed Devices' Types list, not checked - allowed Devices' Types list";
+  PrevColumnFlagSet = RC.CShowEditFlagSet;
+  RC.CShowEditFlagSet="[K_racShowCheckBox]";
+  RC.CBitMask = 1;
+  Self!Columns[i]=RC;
+  RC.CShowEditFlagSet := PrevColumnFlagSet;
+  i = i+1;
+
+  RC.FName="";
+  RC.CCaption = "X-ray/Other devices restrictions";
+  RC.CHint = "";
+  PrevColumnFlagSet = RC.CShowEditFlagSet;
+  RC.CShowEditFlagSet="[K_racSeparator]";
+  Self!Columns[i]=RC;
+  RC.CShowEditFlagSet := PrevColumnFlagSet;
+  i = i+1;
+
+  RC.FName="LMKOtherDevNum";
+  RC.CCaption = "Devices maximal number";
+  RC.CHint = "Devices maximal number (0 - Devices use is forbidden, -1 - Devices maximal number is not limited)";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKOtherDevList";
+  RC.CCaption = "Devices' Types List";
+  RC.CHint = "Devices' Types List (comma-delimited Types' Names)";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKDevListsFlags";
+  RC.CCaption = 'Not Allowed Devices Flag';
+  RC.CHint = "Checked - not allowed Devices' Types list, not checked - allowed Devices' Types list";
+  PrevColumnFlagSet = RC.CShowEditFlagSet;
+  RC.CShowEditFlagSet="[K_racShowCheckBox]";
+  RC.CBitMask = 2;
+  Self!Columns[i]=RC;
+  RC.CShowEditFlagSet := PrevColumnFlagSet;
+  i = i+1;
+
+  RC.FName="";
+  RC.CCaption = "Video devices restrictions";
+  RC.CHint = "";
+  PrevColumnFlagSet = RC.CShowEditFlagSet;
+  RC.CShowEditFlagSet="[K_racSeparator]";
+  Self!Columns[i]=RC;
+  RC.CShowEditFlagSet := PrevColumnFlagSet;
+  i = i+1;
+
+  RC.FName="LMKVideoDevNum";
+  RC.CCaption = "Devices maximal number";
+  RC.CHint = "Devices maximal number (0 - Devices use is forbidden, -1 - Devices maximal number is not limited)";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKVideoDevList";
+  RC.CCaption = "Devices' Types List";
+  RC.CHint = "Devices' Types List (comma-delimited Types' Names)";
+  RC.CShowEditFlagSet="[K_racUseFillColor]";
+  Self!Columns[i]=RC;
+  i = i+1;
+
+  RC.FName="LMKDevListsFlags";
+  RC.CCaption = 'Not Allowed Devices Flag';
+  RC.CHint = "Checked - not allowed Devices' Types list, not checked - allowed Devices' Types list";
+  PrevColumnFlagSet = RC.CShowEditFlagSet;
+  RC.CShowEditFlagSet="[K_racShowCheckBox]";
+  RC.CBitMask = 4;
+  Self!Columns[i]=RC;
+  RC.CShowEditFlagSet := PrevColumnFlagSet;
+  i = i+1;
+
+  SetLength( Adr(Self!Columns), i );
+
+end;

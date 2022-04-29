@@ -1,0 +1,565 @@
+//**************************************
+//***** SPL Build in Functions and System Types
+//**************************************
+unit @:\SPL\syslib;
+
+//**************************************
+//*****       Low Level Types      *****
+//**************************************
+type Bool1 = byte;
+
+//**************************************
+//*****   Build-in Routines Types  *****
+//**************************************
+type TK_UDObjNameType = ( K_ontObjName, K_ontObjAliase, K_ontObjUName );
+type TK_MoveDataFlags = SetOf ( K_mdfCountUDRef, K_mdfCopyRAElems, K_mdfCopyRArray, K_mdfFreeDest, K_mdfFreeAndFullCopy );
+type TK_CreateRAFlags = SetOf ( K_crfCountUDRef, K_crfNotCountUDRef, K_crfSaveElemTypeRAFlag );
+type TK_URArray {%Array of Undef} = ArrayOf Undef;
+
+
+//**************************************
+//*** System routines (SPL compiler special routines)
+//**************************************
+procedure _call( Op1:TN_UDBase );
+function  _CreateInstance( Op1:Undef ) : Undef;
+procedure _CallMethod( Op1:TN_UDBase; MInd:Integer );
+function  _ElemPointer( Arr: ArrayOf Undef; Ind:Integer ): Undef;
+function  _PInstance( UD : Undef ): Undef;
+// get reference to component UDBase from Dynamic context method
+function  _UDComponentObject(  ) : TN_UDBase;
+
+//**************************************
+//*** Miscellaneous routines
+//**************************************
+function  format( FString:String; FData:Undef ): String;
+function  value( PData:^Undef ) : Undef;
+function  time( ) : TDateTime;
+function  date( ) : TDate;
+procedure ShowDump( DumpLine: String; InfoTag:Integer );
+procedure ShowFDump( Fmt: String; Value : Undef );
+function  ToString( Obj : ^Undef ) : String;
+function  Bit( BitNum : Integer ) : Integer;
+procedure ShowMessage( Mes: String );
+function  Random( ) : Double;
+procedure Beep( );
+// Simple Bytes Move
+procedure Move( PSrc: ^Undef; PDest: ^Undef; Count:Integer );
+// Copy Typed SPL Data
+procedure CopyData( DData : ^Undef; SData : ^Undef; Count : Integer; CFlags : TK_MoveDataFlags );
+function  CompareData( PData1: ^Undef; PData2: ^Undef; Count:Integer ) : Integer;
+
+//**************************************
+//*** Build-in Cast Data Expressions List
+//**************************************
+// function Double( V : Integer ) : Double;
+// function Integer( V : Double ) : Integer;
+// function Byte( V : Integer ) : Byte;
+// function Integer( V : Byte ) : Integer;
+// function Double( V : Float ) : Double;
+// function Float( V : Double ) : Float;
+// function String( V : Integer ) : String;
+// function String( V : Double ) : String;
+// function String( V : Float ) : String;
+// function Integer( V : TN_UDBase ) : Integer;
+// function TN_UDBase( V : Integer ) : TN_UDBase;
+// function TN_UDBase( V : String ) : TN_UDBase;
+// function Short( V : Integer ) : Short;
+// function Integer( V : Short ) : Integer;
+// function TDate( V : String ) : TDate;
+// function String( V : TDate ) : String;
+// function TypeCode( V : String ) : TypeCode;
+// function String( V : TypeCode ) : String;
+function  Round( DVal : Double ) : Double;
+function  Floor( DVal : Double ) : Double;
+function  Ceil ( DVal : Double ) : Double;
+function  Sqrt ( DVal : Double ) : Double;
+function  Abs  ( DVal : Double ) : Double;
+function  StrToIBool( V : String ) : Integer;
+function  UpperCase( DVal : String ) : String;
+function  LowerCase( DVal : String ) : String;
+
+//**************************************
+//*** String routines
+//**************************************
+function  SubString( Str: String; Ind:Integer; Count:Integer ) : String;
+function  SLength( Str: String ) : Integer;
+function  StrToNumber( Str: String; PVal : ^Undef ) : Integer;
+
+//**************************************
+//*** Array BuildIn Routines
+//**************************************
+function  ALength( Arr: ArrayOf Undef ) : Integer;
+//procedure SetLength( PArr:^ArrayOf Undef; Size:Integer );
+function  SetLength( PArr:^ArrayOf Undef; Size:Integer ) : ArrayOf Undef;
+function  SubArray( Arr: ArrayOf Undef; Ind:Integer; Count:Integer; CFlags : Integer ) : ArrayOf Undef;
+function  GetSubArray( Arr: ArrayOf Undef; Ind:Integer; Count:Integer; CFlags : TK_MoveDataFlags ) : ArrayOf Undef;
+procedure SetElements( Arr: ArrayOf Undef; Ind:Integer; Count:Integer; Src:^Undef );
+procedure FillElements( Arr: ArrayOf Undef; Ind:Integer; Count:Integer; Src:^Undef );
+procedure InsElements( Arr: ArrayOf Undef; Ind:Integer; Count:Integer );
+procedure DelElements( Arr: ArrayOf Undef; Ind:Integer; Count:Integer );
+function  ARowLength( Arr: ArrayOf Undef ) : Integer;
+procedure SetRowLength( Arr: ArrayOf Undef; Size: Integer );
+function  NewArrayByTypeCode( Count : Integer; DType : TypeCode; CFlags : TK_CreateRAFlags ) : ArrayOf Undef;
+function  NewArrayByTypeName( Count : Integer; TypeName : String; CFlags : TK_CreateRAFlags ) : ArrayOf Undef;
+function  AElemTypeCode( Arr: ArrayOf Undef ) : TypeCode;
+function  AElemTypeName( Arr: ArrayOf Undef ) : String;
+function  ATypeName( Arr: ArrayOf Undef ) : String;
+procedure TranspMatrix( Arr: ArrayOf Undef );
+function  CopySubMatrix( DArr: ArrayOf Undef; DCInd: Integer; DRInd: Integer;
+                         SArr: ArrayOf Undef; SCInd: Integer; SRInd: Integer;
+                         CCount: Integer; RCount: Integer; CFlags : TK_MoveDataFlags ) : Integer;
+function  ARowsRangeCount( Arr: ArrayOf Undef; Ind : Integer; Count : Integer ) : Integer;
+function  AColsRangeCount( Arr: ArrayOf Undef; Ind : Integer; Count : Integer ) : Integer;
+function  StrMatrixSearch( SStr : string; SArr : ArrayOf string;
+                           PCInd : ^Integer; PRInd : ^Integer;
+                           CCount : Integer; RCount : Integer;
+                           CFlags : Integer ) : Integer;
+{
+function  MatrixSearch( PCont : ^Undef; SArr : ArrayOf Undef;
+                        PCInd : ^Integer; PRInd : ^Integer;
+                        CCount : Integer; RCount : Integer ) : Integer;
+}
+//**************************************
+//*** BuildIn Statistical Functions and
+//***     Double Vector Expressions
+//**************************************
+
+procedure DVAddExpr  ( DVRes : ArrayOf Double; DVI1 : ArrayOf Double; DVI2 : ArrayOf Double;
+                       DSF3 : Double; DSF4 : Double );
+procedure DVMultExpr ( DVRes : ArrayOf Double; DVF1 : ArrayOf Double; DVF2 : ArrayOf Double;
+                       DSF3 : Double );
+procedure DVMultExprE( DVRes : ArrayOf Double; DVF1 : ArrayOf Double; Ind1 : Integer;
+                       DVF2 : ArrayOf Double; Ind2 : Integer; DSF3 : Double );
+procedure DVDivExpr  ( DVRes : ArrayOf Double; DVD1 : ArrayOf Double; DVD2 : ArrayOf Double;
+                       DSF3 : Double );
+procedure DVCUSumExpr( DVRes : ArrayOf Double; DVI1 : ArrayOf Double; DSF2 : Double );
+procedure DVAbsExpr  ( DVRes : ArrayOf Double; DVI1 : ArrayOf Double; DSF2 : Double );
+function  DVSum      ( DVI : ArrayOf Double ) : Double;
+function  DVIndOfMax ( DVI : ArrayOf Double ) : Integer;
+function  DVIndOfInterval( DVI : ArrayOf Double; Val : Double ) : Integer;
+{
+function  DVMode     ( DVXIMin : ArrayOf Double; DVXISize : ArrayOf Double;
+                       DVFDistr : ArrayOf Double ) : Double;
+function  DVPartValue( DVXIMin : ArrayOf Double; DVXISize : ArrayOf Double;
+                       DVFRatio : ArrayOf Double; DVCSFRatio : ArrayOf Double;
+                       DPPrc : Double ) : Double;
+}
+//**************************************
+//*** UDBase routines
+//**************************************
+// UDBase TreeView Update Mode
+procedure TreeViewUpdate( Mode : Integer );
+
+// Create and change UDBase attrubutes
+function  UDCreate( TypeName : String ) : TN_UDBase;
+procedure UDSetName( UD :TN_UDBase; Name : String );
+
+// UDBase tree
+function  UDDirHigh( UDParent:TN_UDBase ) : Integer;
+function  UDDirLength( Op1:TN_UDBase ) : Integer;
+procedure UDPutToParent( Parent:TN_UDBase; Ind:Integer; Child:TN_UDBase );
+function  UDAddToParent( Parent:TN_UDBase; Child:TN_UDBase ) : Integer;
+function  UDAddToOwner( Owner :TN_UDBase; Child:TN_UDBase ) : Integer;
+procedure SetUDRef( PUD : ^TN_UDBase; NUD : TN_UDBase );
+function  UDChildByInd( UDParent:TN_UDBase; ChildInd:Integer ) : TN_UDBase;
+
+// Access to UDRArray fields (and Old Scalars)
+function  UDP   ( DPath:String ) : Undef;
+function  UDRP  ( UDRoot:TN_UDBase; DPath:String; NameType:TK_UDObjNameType ) : Undef;
+function  UDFP  ( UDRoot:TN_UDBase; DPath:String ) : Undef;
+
+// Access to UDRArray RArray
+procedure PutArrayToUD( UD : TN_UDBase; Arr: ArrayOf Undef );
+function  GetArrayFromUD( UD : TN_UDBase ) : ArrayOf Undef;
+
+// Access to VarArray
+procedure PutVArray( PVArr : ^VArrayOf Undef; Arr: ArrayOf Undef )
+function  GetVArray( VArr: VArrayOf Undef ) : ArrayOf Undef;
+
+// UDCursor
+procedure UDCursorInit( CurSorName:String; UDRoot:TN_UDBase; NameType:TK_UDObjNameType );
+
+//**************************************
+//*** Pointer Type Functions
+//**************************************
+function  PType0( P : ^Undef; PType : ^TypeCode ) : ^Undef;
+function  TPtr0 ( P : ^Undef; DType : TypeCode ) : ^Undef;
+function  PType ( P : ^Undef; PTypeName : ^String ) : ^Undef;
+function  TPtr  ( P : ^Undef; TypeName : String ) : ^Undef;
+function  PField( P : ^Undef; FieldPath : String ) : ^Undef;
+
+//**************************************
+//*** Edit Data Forms routines
+//**************************************
+function  ShowEditData( Data : ^Undef; DataName: String; EditFlag : Integer ) : Integer;
+function  ShowEditDataForm( Data : ^Undef; DataName: String; EditFlags : Integer;
+                                        FormDescr : Undef ) : Integer;
+
+//**************************************
+//*** UDComponent routines
+//**************************************
+procedure ExecComponent( UD : TN_UDBase );
+procedure InsComponent( UDParent : TN_UDBase; UDChild : TN_UDBase; CInd : Integer; Flags : Integer );
+
+//**************************************
+//*** Data Code Spaces, SubSpaces, Projections
+//**************************************
+function BuildDPIndexes( Indexes : ArrayOf Integer;
+                UDCSSSrc : TN_UDBase; UDCSSDest : TN_UDBase;
+                UDProjName : string ) : Integer;
+
+//**************************************
+//*****    Event Handlers Base Types
+//**************************************
+type TNotifyProc = procedure ( );
+
+//**************************************
+//*****    Timer Functions
+//**************************************
+type TTimeOut = record Handle : Hex; end;
+function  SetTimeout( Interval : Integer; Proc : TNotifyProc ) : TTimeOut;
+function  ClearTimeout( TimeHandle : TTimeOut ) : Integer;
+
+//********************************
+//      Save or Load UDTree Flags
+//********************************
+type TK_UDTreeLSFlagSet = SetOf (
+  K_lsfSkipAllSLSR="Игнорировать все секции",
+  K_lsfJoinAllSLSR="Присоединить все секции",
+  K_lsfSkipJoinChangedSLSR="Присоединить измененные секции",
+  K_lsfDisjoinSLSR="Отсоединить присоединенные секции",
+  K_lsfSkipReadOnlySLSR="Игнорировать измененные секции только для чтения",
+  K_lsfSaveReadOnlySLSR="Сохранить измененные секции только для чтения",
+  K_lsfSkipEmptySLSR="Игнорировать измененные пустые секции",
+  K_lsfSaveEmptySLSR="Сохранить измененные пустые секции",
+  K_lsfSaveNotChangedSLSR="Сохранить и не измененные секции",
+  K_lsfSkipSaveSLSRDialog="Игнорировать измененные пустые секции и  только для чтения" );
+
+//**************************************
+//*****    Miscellaneous System Functions
+//**************************************
+procedure ApplicationTerminate( );
+function  OpenCurArchive( FName : string ) : Integer;
+function  SaveCurArchive( FName : string ) : Integer;
+function  OpenCurArchive1( FName : string; Flags : TK_UDTreeLSFlagSet ) : Integer;
+function  SaveCurArchive1( FName : string; Flags : TK_UDTreeLSFlagSet ) : Integer;
+function  SetArchUndoMode( NewUndoState : Integer ) : Integer;
+function  SelectFilePath( Pars : string; FilePath : string ) : string;
+
+//**************************************
+//*****    Set Operations
+//**************************************
+function SetOR( PRSet:^undef; Set1:Undef; Set2:Undef ) : Integer;
+function SetAND( PRSet:^undef; Set1:Undef; Set2:Undef ) : Integer;
+function SetCLEAR( PRSet:^undef; Set1:Undef; Set2:Undef ) : Integer;
+function SetEQ( Set1:Undef; Set2:Undef ) : Integer;
+function SetLE( Set1:Undef; Set2:Undef ) : Integer;
+function SetToInds( PArr:^ArrayOf Integer; Set:Undef ) : Integer;
+
+//**************************************
+//*****  Application Command Line Parameters Interface
+//**************************************
+function GetCMDLinePar( ParName : string; ParInd : Integer  ) : string;
+
+//**************************************
+//*****    Pascal Objects Interface
+//**************************************
+//type TObject = record V : Hex; end;
+type TObject = Integer;
+procedure Free( Obj : ^TObject );
+
+//**************************************
+//*****   Dynamic Access To Pascal
+//**************************************
+type TPascalHandle = Hex;
+function  GetPascalHandle( ObjName: String ) : TPascalHandle;
+function  PascalNotifyFunc( PascalHandle : TPascalHandle; FParams : ^Undef ) : Integer;
+
+//**************************************
+//*****  Pointer types
+//**************************************
+type Pointer  = ^Undef;
+type PInteger = ^Integer;
+type PDouble  = ^Double;
+
+//**************************************
+//*****  Array Element types ArrayOf type
+//**************************************
+type TK_RAArray  = ArrayOf Undef;
+type TN_IArray   = ArrayOf Integer;
+type TN_SArray   = ArrayOf String;
+type TN_DArray   = ArrayOf Double;
+type TN_FArray   = ArrayOf Float;
+type TN_TPArray  = ArrayOf TPoint;
+type TN_TRArray  = ArrayOf TRect;
+type TN_TDPArray = ArrayOf TDPoint;
+type TN_TDRArray = ArrayOf TDRect;
+type TN_TFPArray = ArrayOf TFPoint;
+type TN_TFRArray = ArrayOf TFRect;
+
+//**************************************
+//*****    Extended Base Types
+//**************************************
+type TRDPoint = record x:  Double;  y:Double;  end;
+type TRFPoint = record x:  Float;   y:Float;   end;
+type TRPoint  = record x:  Integer; y:Integer; end;
+type TRDRect  = record x1: Double;  y1:Double;  x2: Double;  y2:Double;  end;
+type TRFRect  = record x1: Float;   y1:Float;   x2: Float;   y2:Float;   end;
+type TRRect   = record x1: Integer; y1:Integer; x2: Integer; y2:Integer; end;
+
+//**************************************
+//*****    Ind Iterator Object
+//**************************************
+type TK_IndIterator = TObject;
+function  CreateIndIterator( ) : TK_IndIterator;
+procedure AddIIDim( II : TK_IndIterator; PResInd : ^Integer; DimSize : Integer );
+procedure PrepIILoop( II : TK_IndIterator; LCount : Integer; ISeed : Integer );
+procedure GetNextIInds( II : TK_IndIterator );
+
+//**************************************
+//*****    CNK Sets Functions
+//**************************************
+procedure BuildCNKSets( PSetsArr : ^ArrayOf undef; K : Integer );
+type TK_SetsClearCondition = (
+  K_sccNotSuperSet    = "Не является надмножеством",
+  K_sccNoIntersection = "Не содержит общих элементов"
+  );
+function  ClearSetsBySets( SetsArr : ArrayOf undef; CondsArr : ArrayOf undef; ClearCondition : TK_SetsClearCondition  ) : Integer;
+
+//********************************
+//*****  Named Arrays List
+//********************************
+type TK_RAListItem = packed record //*** Element of Named RArray List
+  RAValue  : VArrayOf Undef;
+  RAName   : string;
+end;
+type TK_RAListAttrs = packed record //*** Named RArray List Attributes
+  FDTypeName : string;
+end;
+type TK_RAList = TK_RAListAttrs : TK_RAListItem;
+
+//**************************************
+//*****    Dump Watch Flags
+//**************************************
+type TK_IWFlagSet = SetOf ( K_iwContinueDump, K_iwNotShowNumbers, K_iwShowDate );
+
+{ // New Commands Project
+//**************************************
+//*****    TList Processing
+//**************************************
+type TList = TObject;
+function  ListAdd( PList : ^TList; Obj : TObject ) : Integer; // Result >=0 - New List Length
+function  ListDel( List : TList; Ind : Integer ) : Integer; // if Ind = -1 Delete All, Result >=0 - New List Length, =-1 Error (Ind >= List Length)
+function  ListGet( List : TList; Ind : Integer ) : TObject; // if (List is out of bounds) or (List = nil) -  Result = nil
+function  ListLength( List : TList ); // Result - Current List Length, =-1 - List is nil
+}
+//**************************************
+//*****    TStrings Processing
+//**************************************
+type TStrings = TObject;
+type TK_FileEncodeMode  = (K_femW1251, variant K_femANSI, K_femUTF8, K_femUNICODE, K_femKOI8);
+function  StringsAdd( PStrings : ^TStrings; Str : String ) : Integer;  // Result >=0 - New List Length
+function  StringsSet( Strings : TStrings; Ind : Integer; Str : String ) : Integer; // if Ind = -1 Replace All By Text, Result =0 - OK, =-1 Error (Ind >= List Length or List = nil)
+function  StringsDel( Strings : TStrings; Ind : Integer ) : Integer; // if Ind = -1 Delete All, Result >=0 - New List Length, =-1 Error (Ind >= List Length)
+function  StringsGet( Strings : TStrings; Ind : Integer ) : String; // if (List is out of bounds) or (List = nil) -  Result = ""
+function  StringsLength( Strings : TStrings ) : Integer; // Result - Current Strings Length, =-1 - Strings is nil
+function  StringsLoad( PStrings : ^TStrings; FileName: String; ) : Integer;
+function  StringsSave( Strings  :  TStrings; FileName: String; FileEncMode : TK_FileEncodeMode ) : Integer;
+
+//**************************************
+//*****    UDFields Load/Save Routines
+//**************************************
+function  GetUDFields( UD : TN_UDBase; PStrings  : ^TStrings ) : Integer;
+function  SetUDFields( UD : TN_UDBase; Strings   :  TStrings ) : Integer;
+
+//**************************************
+//*****    Time Period Types
+//**************************************
+type TK_TimePeriodType = (
+         K_tptYear    = "год",
+         K_tptHYeay   = "полугодие",
+         K_tptQuarter = "квартал",
+         K_tptMonth   = "месяц",
+         K_tpt10Days  = "декада",
+         K_tptWeek    = "неделя",
+         K_tptDay     = "день",
+         K_tptHour    = "час",
+         K_tptMinute  = "минута",
+         K_tptSecond  = "секунда",
+         K_tptMSecond = "миллисекунда"
+      ) : Integer;
+
+type TK_MVTimePeriod = record // TK_MVTimePeriod
+  SDate     : TDateTime;         // Start Date
+  PLength   : Integer;           // Period Length
+  PType     : TK_TimePeriodType; // Period Type
+end; // type TK_MVTimePeriod = record
+
+//**************************************
+//***** Web Site Build Routines
+//**************************************
+type TK_WebSitePackMode = ( //*** Web Site File Pack Mode Type
+         K_wspNoPack,     // No Pack Archives and Libraries
+         K_wspAllPack,    // Pack All Files
+         K_wspIfNeeded ); // Pack if packed file size is smaller then unpacked
+
+function CreateWebSite( WSite : TN_UDBase; FPath : string;
+   EncMode : TK_FileEncodeMode; WSPMode : TK_WebSitePackMode ) : Integer;
+
+//**************************************
+//***** MS Office Document Build Routines
+//**************************************
+function CreateMSDoc( WSite : TN_UDBase ) : Integer;
+
+//**************************************
+//***** Function for SPL Compiler Testing
+//**************************************
+function GetVarTypeInfo( PVar: ^Undef ): String;
+
+//**************************************
+//***** SPL Data Type - Pascal Types for Info Dump
+//**************************************
+type TK_ExprExtType = packed record
+  TCode    : Integer;  // Type Code
+  TFlags   : Byte;     // Type Flags
+  CFlags   : Byte;     // Class Flags
+  Reserved : Byte;     // Reserved
+  IFlags   : Byte;     // Interpreter Flags
+end;
+
+//**************************************
+//***** RAFrame Paste from Clipboard Mode Flags
+//**************************************
+type TK_RAFPasteFromClipboardMode = SetOf (
+   K_sdmInsBeforeSelectedRows   = "Вставлять перед выделенными рядами",
+   K_sdmReplaceSelectedRowsOnly = "Заменять только выделенные ряды",
+   K_sdmFixSelectedRowsNumber   = "Не изменять число рядов",
+   K_sdmFillSelectedRows        = "Заполнять выделенные ряды",
+   K_sdmInsBeforeSelectedCols   = "Вставлять перед выделенными колонками",
+   K_sdmReplaceSelectedColsOnly = "Заменять только выделенные колонки",
+   K_sdmFixSelectedColsNumber   = "Не изменять число колонок",
+   K_sdmFillSelectedCols        = "Заполнять выделенные колонки"
+   );
+
+//**************************************
+//*** Separately Loaded SubTree Root Flags
+//**************************************
+type TK_SLSRModeFlags =  SetOf (
+  K_srfRoot     = 'Секция',
+  K_srfText     = 'Формат *.SDT',
+  K_srfRead     = 'Только читать',
+  K_srfManual   = 'Подгружать вручную',
+  K_srfArchJoin = 'Присоединять к архиву'
+   );
+
+//**************************************
+//*** Separately Loaded SubTree Root with Uses
+//**************************************
+type TK_SLSRoot = packed record
+  UDUses : arrayof TN_UDBase;
+end;
+
+//**************************************
+//*** MVFiles Types
+//**************************************
+type TK_MVFCreateFlags = SetOf (
+  K_mvfcEncryptSrc = "Затирать исходные данные при записи"
+);
+
+type TK_MVFEncryptionType = (
+  K_mvfeProtected = "Включить контроль содержимого",
+  K_mvfePlain     = "Исключить изменение данных",
+  K_mvfeXOR       = "Включить простое кодирование и контроль содержимого",
+  K_mvfeEncr1     = "Включить сложное кодирование и контроль содержимого"
+);
+
+type TK_MVFErrorCode = ( // Read File Errors
+  K_mvfrOK               = "OK",
+  K_mvfrErrTooSmall      = "Недостаточная длина",
+  K_mvfrErrBadSignature  = "Неверная сигнатура",
+  K_mvfrErrBadDataSize   = "Неверная длина данных",
+  K_mvfrErrBadCRC        = "Неверная контрольная сумма",
+  K_mvfrErrBadVersion    = "Неверная версия формата",
+  K_mvfrErrBadEncrType   = "Неверный тип кодирования данных",
+  K_mvfrErrBadMetaInfo   = "Неверная служебная информация",
+  K_mvfrErrFileNotExists = "Файл не существует"
+);
+
+type TK_MVFCreateParams = packed record //***** MVFile Create Type Params
+  MVFCreateFlags    : TK_MVFCreateFlags;    // Create File Modes
+  MVFEncryptionType : TK_MVFEncryptionType; // File Content Type
+  MVFFormatVersion  : Integer;              // Format Version
+  MVFPassword       : String;               // Pasword if needed
+end; // type TK_MVFCreateParams = record
+
+//********************************
+//      Archive Runtime Data
+//********************************
+
+type TK_Archive = packed record
+  DataWasChanged   : Byte;           // Archive data was changed
+  SelfArchDataWasChanged : Byte;     // Archive (not Sections) was changed
+  FNameIsNotDef    : Byte;           // Archive File Name is not proper
+  UndoLevChanged   : Byte;           // Archive Undo Level Has Changes
+  UndoState        : Integer;        // Archive Undo State Index
+  UndoInd          : Integer;        // Archive Undo Index
+  UndoFNames       : ArrayOf String; // TK_RArray - Archive Undo File Names
+  ArchFileFormatBin: Byte;           // Archive file format is binary
+end;
+
+//********************************
+//     SPL Global Units Recompile Flags
+//********************************
+type TK_RecompileGSPLFlags = SetOf (
+  K_rsfSaveToDisk     = 'Save Open Archives to Disk',
+  K_rsfTxtMode        = 'Save Open Archives in Text Mode',
+  K_rsfKeepSavedFiles = 'Keep Open Archives Files After SPL Recompilation'
+);
+
+
+//********************************
+//   Text Serialisation Mode Flags
+//********************************
+type TK_TextModeFlags = SetOf (
+  K_txtMetaFullMode = "serialize all TN_UDBase fields",
+  K_txtAttrNewLine = "each TAG atribute start from new line",
+  K_txtSkipDblNewLine = "ignore duplicated NEW_LINE commands",
+  K_txtSysFormat = "serialize all TN_UDBase FLAGS fields (ObjVFlags and ObjUFlags)",
+  K_txtSaveVFlags = "serialize all TN_UDBase ObjVFlags field",
+  K_txtSaveUFlags = "serialize all TN_UDBase ObjUFlags field",
+  K_txtXMLMode = "skip serialization of some system TN_UDBase fields while SDT format is used to serialized and deserialized data in XML format and UsedSPLTypes Info Unload and Check",
+  K_txtRACompact = "not include in serialized data empty records arrays (TK_RArray)",
+  K_txtCompactArray = "compact (multi column) string and number arrays format",
+  K_txtCompDblCoords = "compact format for double coordinates (X,Y)",
+  K_txtCompIntCoords = "compact format for integer coordinates (X,Y)",
+  K_txtSingleLineMode = "ignore all NEW_LINE commands",
+  K_txtSkipCloseTagName = "skip close tags names (like in XML format)",
+  K_txtSkipMetaFields = "all UDBase Meta fields (like in XML format)",
+  K_txtParseXMLTree = "parse XML Tree to UDBase Tree of TK_UDStringList",
+  K_txtSkipTypesInfo = "skip SPL types info serialization"
+);
+
+//********************************
+//   String Matrix Load Flags
+//********************************
+type TN_StrMatrFormat = ( smfCSV="CSV", smfTab="Tab", smfClip="Clip",
+                          smfSpace1="Space1", smfSpace3="SpaceN" );
+
+
+type TK_DFPLFileDirElem = packed record
+  ScriptName : string;
+  ParamsName : string;
+  RIniFileName   : string;
+  RIniFileEncodeFlag : Byte;
+  RIniFileSaveFlag : Byte;
+end;
+
+//**************************************
+//*****    Run DFPL Script
+//**************************************
+function  RunDFPLStrings( Commands : TStrings; Macros : TStrings;
+                          InstallPath : string; IniName : string;
+                          EncodeIniFile : Integer; SkipSaveIniFile : Integer ) : Integer; // Result - =0 OK, >0 Errors while Script Run
+// EncodeIniFile   <>0 true, =0 false
+// SkipSaveIniFile <>0 true, =0 false
+

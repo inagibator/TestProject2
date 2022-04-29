@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SDKDevices version="1.0">
+ <devices>
+     <device id="AcqIO.dll" />
+     <device id="AcqCR7400.dll" />
+     <device id="AcqCS7600.dll" />
+     <device id="AcqVistaScan.dll" />
+     <device id="AcqPaxorama.dll" />
+     <device id="AcqVideo.dll" />
+     <device id="AcqImgFiles.dll" />
+     <device id="AcqCS7200.dll" />
+ </devices>
+</SDKDevices>

@@ -1,0 +1,1 @@
+scp -lc wrapdcm.log.config -od .\data 117

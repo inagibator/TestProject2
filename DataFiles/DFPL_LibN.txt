@@ -1,0 +1,1949 @@
+[[Contents]]
+BuildCommon - All Distributive Builds Common Part
+BuildSourceMorinFilesN - Prepare Source Morin Build for 10 and 07
+BuildSourceProductionFilesN - Prepare Source Production Build for 07 and 10
+BuildSourceDemoFilesN - Prepare Source Demo Build (for Developers)
+BuildSourceTwainFiles - Prepare Source Twain Test
+BuildExeDEMOFiles - Prepare Demo EXE
+BuildExeFiles - Prepare EXE
+BuildExeFSyncFiles - Prepare FSync EXE 
+BuildExeSupportFiles - Prepare Support EXE
+BuildExeCMScanFiles - Prepare CMScan EXE
+BuildExeD4WScanFiles - Prepare D4WScan EXE
+BuildExeTwainFiles - Prepare Twain Test EXE 
+BuildExeDCMExeFiles - Prepare DCMExe EXE
+UpdateFromSVNFiles - Update All source files
+[[/Contents]]
+
+[[CreateOEMSettigs]]
+
+///////////////////////////////////
+// GoodDrs Regional Settings Start
+//
+//*******************************
+// Prepare Regional Ini-file
+//*******************************
+
+// Clear Resulting ini-file
+* --
+
+// Texts castomization
+RegionTexts = CMSuiteProductName   "DrsViewer Pro"
+RegionTexts = CMSuiteCopyrightName "DrsViewer Pro"
+RegionTexts = CMSuiteCopyrightShow FALSE
+RegionTexts = CMScanProductName    "DrsViewer Pro Scanner"
+RegionTexts = CMScanCopyrightName  "DrsViewer Pro Scanner"
+RegionTexts = CMScanCopyrightShow  FALSE
+RegionTexts = CompanyPublName      "Centaur Software Development Company"
+RegionTexts = CompanyDistrName     "Good Doctors USA, Inc."
+RegionTexts = CompanyCopyrightName
+RegionTexts = Internet             www.gooddrs.us
+RegionTexts = Email                info@gooddrs.us
+RegionTexts = Phone                +1-844-448-5050
+RegionTexts = Fax
+RegionTexts = Address              "17609 Ventura Blvd #110, Encino CA 91316"
+RegionTexts = AboutBGColor         FFFFFF
+
+RegionTexts = EGALogin     Admin
+RegionTexts = EGAPassword  DVP17
+
+// Pictures castomization
+// Picture Files Location
+FileGPaths = DataFilesR     (##Exe#)OEMSettings.dat|Files\
+
+CMS_Main       = IconFName                (#DataFilesR#)App.ico
+CMS_Main       = SplashScreenImgFName     (#DataFilesR#)Splash.img
+CMS_Main       = SplashScreenImgEFName    (#DataFilesR#)SplashE.img
+CMS_Main       = ScanIconAltFName         (#DataFilesR#)ScanAlt.ico
+
+Application    = AboutPictFName1 (#DataFilesR#)About1.img
+Application    = AboutPictFName2 (#DataFilesR#)About2.img
+
+// Rename Devices Info
+RegionDevCapts = MediaRay      E2V
+RegionDevCapts = MediaRay+     "Rayence HDI-2000"
+RegionDevCapts = "MediaRay+ 2" "Rayence HDI-S"
+RegionDevCapts = MediaScan     "Fire CR"
+
+//********************************
+// Copy files to OEMSettings.dat
+//********************************
+
+//Clear Resulting Files
+(##Exe#)LangFiles\GoodDrs\ ->> *
+
+// Copy Open Application Icon for making Shotrcuts by Installer
+GDRegionImages =+>- IconFName             (##Exe#)LangFiles\GoodDrs\App.ico
+
+// Copy Images to OEMSettings compound file
+FileGPaths = DataFilesTmp     (##Exe#)LangFiles\GoodDrs\OEMSettings.dat|Files\
+GDRegionImages =+>- IconFName             (#DataFilesTmp#)App.ico
+GDRegionImages =+>- SplashScreenImgFName  (#DataFilesTmp#)Splash.img
+GDRegionImages =+>- SplashScreenImgEFName (#DataFilesTmp#)SplashE.img
+GDRegionImages =+>- AboutPictFName1       (#DataFilesTmp#)About1.img
+GDRegionImages =+>- AboutPictFName2       (#DataFilesTmp#)About2.img
+GDRegionImages =+>- ScanIconAltFName      (#DataFilesTmp#)ScanAlt.ico
+FileGPaths - DataFilesTmp
+
+// Save ini-file to OEMSettings compound file
+# RI>  (##Exe#)LangFiles\GoodDrs\OEMSettings.dat|ini
+
+// Save OEMSettings compound file to OEMSettings.dat
+# BF>- (##Exe#)LangFiles\GoodDrs\OEMSettings.dat "2017-09-04 03:03:42"
+//
+// GoodDrs Regional Settings fin
+///////////////////////////////////
+
+[[/CreateOEMSettigs]]
+
+[[BuildCommon]]
+//////////////////////////////////////////////////////////
+//
+//  All Distributive Builds Common Part
+//
+//////////////////////////////////////////////////////////
+
+// Set Version Macro for outer script use in ZIP File Name  
+_Version #=# CMS_Main BuildInfo
+
+//Clear all Resulting Path Files
+(##Exe#) ->> *
+
+//Clear all Resulting Ini
+* --
+
+//*************************
+// Set Ini Sections 
+//*************************
+//Copy Ini Sections
+CMS_VideoCompr      =+ * //
+CMSComments         =+ * //
+
+K_FormCMSPrintState =+ * //
+CMSColorPals        =+ * //
+CMSDBVerInfo        =+ * //
+
+//Set LogChannels Section
+LogChannels  = 0 "'[lcfEnable,lcfAppendMode,lcfShowCounter,lcfShowTime,lcfShowHeader]' '(#CMSLogFiles#)CMSLog.txt' 10 2"
+LogChannels  = 1 "'[lcfEnable,lcfAppendMode,lcfShowHeader]' '(#CMSLogFiles#)CMSImportLog.txt' 10"
+LogChannels  = 2 "'[lcfEnable,lcfShowHeader,lcfShowCounter]' '(#CMSLogFiles#)CMSErrLog.txt' 10"
+
+//Set CMS_Main Section
+CMS_Main  =+ * //
+CMS_Main  =  LastExportDir       ""
+CMS_Main  =  LastImportDir       (##Exe#)
+//CMS_Main  =  BinaryArchive       FALSE
+CMS_Main  =  DemoMaxSlidesCount  20
+CMS_Main  =  LockPatient         FALSE
+CMS_Main  =  CMLogFlags          "[cmpfEnable cmpfCompInfo cmpfMenuAll cmpfVideoMain cmpfVideoAll cmpfVideoStat cmpfTWAINMain cmpfTWAINAll cmpfDatabase cmpfDatabaseAll cmpfCOMServer cmpfVObjEvents cmpfVObjMain]"
+CMS_Main  =  ImgMemConstraints   "200000000 400000000"
+CMS_Main  =  CurTeethFilter      0
+CMS_Main  =  CurMTypeFilter     -2
+CMS_Main  =  EdFramesLayout      1
+CMS_Main  =  VTBAllTopToolbars   TRUE
+CMS_Main  =  VTBAlterations      TRUE
+CMS_Main  =  ColorPalIndex       0
+CMS_Main  =  UIShowEmbossDetails FALSE
+CMS_Main  =  MediaFilesSplitSize 8000000
+CMS_Main  =  MediaFilesMinSize   1000000
+CMS_Main  =  MediaFilesStoringMode 1
+CMS_Main  =  CMMediaFiles        ""
+CMS_Main  =  MultipleInstanceMode FALSE
+CMS_Main  =  HelpFName (#DLLFiles#)CMSHelp_ENG.chm
+CMS_Main  -  FootPedalIndex
+CMS_Main  -  FootPedalDevInd
+CMS_Main  -  FootPedalReverse
+CMS_Main  -  FootPedalCOMPort
+CMS_Main  =  ThumbsRFrameWidth   90
+CMS_Main  =  FDIToothScheme      TRUE
+CMS_Main  -  StandaloneGUIKey
+CMS_Main  =  ThumbTextFlags      "[ttsObjDateTaken,ttsObjTeethChart]"
+CMS_Main  =  WinDrawSmoothMode   TRUE
+CMS_Main  =  ThumbnailSize       150
+CMS_Main  =  ThumbnailQuality    100
+CMS_Main  =  StudyOnlyThumbsShowMode FALSE
+CMS_Main  =  ImgFileFormat       7
+CMS_Main  =  XRayCaptStreamLine  FALSE
+CMS_Main  -  EmailExportNameFlagsSet
+CMS_Main  -  Skip16bitMode
+CMS_Main  -  RImageType
+CMS_Main  -  RImageNotGDIType
+CMS_Main  =  ImgMaxMegaPixels    30
+CMS_Main  =  ImportFilter        "Picture files (*.bmp;*.jpg;*.jpeg;*.gif;*.tif;*.png;*.dcm;*.dic)|*.bmp;*.jpg;*.jpeg;*.gif;*.tif;*.tiff;*.png;*.dcm;*.dic;|Video files (*.avi; *.mpg; *.mpeg; *.wmv; *.mp4;*.mov)|*.avi;*.mpg;*.mpeg;*.wmv;*.mp4;*.mov|All files (*.*)|*.*"
+CMS_Main  -  DICOMImportFilter
+//CMS_Main  =  DICOMImportFilter   "DICOM files (*.dcm;*.dic)|*.dcm;*.dic;|All files (*.*)|*.*"
+CMS_Main  =  VideoFileExts       ".avi,.mpg,.mp4,.mpeg,.wmv,.mov"
+CMS_Main  -  OpenAllDBVer
+//CMS_Main  =  OpenAllDBVer        TRUE
+CMS_Main  -  DICOMImportVisible
+CMS_Main  -  GUID
+
+CMS_Main  -  ScanDataPath
+CMS_Main  -  ScanDataPathOld
+
+CMS_Main  -  DentalUnitDevInd
+CMS_Main  -  DentalUnitProfName
+
+CMS_Main  =  SharpenMax  5.0
+CMS_Main  =  SmoothenMax 1.0
+
+CMS_Main  - ScanCurDataArch
+CMS_Main  - ShowDBTrialWarning  
+
+CMS_Main  - LastRunVersion
+
+CMS_Main  - ConvToBMPPath
+
+CMS_Main  - CustToolbarSmallButtons
+CMS_Main  - GCustToolbarSmallButtons
+CMS_Main  - UseCustToolbarGlobal
+
+CMS_Main  = MailClientUseDefault TRUE
+
+CMS_Main  - IUCheckUpdatesPath
+CMS_Main  - IURemindeTS
+CMS_Main  - IURemindeInDays
+CMS_Main  - IUCheckUpdatesCMDLType
+
+CMS_Main  - DCMQRSetStoreMode
+CMS_Main  = TerminateByEDAError TRUE
+CMS_Main  - LogsKeepPeriodInMonths
+CMS_Main  - DelObjsKeepMonths
+
+CMS_Main  - EGALogin    
+CMS_Main  - EGAPassword 
+
+CMS_Main  - StudyCaptPreviewTimeout
+
+CMS_Main  - StudySamplesList
+
+CMS_Main  - CMScanWEBUIVisible
+
+//Set N_Forms Section
+N_FormsInit = CMSHist "0 0 780 350 $04"
+N_FormsInit = K_FormCMReportShow "0 0 427 270 $04"
+N_FormsInit = K_FormCMReportShow0 "0 0 427 270 $04"
+N_FormsInit = N_IconSelectionForm "0 0 579 445 $04"
+N_FormsInit = TWAINMode "0 0 145 110 $04"
+
+//Set VObjAttrs Section
+VObjAttrs = DistanceUnits        0
+VObjAttrs = LineWidth            1.5
+VObjAttrs = Font "( 0 0 0 0 0 1 0 0 0 0 0 0 0 $0 $0 $0 $0 $0 $0 $0 $0 ) Arial 20 0 0 0 0 0 $0"
+VObjAttrs = LineColor            #0000FF
+VObjAttrs = TextColor            #0000FF
+
+
+//Set Global Section
+Global =+ NewArchAppID
+Global =+ ArchFmtCurVer
+Global =+ ArchFmtMinVer
+Global =+ ArchSDTCopy
+Global =  SPLBinModeFlags   []
+Global =  UseWinEnvMacro    TRUE
+
+//Set GlobalFlags Section
+GlobalFlags = MEDebFlags     "[medfDebInInterface medfCollectProtocol]"
+GlobalFlags = RecompFlags    []
+GlobalFlags = SDTUnloadFlags "[K_txtSkipDblNewLine K_txtSaveVFlags K_txtSaveUFlags K_txtRACompact K_txtCompactArray]"
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+// Copy User Ini
+(##Exe#)CMSUser.ini  F+> (##Exe#)CMSUser.ini
+CMSIniFiles = User (#BasePath#)CMSUser.ini
+
+//***************************************
+//Copy Regional Settings
+//***************************************
+RegionTexts  =+ * //
+
+[[/BuildCommon]]
+
+[[SetCMCustToolbarIniState]]
+// Create Customizable Toolbar Initial State
+CMCustToolbar =  0 aEditUndoLast
+CMCustToolbar =  1 aEditUndoRedo
+CMCustToolbar =  2 aToolsBriCoGam
+CMCustToolbar =  3 aToolsNegate11
+CMCustToolbar =  4 aToolsEmboss
+CMCustToolbar =  5 aToolsColorize
+CMCustToolbar =  6 aToolsIsodens
+CMCustToolbar =  7 aToolsRotateLeft
+CMCustToolbar =  8 aToolsRotateRight
+CMCustToolbar =  9 aToolsRotate180
+CMCustToolbar = 10 aToolsFlipHorizontally
+CMCustToolbar = 11 aToolsFlipVertically
+[[/SetCMCustToolbarIniState]]
+
+
+[[CopyDLLFiles]]
+//Copy DLL files
+(#DLLFiles#)                   F>> (#DLLFiles#) *.dll
+(#DLLFiles#)                   F>> (#DLLFiles#) *.xml
+(#DLLFiles#)                   F>> (#DLLFiles#) *.exe
+(#DLLFiles#)                   F>> (#DLLFiles#) *.config
+(#DLLFiles#)                   F>> (#DLLFiles#) *.txt
+(#DLLFiles#)                   F>> (#DLLFiles#) *.cfg
+(#DLLFiles#)                   F>> (#DLLFiles#) *.ini
+(#DLLFiles#)                   F>> (#DLLFiles#) *.dat
+//(#DLLFiles#)Progeny\           F>> (#DLLFiles#)Progeny\ *.exe
+//(#DLLFiles#)MediaScan\         F>> (#DLLFiles#)MediaScan\ *.dll
+// Remove Extra Files
+(#DLLFiles#)scp.exe            -> 
+(#DLLFiles#)scp.log.config     -> 
+[[/CopyDLLFiles]]
+
+[[CopyCommonFilesToSrcDistr]]
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+//***************************************
+//Copy Customised UI Pictures Files
+//***************************************
+//Copy About form Picture Files
+Application =+> AboutPictFName1 (#ImgFiles#)About1.*
+Application =+> AboutPictFName2 (#ImgFiles#)About2.*
+
+//Copy Icon File Name
+CMS_Main                        =+> IconFName          (#ImgFiles#)App.ico
+
+//Copy CMScan Alt Icon File Name
+CMS_Main                        =+> ScanIconAltFName         (#ImgFiles#)AppAlt.ico
+
+// Copy Splash Screen
+CMS_Main                        =+> SplashScreenImgFName     (#ImgFiles#)Splash.*
+CMS_Main                        =+> SplashScreenImgEFName    (#ImgFiles#)SplashE.*
+
+//Copy Cloud SplashScreen files
+CMS_Main                        =+> SplashScreenImgCloudFName     (#ImgFiles#)SplashCloud.*
+CMS_Main                        =+> SplashScreenImgCloudEFName    (#ImgFiles#)SplashECloud.*
+
+//***************************************
+//Copy UI Pictures Files
+//***************************************
+//Copy Teeth Chart Files
+CMS_Main                        =+> TeethchartImgFNameNormal1    (#ImgFiles#)TeethchartN1.*
+CMS_Main                        =+> TeethchartImgFNameHighlited1 (#ImgFiles#)TeethchartH1.*
+CMS_Main                        =+> TeethchartImgFNameNormal2    (#ImgFiles#)TeethchartN2.*
+CMS_Main                        =+> TeethchartImgFNameHighlited2 (#ImgFiles#)TeethchartH2.*
+CMS_Main                        =+> TeethchartImgFNameMask       (#ImgFiles#)TeethchartMask.*
+
+//Copy Archived Thumbnails Files
+CMS_Main                        =+> ArchSlideTIMGFName           (#ImgFiles#)ArchTIMG.*
+CMS_Main                        =+> ArchSlideQTIMGFName          (#ImgFiles#)ArchQTIMG.*
+
+//Copy D4WScan UI Files
+CMS_Main                        =+> D4WScanIconFName             (#ImgFiles#)D4WScan.ico
+CMS_Main                        =+> D4WAboutPictFName1           (#ImgFiles#)D4WScanAbout1.jpg
+
+//Copy Thumbnail 3Shape File
+CMS_Main                        =+> Thumb3ShapeFName             (#ImgFiles#)Thumb3Shape.*
+
+//Copy Thumbnail Vatech File
+CMS_Main                        =+> ThumbVatechFName             (#ImgFiles#)ThumbVatech.*
+
+//Copy Cursors
+(#CursorFiles#)                 >> (#CursorFiles#) *.cur
+
+//Copy Device Icons Files
+CMS_Main                        =+> IconsBigFName   (#ImgFiles#)DevIcons44.*
+CMS_Main                        =+> IconsSmallFName (#ImgFiles#)DevIcons18.*
+
+// Copy PMT Vizard Files
+PMTImages  =F> * (#ImgFiles#)PMTImages\
+
+//***************************************
+//Copy Other Common Files
+//***************************************
+//Copy DLL files
+*DFPLLib|CopyDLLFiles VFE>
+(#DLLFiles#)scp.exe         F>  (#DLLFiles#)
+(#DLLFiles#)scp.log.config  F>  (#DLLFiles#)
+(#DLLFiles#)                F>> (#DLLFiles#) start*.bat
+
+//Copy LangFiles
+(%IF NOT _SkipSomeFilesForSVN %)
+(#LangFiles#)                  F>> (#BasePath#)LangFiles\
+(%END%)
+
+//Copy Context Save DFPL Scripts file
+CMS_Main                        => SaveDFPLLib     (#DataFiles#)
+
+//Copy DFPL Distribute files
+(#_DFPL_LIB#)  > (#DataFiles#)
+
+//***************************
+// Copy Archives Files
+//***************************
+
+//Copy SYS Archive Section with Annotations Library
+(#ArchSections#)CMArch_Sys.sdt      > (#DataFiles#)
+
+// Copy DEMO Archive Files
+(#DemoFiles#)CMArch_Demo.sdt          >  (#DataFiles#)
+(#DemoFiles#)CMArch_Demo.files       >>  (#DataFiles#)CMArch_Demo.files
+
+[[/CopyCommonFilesToSrcDistr]]
+
+
+[[CopyCommonFilesToExeDistr]]
+//Copy About form Picture Files
+Application =+> AboutPictFName1 (#DataFiles#)About1.Img
+Application =+> AboutPictFName2 (#DataFiles#)About2.Img
+
+CMS_Main                        =>   IconFName     (#DataFiles#)
+CMS_Main                        =+>- IconFName     (#DLLFiles#)App.ico
+
+
+//Copy Cursors
+(#CursorFiles#)                 >> (#CursorFiles#) *.cur
+
+//Copy Icons
+CMS_Main                        => IconsBigFName   (#DataFiles#)
+CMS_Main                        => IconsSmallFName (#DataFiles#)
+
+//Copy DLL files
+*DFPLLib|CopyDLLFiles VFE>
+
+//Copy Context Save DFPL Scripts file
+CMS_Main                        => SaveDFPLLib     (#DataFiles#)
+
+//***************************
+// Copy Archives Files
+//***************************
+
+//Copy SYS Archive Section with Annotations Library
+(#DataFiles#)CMArch_Sys.sdt      > (#DataFiles#)
+
+//Copy SPL.sdb File Name
+Global                         =+> SPLBinFile         (#DataFiles#)SPL.sdb
+
+//Copy Thumbnail 3Shape File
+CMS_Main                        => Thumb3ShapeFName   (#DataFiles#)
+
+//Copy Thumbnail Vatech File
+CMS_Main                        => ThumbVatechFName   (#DataFiles#)
+
+[[/CopyCommonFilesToExeDistr]]
+
+[[CopyCommonFilesToExeDistr1]]
+*DFPLLib|CopyCommonFilesToExeDistr VFE>
+
+//Copy SplashSceen files
+CMS_Main                        =+> SplashScreenImgFName     (#DataFiles#)Splash.img
+CMS_Main                        =+> SplashScreenImgEFName    (#DataFiles#)SplashE.img
+
+
+//Copy Teeth Chart Files
+CMS_Main                        => TeethchartImgFNameNormal1    (#DataFiles#)
+CMS_Main                        => TeethchartImgFNameHighlited1 (#DataFiles#)
+CMS_Main                        => TeethchartImgFNameNormal2    (#DataFiles#)
+CMS_Main                        => TeethchartImgFNameHighlited2 (#DataFiles#)
+CMS_Main                        => TeethchartImgFNameMask       (#DataFiles#)
+
+//Copy Archived Thumbnails Files
+CMS_Main                        => ArchSlideTIMGFName           (#DataFiles#)
+CMS_Main                        => ArchSlideQTIMGFName          (#DataFiles#)
+
+// Copy PMT Vizard files
+PMTImages  => * (#DataFiles#)PMTImages\
+
+[[/CopyCommonFilesToExeDistr1]]
+
+[[BuildSourceMorinFilesN]]
+//////////////////////////////////////////////////////////
+//
+//  Prpepare Source Morin Build
+//
+//////////////////////////////////////////////////////////
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+// Build Distributive Common Part
+*DFPLLib|SetCMCustToolbarIniState VFE>
+  
+//*************************
+// Set Ini Sections 
+//*************************
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (##Exe#)DataFiles\
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = ImgFiles       (#DataFiles#)Img\
+FileGPaths = CursorFiles    (#DataFiles#)Img\
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+FileGPaths = CMSLogFiles    (#LogFiles#)
+// DemoFiles is needed for future call to BuildExeDEMOFiles DFPL script
+FileGPaths = DemoFiles      (#DataFiles#)
+
+//Set CMS_Main Section
+CMS_Main  =  IDEMode             0
+CMS_Main  =  CheckBuildInfo      TRUE
+CMS_Main  =  UseExtDB            FALSE
+CMS_Main  =  StartByClientOnly   FALSE
+CMS_Main  =  DemoMode            FALSE
+CMS_Main  =  ShowDBTrialWarning  TRUE
+CMS_Main  =  DebVersionMode      FALSE
+CMS_Main  =  CheckBuildRegistration TRUE
+CMS_Main  =  CheckFilesCRC       FALSE
+CMS_Main  =  DesignMode          FALSE
+CMS_Main  =  DistrFilesMode      TRUE
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+*DFPLLib|CopyCommonFilesToSrcDistr VFE>
+
+//Copy SPL files and set SPL.sdb File Name
+Global                              =+ SPLBinFile  (##Exe#)SPL\SPL.sdb
+SPLSrcFiles                         => *           (##Exe#)SPL\
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+_SrcArchPath         #=#       CMS_Main      EmptyArchive
+CMS_Main              =        StartArchive  (#DataFiles#)CMArch.dat
+(#_SrcArchPath#)      +>       (#DataFiles#)CMArch.dat
+(#_SrcArchPath#)      >>.files (#DataFiles#)CMArch.files\
+
+//*******************************************
+// Build Projects, corresponding INI Files and DistrInterfase
+//*******************************************
+
+
+// Prepare MacroVars for porjects DOF File
+_DOFMajorVer #=#  CMS_Main DOFMajorVer
+_DOFRelease  #=#  CMS_Main DOFRelease
+_DOFBuild    #=#  CMS_Main DOFBuild
+
+// Build ComClient DLL Project  
+(%IF CopyClientDLLPrj %)
+// Prepare MacroVars for project DOF File 
+_DOFLibVer   #=#  CMS_Main DOFLibVer
+//CMS_Main DUMP> DOFLibVer > (#_DOFLibVer#)
+(##Exe#)..\K_MVDar\Proj_CMS$$$ComClientLib.dof M> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_CMSComClientLib_00.dof" "DOFMajorVer=(#_DOFMajorVer#),DOFRelease=(#_DOFRelease#),DOFBuild=(#_DOFBuild#),DOFLibVer=(#_DOFLibVer#)," "," R
+(##Exe#)..\K_MVDar\Proj_CMSComClientLib.res    +> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_CMSComClientLib_00.res"
+(##Exe#)..\K_MVDar\Proj_CMS$$$Lib.txt          +> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_CMSComClientLib_00.dpr" 
+(##Exe#)..\K_MVDar\Proj_CMSComClientLib.dpr    DPRU> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_CMSComClientLib_00.dpr" 
+(##Exe#)..\K_MVDar\Proj_CMSComClientLib_00.dpr >>DPR (##Exe#)CMSClient.dpr
+(%END%)
+
+
+// Build D4WScan DLL Project  
+(%IF CopyD4WScanDLLPrj %)
+// Prepare MacroVars for project DOF File 
+_DOFLibVer   #=#  CMS_Main DOFD4WLibVer
+(##Exe#)..\K_MVDar\Proj_CMS$$$D4WScanLib.dof M> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_D4WScanLib_00.dof" "DOFMajorVer=(#_DOFMajorVer#),DOFRelease=(#_DOFRelease#),DOFBuild=(#_DOFBuild#),DOFLibVer=(#_DOFLibVer#)," "," R
+(##Exe#)..\K_MVDar\Proj_D4WScanLib.res    +> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_D4WScanLib_00.res"
+(##Exe#)..\K_MVDar\Proj_CMS$$$Lib.txt     +> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_D4WScanLib_00.dpr" 
+(##Exe#)..\K_MVDar\Proj_D4WScanLib.dpr    DPRU> "(#SrcFileGPaths.#Exe#)..\K_MVDar\Proj_D4WScanLib_00.dpr" 
+(##Exe#)..\K_MVDar\Proj_D4WScanLib_00.dpr >>DPR (##Exe#)D4WScanLib.dpr
+(%END%)
+
+// Prepare *.res and *.dof for all other projects 
+(##Exe#)Proj_CMS$$$.dof    M> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dof" "DOFMajorVer=(#_DOFMajorVer#),DOFRelease=(#_DOFRelease#),DOFBuild=(#_DOFBuild#)," "," R
+(##Exe#)(#SrcIniName#).res +> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.res"
+
+CMSDISTR_DFPL = LIBFile (#_DFPL_LIB#)
+
+//////////////////////////////////////
+// Build DEMO Project and Save INI  
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=CMS,DEMO=TRUE"
+(%IF NOT _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)CMSuiteDemo.dpr -
+(%END%)
+CMS_Main  =  DemoMode      TRUE
+
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMSuiteDemo
+CMSDISTR_DFPL = ResultName CMSuiteDemo
+CMSDISTR_DFPL = Script BuildExeDEMOFiles
+CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+(%IF NOT _SkipSomeFilesForSVN %)
+# RI> (##Exe#)CMSuiteDemo.ini
+(%END%)
+
+CMS_Main  =  DemoMode  FALSE
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+
+//////////////////////////////////////
+// Build Support Project and Save INI  
+(##Exe#)Proj_CMS$$$.txt     +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr  DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr     M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=SUPPORT"
+(%IF NOT _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr     >>DPR (##Exe#)CMSupport.dpr -
+(%END%)
+//CMS_Main  = CMSupportMode TRUE
+CMS_Main  = AppMode Support
+
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMSupport
+CMSDISTR_DFPL = ResultName CMSupport
+CMSDISTR_DFPL = Script BuildExeSupportFiles
+
+(%IF NOT _SkipSomeFilesForSVN %)
+# RI> (##Exe#)CMSupport.ini
+(%END%)
+
+//CMS_Main  - CMSupportMode 
+
+//////////////////////////////////////
+// Build CMScan Project and Save INI  
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=SCAN"
+(%IF NOT _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)CMScan.dpr -
+(%END%)
+CMS_Main  = AppMode ClientScan
+
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMScan
+CMSDISTR_DFPL = ResultName CMScan
+CMSDISTR_DFPL = Script BuildExeCMScanFiles
+
+(%IF NOT _SkipSomeFilesForSVN %)
+# RI> (##Exe#)CMScan.ini
+(%END%)
+
+CMS_Main  - AppMode
+
+//////////////////////////////////////
+// Build CMScan Project and Save INI  
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=SCAN"
+(%IF _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)CMScanWEB.dpr -
+(##Exe#)ExtPas\L\K_FCMScan.pas           F+> (##Exe#)K_FCMScan.pas 
+(##Exe#)ExtPas\L\K_FCMScan.dfm           F+> (##Exe#)K_FCMScan.dfm 
+(%END%)
+CMS_Main  = AppMode ClientScan
+
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMScanWEB
+CMSDISTR_DFPL = ResultName CMScanWEB
+CMSDISTR_DFPL = Script BuildExeCMScanFiles
+
+(%IF _SkipSomeFilesForSVN %)
+# RI> (##Exe#)CMScanWEB.ini
+(%END%)
+
+CMS_Main  - AppMode
+
+//////////////////////////////////////
+// Build D4WScan Project and Save INI  
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=DSCAN"
+(%IF NOT _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)D4WScan.dpr -
+(%END%)
+CMS_Main  = AppMode ClientD4WScan
+
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\D4WScan
+CMSDISTR_DFPL = ResultName D4WScan
+CMSDISTR_DFPL = Script BuildExeD4WScanFiles
+
+// Save D4WScan specific vars
+_ProdScanName       #=#D  RegionTexts CMScanProductName
+_ProdScanCopyright  #=#D  RegionTexts CMScanCopyrightName
+_IconFName          #=#D  CMS_Main    IconFName
+_IconAltFName       #=#D  CMS_Main    ScanIconAltFName
+_AboutFName1        #=#D  Application AboutPictFName1
+
+// Set Vars with D4WScan values 
+_D4WIconFName       #=#D  CMS_Main D4WScanIconFName
+_D4WAboutFName1     #=#D  CMS_Main D4WAboutPictFName1
+
+// Set  D4WScan specific vars
+RegionTexts = CMScanProductName   "D4W Scanner"
+RegionTexts = CMScanCopyrightName "D4W Scanner"
+Application = AboutPictFName1     (#_D4WAboutFName1#)
+CMS_Main    = IconFName           (#_D4WIconFName#)
+//CMS_Main    - ScanIconAltFName
+CMS_Main    = ScanIconAltFName    (#_D4WIconFName#)
+
+
+(%IF NOT _SkipSomeFilesForSVN %)
+# RI> (##Exe#)D4WScan.ini
+(%END%)
+
+CMS_Main  - AppMode
+
+// Restore  D4WScan specific vars
+RegionTexts = CMScanProductName   (#_ProdScanName#)
+RegionTexts = CMScanCopyrightName (#_ProdScanCopyright#)
+CMS_Main    = IconFName           (#_IconFName#)  
+CMS_Main    = ScanIconAltFName    (#_IconAltFName#)  
+Application = AboutPictFName1     (#_AboutFName1#) 
+
+//////////////////////////////////////
+// Build DCMExe Project and Save INI  
+(##Exe#)Proj_CMS$$$.txt     +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr  DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr     M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=DCMExe"
+(%IF NOT _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr     >>DPR (##Exe#)CMDCM.dpr -
+(%END%)
+CMS_Main  = AppMode DCMExe
+
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMDCM
+CMSDISTR_DFPL = ResultName CMDCM
+CMSDISTR_DFPL = Script BuildExeDCMExeFiles
+
+(%IF NOT _SkipSomeFilesForSVN %)
+# RI> (##Exe#)CMDCM.ini
+(%END%)
+
+CMS_Main  - AppMode
+
+//////////////////////////////////////
+// Build CMSuiteWEB Project, Copy Project Files
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "COM=TRUE,DELPHI=(#_DELPHI#),MODE=CMS,WEB=TRUE"
+(%IF _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)CMSuiteWEB.dpr
+(##Exe#)ExtPas\                         >>  (##Exe#) *.inc
+(##Exe#)(#SrcIniName#).tlb              +>  (##Exe#)CMSuiteWEB.tlb
+(##Exe#)ExtPas\L\L_VirtUI.pas           F+> (##Exe#)L_VirtUI.pas 
+(%END%)
+ 
+// Resulting Exe Distributive Folder 
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMSuiteWEB
+// Resulting Exe File Name 
+CMSDISTR_DFPL = ResultName CMSuiteWEB
+// Exe Distributive build DFPL Script Name 
+CMSDISTR_DFPL = Script BuildEXEFiles
+// DLLs CRC Check on each CMSuiteWEB.exe start Flag 
+CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+// Save Main ini-file
+(%IF _SkipSomeFilesForSVN %)
+# RI> (##Exe#)CMSuiteWEB.ini
+(%END%)
+
+
+//////////////////////////////////////
+// Build CMSuite Project, Copy Project Files and Client DLL
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "COM=TRUE,DELPHI=(#_DELPHI#),MODE=CMS"
+(%IF NOT _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR
+(##Exe#)ExtPas\                          >> (##Exe#) *.inc
+(##Exe#)(#SrcIniName#).tlb               +> (##Exe#)(#DstIniName#).tlb
+//(#OwnDLLsPath#)Proj_CMSComCLientLib.dll F+> "(#_DistrCOMClientDLL#)"
+(%END%)
+
+// Build CMSClient DLL Project, Copy Project Files
+//(%IF CopyClientDLLPrj %)
+//(##Exe#)..\K_MVDar\Proj_CMSComClientLib.dpr >>DPR (##Exe#)CMSClient.dpr
+//(%END%)
+
+// Resulting Exe Distributive Folder 
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMSuite
+// Resulting Exe File Name 
+CMSDISTR_DFPL = ResultName CMSuite
+// Exe Distributive build DFPL Script Name 
+CMSDISTR_DFPL = Script BuildEXEFiles
+// Path to CMSClient.dll (in AuxFiles) to check if CMSClient.dll version corresponds to version needed to CMSuite.exe  
+//CMSDISTR_DFPL = COMClientDLL "(#_DistrCOMClientDLL#)"
+CMSDISTR_DFPL = COMClientDLL "(##Exe#)CMSCLient"
+// DLLs CRC Check on each CMSuite.exe start Flag 
+CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+// Save Main ini-file
+//# RI> (##Exe#)CMSuite.ini
+(%IF NOT _SkipSomeFilesForSVN %)
+# RI> 
+(%END%)
+
+CMS_Main  - AppMode
+
+////////////////////////////////////////
+//  Project and ini-file for Lomodurov
+////////////////////////////////////////
+CMS_Main  =  ShowDBTrialWarning     FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  DistrFilesMode         FALSE
+CMS_Main  =  DesignMode             TRUE
+CMS_Main  =  UseExtDB               TRUE
+
+//Set FileGPaths Section
+FileGPaths = WrkFiles       (#BasePath#)WrkFiles\   -F
+FileGPaths = CMSWrkFiles    (#WrkFiles#)%USERNAME%\ -F
+FileGPaths = CMECacheFiles  (#BasePath#)EmFiles\    -F
+
+FileGPaths = ArchSections   (#DataFiles#)
+
+
+//////////////////////////////////////
+// Build CMSuite Project, Copy Project Files
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "COM=TRUE,DELPHI=(#_DELPHI#),MODE=CMS,WEB=TRUE"
+(%IF _SkipSomeFilesForSVN %)
+(##Exe#)Proj_CMS_00.dpr    >>DPR  (##Exe#)DevCMSuite.dpr -
+(##Exe#)(#SrcIniName#).tlb +>     (##Exe#)DevCMSuite.tlb
+
+# RI> (##Exe#)DevCMSuite.ini
+
+///////////////////////////
+//  OEM settings
+
+- DUMP> * > ***********
+LogChannels DUMP> * > SRC
+- DUMP> * > ***********
+LogChannels DUMP> * < DEST
+- DUMP> * > ***********
+CMS_Main DUMP> ThumbTextFlags > SRC
+CMS_Main DUMP> ThumbTextFlags < DEST
+- DUMP> * > ***********
+CMS_Main DUMP> MultipleInstanceMode < DEST
+- DUMP> * > ***********
+
+// Create OEMSettings
+*DFPLLib|CreateOEMSettigs VFE>
+
+// Copy WEB FCMScan PAS and DFM (after all Delphi files are copied)
+(##Exe#)ExtPas\L\K_FCMScan.pas           F+> (##Exe#)K_FCMScan.pas 
+(##Exe#)ExtPas\L\K_FCMScan.dfm           F+> (##Exe#)K_FCMScan.dfm 
+(%END%)
+
+// Close Resulting Ini-file without saving
+# RI-
+[[/BuildSourceMorinFilesN]]
+
+
+[[BuildSourceProductionFilesN]]
+//////////////////////////////////////////////////////////
+//
+//  Prpepare Source Production Build for 07 and 10
+//
+//////////////////////////////////////////////////////////
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+// Build Distributive Common Part
+*DFPLLib|SetCMCustToolbarIniState VFE>
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (##Exe#)DataFiles\
+FileGPaths = WrkFiles       (#BasePath#)WrkFiles\
+FileGPaths = CMSWrkFiles    (#WrkFiles#)%USERNAME%\ -F
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CMECacheFiles  (#BasePath#)EmFiles\
+FileGPaths = ImgFiles       (#DataFiles#)Img\
+FileGPaths = CursorFiles    (#DataFiles#)Img\
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths =+ LogFiles
+FileGPaths = OwnDLLsPath    (##Exe#)OwnDLLs\
+FileGPaths = CMSLogFiles    (#LogFiles#)%USERNAME%\ -F
+// DemoFiles is needed for future call to BuildExeDEMOFiles, BuildSourceMorinFilesN DFPL scripts 
+FileGPaths = DemoFiles      (#DataFiles#)
+FileGPaths = LangFiles      (#BasePath#)LangFiles\
+
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  =  CheckBuildInfo      FALSE
+CMS_Main  =  IDEMode             1
+CMS_Main  =  UseExtDB            TRUE
+CMS_Main  =  StartByClientOnly   FALSE
+CMS_Main  =  DemoMode            FALSE
+CMS_Main  =  ShowDBTrialWarning  FALSE
+CMS_Main  =  DebVersionMode      FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC       FALSE
+CMS_Main  =  DesignMode          TRUE
+CMS_Main  =  DistrFilesMode      FALSE
+CMS_Main  =  StandaloneGUIKey    -sa
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+CMSDB = BlobsCompressPower 1
+CMSDB =+ ExtProperties
+
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+// Copy Desigh Ini
+CMSIniFiles => Design (##Exe#)
+
+*DFPLLib|CopyCommonFilesToSrcDistr VFE>
+
+//Copy SPL files and set SPL.sdb File Name
+Global                              =+ SPLBinFile  (##Exe#)SPL\SPL.sdb
+SPLSrcFiles                         => *           (##Exe#)SPL\
+
+//Copy DFPL Distribute files
+(#_DFPL_MAIN#) > (#DataFiles#)
+
+// Copy EMPTY Archive Files
+CMS_Main  =>  EmptyArchive (#DataFiles#)
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+CMS_Main              =    StartArchive    (#DataFiles#)CMArch_Distr.sdt
+_SrcArchPath          #=#  CMS_Main StartArchive
+(#_SrcArchPath#)      +>       (#DataFiles#)CMArch_Distr.sdt
+(#_SrcArchPath#)      >>.files (#DataFiles#)CMArch_Distr.files\
+
+//*******************************************
+// Build Projects and corresponding INI Files
+//*******************************************
+// Build All needed Project Patterns
+(##Exe#)Proj_CMS_00.txt     F> (##Exe#)
+(##Exe#)Proj_CMS_00.dof     F> (##Exe#)
+(##Exe#)Proj_CMS_00.res     F> (##Exe#)
+
+// Build Client Lib Project and Copy Project Files
+(##Exe#)..\K_MVDar\Proj_CMSComCLientLib.dpr >>DPR (##Exe#)Proj_CMSComCLientLib.dpr
+
+// Build Test Client Lib Project and Copy Project Files
+(##Exe#)..\K_MVDar\Proj_CMSAComClient.dpr >>DPR (##Exe#)Proj_CMSAComClient.dpr
+
+
+// Build Main Project and Copy Project Files
+//(##Exe#)Proj_CMS_00.txt    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "COM=TRUE,DELPHI=(#_DELPHI#),MODE=PROD"
+//(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr"
+(##Exe#)(#SrcIniName#).res +> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.res"
+//(##Exe#)Proj_CMS_00.dpr    >>DPR 
+//???
+(%IF _DELPHI EQ '07' %)
+(##Exe#)(#SrcIniName#).dpr    >>DPR
+(%ELSE%)
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "COM=TRUE,DELPHI=(#_DELPHI#),MODE=PROD"
+(##Exe#)Proj_CMS_00.dpr    >>DPR
+(%END%)
+(##Exe#)ExtPas\                      >> (##Exe#) *.inc
+(##Exe#)ExtPas\                      >> (##Exe#)ExtPas\ *.inc
+(##Exe#)ExtPas\                      >> (##Exe#)ExtPas\ *.pas
+(##Exe#)(#SrcIniName#).tlb           +> (##Exe#)(#DstIniName#).tlb
+(#OwnDLLsPath#)Proj_CMSComCLientLib.dll > (#OwnDLLsPath#)
+
+
+// Save Main Project INI
+# RI>-
+[[/BuildSourceProductionFilesN]]
+
+[[BuildSourceDemoFilesN]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare Source Demo Build (for Developers)
+//
+//////////////////////////////////////////////////////////
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+// Build Distributive Common Part
+*DFPLLib|SetCMCustToolbarIniState VFE>
+
+//*************************
+// Set Ini Sections 
+//*************************
+
+//Set FileGPaths Section
+//FileGPaths = DLLFiles       (##Exe#)
+//FileGPaths = BasePath       (##Exe#)
+//FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+//FileGPaths = DataFiles1     (#DLLFiles#)CMScanCur.dat|Files\
+//FileGPaths = WrkFiles       (#BasePath#)WrkFiles\
+//FileGPaths = CMSWrkFiles    (#WrkFiles#)
+//FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+//FileGPaths = CMMediaFiles   (#BasePath#)MediaFiles\
+//FileGPaths = ImgFiles       (#DataFiles#)
+//FileGPaths = CursorFiles    (#DataFiles#)
+//FileGPaths = ArchSections   (#DataFiles#)
+//FileGPaths = CMArchSections (##ArchDFiles#)
+//FileGPaths = LogFiles       (#BasePath#)LogFiles\
+//FileGPaths = CMSLogFiles    (#LogFiles#)
+//!! DemoFiles is needed for future call to BuildExeDEMOFiles DFPL script 
+//FileGPaths = DemoFiles      (#DataFiles#)
+
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (##Exe#)DataFiles\
+FileGPaths = DataFiles1     (#DLLFiles#)CMScanCur.dat|Files\
+FileGPaths = DataFiles2     (##Exe#)DataFiles\
+FileGPaths = WrkFiles       (#BasePath#)WrkFiles\
+FileGPaths = CMSWrkFiles    (#WrkFiles#)
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CMMediaFiles   (#BasePath#)MediaFiles\
+FileGPaths = ImgFiles       (#DataFiles#)Img\
+FileGPaths = CursorFiles    (#DataFiles#)Img\
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+FileGPaths = CMSLogFiles    (#LogFiles#)
+// DemoFiles is needed for future call to BuildExeDEMOFiles DFPL script 
+FileGPaths = DemoFiles      (#DataFiles#)
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  =  CheckBuildInfo       FALSE
+CMS_Main  =  IDEMode 2
+CMS_Main  =  UseExtDB             FALSE
+CMS_Main  =  StartByClientOnly    FALSE
+//CMS_Main  =  DemoMode             TRUE
+CMS_Main  =  ShowDBTrialWarning   FALSE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  DesignMode           TRUE
+CMS_Main  -  DistrFilesMode
+CMS_Main  -  SaveDFPLLib
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+*DFPLLib|CopyCommonFilesToSrcDistr VFE>
+
+//Copy SPL files and set SPL.sdb File Name
+Global                              =+>  SPLBinFile        (#DataFiles#)SPL.sdb
+
+//Copy DFPL Distribute files
+(#_DFPL_MAIN#) > (#DataFiles#)
+
+
+//***********************************************************
+//***********************************************************
+// Build Projects and corresponding INI Files for CMScan
+//***********************************************************
+//***********************************************************
+
+// Build CMScan Project and Save INI
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr"
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=SCAN"
+(##Exe#)(#SrcIniName#).res +> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.res"
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)CMScan.dpr -
+//(##Exe#)ExtPas\                          >> (##Exe#) *.inc
+CMS_Main  = AppMode ClientScan
+
+CMSDISTR_DFPL = LIBFile (#_DFPL_LIB#)
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMScan
+CMSDISTR_DFPL = ResultName CMScan
+CMSDISTR_DFPL = Script BuildExeCMScanFiles
+//CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+//Copy Start Archive files for CMScan project
+_SrcArchPath         #=#  CMS_Main EmptyArchive
+(#_SrcArchPath#)              +>       (#DataFiles#)CMArch.dat
+(#_SrcArchPath#)              >>.files (#DataFiles#)CMArch.files\
+CMS_Main    = StartArchive       (#DataFiles#)CMArch.dat
+
+CMS_Main    = DemoMode  FALSE
+
+// Set Archive for storing current Binary Context
+CMS_Main    = ScanCurDataArch    (#DataFiles1#)CMArch.sdt
+// Set file for current Ini Context
+CMSIniFiles = CMScanCur          (#DataFiles1#)CMScanCur.ini*
+
+# RI>  (##Exe#)11CMScan.ini 
+# RI>  (##Exe#)CMScan.dat|ini +20%
+# BF>- (##Exe#)CMScan.dat
+
+// Clear CMSCan Context
+CMS_Main    - ScanCurDataArch
+CMSIniFiles - CMScanCur
+
+
+//***********************************************************
+//***********************************************************
+// Build Projects and corresponding INI Files for CMSuiteDemo
+//***********************************************************
+//***********************************************************
+
+CMS_Main  - AppMode
+
+// Build CMSuiteDemo Project and Copy Project Files
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr"
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=CMS,DEMO=TRUE"
+//(##Exe#)(#SrcIniName#).res +> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.res"
+(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)(#DstIniName#).dpr -
+//(##Exe#)ExtPas\                          >> (##Exe#) *.inc
+
+//CMSDISTR_DFPL = LIBFile (#_DFPL_LIB#)
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMSuiteDemo
+CMSDISTR_DFPL = ResultName CMSuiteDemo
+CMSDISTR_DFPL = Script BuildExeDEMOFiles
+//CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+//Copy Start Archive files for Self project
+(#DemoFiles#)CMArch_Demo.sdt    +>   (##Exe#)CMArch.dat
+(#DemoFiles#)CMArch_Demo.files  >>   (##Exe#)CMArch.files\
+CMS_Main    = StartArchive    (##Exe#)CMArch.dat
+
+CMS_Main    = DemoMode  TRUE
+
+// Save Main Project INI
+//# RI>  (#DLLFiles#)11(#DstIniName#).ini
+# RI>  (#DLLFiles#)(#DstIniName#).dat|ini +20%
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+
+
+//***********************************************************
+//***********************************************************
+// Build Projects and corresponding INI Files for CMSuite
+//***********************************************************
+//***********************************************************
+
+FileGPaths = CMECacheFiles  (#BasePath#)EmFiles\
+
+CMS_Main  =  UseExtDB            TRUE
+CMS_Main  =  DemoMode            FALSE
+CMS_Main  =  StandaloneGUIKey    -sa
+CMS_Main  =  OpenAllDBVer        TRUE
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+CMSDB = BlobsCompressPower 1
+
+
+// Build CMSuiteDemo Project and Copy Project Files 
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "COM=TRUE,DELPHI=(#_DELPHI#),MODE=CMS"
+//(##Exe#)(#SrcIniName#).res +> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.res"
+(##Exe#)Proj_CMS_00.dpr      >>DPR (##Exe#)CMSuite.dpr 
+(##Exe#)ExtPas\              >> (##Exe#) *.inc
+(##Exe#)(#SrcIniName#).tlb   +> (##Exe#)CMSuite.tlb
+
+// Resulting Exe Distributive Folder 
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMSuite
+// Resulting Exe File Name 
+CMSDISTR_DFPL = ResultName CMSuite
+// Exe Distributive build DFPL Script Name 
+CMSDISTR_DFPL = Script BuildEXEFiles
+// Path to CMSClient.dll (in AuxFiles) to check if CMSClient.dll version corresponds to version needed to CMSuite.exe  
+//CMSDISTR_DFPL = COMClientDLL "(##Exe#)CMSCLient"
+// DLLs CRC Check on each CMSuite.exe start Flag 
+//CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+
+// Save Main Project INI
+//# RI>  (#DLLFiles#)11CMSuite.ini 
+# RI>- (#DLLFiles#)CMSuite.dat|ini +20%
+# BF>- (#DLLFiles#)CMSuite.dat
+
+[[/BuildSourceDemoFilesN]]
+
+[[BuildSourceTwainFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prpepare Source Twain Test
+//
+//////////////////////////////////////////////////////////
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+//*************************
+// Set Ini Sections 
+//*************************
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (##Exe#)DataFiles\
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+FileGPaths = CMSLogFiles    (#LogFiles#)
+
+//Set CMS_Main Section
+CMS_Main  =  IDEMode             0
+CMS_Main  =  CheckBuildInfo      FALSE
+CMS_Main  =  UseExtDB            FALSE
+CMS_Main  =  StartByClientOnly   FALSE
+CMS_Main  =  DemoMode            FALSE
+CMS_Main  =  ShowDBTrialWarning  FALSE
+CMS_Main  =  DebVersionMode      FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC       FALSE
+CMS_Main  =  DesignMode          FALSE
+CMS_Main  =  DistrFilesMode      TRUE
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+
+
+//Copy DLL files
+(#DLLFiles#)ImageLibrary.dll   F> (#DLLFiles#)
+
+
+//Copy Context Save DFPL Scripts file
+CMS_Main                        => SaveDFPLLib     (#DataFiles#)
+
+//Copy DFPL Distribute files
+(#_DFPL_LIB#)  > (#DataFiles#)
+
+
+
+//Copy SPL files and set SPL.sdb File Name
+Global             =+ SPLBinFile    (##Exe#)SPL\SPL.sdb
+SPLSrcFiles        => *             (##Exe#)SPL\
+
+
+//*******************************************
+// Build Projects, corresponding INI Files and DistrInterfase
+//*******************************************
+
+
+// Prepare MacroVars for porjects DOF File 
+_DOFMajorVer #=#  CMS_Main DOFMajorVer
+_DOFRelease  #=#  CMS_Main DOFRelease
+_DOFBuild    #=#  CMS_Main DOFBuild
+
+
+// Prepare *.res and *.dof for all other projects 
+(##Exe#)Proj_CMS$$$.dof    M> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dof" "DOFMajorVer=(#_DOFMajorVer#),DOFRelease=(#_DOFRelease#),DOFBuild=(#_DOFBuild#)," "," R
+(##Exe#)(#SrcIniName#).res +> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.res"
+
+CMSDISTR_DFPL = LIBFile (#_DFPL_LIB#)
+
+// Build DEMO Project and Save INI  
+
+(##Exe#)Proj_CMS$$$.txt    +>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" 
+(##Exe#)(#SrcIniName#).dpr DPRU> "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "K_CMSCom,K_CMSCom_TLB"
+(##Exe#)Proj_CMS_00.dpr    M>    "(#SrcFileGPaths.#Exe#)Proj_CMS_00.dpr" "DELPHI=(#_DELPHI#),MODE=TWAIN"
+//(##Exe#)Proj_CMS_00.dpr    >>DPR (##Exe#)CMTwain.dpr
+(##Exe#)Proj_CMS_00.dpr    >>DPR
+CMSDISTR_DFPL = ResultPath (##Exe#)!DistrFiles\CMTwain
+CMSDISTR_DFPL = ResultName CMTwain
+CMSDISTR_DFPL = Script BuildExeTwainFiles
+CMSDISTR_DFPL = DLLCRCCheck (#DLLCRCCheck#)
+
+// Save Main Project INI 
+# RI>- 
+[[/BuildSourceTwainFiles]]
+
+[[BuildExeDEMOFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare Demo EXE
+//
+//////////////////////////////////////////////////////////
+
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+
+//*************************
+// Set Ini Sections 
+//*************************
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = WrkFiles       (#BasePath#)WrkFiles\
+FileGPaths = CMSWrkFiles    (#WrkFiles#)
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CursorFiles    (#DataFiles#)
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+FileGPaths = CMSLogFiles    (#LogFiles#)
+FileGPaths = CMMediaFiles   (#BasePath#)MediaFiles\
+
+//Set CMS_Main Section
+CMS_Main  - SaveDFPLLib
+CMS_Main  - EmptyArchive
+CMS_Main  =  IDEMode 0
+CMS_Main  =  CheckBuildInfo       TRUE
+CMS_Main  =  UseExtDB             FALSE
+CMS_Main  =  StartByClientOnly    FALSE
+CMS_Main  =  DemoMode             TRUE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration TRUE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  DesignMode           FALSE
+CMS_Main  =  DistrFilesMode       FALSE
+CMS_Main  =  PatientID            33
+CMS_Main  =  LocationID           1
+CMS_Main  =  ProviderID           1
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+// Copy Customizable Toolbar Initial State
+CMCustToolbar =+ * //
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+*DFPLLib|CopyCommonFilesToExeDistr1 VFE>
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+CMS_Main                         =   StartArchive    (#BasePath#)CMArch.dat
+(#DemoFiles#)CMArch_Demo.sdt    +>   (#BasePath#)CMArch.dat
+(#DemoFiles#)CMArch_Demo.files  >>   (#BasePath#)CMArch.files\
+
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe  F+>  (#DLLFiles#)(#DstIniName#).exe
+FilesCRC                   =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+(%IF DLLCRCCheck %)
+FilesCRC                   =CRC  * (#DLLFiles#)*.dll (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)*.xml (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)*.exe (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)Progeny\*.exe (#DLLFiles#)Progeny\
+FilesCRC                   =CRC  * (#DLLFiles#)MediaScan\*.dll (#DLLFiles#)MediaScan\
+(%END%)
+CMS_Main                      =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save COmpound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini +20%
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+[[/BuildExeDEMOFiles]]
+
+
+[[BuildExeFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare EXE
+//
+//////////////////////////////////////////////////////////
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+//*************************
+// Set Ini Sections
+//*************************
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = WrkFiles       (#BasePath#)WrkFiles\
+FileGPaths = CMSWrkFiles    (#WrkFiles#)%USERNAME%\ -F
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CursorFiles    (#DataFiles#)
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+//FileGPaths = CMSLogFiles    (#LogFiles#)%USERNAME%\ -F
+FileGPaths = CMECacheFiles  (#BasePath#)EmFiles\
+
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  =  IDEMode 0
+CMS_Main  =  CheckBuildInfo       TRUE
+CMS_Main  =  UseExtDB             TRUE
+CMS_Main  =  StartByClientOnly    TRUE
+CMS_Main  =  DemoMode             FALSE
+CMS_Main  =  ShowDBTrialWarning   TRUE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration TRUE
+CMS_Main  =  DesignMode           FALSE
+CMS_Main  =  DistrFilesMode       FALSE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  StandaloneGUIKey     -sa
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+CMSDB = BlobsCompressPower 1
+
+// Copy Customizable Toolbar Initial State
+CMCustToolbar =+ * //
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+*DFPLLib|CopyCommonFilesToExeDistr1 VFE>
+
+//***************************************
+//Copy *.js Files for CMSuiteWEB
+//***************************************
+(%IF ResultName EQ 'CMSuiteWEB' %)
+(##Exe#)js\ F>> (#DLLFiles#) ScanCompName.js
+(%END%)
+
+//Copy Cloud SplashSceen files
+CMS_Main                        => SplashScreenImgCloudFName     (#DataFiles#)
+CMS_Main                        => SplashScreenImgCloudEFName    (#DataFiles#)
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+_SrcArchPath                    #=#  CMS_Main StartArchive
+CMS_Main                         =   StartArchive    (#DataFiles#)CMArch.dat
+(#_SrcArchPath#)                +>   (#DataFiles#)CMArch.dat
+//(#_SrcArchPath#)                >>.files (#DataFiles#)CMArch.files\
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe  F+>  (#DLLFiles#)(#DstIniName#).exe
+FilesCRC                   =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+(%IF DLLCRCCheck %)
+FilesCRC                   =CRC  * (#DLLFiles#)*.dll (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)*.xml (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)*.exe (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)Progeny\*.exe (#DLLFiles#)Progeny\
+FilesCRC                   =CRC  * (#DLLFiles#)MediaScan\*.dll (#DLLFiles#)MediaScan\
+(%END%)
+CMS_Main                      =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save Compound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+[[/BuildExeFiles]]
+
+[[BuildExeFSyncFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare FSync EXE
+//
+//////////////////////////////////////////////////////////
+
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+//*************************
+// Set Ini Sections
+//*************************
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CursorFiles    (#DataFiles#)
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+FileGPaths = CMSLogFiles    (#LogFiles#)
+
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  -  DistrFilesMode
+CMS_Main  -  SaveDFPLLib
+CMS_Main  =  IDEMode 0
+CMS_Main  =  CheckBuildInfo       FALSE
+CMS_Main  =  UseExtDB             TRUE
+CMS_Main  =  StartByClientOnly    FALSE
+CMS_Main  =  DemoMode             FALSE
+CMS_Main  =  ShowDBTrialWarning   FALSE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  DesignMode           TRUE
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+CMSDB = BlobsCompressPower 1
+
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+//Copy SPL.sdb File Name
+Global                         =+> SPLBinFile      (#DataFiles#)SPL.sdb
+
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe  F+>  (#DLLFiles#)(#DstIniName#).exe
+FilesCRC                   =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+CMS_Main                      =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save COmpound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+[[/BuildExeFSyncFiles]]
+
+
+[[BuildExeSupportFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare Support EXE
+//
+//////////////////////////////////////////////////////////
+
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+
+//*************************
+// Set Ini Sections
+//*************************
+
+//Check LogChannels Section
+LogChannels  = 0 "'[lcfEnable,lcfAppendMode,lcfShowCounter,lcfShowTime,lcfShowHeader]' '(#CMSLogFiles#)CMSupportLog.txt' 1 2"
+LogChannels  = 2 "'[lcfEnable,lcfFlushMode,lcfShowHeader,lcfShowCounter]' '(#CMSLogFiles#)CMSupportErrLog.txt' 1"
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CursorFiles    (#DataFiles#)
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+//FileGPaths = CMSLogFiles    (#LogFiles#)
+FileGPaths = ImgFiles       (#DataFiles#)
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  -  DistrFilesMode
+//CMS_Main  -  SaveDFPLLib
+//Copy Context Save DFPL Scripts file
+CMS_Main                        => SaveDFPLLib     (#DataFiles#)
+
+
+CMS_Main  =  IDEMode 0
+CMS_Main  =  CheckBuildInfo       FALSE
+CMS_Main  =  UseExtDB             TRUE
+CMS_Main  =  StartByClientOnly    FALSE
+CMS_Main  =  DemoMode             FALSE
+CMS_Main  =  ShowDBTrialWarning   FALSE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  DesignMode           FALSE
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+CMSDB = BlobsCompressPower 1
+
+
+//***************************
+// Copy Archives Files
+//***************************
+
+//Copy SYS Archive Section with Annotations Library
+(#DataFiles#)CMArch_Sys.sdt      > (#DataFiles#)
+
+//Copy SPL.sdb File Name
+Global                         =+> SPLBinFile      (#DataFiles#)SPL.sdb
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+_SrcArchPath                    #=#  CMS_Main StartArchive
+CMS_Main                         =   StartArchive    (#DataFiles#)CMArch.dat
+(#_SrcArchPath#)                +>       (#DataFiles#)CMArch.dat
+//(#_SrcArchPath#)                >>.files (#DataFiles#)CMArch.files\
+
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe   F+>  (#DLLFiles#)(#DstIniName#).exe
+FilesCRC                    =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+(#DLLFiles#)ImageLibrary.dll F>   (#DLLFiles#)
+(#DLLFiles#)wrapdcm.dll      F>   (#DLLFiles#)
+(%IF DLLCRCCheck %)
+FilesCRC                    =CRC  (#DLLFiles#)ImageLibrary.dll "(#DistrFileGPaths.DLLFiles#)ImageLibrary.dll"
+FilesCRC                    =CRC  (#DLLFiles#)wrapdcm.dll "(#DistrFileGPaths.DLLFiles#)wrapdcm.dll"
+(%END%)
+CMS_Main                      =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save COmpound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+[[/BuildExeSupportFiles]]
+
+[[BuildExeScanFiles0]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare Scan EXE
+//
+//////////////////////////////////////////////////////////
+
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+//*************************
+// Set Ini Sections
+//*************************
+
+//Check LogChannels Section
+LogChannels  = 0 "'[lcfEnable,lcfAppendMode,lcfShowCounter,lcfShowTime,lcfShowHeader]' '(#CMSLogFiles#)(#_ScanName#)Log.txt' 1 2"
+LogChannels  = 2 "'[lcfEnable,lcfFlushMode,lcfShowHeader,lcfShowCounter]' '(#CMSLogFiles#)(#_ScanName#)ErrLog.txt' 1"
+
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = DataFiles1     (#BasePath#)DataFiles\(#DstIniName#)Cur.dat|Files\
+FileGPaths = WrkFiles       (#BasePath#)WrkFiles\
+FileGPaths = CMSWrkFiles    (#WrkFiles#)
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CursorFiles    (#DataFiles#)
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+//FileGPaths = CMSLogFiles    (#LogFiles#)
+
+
+//Set CMS_Main Section
+CMS_Main - EmptyArchive
+CMS_Main = IDEMode 0
+CMS_Main = CheckBuildInfo       TRUE
+CMS_Main = UseExtDB             FALSE
+CMS_Main = StartByClientOnly    FALSE
+CMS_Main = DemoMode             FALSE
+CMS_Main = DebVersionMode       FALSE
+CMS_Main = CheckFilesCRC        FALSE
+CMS_Main = DesignMode           FALSE
+CMS_Main = DistrFilesMode       FALSE
+(%IF DstIniName EQ 'CMScanWEB' %)
+CMS_Main = CMScanWEBUIVisible   TRUE
+(%END%)
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+
+//***************************************
+//Copy Files and set correspondig Section
+//***************************************
+
+*DFPLLib|CopyCommonFilesToExeDistr VFE>
+
+//Copy CMScan Alt Icon File Name
+CMS_Main                        => ScanIconAltFName (#DataFiles#)
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+CMS_Main                         = StartArchive    (#DataFiles#)CMArch.dat
+(#DataFiles#)CMArch.dat          > (#DataFiles#)
+
+//***************************
+// Cur Context Settings
+//***************************
+CMSIniFiles = CMScanCur          (#DataFiles1#)CMScanCur.ini*
+
+CMS_Main    = ScanCurDataArch    (#DataFiles1#)CMArch.sdt
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe  F+>  (#DLLFiles#)(#DstIniName#).exe
+FilesCRC                   =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+(%IF DLLCRCCheck %)
+FilesCRC                   =CRC  * (#DLLFiles#)*.dll (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)*.xml (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)*.exe (#DLLFiles#)
+FilesCRC                   =CRC  * (#DLLFiles#)Progeny\*.exe (#DLLFiles#)Progeny\
+FilesCRC                   =CRC  * (#DLLFiles#)MediaScan\*.dll (#DLLFiles#)MediaScan\
+(%END%)
+CMS_Main                      =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save COmpound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+
+//# RI>  (#DLLFiles#)(#DstIniName#)1.ini
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini %10
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+//*# BF>- (#DLLFiles#)(#DstIniName#)1.dat
+//*# BF>- (#DLLFiles#)(#DstIniName#)2.dat
+[[/BuildExeScanFiles0]]
+
+[[BuildExeCMScanFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prpepare CMScan EXE
+//
+//////////////////////////////////////////////////////////
+_ScanName #= CMScan
+*DFPLLib|BuildExeScanFiles0 VFE>
+[[/BuildExeCMScanFiles]]
+
+[[BuildExeD4WScanFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prpepare D4WScan EXE
+//
+//////////////////////////////////////////////////////////
+_ScanName #= D4WScan
+*DFPLLib|BuildExeScanFiles0 VFE>
+[[/BuildExeD4WScanFiles]]
+
+
+[[BuildExeTwainFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare Twain EXE 
+//
+//////////////////////////////////////////////////////////
+
+
+// Build Distributive Common Part
+//*DFPLLib|BuildCommon VFE>
+// Set Version Macro for outer script use in ZIP File Name  
+_Version #=# CMS_Main BuildInfo
+
+//Clear all Resulting Path Files
+(##Exe#) ->> *
+
+//Clear all Resulting Ini
+* --
+
+
+
+//*************************
+// Set Ini Sections 
+//*************************
+
+//Check LogChannels Section
+LogChannels  = 0 "'[lcfEnable,lcfAppendMode,lcfShowCounter,lcfShowTime,lcfShowHeader]' '(#CMSLogFiles#)CMTwainLog.txt' 1 2"
+LogChannels  = 2 "'[lcfEnable,lcfFlushMode,lcfShowHeader,lcfShowCounter]' '(#CMSLogFiles#)CMTwainErrLog.txt' 1"
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+// Save Ini file to compound filr first for future correct compound file detection
+# RI> (#DLLFiles#)(#DstIniName#).dat|ini +30%
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+//FileGPaths = CMSLogFiles    (#LogFiles#)
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  -  DistrFilesMode
+CMS_Main  -  SaveDFPLLib
+CMS_Main  =  IDEMode 0
+CMS_Main  =  CheckBuildInfo       FALSE
+CMS_Main  =  UseExtDB             FALSE
+CMS_Main  =  StartByClientOnly    FALSE
+CMS_Main  =  DemoMode             FALSE
+CMS_Main  =  ShowDBTrialWarning   FALSE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  DesignMode           FALSE
+
+//Copy SPL.sdb File Name
+Global =+> SPLBinFile      (#DataFiles#)SPL.sdb
+Global =  UseWinEnvMacro    TRUE
+
+//Copy DLL files
+(#DLLFiles#)ImageLibrary.dll   F> (#DLLFiles#)
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe   F+>  (#DLLFiles#)(#DstIniName#).exe
+//!!! CRC check is closed now because check CRC code is remove from project
+//FilesCRC                    =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+//(%IF DLLCRCCheck %)
+//FilesCRC                    =CRC  (#DLLFiles#)ImageLibrary.dll "(#DistrFileGPaths.DLLFiles#)ImageLibrary.dll"
+//(%END%)
+//CMS_Main                    =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save Compound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini +20%
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+[[/BuildExeTwainFiles]]
+
+[[BuildExeDCMExeFiles]]
+//////////////////////////////////////////////////////////
+//
+//  Prepare DCMExe EXE
+//
+//////////////////////////////////////////////////////////
+
+
+// Build Distributive Common Part
+*DFPLLib|BuildCommon VFE>
+
+
+//*************************
+// Set Ini Sections
+//*************************
+
+//Check LogChannels Section
+LogChannels  = 0 "'[lcfEnable,lcfAppendMode,lcfShowCounter,lcfShowTime,lcfShowHeader]' '(#CMSLogFiles#)CMDCMLog.txt' 1 2"
+LogChannels  = 2 "'[lcfEnable,lcfFlushMode,lcfShowHeader,lcfShowCounter]' '(#CMSLogFiles#)CMDCMErrLog.txt' 1"
+
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (#DLLFiles#)(#DstIniName#).dat|Files\
+FileGPaths = TmpFiles       (#BasePath#)TmpFiles\
+FileGPaths = CursorFiles    (#DataFiles#)
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+FileGPaths = LogFiles       (#BasePath#)LogFiles\
+FileGPaths = ImgFiles       (#DataFiles#)
+FileGPath  = WrkFiles       (#BasePath#)WrkFiles\
+FileGPaths = CMECacheFiles  (#BasePath#)EmFiles\
+
+//Set CMS_Main Section
+CMS_Main  -  EmptyArchive
+CMS_Main  -  DistrFilesMode
+CMS_Main  =  IDEMode 0
+CMS_Main  =  CheckBuildInfo       FALSE
+CMS_Main  =  UseExtDB             TRUE
+CMS_Main  =  StartByClientOnly    FALSE
+CMS_Main  =  DemoMode             FALSE
+CMS_Main  =  ShowDBTrialWarning   FALSE
+CMS_Main  =  DebVersionMode       FALSE
+CMS_Main  =  CheckBuildRegistration FALSE
+CMS_Main  =  CheckFilesCRC        FALSE
+CMS_Main  =  DesignMode           FALSE
+
+//Set Global Section
+Global    = CurLangDataFile       (##Exe#)CMSuiteGUI*.*
+
+//Set CMSDB Section
+CMSDB =+ ConnectionString
+CMSDB = BlobsCompressPower 1
+
+
+//***************************
+// Copy Archives Files
+//***************************
+
+//Copy SYS Archive Section with Annotations Library
+(#DataFiles#)CMArch_Sys.sdt      > (#DataFiles#)
+
+//Copy SPL.sdb File Name
+Global                         =+> SPLBinFile      (#DataFiles#)SPL.sdb
+
+//Copy Start Archive files and set CMS_Main.StartArchive File Name
+_SrcArchPath                    #=#  CMS_Main StartArchive
+CMS_Main                         =   StartArchive    (#DataFiles#)CMArch.dat
+(#_SrcArchPath#)                +>       (#DataFiles#)CMArch.dat
+//(#_SrcArchPath#)                >>.files (#DataFiles#)CMArch.files\
+
+//Copy CMScan Alt Icon File Name
+CMS_Main                        => ScanIconAltFName (#DataFiles#)
+
+//Copy Context Save DFPL Scripts file
+CMS_Main                        => SaveDFPLLib     (#DataFiles#)
+
+//*******************************************
+// Copy EXE and Prepare CRC info
+//*******************************************
+(##Exe#)(#SrcIniName#).exe   F+>  (#DLLFiles#)(#DstIniName#).exe
+FilesCRC                    =CRC  (#TmpFiles#)(#DstIniName#).exe "(#DistrFileGPaths.DLLFiles#)(#DstIniName#).exe"
+(#DLLFiles#)ImageLibrary.dll F>   (#DLLFiles#)
+(#DLLFiles#)wrapdcm.dll      F>   (#DLLFiles#)
+(#DLLFiles#)scp.exe          F>   (#DLLFiles#)
+(#DLLFiles#)scp.log.config   F>   (#DLLFiles#)
+(#DLLFiles#)                 F>>  (#DLLFiles#) start*.bat
+(#DLLFiles#)CMSSvc.exe       F>   (#DLLFiles#) 
+(#DLLFiles#)CMSSvc.ini       F>   (#DLLFiles#) 
+
+(%IF DLLCRCCheck %)
+FilesCRC                    =CRC  (#DLLFiles#)ImageLibrary.dll "(#DistrFileGPaths.DLLFiles#)ImageLibrary.dll"
+FilesCRC                    =CRC  (#DLLFiles#)wrapdcm.dll "(#DistrFileGPaths.DLLFiles#)wrapdcm.dll"
+(%END%)
+CMS_Main                      =  CheckFilesCRC TRUE
+
+//*******************************************
+// Build INI File and save COmpound Data File
+//*******************************************
+FileGPaths = DLLFiles       (##Exe#)
+FileGPaths = BasePath       (##Exe#)..\
+# RI>- (#DLLFiles#)(#DstIniName#).dat|ini
+# BF>- (#DLLFiles#)(#DstIniName#).dat
+[[/BuildExeDCMExeFiles]]
+
+[[UpdateFromSVNFiles]]
+//Set FileGPaths Section
+FileGPaths = DLLFiles       (##Exe#)BinFiles\
+FileGPaths = BasePath       (##Exe#)
+FileGPaths = DataFiles      (##Exe#)DataFiles\
+FileGPaths = ImgFiles       (#DataFiles#)Img\
+FileGPaths = CursorFiles    (#DataFiles#)Img\
+FileGPaths = ArchSections   (#DataFiles#)
+FileGPaths = CMArchSections (##ArchDFiles#)
+
+(#SrcFileGPaths.#Exe#)!NewFiles ->> *
+
+// Update PAS and DFM files
+(##Exe#) UF> "*.pas,*.dfm" "(##Exe#)..\K_Clib,(##Exe#)..\K_MVDar,(##Exe#)..\N_Tree,(##Exe#)..\N_Tree\ExtPas,(##Exe#)..\N_Tree\Old_Pas" "(##Exe#)!NewFiles"
+
+// Update SPL files
+(##Exe#)SPL UF> "*.spl" "(##Exe#)..\K_Clib\SPL,(##Exe#)..\K_MVDar\SPL,(##Exe#)..\N_Tree\SPL" "(##Exe#)!NewFiles"
+
+// Update User Ini
+(##Exe#) UF> "CMSUser.ini" "(##Exe#)..\N_Tree" "(##Exe#)!NewFiles"
+
+// Update DLL Files
+(#DLLFiles#) UF> "*.dll,*.xml,*.exe,*.config,*.txt,*.cfg,*.ini" "(#DLLFiles#)" "(##Exe#)!NewFiles"
+(#DLLFiles#)Progeny UF> "*.exe" "(#DLLFiles#)Progeny" "(##Exe#)!NewFiles"
+
+// Update pictures
+(#ImgFiles#) UF> "*.ico,*.jpg,*.bmp,*.png,*.tif" "(#StatDataFiles#)" "(##Exe#)!NewFiles"
+(#CursorFiles#) UF> "*.cur" "(#CursorFiles#)" "(##Exe#)!NewFiles"
+
+// Update DFPL scripts
+(#DataFiles#) UF> "DFPL*.txt" "(#DataFiles#)" "(##Exe#)!NewFiles"
+
+// Update source archives 
+(#DataFiles#) UF> "CMArch_Sys.sdt" "(#ArchSections#)" "(##Exe#)!NewFiles"
+(#DataFiles#) UF> "CMArch_Demo.sdt" "(#DemoFiles#)" "(##Exe#)!NewFiles"
+(#DataFiles#)CMArch_Demo.files UF> "*.*" "(#DemoFiles#)CMArch_Demo.files" "(##Exe#)!NewFiles"
+[[/UpdateFromSVNFiles]]
