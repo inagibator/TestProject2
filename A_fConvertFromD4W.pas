@@ -32,6 +32,7 @@ type
     procedure edtMappingFileRightButtonClick(Sender: TObject);
   private
     { Private declarations }
+dfsfsdfs
   public
     { Public declarations }
   end;
