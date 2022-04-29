@@ -49,6 +49,7 @@ procedure TConvertFromD4W.btnConvertClick(Sender: TObject);
     ProgressBar1.StepBy(1);
     ProgressBar1.StepBy(-1);
     ProgressBar1.StepBy(1);
+fdgfdgd
   end;
 var
   SrcFolder: string;
